@@ -1,0 +1,46 @@
+{extends file="header_footer.html"} 
+
+{block name=content}
+<div class="cms_manage_base">
+    <div class="wrap clearfix">
+        <div class="cms_manage_left">
+            {block name="insider_left"}
+                        
+            {$manage_menu = managemenu('nav')}
+            {if !$manage_menu}{$manage_menu=[]}{/if}
+            <ul class="list cms_manage_menu clearfix">
+                {foreach $manage_menu as $level1_id => $level1}
+                <li class="{if $manage_top_id == $level1_id}top_current{/if}">
+                    <div class="cms_top_nav"><span class="toggle"><i class="fa fa-minus-circle"></i></span>{call manage_menu_tag id = $level1_id}</div>
+                    {if $level1}
+                    <dl>
+                        {foreach $level1 as $level2_id => $level2}
+                        <dd class="{if $manage_menu_data.id == $level2_id}current{/if}">{call manage_menu_tag id = $level2_id}</dd>
+                        {/foreach}
+                    </dl>
+                    {/if}                    
+                </li>
+                {/foreach}
+            </ul>
+            
+            {/block}
+        </div>
+        <div class="cms_manage_rght">
+            <div class="location">{include file="Common/path.html" delimiter="&gt;"}</div>
+            
+            {block name="insider_right"}
+            <div class="cms_insider">{block name="insider"}{/block}</div>
+            {/block}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$('.cms_manage_menu').find('.cms_top_nav .toggle').click(function(){
+    if ($(this).closest('li').hasClass('close')) {
+        $(this).find('.fa').removeClass('fa-plus-circle').addClass('fa-minus-circle').closest('li').removeClass('close').find('dl').stop(true, true).slideDown(200);
+    } else {
+        $(this).find('.fa').removeClass('fa-minus-circle').addClass('fa-plus-circle').closest('li').addClass('close').find('dl').stop(true, true).slideUp(200);
+    }
+})
+</script>
+{/block}

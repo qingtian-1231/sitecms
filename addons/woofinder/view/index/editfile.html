@@ -1,0 +1,829 @@
+{extends file="../global.html"}
+{block name=function}
+<script type="text/javascript">
+$(function(){
+    layui.use(['layer'], function(){
+        layer = layui.layer;        
+        layer.config({
+            zIndex:10000
+        });
+    })
+})
+
+HKUC.ajax_request.defaultSuccessHandlers= {
+    'success':function(rslt_msg,rslt_data){ 
+       layer.alert(rslt_msg,{
+            icon:1
+        }); 
+    },
+    'error':function(rslt_msg,rslt_data){
+        layer.alert(rslt_msg,{
+            icon:2
+        });                   
+    },
+    'nopower':function(msg,data){
+        
+        layer.alert(msg,{
+            icon:2
+        });
+    }
+};
+HKUC.ajax_request.defaultErrorHandlers={
+    403:function(text,rerun){
+        layer.alert('登录超时，请刷新重新登录',{
+            icon:2
+        });
+	},
+    404:function(text,rerun){
+        layer.alert('页面不存在',{
+            icon:2
+        });
+    }
+};
+
+</script>
+{$smarty.block.child}
+{/block}
+{block name="global"}
+
+<div id="imgHeader">
+    <div class="info clearfix">
+        <a href="javascript:void(0);" onclick="parent.closeImageEdit()"><i class="fa fa-arrow-left"></i></a><span class="en-font">{$data.basename}</span>
+    </div>
+    <div class="btns">
+        <button class="layui-btn image-save"><i class="fa fa-floppy-o"></i>保存</button><button class="layui-btn  layui-btn-primary image-reset layui-btn-disabled"><i class="fa fa-undo"></i>重置</button>
+    </div>
+</div>
+<div id="imgMain">
+    <div id="imgLeft">
+        <div class="layui-collapse" lay-accordion lay-filter="action">
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">缩放</h2>
+                <div class="layui-colla-content woo-scale">
+                    <div class="woo-scale-input">
+                        <input  type="text" class="layui-input scale-input scale-width"/> <span class="s1">×</span> <input  type="text" class="scale-input layui-input scale-height"/> <span class="s2">像素</span>
+                    </div>
+                    <button class="layui-btn layui-btn-primary scale_keep active"><i class="fa fa-check"></i>保持纵横比</button>
+                    <button class="layui-btn layui-btn-primary scale_ok"><i class="fa fa-check-circle"></i>应用</button>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">裁剪</h2>
+                <div class="layui-colla-content woo-crop">
+                    <button class="layui-btn layui-btn-primary crop_keep active"><i class="fa fa-check"></i>保持纵横比</button>
+                    <button class="layui-btn layui-btn-primary crop_ok"><i class="fa fa-check-circle"></i>应用</button>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">旋转</h2>
+                <div class="layui-colla-content woo-rotate">
+                    <button class="layui-btn layui-btn-primary rotate-left"><i class="fa fa-rotate-left"></i>逆时针90°</button>
+                    <button class="layui-btn layui-btn-primary rotate-right"><i class="fa fa-rotate-right"></i>顺时针90°</button>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">调整</h2>
+                <div class="layui-colla-content woo-adjust ">
+                    <ul class="list">
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-sun-o"></i>亮度：</div>
+                            <div class="tool-con">
+                                <div id="brightnessTool">
+                                    <div id="brightness-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>                        
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-adjust"></i>对比度：</div>
+                            <div class="tool-con">
+                                <div id="contrastTool">
+                                    <div id="contrast-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-star-half-o"></i>饱和度：</div>
+                            <div class="tool-con">
+                                <div id="saturationTool">
+                                    <div id="saturation-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-star"></i>曝光度：</div>
+                            <div class="tool-con">
+                                <div id="exposureTool">
+                                    <div id="exposure-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-pie-chart"></i>怀旧：</div>
+                            <div class="tool-con">
+                                <div id="sepiaTool">
+                                    <div id="sepia-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="clearfix">
+                            <div class="tool-tit"><i class="fa fa-umbrella "></i>色调：</div>
+                            <div class="tool-con">
+                                <div id="hueTool">
+                                    <div id="hue-handle" class="ui-slider-handle custom-handle"></div>
+                                </div>
+                            </div>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-colla-item">
+                <h2 class="layui-colla-title">预设</h2>
+                <div class="layui-colla-content woo-preset">                    
+                    <ul class="grid">
+                        <li data-preset="clarity" class="sizing">
+                            <canvas id="clarityCanvas"></canvas>
+                        </li>
+                        <li data-preset="herMajesty" class="sizing">
+                            <canvas id="herMajestyCanvas"></canvas>
+                        </li>
+                        <li data-preset="nostalgia" class="sizing">
+                            <canvas id="nostalgiaCanvas"></canvas>
+                        </li>
+                        <li data-preset="pinhole" class="sizing">
+                            <canvas id="pinholeCanvas"></canvas>
+                        </li>
+                        <li data-preset="sunrise" class="sizing">
+                            <canvas id="sunriseCanvas"></canvas>
+                        </li>
+                        <li data-preset="vintage" class="sizing">
+                            <canvas id="vintageCanvas"></canvas>
+                        </li>
+                        <li data-preset="lomo" class="sizing">
+                            <canvas id="lomoCanvas"></canvas>
+                        </li>
+                        <li data-preset="love" class="sizing">
+                            <canvas id="loveCanvas"></canvas>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="imgRight">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="showSize"><span class="width">{$data.width}</span>×<span class="height">{$data.height}</span></div>
+</div>
+
+<div id="loadCover"></div>
+
+
+
+<script>
+{if empty($data) || !in_array(strtolower($data.ext), ['jpg', 'png', 'gif', 'jpeg'])}
+if(self != top) {
+    parent.notImage('暂不支持编辑{$data.ext}格式文件')
+} else {
+    history.back();
+}
+{/if}
+
+var camanObj = null;
+var image = null;
+var original = { width : 0, height : 0, isChange : false};
+
+Object.defineProperties(original, {
+    width : {
+        configurable: true,
+        get: function() {
+            return width;
+        },
+        set: function(newValue) {
+            width = newValue;
+            $('#showSize').show().find('.width').html(width);
+        }
+    },
+    height : {
+        configurable: true,
+        get: function() {
+            return height;
+        },
+        set: function(newValue) {
+            height = newValue;
+            $('#showSize').show().find('.height').html(height);
+        }
+    },
+    isChange : {
+        configurable: true,
+        get: function() {
+            return isChange;
+        },
+        set: function(newValue) {
+            isChange = newValue;
+            if (isChange) {
+                $('.image-reset').removeClass('layui-btn-disabled');
+            } else {
+                $('.image-reset').addClass('layui-btn-disabled');
+            }
+        }
+    },
+})
+original.isChange = false;
+image = new Image();
+image.crossOrigin = "";
+image.src = "{$absroot}{$data.url}?" + Math.random();
+
+setTimeout(function() {
+    if (camanObj === null) {
+        if(self != top) {
+            parent.notImage('图片加载超时')
+        } else {
+            history.back();
+        }
+    }
+}, 4000)
+
+
+image.onload = function() {
+    camanObj = Caman("#canvas", image.src, function() {
+        original.width = this.originalWidth;
+        original.height= this.originalHeight;
+        imageResize()
+    })
+    
+    Caman("#clarityCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.clarity().render(function() {
+                $('[data-preset="clarity"').html('<img width="110" alt="清晰" src="' + this.toBase64() + '"><h2>清晰</h2>');
+            })
+        })
+    })
+    
+    Caman("#herMajestyCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.herMajesty().render(function() {
+                $('[data-preset="herMajesty"').html('<img width="110" alt="雄伟" src="' + this.toBase64() + '"><h2>雄伟</h2>')
+            })
+        })
+    })
+    
+    Caman("#nostalgiaCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.nostalgia().render(function() {
+                $('[data-preset="nostalgia"').html('<img width="110" alt="怀旧" src="' + this.toBase64() + '"><h2>怀旧</h2>')
+            })
+        })
+    })
+    
+    Caman("#pinholeCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.pinhole().render(function() {
+                $('[data-preset="pinhole"').html('<img width="110" alt="针孔" src="' + this.toBase64() + '"><h2>针孔</h2>')
+            })
+        })
+    })
+    
+    Caman("#sunriseCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.sunrise().render(function() {
+                $('[data-preset="sunrise"').html('<img width="110" alt="日出" src="' + this.toBase64() + '"><h2>日出</h2>')
+            })
+        })
+    })
+    
+    Caman("#vintageCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.vintage().render(function() {
+                $('[data-preset="vintage"').html('<img width="110" alt="复古" src="' + this.toBase64() + '"><h2>复古</h2>')
+            })
+        })
+    })
+    
+    Caman("#lomoCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.lomo().render(function() {
+                $('[data-preset="lomo"').html('<img width="110" alt="唯美" src="' + this.toBase64() + '"><h2>唯美</h2>')
+            })
+        })
+    })
+    
+    Caman("#loveCanvas", image.src, function() {
+        this.resize({ width : 110}).render(function() {
+            this.love().render(function() {
+                $('[data-preset="love"').html('<img width="110" alt="爱情" src="' + this.toBase64() + '"><h2>爱情</h2>')
+                if (self != top)
+                    parent.loadFinish()
+                $('#loadCover').fadeOut(300)
+            })
+        })
+    })
+}
+
+$('.image-reset').click(function() {
+    if (!original.isChange) return false;
+    $('#imgRight').empty().html('<canvas id="canvas"></canvas>');
+    camanObj = Caman("#canvas", image.src, function() {
+        original.width = this.originalWidth;
+        original.height= this.originalHeight;
+        imageResize()
+        
+        $('.scale-width').val(original.width);
+        $('.scale-height').val(original.height);
+        $('.scale_keep').addClass('active');
+        
+        hiddenCrop()
+        resetAdjust()
+        original.isChange = false;
+        $('.woo-preset').find('li.active').removeClass('active');        
+    })
+})
+
+function saveImage(isReplace) {
+    layer.closeAll();
+    var index = layer.load();
+    
+    $.post("{addon_url('woofinder/Index/ajaxUpdateImage')}", {
+        replace : isReplace,
+        upload_id : {$data.id},
+        image :  camanObj.toBase64()
+        
+    }, function(data) {
+        
+        data = JSON.parse(data);
+        layer.close(index);
+        if (data.result == 'success') {
+            var icon = 1
+        } else {
+            var icon = 2
+        }
+        layer.msg(data.message + '，即将自动刷新', {
+            time : 2000,
+            icon : icon
+        })
+        setTimeout(function() {
+            if (self != top)
+                parent.closeImageEdit(true);
+            else
+                location.href = "{addon_url('woofinder/Index/index', ['model' => $data.model])}";
+        }, 1000)
+    })
+}
+
+$('.image-save').click(function() {
+    hiddenCrop()
+    layer.confirm('请选择保存方式', {
+        btn: ['替换', '复制']
+        ,title : '保存方式',
+        icon : 6
+    }, function(index){
+        if (!original.isChange) {
+            layer.msg('文件未做修改', {
+                time : 1000,
+                icon : 2
+            })
+            return false;
+        }
+        saveImage(true)
+    }, function(index){
+        if (!original.isChange) {
+            layer.msg('文件未做修改', {
+                time : 1000,
+                icon : 2
+            })
+            return false;
+        }
+        saveImage(false)
+    })
+})
+
+$('body').on('click', '.woo-preset li', function(){
+    var preset = $(this).attr('data-preset')
+    $('.woo-preset').find('li.active').removeClass('active')
+    $(this).addClass('active')
+    camanObj.revert(false)
+    original.isChange = true;
+    switch (preset) {
+        case 'clarity':
+            camanObj.clarity().render()
+            break;
+        case 'herMajesty':
+            camanObj.herMajesty().render()
+            break;
+        case 'nostalgia':
+            camanObj.nostalgia().render()
+            break;
+        case 'pinhole':
+            camanObj.pinhole().render()
+            break;
+        case 'sunrise':
+            camanObj.sunrise().render()
+            break;
+        case 'vintage':
+            camanObj.vintage().render()
+            break;
+        case 'lomo':
+            camanObj.lomo().render()
+            break;
+        case 'love':
+            camanObj.love().render()
+            break;
+        default:
+            break;    
+    }
+    resetAdjust()
+})
+
+function imageResize() {
+    if (!camanObj) return false;
+    var maxW = $('#imgRight').width() * 0.7;
+    var maxH = $('#imgRight').height() * 0.7;
+    var newW = 0, newH = 0;
+    if (original.width > maxW || original.height > maxH) {
+        if (original.width > maxW) {
+            newW = Math.round(maxW);
+            newH = Math.round(original.height * newW / original.width);
+            
+            if (newH > maxH) {
+                newH = Math.round(maxH);
+                newW = Math.round(original.width * newH / original.height);
+            }
+        } else {
+            newH = Math.round(maxH);
+            newW = Math.round(original.width * newH / original.height);
+            if (newW > maxW) {
+                newW = Math.round(maxW);
+                newH = Math.round(original.height * newW / original.width);
+            }
+        }
+    } else {
+        newW = original.width;
+        newH = original.height;
+    }
+    //camanObj.resize({ width : newW, height: newH}).render();
+    $('#canvas').width(newW).height(newH);
+}
+
+
+var cropImg = null;
+function showCrop(isr) {
+    if (!camanObj) return false;
+    var canvasW = $('#canvas').width();
+    var canvasH = $('#canvas').height();
+    if (typeof isr == 'undefined') {
+        isr = true;
+    }
+    
+    var cropBox = $('<div id="cropContainer"></div>');    
+    cropBox.width(canvasW).height(canvasH).appendTo($('#imgRight'));
+    cropImg = $('<img id="cropImage" src="' + camanObj.toBase64() + '">');
+    cropBox.append(cropImg);
+    
+    var minX = 30;
+    var minY = minX * original.height / original.width;
+    
+    cropImg.rcrop({
+        maxSize : [original.width, original.height],
+        minSize : [minX, minY],
+        preserveAspectRatio : isr
+    });
+    
+    cropImg.on('rcrop-change rcrop-ready', function() {
+        $('#canvas:visible').hide();
+        var values = getCropSize();
+        var html = values.cropWidth + '×' + values.cropHeight;
+        if ($('.crop-size-show').length) {
+            $('.crop-size-show').html(html);
+        } else {
+            $('.rcrop-outer-wrapper').append("<div class='crop-size-show'>" + html + "</div>");
+        }
+        $('.crop-size-show').css({
+            left : (values.width  + values.x + 5),
+            top  : (values.height + values.y + 5)
+        }).show();
+    })
+}
+
+function hiddenCrop() {
+    if (cropImg) {
+        cropImg.rcrop('destroy');
+    }
+    $('#cropContainer').remove();
+    $('#canvas').show();
+}
+
+function getCropSize() {
+    var values = cropImg.rcrop('getValues');
+    values.cropWidth  = values.width;
+    values.cropHeight = values.height;
+    values.cropX      = values.x;
+    values.cropY      = values.y;
+    
+    values.width  = Math.round(values.width * $('#canvas').width() / original.width);
+    values.height = Math.round(values.height * $('#canvas').height() / original.height);
+    values.x      = Math.round(values.x * $('#canvas').width() / original.width);
+    values.y      = Math.round(values.y * $('#canvas').height() / original.height);    
+    
+    //console.log(values, original)
+    //values.cropWidth = Math.round(original.width * values.width / $('#canvas').width());
+    //values.cropHeight = Math.round(original.height * values.height / $('#canvas').height());
+    return values;
+}
+
+$('.crop_ok').click(function(){
+    if (!cropImg) return false;
+    if ($('#cropContainer').length == 1) {
+        var values = getCropSize();
+        if (original.width == values.cropWidth && original.height == values.cropHeight) {
+            return false;
+        }
+        camanObj.crop(values.cropWidth, values.cropHeight, values.cropX, values.cropY).render(function() {
+            original.width = values.cropWidth;
+            original.height = values.cropHeight;
+            
+            $('#imgRight').empty().html('<canvas id="canvas"></canvas>');
+            camanObj = Caman("#canvas", this.toBase64(), function() {
+                original.isChange = true;
+                imageResize()
+            })
+        });
+        hiddenCrop()
+    } else {
+        /*
+        if ($('.crop_keep').hasClass('active')) {
+            showCrop(true)
+        } else {
+            showCrop(false)
+        }*/
+    }
+})
+
+$('body').on('dblclick', '.rcrop-croparea', function() {
+    $('.crop_ok').trigger('click')
+})
+
+$('.crop_keep').click(function() {
+    if (!cropImg || $('#cropContainer').length < 1) return false;
+    if ($(this).hasClass('active')) {
+        $(this).removeClass('active').find('i').removeClass('fa fa-check')
+        hiddenCrop();
+        showCrop(false);
+    } else {
+        $(this).addClass('active').find('i').addClass('fa fa-check')
+        hiddenCrop();
+        showCrop(true);
+    }
+})
+
+$('.rotate-left').click(function() {
+    camanObj.rotate(-90).render();
+    var temp = original.width;
+    original.width = original.height;
+    original.height = temp;
+    original.isChange = true;
+    imageResize();
+})
+
+$('.rotate-right').click(function() {
+    camanObj.rotate(90).render();
+    var temp = original.width;
+    original.width = original.height;
+    original.height = temp;
+    original.isChange = true;
+    imageResize();
+})
+
+$('.scale_keep').click(function() {
+    if ($(this).hasClass('active')) {
+        $(this).removeClass('active').find('i').removeClass('fa fa-check')
+    } else {
+        $(this).addClass('active').find('i').addClass('fa fa-check')
+    }
+})
+
+$('.scale-width').blur(function() {
+    var val = $.trim($(this).val());
+    var val = parseInt(val);
+    if (val < 1 || val > original.width || isNaN(val)) {
+        val  = original.width;
+    }
+    $(this).val(val);    
+    if ($('.scale_keep').hasClass('active')) {
+        $('.scale-height').val(parseInt(val * original.height / original.width))
+    }
+}).keyup(function(event) {
+    if (event.keyCode == 13) {
+        $('.scale-height').focus();
+    }
+})
+
+$('.scale-height').blur(function() {
+    var val = $.trim($(this).val());
+    var val = parseInt(val);
+    if (val < 1 || val > original.height || isNaN(val)) {
+        val  = original.height;
+    }
+    $(this).val(val);
+    if ($('.scale_keep').hasClass('active')) {
+        $('.scale-width').val(parseInt(val * original.width / original.height))
+    }
+}).keyup(function(event) {
+    if (event.keyCode == 13) {
+        $(this).blur();
+        $('.scale_ok').trigger('click');
+    }
+})
+
+$('.scale_ok').click(function() {
+    var nw = parseInt($('.scale-width').val());
+    var nh = parseInt($('.scale-height').val());
+    if (nw == original.width && nh == original.height) {
+        return false;
+    }
+    camanObj.resize({ width : nw, height: nh}).render(function(){
+        original.width = nw;
+        original.height = nh;
+        original.isChange = true;
+        imageResize();
+        //$('body').append('<img src="'+this.toBase64()+'">')
+    });  
+      
+})
+
+var adjustList = {
+    brightness : 0,
+    contrast : 0,
+    saturation : 0,
+    exposure : 0,
+    sepia : 0,
+    hue : 0
+};
+
+function changeAdjust() {
+    original.isChange = true;
+    camanObj.revert(false);
+    camanObj
+        .brightness(adjustList.brightness)
+        .contrast(adjustList.contrast)
+        .saturation(adjustList.saturation)
+        .exposure(adjustList.exposure)
+        .sepia(adjustList.sepia)
+        .hue(adjustList.hue)
+        .render();
+}
+
+function resetAdjust() {
+    handle1Slider.slider('value', 0);
+    handle1.text(0);
+    
+    handle2Slider.slider('value', 0);
+    handle2.text(0);
+    
+    handle3Slider.slider('value', 0);
+    handle3.text(0);
+    
+    handle4Slider.slider('value', 0);
+    handle4.text(0);
+    
+    handle5Slider.slider('value', 0);
+    handle5.text(0);
+    
+    handle6Slider.slider('value', 0);
+    handle6.text(0);
+    
+    adjustList = {
+        brightness : 0,
+        contrast : 0,
+        saturation : 0,
+        exposure : 0,
+        sepia : 0,
+        hue : 0
+    }  
+}
+
+var handle1 = $("#brightness-handle");
+var handle1Slider = $("#brightnessTool").slider({
+    range: "min",
+    value: 0,
+    min: -30,
+    max: 30,
+    create: function() {
+        handle1.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle1.text(ui.value);
+        adjustList.brightness = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+var handle2 = $("#contrast-handle");
+var handle2Slider = $("#contrastTool").slider({
+    range: "min",
+    value: 0,
+    min: -30,
+    max: 30,
+    create: function() {
+        handle2.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle2.text(ui.value);
+        adjustList.contrast = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+var handle3 = $("#saturation-handle");
+var handle3Slider = $("#saturationTool").slider({
+    range: "min",
+    value: 0,
+    min: -30,
+    max: 30,
+    create: function() {
+        handle3.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle3.text(ui.value);
+        adjustList.saturation = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+var handle4 = $("#exposure-handle");
+var handle4Slider = $("#exposureTool").slider({
+    range: "min",
+    value: 0,
+    min: -30,
+    max: 30,
+    create: function() {
+        handle4.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle4.text(ui.value);
+        adjustList.exposure = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+var handle5 = $("#sepia-handle");
+var handle5Slider = $("#sepiaTool").slider({
+    range: "min",
+    value: 0,
+    min: 0,
+    max: 100,
+    create: function() {
+        handle5.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle5.text(ui.value);
+        adjustList.sepia = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+var handle6 = $("#hue-handle");
+var handle6Slider = $("#hueTool").slider({
+    range: "min",
+    value: 0,
+    min: 0,
+    max: 100,
+    create: function() {
+        handle6.text($(this).slider("value"));
+    },
+    slide: function( event, ui ) {
+        handle6.text(ui.value);
+        adjustList.hue = parseInt(ui.value);
+        changeAdjust()
+    }
+})
+
+
+layui.use(['element', 'slider'], function(){
+    var element = layui.element;
+    element.on('collapse(action)', function(data){
+        if (data.show && data.content[0] == document.getElementsByClassName('woo-crop')[0]) {
+            if ($('.crop_keep').hasClass('active')) {
+                showCrop(true)
+            } else {
+                showCrop(false)
+            }
+        } else {
+            hiddenCrop()
+        }
+        
+        if (data.show && data.content[0] == document.getElementsByClassName('woo-scale')[0]) {
+            $('.scale-width').val(original.width);
+            $('.scale-height').val(original.height)
+        }
+        
+    });
+})
+
+$(window).resize(function() {
+    $('#imgRight').height($(window).height() - 55);
+    if ($('#cropContainer').length) {
+        $('#cropContainer').width($('#canvas').width()).height($('#canvas').height())
+    }
+}).trigger('resize')
+
+</script>
+{/block}

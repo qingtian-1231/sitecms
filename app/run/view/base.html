@@ -1,0 +1,93 @@
+{extends file="global.html"}
+
+{block name=function}
+<script type="text/javascript">
+
+var layer;
+var is_layer_loading = {setting('is_layer_loading')|default:0};
+$(function(){
+    layui.use(['layer'], function(){
+        layer = layui.layer;        
+        layer.config({
+            zIndex:10000
+        });
+        
+        {if $error}
+          layer.msg('{$error}',{
+            offset :['50px', '35%']
+          });
+        {/if}
+    })
+})
+
+HKUC.ajax_request.defaultSuccessHandlers= {
+    'success':function(rslt_msg,rslt_data){ 
+       layer.alert(rslt_msg,{
+            icon:1
+        }); 
+    },
+    'error':function(rslt_msg,rslt_data){
+        layer.alert(rslt_msg,{
+            icon:2
+        });                   
+    },
+    'nopower':function(msg,data){
+        
+        layer.alert(msg,{
+            icon:2
+        });
+        layer.closeAll('loading');
+    }
+};
+HKUC.ajax_request.defaultErrorHandlers={
+    403:function(text,rerun){
+        layer.alert('登录超时，请刷新重新登录',{
+            icon:2
+        });
+	},
+    404:function(text,rerun){
+        layer.alert('页面不存在',{
+            icon:2
+        });
+    }
+};
+
+</script>
+{$smarty.block.child}
+{/block}
+{block name=global}
+<div class="admin_main">
+    <div class="admin_header_fixed load-frame-hidden">
+        <div class="admin_header clearfix">
+            <div class="title"><i></i>{$title.operation}{if $parent_info}<a class="parent_info" href="{url($params.controller|cat:'/'|cat:'lists', array_merge($args, ['parent_id' => null]))}">所属{$parent_info.cname}：{$parent_info.title}</a>{/if}</div>
+            {if $actions}
+    		<div class="action">
+                <b></b>
+                <div class="layui-btn-group">
+    			{foreach $actions as $item}{strip}
+                {if !$item}{continue}{/if}
+                <a class="layui-btn  layui-btn-sm  layui-btn-shadow {$item.class} {if strpos($item.class, 'layui-btn') === false}layui-btn-primary{/if}" href="{call url url=$item.url}"><i class="fa {$item.icon}"></i> {$item.title}</a>
+    			{/strip}{/foreach}
+                </div>
+            </div>
+    		{/if}
+        </div>
+    </div>
+    <div class="admin_base">
+    {block name=base}{/block}
+    </div>
+    <div class="admin_bottom">
+    {block name=bottom}{/block}
+    </div>
+</div>
+{/block}
+
+{block name=script}
+{$smarty.block.child}
+<script>
+    if (top.$('#wooBase').length ==  0) {
+        $('body').append('<div onclick="location.href=\'{$absroot}run\'" id="goHome"><i  class="layui-icon layui-icon-home"></i></div>')
+        $('#goHome').addClass('animated bounceInUp')
+    }
+</script>
+{/block}

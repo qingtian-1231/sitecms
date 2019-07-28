@@ -1,0 +1,274 @@
+{extends file="../base.html"}
+{block name=function}
+
+{/block}
+{block name=base}
+{$form->create(['type'=>'file','class'=>'layui-form','novalidate'=>true])}
+{$form->hidden("$mdl.type")}
+{$form->hidden("$mdl.foreign_id")}
+<div id="Power">
+    <div class="userList">
+        <ul class="list">
+            {foreach $list as $ug}
+            <li>
+                <div class="ug">
+                    <i class="fa fa-minus-circle  fa-lg icon"></i>
+                    <a href="{url('content', ['type' => 'usergroup', 'foreign' => $ug.id])}" {if $args.type=='usergroup' && $args.foreign==$ug.id}class="current"{/if}>{$ug.title}</a>
+                </div>
+                {if $ug.User}
+                <dl class="en-font">
+                    {foreach $ug.User as $u}
+                    <dd>
+                        <a href="{url('remove', ['foreign'=>$u.id])}" class="remove javascript" rel="remove_user_power"><i class="fa fa-remove"></i></a>
+                        <a href="{url('content', ['type' => 'user', 'foreign' => $u.id])}" {if $args.type=='user' && $args.foreign==$u.id}class="current"{/if}>{$u.username}</a></dd>
+                    {/foreach}
+                </dl>
+                {/if}
+            </li>
+            {/foreach}
+        </ul>
+        <div class="state"></div>
+        <div class="layui-btn-group">
+            <button class="layui-btn layui-btn-warm" lay-submit lay-filter="power">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a class="layui-btn  power-all  layui-btn-normal" href="javascript:void(0);">全选</a>
+        </div>
+        
+        <div class="layui-btn-group">
+            <a class="layui-btn  layui-btn-normal power-all-reverse" href="javascript:void(0);">反选</a>
+            <a class="layui-btn concise layui-btn-primary" href="javascript:void(0);">简洁</a>
+            <a class="layui-btn fullopen layui-btn-primary" href="javascript:void(0);">展/收</a>            
+        </div>
+    </div>
+
+    <style>
+      .menu_action span.each{ margin-left: 10px;}
+      .menu_action .layui-form-checkbox[lay-skin="primary"]{ padding-left: 22px; margin-left: 5px}
+      #menu_tree .menu_level .self .menu_action a{ color: #ffffff;}
+      blockquote{ line-height: 28px !important;}
+    </style>
+    <blockquote class="site-text layui-elem-quote form_warning">
+        {if !config('auth.menu_power_check')}当前栏目权限验证没有开启，可以在auth配置文件中开启；<br>{/if}
+        如果路由节点中没有权限，即使栏目权限开启了，任然不能访问；<br>
+        建议开发完成以后来设置栏目权限，栏目有变动最好也重新查看下栏目权限设置哦
+    </blockquote>
+
+    {if powertree()}
+    {function menu level=1}
+    {foreach $data as $self_id=>$children}
+    {$menu_type=menu($self_id,'type')}
+    {$power_tree_id = $menu_power_tree.$menu_type}
+    <div class="menu_level menu_level_{$level} {if !$children}no_child{/if} {if $level>1&&$children}isOpen{/if}">
+        <div class="self clearfix">
+            <i class="lline"></i>
+                {if !in_array($menu_type, ['Menu', 'Exlink'])}
+                <div class="menu_action">
+                    {*<a href="javascript:void(0);" class="layui-btn layui-btn-xs menu-power-all">全选</a>*}<a href="javascript:void(0);" class="layui-btn layui-btn-xs menu-power-reverse">反选</a>
+                {$options = []}
+                {foreach powertree('children', $power_tree_id) as $each_id}
+                    {$options[powertree($each_id, 'action')] = powertree($each_id, 'title')}
+                {/foreach}
+                {$form->checkbox("$mdl.content.$self_id",$options,['div' => false,'value' => $powers[$self_id],'lay-skin'=>'primary','lay-filter'=>'menu_power_filter','class'=>'form_item switch'])}
+                </div>
+                {/if}
+
+            <span class="menu_info clearfix ">
+            {$child_count = menu($self_id,'child_count')}
+            <i class="fa  {if $children}{if $level==1}fa-plus-circle{else}fa-minus-circle{/if}{else}fa-minus-circle{/if}  fa-lg left fa-icon"></i>
+            <span class="menu_title left">{menu($self_id,'title')}</span>
+            <span class="menu_id left hover_hidden nc">〖ID：{$self_id}〗</span>
+            <span class="menu_type left hover_hidden nc">〖栏目类型：{$menu_map.$menu_type}〗</span>
+            {*if $child_count>0}<span class="menu_child_count left hover_hidden nc">〖子栏目数：{$child_count}〗</span>{/if*}
+        </span>
+        </div>
+        {if $children}
+        <div class="menu_children">
+            {call menu data=$children level=$level+1}
+        </div>
+        {/if}
+    </div>
+    {/foreach}
+    {/function}
+
+
+    <div id="menu_tree">
+        {if menu('threaded')}{$threaded = reset(menu('threaded'))}{else}{$threaded = []}{/if}
+        {if $threaded}
+        {call menu data=$threaded level=1}
+        {/if}
+    </div>
+
+    {else}
+    <div >
+        <a href="{url('PowerTree/lists')}" rel="start" class="layui-btn new_tab" data-icon="fa-tree">权限节点</a> ，必须先生成权限节点以后允许进行栏目授权
+    </div>
+    {/if}  
+</div>
+{$form->end()}
+{/block}
+{block name=script}
+<script>
+{if isset($error)}
+layer.msg("{$error}");
+{/if}
+
+
+if ($('.userList').find('.current').length) {
+    $('.state').html('您当前正在对【<span>'+$('.userList').find('.current').html()+'</span>】进行栏目授权')
+}
+
+
+
+function remove_user_power(){
+    var url = $(this).attr('href');
+    layer.confirm('请确认是否删除用户授权？',{ icon: 3, title:'提示'}, function(){
+        HKUC.ajax_request.call(this,url,null,
+        	{
+        		'success':function(msg,data){
+      		        layer.closeAll();
+                    layer.msg(msg);
+        		},
+        		'error':function(msg,data){
+                      layer.closeAll();
+                      layer.msg(msg);
+        		}
+        	}
+        );
+    });
+}
+
+layui.use(['form','element'], function(){
+    var layForm = layui.form;
+    
+    layForm.on('submit(power)', function(data){
+        if (!$('#MenupowerType').val() || !$('#MenupowerForeignId').val()) {
+            layer.msg('请选择一个用户组或用户进行授权');
+            return false;
+        }
+        var who = $('.userList').find('a.current').text();
+        layer.confirm('请确认对[' + who + ']授权完毕？',{ icon: 3, title:'提示'}, function(){
+            $('#MenuPowerForm').submit();
+        });
+        return false ;
+    });
+    
+    $('.concise').click(function(){
+        $('#Power').toggleClass('concise');
+    })
+    
+    $('.fullopen').click(function(){
+        $(this).toggleClass('isOpen');
+        if ($(this).hasClass('isOpen')) {
+             $('#menu_tree').find('.self').each(function(){
+                var parent = $(this).parent('.menu_level') ;
+                if(!parent.hasClass('isOpen'))
+                    parent.addClass('isOpen').children('.menu_children').show().end().children('.self').find('.fa-icon').removeClass('fa-plus-circle').addClass('fa-minus-circle')
+            })
+        } else {
+            $('#menu_tree').find('.self').each(function(){
+                var parent = $(this).parent('.menu_level') ;
+                if(parent.hasClass('isOpen'))
+                    parent.removeClass('isOpen').children('.menu_children').hide().end().children('.self').find('.fa-icon').removeClass('fa-minus-circle').addClass('fa-plus-circle')
+            })
+        }
+    })
+    
+    
+    $('.layui-select-all').click(function(){
+        if (!$(this).closest('.menu_level').hasClass('isOpen')) {
+            $(this).parent().trigger('click');
+        }
+        
+        var child = $(this).closest('.menu_level').find('.menu_action').find('.switch');
+        child.each(function(index, item){
+            item.checked = 1;
+        });
+        layForm.render('checkbox');
+    })
+    
+    $('.layui-select-reverse').click(function(){
+        if (!$(this).closest('.menu_level').hasClass('isOpen')) {
+            $(this).parent().trigger('click');
+        }
+        var child = $(this).closest('.menu_level').find('.menu_action').find('.switch');
+        child.each(function(index, item){
+            if (item.checked) {
+                item.checked = 0
+            } else {
+                item.checked = 1;
+            }
+        });
+        layForm.render('checkbox');
+    })
+    
+    $('.power-all-reverse').click(function(){
+        var child = $('#menu_tree').find('.menu_action').find('.switch');
+        child.each(function () {
+            if ($(this).prop('checked')) {
+                $(this).prop('checked', false)
+            } else {
+                $(this).prop('checked', true)
+            }
+        })
+        layForm.render('checkbox');
+    })
+    
+    $('.power-all').click(function(){
+        var child = $('#menu_tree').find('.menu_action').find('.switch');
+        child.each(function () {
+            $(this).prop('checked', true)
+        })
+        layForm.render('checkbox');
+    })
+
+    $('.menu-power-all').click(function () {
+        var child = $(this).closest('div').find('.switch');
+        child.each(function () {
+            $(this).prop('checked', true)
+        })
+        layForm.render('checkbox');
+    })
+
+    $('.menu-power-reverse').click(function () {
+        var child = $(this).closest('div').find('.switch');
+        child.each(function () {
+            if ($(this).prop('checked')) {
+                $(this).prop('checked', false)
+            } else {
+                $(this).prop('checked', true)
+            }
+        })
+        layForm.render('checkbox');
+    })
+
+
+    $('.menu_action').click(function (e) {
+        e.stopPropagation()
+    })
+
+})
+
+$('.userList').find('i.icon').click(function(){
+    if ($(this).hasClass('fa-minus-circle')) {
+        $(this).removeClass('fa-minus-circle').addClass('fa-plus-circle').closest('li').find('dl').stop(true, true).slideUp(300);
+    } else {
+        $(this).removeClass('fa-plus-circle').addClass('fa-minus-circle').closest('li').find('dl').stop(true, true).slideDown(300);
+    }
+})
+
+
+$('#menu_tree .self').click(function(){
+    var parent = $(this).parent('.menu_level') ;
+    $('#menu_tree').find('.isClick').removeClass('isClick');
+    parent.addClass('isClick');
+    if(parent.hasClass('no_child')) return false ;
+    if(parent.hasClass('isOpen'))
+        parent.removeClass('isOpen').children('.menu_children').hide().end().children('.self').find('.fa-icon').removeClass('fa-minus-circle').addClass('fa-plus-circle')
+    else
+        parent.addClass('isOpen').children('.menu_children').show().end().children('.self').find('.fa-icon').removeClass('fa-plus-circle').addClass('fa-minus-circle')
+}).find('a').click(function(e){
+    e.stopPropagation();
+})
+
+</script>
+{/block}

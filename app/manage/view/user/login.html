@@ -1,0 +1,35 @@
+{extends file="../header_footer.html"} 
+
+{block name=content}
+<div class="cms_user">
+    <div class="wrap">
+        {if $error}<div class="error">{$error}</div>{/if}
+        {$form->create(['type' => 'post', 'class' => 'layui-form layui-form-pane'])}
+          <div class="layui-form-item">
+            <label class="layui-form-label">账号</label>
+            <div class="layui-input-inline">
+              {$form->text("User.username",['class'=>'layui-input','placeholder'=>'请输入账号','autocomplete'=>'off'])}
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+              {$form->password("User.password",['class'=>'layui-input','placeholder'=>'请输入密码','autocomplete'=>'off'])}
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">验证码</label>
+            <div class="layui-input-inline captcha">
+              {$form->text("captcha",['class'=>'layui-input',name=>'captcha','value'=>'','autocomplete'=>'off','placeholder'=>'请输入验证码'])}
+              <span class="vimg"><img  src="{captcha_src()}" class="tooltip" onclick="this.src='{captcha_src()}?'+Math.random()"/></span>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-inline">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">立即登录</button>
+            </div>
+          </div>
+        {$form->end()}
+    </div>
+</div>
+{/block}

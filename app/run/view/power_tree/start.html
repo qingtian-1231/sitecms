@@ -1,0 +1,173 @@
+{extends file="../base.html"}
+{block name=function}
+
+{/block}
+{block name=base}
+<style>
+.export-content li.t{ padding-bottom: 15px;}
+#resetPowerTree:active,#resetControllerPowerTree:active{ position: relative;top: -1px;left: -1px;}
+</style>
+<fieldset class="export-content">
+    <legend>功能说明</legend>
+    <div>
+        <ul class="list">
+            <li class="t">
+            1、自动生成节点的原理是通过反射机制自动获取控制器注释和方法注释，因此开发人员需要合理的设置注释。注释说明：
+<pre class="layui-code" lay-title="PHP">
+namespace app\run\controller;
+/**
+ * 文章
+ * @powerset true
+ */
+class Article extends Run
+{
+    /**
+     * 列表
+     * @powerset true
+     */
+    public function lists(){ }
+}</pre>
+             其中powerset是是否加入权限，其他注释属性不关心          
+            </li>
+            <li class="t">
+                2、权限相关的配置都在“auth”文件中，允许配置是否开启权限验证、是否允许节点重置等
+            </li>
+            <li class="t">
+                3、权限相关功能介绍请查阅开发手册中权限章节。
+            </li>
+        </ul>
+        <div style="text-align: center;">
+            {if config('auth.power_reset')}<button class="layui-btn layui-btn-danger" id="resetPowerTree">重置所有权限节点</button>{/if}{if config('auth.power_controller_reset')}<button class="layui-btn" id="resetControllerPowerTree">重置指定控制器权限节点</button>{/if}
+        </div>
+    </div>
+</fieldset>
+
+
+
+<script type="text/javascript">
+layui.use('code', function(){ 
+  layui.code({
+    about: false
+    ,encode : true
+  }); //引用code方法
+});
+
+$('#resetControllerPowerTree').click(function(){
+    layer.prompt({
+        title: '请输入控制器名称：'
+    }, function(value, index, elem){
+        value = $.trim(value);
+        var proindex = index;
+        if (value) {
+            var index = layer.open({
+                title:'节点生成进程'
+                ,area:['500px', 'auto']
+                ,content: '<div id="powerLogging"><ul class="list log-list"></ul><div class="tip"><i class="fa fa-spinner fa-pulse  fa-fw margin-bottom"></i>节点生成中，请稍后...</div></div>'
+                ,success: function(layero, index){
+                    layer.close(proindex)
+                    showLog('数据开始传输...')
+                    var url = '{url("run/PowerTree/ajaxConReset")}';
+                    HKUC.ajax_request.call(this,url+'?c='+value,null,
+                    	{
+                    		'success':function(msg,data){
+                  		        showLog(msg)
+                                writeCache()
+                    		},
+                    		'error':function(msg,data){
+                                showLog(msg)
+                                $('#powerLogging').find('.tip').html('<i class="fa fa-close"></i> 本次操作已经完成');
+                    		}
+                    	}
+                    );
+                }
+            });
+        }
+    });
+
+})
+
+$('#resetPowerTree').click(function() {
+    layer.confirm('请确认是否生成权限节点（如果已有，会清空重新生成）？', {
+        icon:3,
+        title:'确认'
+    },function() {
+        var index = layer.open({
+            title:'节点生成进程'
+            ,area:['500px', 'auto']
+            ,content: '<div id="powerLogging"><ul class="list log-list"></ul><div class="tip"><i class="fa fa-spinner fa-pulse  fa-fw margin-bottom"></i>节点生成中，请稍后...</div></div>'
+            ,success: function(layero, index){
+                showLog('数据开始传输...')
+                elsePower()
+                
+            }
+        });
+    })
+})
+
+
+function elsePower() {
+    var url = '{url("run/PowerTree/elsePower")}';
+    HKUC.ajax_request.call(this,url,null,
+    	{
+    		'success':function(msg,data){
+  		        showLog(msg)   
+                treeInstall(1)            
+    		},
+    		'error':function(msg,data){
+                showLog(msg)
+                showLog('节点生成中断，请处理以后重试')
+                
+    		}
+    	}
+    );
+}
+
+function writeCache() {
+    var url = '{url("run/PowerTree/writeCache")}';
+    showLog('数据缓存请求开始...')
+    HKUC.ajax_request.call(this,url,null,
+    	{
+    		'success':function(msg,data){
+  		        showLog(msg)
+                $('#powerLogging').find('.tip').html('<i class="fa fa-check"></i> 本次操作已经完成');
+                setTimeout(function(){
+                    //layer.closeAll()
+                }, 2000)                
+    		},
+    		'error':function(msg,data){
+                showLog(msg)
+                showLog('操作中断，请处理以后重试')
+    		}
+    	}
+    );
+}
+
+function treeInstall(index) {
+    var url = '{url("run/PowerTree/ajaxReset")}';
+    HKUC.ajax_request.call(this,url+'?index='+index,null,
+    	{
+    		'success':function(msg,data){
+  		        showLog(msg)
+                if (data.finish) {
+                    writeCache()
+                } else {
+                   treeInstall(++index) 
+                }
+    		},
+    		'error':function(msg,data){
+                showLog(msg)
+                showLog('节点重置中断，请处理以后重试')
+    		}
+    	}
+    );
+}
+
+function showLog(msg)
+{
+    $('#powerLogging').find('.log-list').append('<li>'+msg+'</li>').scrollTop(999999)
+}
+
+
+
+</script>
+{/block}

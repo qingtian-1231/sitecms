@@ -1,0 +1,102 @@
+{extends file='../base.html'}
+
+{block name=content}
+<div class="steps">
+    <ul class="grid"></ul>
+</div>
+
+<div id="insLog">
+    <ul class="list" id="insRslt">
+    </ul>
+</div>
+
+
+<div class="bottom-btns" style="color: #009688;">
+    <i class="fa fa-refresh fa-spin"></i>
+    正在安装，请稍后...期间请不要刷新或关闭浏览器
+</div>
+</form>
+<script>
+var layer;
+layui.use(['layer'], function(){
+  layer = layui.layer
+})
+$(function () {
+    install(0);
+});
+
+var insRslt = $('#insRslt');
+
+function install(index) {
+    $.ajax({
+        url: "{url('install/Index/install')}",
+        type: 'GET',
+        data:{
+            index: index
+        },
+        dataType: 'JSON',
+        success: function (data) {
+           console.log(data)
+           if (data.code == 1) {
+               insRslt.append('<li><i class="fa fa-check"></i>'+data.msg+'</li>');
+           } else if(data.code == 0) {
+               insRslt.append('<li><i class="fa fa-remove"></i>'+data.msg+'<br><pre>'+data.data.sql+'</pre><br><pre>'+data.data.exception+'</pre></li>');
+           } else if(data.code == 2) {
+               insRslt.append('<li><i class="fa fa-check"></i>数据库安装完成！</li>');
+               if (data.data.error) {
+                  layer.alert('本次安装过程中，共'+data.data.error+'个SQL执行失败，可能您在此数据库下已经安装过WooCMS系统。确实有疑问，请加入我们QQ群：314833523。');
+               } else {
+                   setDbConfig();
+               }
+           } else if(data.code == -1) {
+               insRslt.append('<li><i class="fa fa-remove"></i>'+data.msg+'<a href="{$absroot}?s=install" style="color:red;margin-left:10px;">重新安装</a></li>');
+           }
+           $('#insLog').scrollTop(8888888);
+           if (!(data.code == 2 || data.code == -1)) {
+              install(index + 1)
+           }
+        }
+    })
+}
+
+function setDbConfig() {
+    $.ajax({
+        url: "{url('install/Index/setDbConfig')}",
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (data) {
+           if (data.code == 1) {
+               insRslt.append('<li><i class="fa fa-check"></i>'+data.msg+'</li>');
+               setAdminUser();
+           } else {
+               layer.alert(data.msg + '请检查/data/config/database.php是否可写？<br/>检查后点击“确定”尝试重新写入数据库配置文件', function(index){
+                  setDbConfig();
+               });
+           }
+           $('#insLog').scrollTop(8888888);
+        }
+    })
+}
+
+function setAdminUser() {
+    $.ajax({
+        url: "{url('install/Index/setAdminUser')}",
+        type: 'GET',
+        dataType: 'JSON',
+        success: function (data) {
+           if (data.code == 1) {
+               insRslt.append('<li><i class="fa fa-check"></i>'+data.msg+'</li>');
+               $('.bottom-btns').html('<i class="fa fa-check"></i>所有程序安装完成，页面即将跳转...');
+               setTimeout(function () {
+                    window.location = "{url('install/index/step5')}";
+               }, 1000);
+           } else {
+               insRslt.append('<li><i class="fa fa-remove"></i>'+data.msg+'<br><pre>'+data.data.error+'</pre></li>');
+           }
+           $('#insLog').scrollTop(8888888);
+        }
+    })
+}
+
+</script>
+{/block}

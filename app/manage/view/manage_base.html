@@ -1,0 +1,53 @@
+{extends file="header_footer.html"} 
+
+{block name=content}
+<div class="cms_manage_base">
+    <div class="wrap clearfix">
+        <div class="cms_manage_left">
+            {block name="insider_left"}                        
+            {$manage_menu = managemenu('nav')}
+            {if !$manage_menu}{$manage_menu=[]}{/if}            
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                {foreach $manage_menu as $level1_id => $level1}
+                <li class="layui-nav-item layui-nav-itemed {if $manage_top_id == $level1_id && !$level1}layui-this{/if}">
+                    {call manage_menu_tag id = $level1_id}
+                    {if $level1}
+                    <dl class="layui-nav-child">
+                        {foreach $level1 as $level2_id => $level2}
+                        <dd class="{if $manage_menu_data.id == $level2_id}layui-this{/if}">{call manage_menu_tag id = $level2_id}</dd>
+                        {/foreach}
+                    </dl>
+                    {/if}
+                </li>
+                {/foreach}
+            </ul>
+            {/block}
+        </div>
+        <div class="site-tree-mobile"><i class="layui-icon layui-icon-spread-left"></i></i></div>
+        <div class="cms_manage_rght">
+            <div class="location">{include file="Common/path.html" delimiter="&gt;"}</div>            
+            {block name="insider_right"}
+            <div class="cms_insider">{block name="insider"}{/block}</div>
+            {/block}
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$('.cms_manage_menu').find('.cms_top_nav .toggle').click(function(){
+    if ($(this).closest('li').hasClass('close')) {
+        $(this).find('.fa').removeClass('fa-plus-circle').addClass('fa-minus-circle').closest('li').removeClass('close').find('dl').stop(true, true).slideDown(200);
+    } else {
+        $(this).find('.fa').removeClass('fa-minus-circle').addClass('fa-plus-circle').closest('li').addClass('close').find('dl').stop(true, true).slideUp(200);
+    }
+})
+
+$('.site-tree-mobile').click(function() {
+    if ($('.cms_manage_left').is(':visible')) {
+        $('.cms_manage_left').fadeOut(500)
+    } else {
+        $('.cms_manage_left').fadeIn(500)
+    }
+})
+
+</script>
+{/block}

@@ -1,0 +1,28 @@
+{extends file='../base.html'}
+
+{block name=content}
+
+<div class="finish">
+    <div class="success">恭喜您！所有程序安装成功！</div>
+    <div class="success-tips">
+    为了您的项目安全，强烈建议安装完成后立即将项目app目录下的“install”文件夹删除！如果中途要修改数据库相关配置，您可在：“项目名称/config/database.php”中按照说明进行修改。
+    </div>
+    <div class="links">
+        <div class="title">相关介绍和文档：</div>
+        <div class="content">
+            <ul class="list">
+                <li><span>WooCMS官方网站：</span><a href="https://www.eduaskcms.xin/" target="_blank">https://www.eduaskcms.xin/</a></li>
+                <li><span>WooCMS建站手册：</span><a href="https://www.kancloud.cn/laowu199/e_use" target="_blank">https://www.kancloud.cn/laowu199/e_use</a></li>
+                <li><span>WooCMS开发手册：</span><a href="https://www.kancloud.cn/laowu199/e_dev" target="_blank">https://www.kancloud.cn/laowu199/e_dev</a></li>
+                <li><span>WooCMS后台培训：</span><a href="https://www.kancloud.cn/laowu199/e_manual" target="_blank">https://www.kancloud.cn/laowu199/e_manual</a></li>
+                <li><span>ThinkPHP5.1完全开发手册：</span><a href="https://www.kancloud.cn/manual/thinkphp5_1" target="_blank">https://www.kancloud.cn/manual/thinkphp5_1</a></li>
+                <li><span>WooCMS系统QQ交流群：</span><a href="//shang.qq.com/wpa/qunwpa?idkey=904af7a5d6b422b0fdc1cd04160b64b117fda091bf830b44d1cbd3b02f079e33" target="_blank">314833523</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="bottom-btns">
+    <a href="{url('home/index/index')}" class="layui-btn">访问前台</a><a href="{url('run/index/index')}" class="layui-btn">访问后台</a>
+</div>
+
+{/block}

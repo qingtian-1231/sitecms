@@ -1,0 +1,14 @@
+{extends file="../insider_base.html"} 
+
+
+{block name=insider}
+<div class="comm_view">   
+    <div class="comm_content"><div class="editor_content">{$data.content}</div>
+        {if $render}
+        <div id="cms_page" class="clearfix fallsPage">
+            <div class="cms_page_relative clearfix">{$render}</div>
+        </div>
+        {/if}
+    </div>    
+</div>
+{/block}

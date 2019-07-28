@@ -1,0 +1,6 @@
+{extends file="../lists.html"}
+{block name=function}
+    {function name=item_action_modelgolist item=[] info=[]}{strip}
+		<a class="layui-btn  layui-btn-sm  new_tab" href="{url($item.model|cat:'/lists')}" data-title="{$item.cname}列表" data-icon="layui-icon-chart"><i class="layui-icon layui-icon-chart"></i>查看列表</a>
+    {/strip}{/function}
+{/block}

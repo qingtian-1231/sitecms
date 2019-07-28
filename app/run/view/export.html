@@ -1,0 +1,197 @@
+{extends file="lists.html"}
+{block name=function}    
+      
+
+{/block}
+
+
+{block name=base_top}
+
+{if $list_search_fields}
+<div class="admin_module clearfix admin_module_search">
+    <i class="line"></i>
+    <a class="javascript" id="list_search_toggle" rel='list_search_switch'>{if !$filter}展开搜索{else}关闭搜索{/if}</a>
+    <div id="list_search" class="clearfix {if !$filter}hidden{/if}" >
+    	{$form->create(['type'=>'post','class'=>'layui-form layui-form-pane','novalidate'=>true])}
+        
+        {foreach $list_search_fields as $field=>$info}
+        {if $info.hide}{continue}{/if}
+        <div class="layui-form-item">
+            <label class="layui-form-label">{$info.name}</label>
+            <div class="layui-input-inline">
+                {if $info.elem == 'text'}
+                    {$form->text("Search.$field",['class' => 'layui-input','value' => $filter.$field])}
+                {elseif $info.elem == 'checker'}
+                    {$form->checkbox("Search.$field",[],['value' => $filter.$field, 'class' => "form_item" ,'lay-skin'=>'switch','lay-filter'=>$field,'lay-text'=>"Y|N"])}
+                {elseif $info.elem == 'options'}
+                    {$form->select("Search.$field",$info.options,['class'=>'form_item','value' => $filter.$field, 'lay-search'=>'', 'lay-filter'=>$field, 'empty'=>"≡请选择{$info.name}≡"])}
+                {elseif $info.elem == 'date'}
+                    {$form->text("Search.$field",['class' => 'layui-input datepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'date', 'data-range' => $info.options.range|default:'', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
+                {elseif $info.elem == 'datetime'}
+                    {$form->text("Search.$field",['class' => 'layui-input datetimepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'datetime', 'data-range' => $info.options.range|default:'', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
+                {elseif $info.elem == 'date_range'}
+                    {$form->text("Search.$field",['class' => 'layui-input datepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'date', 'data-range' => '~', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
+                {elseif $info.elem == 'number_range'}
+                    <div class="number_range clearfix">
+                        {$form->hidden("Search.$field",['class' => 'layui-input','value' => urldecode($filter.$field)])}
+                        {$rangeVal=explode('~', urldecode($filter.$field))}                        
+                        <input class="layui-input min" value="{trim($rangeVal[0])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}"  type="number"/><span>-</span><input value="{trim($rangeVal[1])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}" class ="layui-input max"  type="number"/> 
+                    </div>               
+                {else}
+                    {$local.func='list_search_'|cat:$info.elem}
+                    {call name=$local.func  field=$field info=$info value=$filter.$field}                    
+                {/if}
+            </div>
+        </div>
+        {/foreach}
+        
+        <div class="search_action">
+            <button class="layui-btn" lay-submit>搜索</button>
+            <a href="{html_entity_decode(U(['parent_id'=>$args.parent_id]),true)}" class="layui-btn layui-btn-primary">清空</a>
+        </div>        
+    	{$form->end()}
+    </div>
+</div>
+{/if}
+{/block}
+
+{block name=base_content}
+<style>
+.layui-input-inline{ max-width: 1000px;}
+</style>
+<div class="box_form">
+{$form->create(['type'=>'post','class'=>'MainForm layui-form layui-form-pane','novalidate'=>true])}
+<fieldset class="export-content">
+    <legend>导出设置</legend>
+    <blockquote class="layui-elem-quote" >当前情况下，共有【<span style="color: #FF5722;">{$total}</span>】条数据；导出数据需要一定时间请耐心等待！</blockquote>
+    <div class="layui-form-item form-item-row form-item-checkbox" style="margin-top: 15px;">
+        <label class="layui-form-label">导出字段</label>
+        <div class="layui-input-inline">
+            {$fields = []}
+            {$sort_field = []}
+            {foreach $mdls.$mdl->form as $field => $info}
+                {$fields.$field= $info.name}
+                {if in_array($info.type, ['integer'])}
+                    {$sort_field.$field= $info.name}
+                {/if}
+            {/foreach}
+            {$form->checkbox("Export.field", $fields,['value' => array_keys($fields),'div' => false,'lay-skin'=>'primary','lay-filter'=>'field','class'=>'form_item'])}
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序字段</label>
+        <div class="layui-input-inline">
+            {$form->select("Export.sort",$sort_field,['value' => 'id','class'=>'form_item','multiple'=>$col.multiple,'lay-search'=>'','lay-filter'=>'sort','empty'=>"≡请选择≡"])}
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">排序方式</label>
+        <div class="layui-input-inline">
+            {$form->select("Export.direction",['DESC' => '倒序', 'ASC' => '正序'],['value' => 'DESC','class'=>'form_item','multiple'=>$col.multiple,'lay-search'=>'','lay-filter'=>'direction','empty'=>"≡请选择≡"])}
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">拉取条数</label>
+        <div class="layui-input-inline">
+            {$form->select("Export.limit",[100 => 100, 200 => 200, 500 => 500, 1000 => 1000, 2000 => 2000, 5000 => 5000],['value' => '1000','class'=>'form_item','lay-search'=>'','lay-filter'=>'limit','empty'=>"≡请选择≡"])}
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">页码选择</label>
+        <div class="layui-input-inline">
+            {$form->select("Export.page",[1 => '第1页'],['value' => '1','class'=>'form_item','multiple'=>$col.multiple,'lay-search'=>'','lay-filter'=>'page','empty'=>"≡请选择≡"])}
+        </div>
+    </div>
+    <div class="layui-form-item form-item-btns load-frame-hidden">
+        <div class="layui-input-inline">
+          <button class="layui-btn layui-btn-normal" lay-submit lay-filter="exportExcel">导出EXCEL</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    
+</fieldset>
+{$form->end()}
+</div>
+{/block}
+
+
+
+
+{block name=script}
+<script type="text/javascript">
+var total = {$total}
+var fields = {json_encode($fields)};
+
+
+layui.config({
+	base: '{$absroot}files/layui_exts/',
+}).extend({
+	excel: 'excel',
+});
+
+layui.use(['excel', 'form'], function() {    
+    layForm = layui.form; 
+    excel = layui.excel;  
+    
+      
+    layForm.on('select(limit)', function(data){      
+      render_page(data.value)
+    });
+    render_page($('#ExportLimit').val());
+    
+    
+      
+    layForm.on('submit(exportExcel)', function(data){
+        
+        {if $export_type == 'ajax'}
+        layer.load()        
+        $.post('{url("export", $args)}', data.field, function(res){
+            layer.closeAll()
+            if (res.result == 'success') {
+                var header = {}
+                for(i in res.data.list[0]) {
+                    header[i] = fields[i]
+                }
+                res.data.list.unshift(header);                
+                
+                excel.exportExcel({
+                    sheet1 : res.data.list
+                }, res.data.filename + '.xlsx', 'xlsx');
+            } else {
+                layer.alert(res.message, {
+                    icon : 2
+                })
+            }
+        }, 'json')
+        return false;
+        {/if}
+    });
+})
+
+
+
+
+
+
+
+function render_page(limit) {
+    limit = parseInt(limit)
+    var now_page = $('#ExportPage').val();
+    var total_page = Math.ceil(total / limit)
+    var html = '<option value="">≡请选择≡</option>';
+    for (var i = 1; i <= total_page; i++) {
+        html += '<option value="'+i+'">第'+i+'页</option>';
+    }
+    if (now_page > total_page) {
+        now_page = total_page;
+    }
+    
+    $('#ExportPage').empty().html(html).val(now_page)
+    layForm.render('select');
+}
+
+</script>
+{/block}

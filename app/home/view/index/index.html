@@ -1,0 +1,58 @@
+{extends file='../header_footer.html'}
+
+{block name=content}
+<div class="layui-carousel" id="banner">
+  <div carousel-item>
+    {foreach $ad.index_banner.Ad as $each}
+    <div><a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});"><img  src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/></a></div>
+    {/foreach}
+  </div>
+</div>
+<script>
+layui.use('carousel', function(){
+  var carousel = layui.carousel;
+  //建造实例
+  carousel.render({
+    elem: '#banner'
+    ,width: '100%' //设置容器宽度
+    ,height:'500px'
+    //,arrow: 'always' //始终显示箭头
+    ,anim: 'fade' //切换动画方式
+  });
+});
+
+</script>
+
+
+<div id="Index">
+    <div class="wrap clearfix">
+        <div style="margin-bottom: 4%;">
+            {*整个模型数据搜索--不管栏目，整表搜索*}
+            模型搜索示例
+            <form action="{call search_link mdl='Article'}" method="post">
+                <input  type="text" name="kw" class="layui-input"/>
+                <button class="layui-btn">搜索</button>
+            </form>
+            {*栏目数据搜索--需要指定栏目，非整表搜索*}
+            栏目搜索示例
+            <form action="{call search_link id=3}" method="post">
+                <input  type="text" name="kw" class="layui-input"/>
+                <button class="layui-btn">搜索</button>
+            </form>
+
+        </div>
+
+
+        <div class="about">
+            <div class="item_tit"><a href="{call menu_link id=12}">{menu(12,'title')}</a></div>
+            <div class="item_con">
+            </div>
+        </div>
+        <div class="news">
+            <div class="item_tit"><a href="{call menu_link id=3}">{menu(3,'title')}</a></div>
+            <div class="item_con">
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

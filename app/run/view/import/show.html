@@ -1,0 +1,139 @@
+{extends file="../base.html"}
+
+{block name=base}
+<div id="importList">
+    <table class="layui-table list" lay-filter="list">
+        <thead>
+            <tr>
+                <th><div class="list-cell">序号</div></th>
+                {$real_vields=[]}
+                {foreach $data.fields as $field}
+                {$start = strpos($field, '#')}
+                {if $start === false}
+                    {$real_vields[]=$field}
+                    {$show_name=$field}
+                {else}
+                    {$show_name=substr($field,0,$start)}
+                    {$real_vields[]=substr($field, $start+1)}
+                {/if}
+                <th><div class="list-cell">{$show_name}</div></th>
+                {/foreach}
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $data.list as $item}
+            <tr>
+                <td class="center">{$item@iteration}</td>
+                {foreach $real_vields as $field}
+                <td><input type="text" class="layui-input" name="{$field}" value="{$item.$field}"/></td>
+                {/foreach}
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+</div>
+<div id="importContainer">
+    <div id="import">
+        <div class="title">
+        <a href="javascript:void(0);" class="close" onclick="$('#importContainer').fadeOut(300)"><i class="fa fa-close"></i></a>
+        数据导入 
+        </div>
+        <div class="content">
+            <ul class="list" id="importRslt">
+                
+            </ul>
+        </div>
+        <div class="tips" id="tips">
+            <i class="fa fa-refresh fa-spin"></i>
+            正在导入，请稍后...期间请不要刷新或关闭窗口
+        </div>
+    </div>
+</div>
+
+<script>
+$(window).resize(function() {
+    var wh = $(window).height();
+    $('#importList').height(wh - 70);
+}).trigger('resize')
+
+var fields = {json_encode($real_vields)};
+$('#importList table').css('min-width', (fields.length * 150 + 60) + 'px');
+
+var importCount = 100;
+var maxIndex = {ceil(count($data.list)/100)};
+var startTime = 0;
+var endTime = 0;
+function importData(index) {
+    var data = [];
+    for (var i = importCount * index; i<=importCount * index + importCount  - 1;i++) {
+        var tr = $('#importList').find('tbody').find('tr:eq('+i+')');
+        var row = {};
+        for (var f in fields) {
+            var field = fields[f];
+            row[field] = tr.find('input[name="'+field+'"]').val();
+        }
+        data.push(row)
+    }
+    var last = index >= maxIndex-1 ? true : false;
+    if (index == 0) {
+        startTime = new Date();
+        startTime = startTime.getTime();
+    }
+    $('#importRslt').append('<li><i class="fa fa-check"></i>数据准备完成，传输中...</li>');    
+    HKUC.ajax_request("{url('Import/import')}",{
+            id : {$import.id},
+            data : data,
+            index : index,
+            last : last
+        },
+        {
+			'success':function(msg,data){
+                
+                if (!data) {
+                    $('#importRslt').append('<li><i class="fa fa-check"></i>'+msg+'</li>');
+                } else {
+                    $('#importRslt').append('<li><i class="fa fa-check"></i>'+msg+'<pre>'+JSON.stringify(data)+'</pre></li>');
+                }
+                if (index < maxIndex-1) {
+                    index++;
+                    importData(index);
+                } else {
+                    endTime = new Date();
+                    endTime = endTime.getTime();
+                    var useTime = ((endTime - startTime) / 1000).toFixed(2);
+                    $('#importRslt').append('<li><i class="fa fa-check"></i>数据已经全部提交服务器，本次导入共用时'+useTime+'秒</li>');
+                    layer.msg('数据已经全部提交服务器，本次导入共用时'+useTime+'秒');
+                    $('#import').find('a.close').fadeIn(300);
+                    $('#tips').html('<a class="layui-btn" href="{url('Import/lists')}">返回列表</a>')
+                }
+                $('#importRslt').scrollTop(8888888);
+			},
+			'error':function(msg,data){
+			    
+                $('#importRslt').append('<li><i class="fa fa-remove"></i>'+msg+'</li>');
+                $('#import').find('a.close').fadeIn(300)
+                $('#tips').html('<a class="layui-btn" href="{url('Import/lists')}">返回列表</a>');
+                $('#importRslt').scrollTop(8888888);
+			}
+		}
+	);
+}
+
+$(function() {
+    $('.do-import').parent().click(function () {
+        layer.confirm('请确认是否立即开始导入数据？', function() {
+            layer.closeAll();
+            $('#importRslt').html('');
+            $('#tips').html('<i class="fa fa-refresh fa-spin"></i>正在导入，请稍后...期间请不要刷新或关闭窗口');
+            $('#importContainer').fadeIn(300, function () {
+                importData(0)
+            })
+        })
+    })
+})
+
+</script>
+
+
+
+{/block}

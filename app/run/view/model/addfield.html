@@ -1,0 +1,38 @@
+{extends file="../form.html"}
+
+
+
+{block name=script}
+{$smarty.block.child}
+<script>
+layui.use(['form'], function() {
+    form = layui.form;
+    form.on('submit(wooForm)', function(data){
+        
+        layer.confirm('请确定字段信息填写完成，立即执行数据库？',{
+            title : '确认',
+            icon : 3
+        }, function(){
+            HKUC.ajax_request.call(this,"{url('ajaxAddField')}",data.field,
+        	{
+            		'success':function(msg,data){
+                        layer.closeAll();
+                        layer.alert(msg, {
+                            icon : 1
+                        },function(index) {
+                            history.back()
+                        })
+            		},
+            		'error':function(msg,data){
+                          layer.closeAll();
+                          layer.msg(msg)
+            		}
+            	}
+            );
+        })
+        return false;
+    });
+
+})
+</script>
+{/block}

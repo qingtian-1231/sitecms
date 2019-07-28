@@ -1,0 +1,170 @@
+{extends file='../base.html'}
+
+{block name=content}
+<div class="steps">
+    <ul class="grid">
+        <li >
+            <span class="step">1</span>检测环境
+        </li>
+        <li class="current">
+            <span class="step">2</span>创建数据
+        </li>
+        <li>
+            <span class="step">3</span>完成安装
+        </li>
+    </ul>
+</div>
+<form method="post" class="layui-form" action="{url('install/Index/step4')}">
+<div class="dbform">
+    
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th width="100%" colspan="4">数据库信息</th>
+            </tr>
+            <tr>
+                <th class="title"><label>数据库地址</label></th>
+                <td width="35%"><input lay-verify="required" value="127.0.0.1" woo-tip="一般为127.0.0.1或localhost"  type="text" class="layui-input" name="dbhost"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>数据库端口</label></th>
+                <td><input  type="text" lay-verify="required" value="3306" woo-tip="Mysql端口一般为3306" class="layui-input" name="dbport"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>数据库用户名</label></th>
+                <td><input  type="text" lay-verify="required"  value="root" class="layui-input" name="dbusername"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>数据库密码</label></th>
+                <td><input  type="password" class="layui-input" lay-verify="dbpassword" value="" woo-checked="0"  name="dbpassword"/></td>            
+                <td></td>        
+            </tr>            
+            <tr>
+                <th class="title"><label>数据库名</label></th>
+                <td><input  type="text" lay-verify="required" value="woocms" class="layui-input" name="dbname"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>数据库表前缀</label></th>
+                <td><input  type="text" lay-verify="required" value="woo_" woo-tip="一个库如果有多个项目可以通过前缀区分" class="layui-input" name="dbprefix"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>数据库编码</label></th>
+                <td>
+                    <select name="dbcharset" lay-verify="required">
+                        <option value="">--请选择数据库编码--</option>
+                        <option value="utf8" selected="">utf8</option>
+                        <option value="utf8mb4">utf8mb4</option>
+                    </select>
+                </td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th width="100%" colspan="4">创始人信息</th>
+            </tr>
+            <tr>
+                <th class="title"><label>管理员账号</label></th>
+                <td><input  type="text" lay-verify="required"  woo-tip="创始人帐号，拥有后台所有管理权限"  value="admin" class="layui-input" name="username"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>密码</label></th>
+                <td><input  type="password" lay-verify="password" voo-tip="密码长度不低于5位,不高于16位" class="layui-input" name="password"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>确认密码</label></th>
+                <td><input  type="password" lay-verify="repassword" class="layui-input" name="repassword"/></td>            
+                <td></td>        
+            </tr>
+            <tr>
+                <th class="title"><label>Email</label></th>
+                <td><input  type="text" lay-verify="email" class="layui-input" name="email"/></td>            
+                <td></td>        
+            </tr>
+        </table>
+    
+</div>
+
+
+<div class="bottom-btns">
+    <a href="{$absroot}?s=install/index/step2" class="layui-btn"><< 上一步</a><input lay-filter="submit" lay-submit="" type="submit" value="创建数据" class="layui-btn"/>
+</div>
+</form>
+<script>
+
+layui.use(['form'], function(){
+  var form = layui.form
+  ,layer = layui.layer;
+  
+  
+  
+  
+  
+  
+ 
+  //自定义验证规则  
+  $('[woo-tip]').focus(function(){
+    var text  = $(this).attr('woo-tip');
+    layer.tips(text, $(this));
+  })
+  
+  form.verify({
+    password : function (value, item) {
+        if (value.length < 5 || value.length > 16) {
+            return '密码长度不低于5位,不高于16位';
+        }
+    },
+    repassword : function (value, item) {
+        var pass  = $('[name="password"]').val();
+        if (pass != value) {
+            return '两次密码输入不一致';
+        }
+    },
+    dbpassword : function (value, item) {
+        var is_check = $('[name="dbpassword"]').attr('woo-checked');
+        if (is_check == 0) {
+            return '密码验证失败，如果为空请先点一次自动验证';
+        }
+    }
+  })
+  
+  $('[name="dbpassword"]').blur(function(){
+      var dbuser = $('[name="dbusername"]').val();
+      var dbhost = $('[name="dbhost"]').val();
+      var dbport = $('[name="dbport"]').val();
+      var dbpass = $('[name="dbpassword"]').val();
+      $.ajax({
+        url: "{url('install/Index/testDbPwd')}",
+        type: 'GET',
+        data:{
+            hostname: dbhost,
+            username : dbuser,
+            password :　dbpass,
+            hostport　: dbport
+        },
+        dataType: 'JSON',
+        success: function (data) {
+           if (data.code == 1) {
+              $('[name="dbpassword"]').attr('woo-checked', 1);              
+           } else  {
+              $('[name="dbpassword"]').attr('woo-checked', 0).val(''); 
+              layer.tips(data.msg, $('[name="dbpassword"]')); 
+           }
+        }
+    })
+  })
+  
+  
+  
+  
+  //监听提交
+  form.on('submit(submit)', function(data){
+    
+  });
+});
+</script>
+{/block}

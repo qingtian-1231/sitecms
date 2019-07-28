@@ -1,0 +1,977 @@
+{extends file="../global.html"}
+{block name=function}
+<script type="text/javascript">
+$(function(){
+    layui.use(['layer'], function(){
+        layer = layui.layer;        
+        layer.config({
+            zIndex:10000
+        });
+    })
+})
+
+HKUC.ajax_request.defaultSuccessHandlers= {
+    'success':function(rslt_msg,rslt_data){ 
+       layer.alert(rslt_msg,{
+            icon:1
+        }); 
+    },
+    'error':function(rslt_msg,rslt_data){
+        layer.alert(rslt_msg,{
+            icon:2
+        });                   
+    },
+    'nopower':function(msg,data){
+        
+        layer.alert(msg,{
+            icon:2
+        });
+    }
+};
+HKUC.ajax_request.defaultErrorHandlers={
+    403:function(text,rerun){
+        layer.alert('登录超时，请刷新重新登录',{
+            icon:2
+        });
+	},
+    404:function(text,rerun){
+        layer.alert('页面不存在',{
+            icon:2
+        });
+    }
+};
+
+</script>
+{$smarty.block.child}
+{/block}
+{block name="global"}
+{function folder list=null}
+    {if $list}
+        <ul class="list">
+            {foreach $list as $self_id=>$children}
+                <li>
+                    <div class="self {if $args['vfolder_id'] == $self_id}current{/if}"><span class="more {if !$children}hidden{/if}"><i class="fa  fa-plus-circle"></i></span><a href="" data-id="{$self_id}"><i class="fa fa-folder-o"></i><cite class="en-font">{$vfolder.list[$self_id].title}</cite></a></div>
+                    {if $children}
+                        {call folder list=$children}
+                    {/if}
+                </li>
+            {/foreach}
+        </ul>
+    {/if}
+{/function}
+<div id="ckeditor">
+    <div id="folder">
+        <div class="container folder-list">
+            {call folder list=$vfolder.threaded}            
+        </div>
+    </div>
+    <div id="folderFiles">
+        <div id="filesTop">
+            <button class="layui-btn main-upload hidden"><i class="layui-icon layui-icon-upload"></i></button>
+            <button class="layui-btn layui-btn-primary main-close hidden"><i class="layui-icon layui-icon-close"></i></button>
+            <div class="search">
+                <form class="layui-form" lay-filter="searchForm">
+                    <select name="ORDER" class="layui-select">
+                        <option value="">排序：</option>
+                        <option value="id">文件日期</option>
+                        <option value="basename">文件名称</option>
+                        <option value="size">文件大小</option>               
+                    </select>
+                    <select class="layui-select" name="ORDERTYPE">
+                        <option value="">排序排序：</option>
+                        <option value="DESC">降序</option>
+                        <option value="ASC">升序</option>              
+                    </select>
+                    <select class="layui-select" name="FILETYPE">
+                        <option value="">文件类型：</option>
+                        <option value="image">图片</option>
+                        <option value="file">文件</option>              
+                    </select>
+                    <select class="layui-select item-limit" name="LIMIT">
+                        <option value="">每页数量：</option>
+                        <option value="10" selected="">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>  
+                        <option value="50">50</option>           
+                    </select>
+                    <input type="text" class="layui-input search-keyword" name="KEYWORDS" placeholder="过滤"/>
+                    <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="search"><i class="layui-icon-search layui-icon"></i></button>
+                    <input  type="reset" id="searchReset" class="hidden"/>
+                </form>
+            </div>
+        </div>
+        <script>
+        layui.use(['form'], function() {
+            var layForm = layui.form;
+            
+            layForm.val("searchForm", {
+              "FILETYPE": "{if isset($args['filetype'])}{$args['filetype']}{/if}",
+              "LIMIT" : "{if isset($args['limit'])}{$args['limit']}{else}10{/if}"
+            })
+            layForm.on('submit(search)', function(data){
+                var search = {}
+                for (key in data.field) {
+                    if (data.field[key]) {
+                        search[key] = data.field[key];
+                    } else {
+                        search[key] = key
+                    }
+                }
+                search['PAGE'] = 'PAGE';
+                loadFile($.extend(baseReplace, search), true)
+                return false;
+            });
+        })
+        </script>
+        
+        <div id="filesList">
+            <div id="uploader" class="hidden">            
+                <div id="thelist" class="uploader-list">                    
+                    <ul class="grid">
+                        {*
+                        <li >
+                           <div class="show">
+                                 <div class="tip">
+                                     <p>预览中...</p>
+                                 </div>
+                                  <div class="thumb"></div>
+                                 <div class="size"></div>
+                                 <div class="name"><input type="text" value=""/></div>
+                                 <div class="btns"><span class="cancel"><i class="fa fa-trash-o"></i></span></div>
+                                 <div class="progress"><i></i><span>等待上传</span></div>
+                             </div>
+                           </li> 
+                       *}              
+                    </ul>
+                    <div class="lock"></div>
+                </div>
+                <div id="uploader-drag-drop">
+                    <div id="uploader-btn"></div>
+                    <div class="lock"></div>
+                </div>
+                <div id="uploader-btns">
+                    <div class="layui-btn-group">
+                        <a href="javascript:void(0);" class="layui-btn  layui-btn-normal upload"><i class="fa fa-upload"></i>上传</a>                        
+                        <a href="javascript:void(0);" class="layui-btn pause"><i class="fa fa-pause"></i>暂停</a>
+                        <a href="javascript:void(0);" class="layui-btn replay"><i class="fa fa-play"></i>继续</a>
+                        <a href="javascript:void(0);" class="layui-btn close layui-btn-primary"><i class="fa fa-close"></i>关闭</a>
+                    </div>
+                </div>               
+            </div>
+            <div id="showFile">
+                <ul class="grid">
+                    {if !empty($list.list)}
+                    {foreach $list.list as $item}
+                    <li data-src="{$item.url}" data-id="{$item.id}" data-basename="{$item.basename}">
+                        <div class="thumb sizing">
+                            <a href="javascript:void(0);"><img  src="{$absroot}{if $item.type=='image'}{$item.url}{else}addons/woofinder/images/fileholder.png{/if}" alt="{$item.basename}"/></a>
+                        </div>
+                        <div class="info">
+                            <p><span>文件名称：</span><em class="basename">{$item.basename}</em></p>
+                            <p><span>文件路径：</span>{$item.url}</p>
+                            <p><span>时间信息：</span>{$item.created} / {$item.modified}</p>
+                            <p><span>上传类型：</span>{if $item.type=='image'}图片{else}文件{/if}</p>
+                            <p><span>大小尺寸：</span>{return_size($item.size)} {if $item.width}/ {$item.width} × {$item.height}像素{/if}</p>
+                        </div>
+                        <div class="summary  en-font">
+                            <div class="title basename">{$item.basename}</div>
+                            <div class="date">{$item.created}</div>
+                            <div class="size">{return_size($item.size)}</div>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <div class="page">{if !empty($list.list)}{if $list.page.current_page < $list.page.last_page}<a href="javascript:void(0);" onclick="nextPage({$list.page.current_page + 1})" class="layui-btn layui-btn-primary">{$list.page.current_page} / {$list.page.last_page}</a>{/if}{/if}</div>
+            </div>
+        </div>
+        <div id="filesBottom" class="en-font">
+            
+        </div>
+    </div>
+</div>
+
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+var window_width,
+file_select_id,
+window_height,
+vfolder_select_id = {if isset($args['vfolder_id'])}{$args['vfolder_id']}{else}0{/if};
+var baseUrl = "{addon_url('woofinder/Index/ajaxLoadFile', ['vfolder_id' => 'VFOLDERID', 'keywords' => 'KEYWORDS', 'order' => 'ORDER', 'ordertype' => 'ORDERTYPE','limit' => 'LIMIT', 'filetype' => 'FILETYPE', 'page' => 'PAGE'])}";
+var baseReplace = {
+    VFOLDERID:{if isset($args['vfolder_id'])}{$args['vfolder_id']}{else}'VFOLDERID'{/if},
+    FILETYPE: "{if isset($args['filetype'])}{$args['filetype']}{else}FILETYPE{/if}"
+};
+
+
+if (window.opener || self != top) {
+    $('.main-close').show()
+}
+
+$('.main-close').click(function() {
+    if (window.opener) {
+        window.close();
+    } else {
+        top.$('.layui-tab').find('.layui-tab-title li.layui-this .layui-tab-close').trigger('click');
+    }
+})
+
+if (vfolder_select_id > 0) {
+    $('.main-upload').show()
+}
+
+$(window).resize(function(){
+    $('body').css('overflow', 'hidden'); 
+    window_width  = $(window).width();
+    window_height = $(window).height();
+    $('body').css('overflow', 'auto'); 
+    $('#folder .container,#ckeditor').height(window_height);
+    $('#filesList').height(window_height - 70 - 120);   
+    
+}).trigger('resize');
+
+$('body').on('click', '.folder-list span.more', function(){
+    if ($(this).hasClass('isOpen')) {
+        $(this).removeClass('isOpen').find('i').removeClass('fa-minus-circle').addClass('fa-plus-circle').end().closest('li').children('.self').find('a').find('i').removeClass('fa-folder-open-o').addClass('fa-folder-o').end().end().end().children('ul').stop(true).slideUp(300);
+    } else {
+        $(this).addClass('isOpen').find('i').removeClass('fa-plus-circle').addClass('fa-minus-circle').end().closest('li').children('.self').find('a').find('i').removeClass('fa-folder-o').addClass('fa-folder-open-o').end().end().end().children('ul').stop(true).slideDown(300);
+    }
+})
+
+$('body').on('click', '.main-upload', function(){
+    $('#showFile').find('li.active').removeClass('active');
+    $('#filesBottom').empty();
+    $('#uploader').slideDown(500, function(){
+        $(window).trigger('resize');
+    });
+})
+
+$('body').on('click', '#folder a', function(){
+    if ($(this).closest('.self').hasClass('current')) return false;
+    
+    var id = $(this).attr('data-id');
+    //$('#searchReset').trigger('click');
+    
+    $('#folder').find('.self.current').removeClass('current');
+    $(this).closest('.self').addClass('current');
+    
+    $('.main-upload').show();
+    vfolder_select_id = id;
+    
+    loadFile($.extend(baseReplace, {
+        'VFOLDERID' : id}), true)
+    return false;
+})
+
+$('body').on('click', '#moveFolder a', function() {
+    if ($(this).closest('.self').hasClass('current')) return false;
+    var id = $(this).attr('data-id');
+    var tit = $(this).text();
+    if (!file_select_id) {
+        layer.alert('未指定需要移动的文件')
+    }
+    
+    layer.confirm('请确认将该文件移动到['+tit+']？', function() {
+        layer.closeAll();
+        var index = layer.load()
+        $.get("{addon_url('woofinder/Index/ajaxMoveFile')}", {
+            file_id : file_select_id,
+            folder_id : id
+        }, function(data) {
+            data = JSON.parse(data);
+            layer.msg(data.message, {
+                time: 1000,
+                icon : data.result == 'success' ? 1 : 2
+            })
+            layer.close(index)
+            if (data.result == 'success') {
+                $('#showFile li[data-id="' + file_select_id + '"]').remove()
+                file_select_id = 0;
+            }
+        })
+    })
+    
+    return false;
+})
+
+
+$('body').on('click', '#showFile li', function(){
+    if ($(this).hasClass('active')) {
+        $(this).removeClass('active');
+        $('#filesBottom').empty();
+        return false;
+    }
+    $('#showFile').find('li.active').removeClass('active');
+    $(this).addClass('active')
+    var info  = $(this).find('.info').html();
+    $('#filesBottom').html(info);
+})   
+
+$('#folder span.more:first').trigger('click');
+
+function loadFile(replace, reload) {
+    var href = baseUrl;
+    if (typeof replace === 'object') {
+        for (i in replace) {
+            href = href.replace(i, replace[i])
+        }
+        baseReplace = replace
+    }
+    if (reload) {
+        $('#showFile ul').empty();
+        $('#filesBottom').empty();
+    }
+    
+    var index = layer.load();    
+    $.get(href, function(data) {
+        data = JSON.parse(data);
+        if (data.result == 'success') {
+            if (data.data.list.length > 0) {
+                var i = 0;
+                var timer = setInterval(function() {
+                    var html  = '<li data-src="' + data.data.list[i].url +'" data-id="' + data.data.list[i].id + '" data-basename="' + data.data.list[i].basename + '">';
+                            html += '<div class="thumb sizing">';
+                            html += '   <a href="javascript:void(0);"><img  src="{$absroot}' +  (data.data.list[i].type == 'image' ? data.data.list[i].url : 'addons/woofinder/images/fileholder.png') + '" alt=""/></a>';
+                            html += '</div>';
+                            html += '<div class="info">';
+                            html += '   <p><span>文件名称：</span><em class="basename">' + data.data.list[i].basename + '</em></p>';
+                            html += '   <p><span>文件路径：</span>' + data.data.list[i].url + '</p>';
+                            html += '   <p><span>时间信息：</span>' + data.data.list[i].created + ' / ' +data.data.list[i].modified + '</p>';
+                            html += '   <p><span>上传类型：</span>' + (data.data.list[i].type == 'image' ? '图片' : '文件') + '</p>';
+                            html += '   <p><span>大小尺寸：</span>' + return_size(data.data.list[i].size) + (data.data.list[i].width ? ' / ' + data.data.list[i].width +'×' + data.data.list[i].height +'像素': '') +'</p>';
+                            html += '</div>';
+                            html += '<div class="summary  en-font">';
+                            html += '    <div class="title basename">' + data.data.list[i].basename + '</div>';
+                            html += '    <div class="date">' + data.data.list[i].created + '</div>';
+                            html += '    <div class="size">' + return_size(data.data.list[i].size) + '</div>';
+                            html += '</div>';
+                        html += '</li>';
+                        $('#showFile ul').append($(html))
+                    i++;
+                    if (i >= data.data.list.length) {
+                        if (data.data.page.current_page < data.data.page.last_page) {
+                            $('#showFile .page').html('<a href="javascript:void(0);" onclick="nextPage(' + (parseInt(data.data.page.current_page) + 1) + ')" class="layui-btn layui-btn-primary"> ' + (parseInt(data.data.page.current_page)) + ' / ' + data.data.page.last_page + '</a>')
+                        } else {
+                            $('#showFile .page').empty();
+                        }
+                        layer.close(index);
+                        bindFile();
+                        clearInterval(timer)
+                    }
+                }, 50)
+            } else {
+                $('#showFile ul').append($('<li class="nolist">没有找到</li>'))
+                $('#showFile .page').empty();
+                layer.close(index);
+            }
+        } else {
+            layer.msg(data.message)
+            layer.close(index);
+        }
+        
+    })
+}
+
+function nextPage(page) {
+    loadFile($.extend(baseReplace, {
+        'PAGE' : page
+    }))
+}
+/*----------------------------*/
+
+// 添加的文件数量
+var fileCount = 0;
+
+// 添加的文件总大小
+var fileSize = 0;
+
+var fileNumLimit  = 20;
+
+var uploadMaxSize = {$upload_max_size};
+var allowedExtensions = {json_encode($allowedExtensions|default:[])};
+
+var successCount = 0;
+var errorCount = 0;
+
+var uploader = WebUploader.create({
+    //auto: true,
+    dnd: '#uploader-drag-drop',
+    paste: document.body,
+    disableGlobalDnd : true,
+    // swf文件路径
+    swf:'{$absroot}files/webuploader/Uploader.swf',
+
+    // 文件接收服务端。
+    server: "{addon_url('woofinder/Index/webuploader', ['type' => $args.type|default:'file'])}",
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: {
+        id: '#uploader-btn',
+        innerHTML : '点击选择文件'
+    },
+
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    accept :  null,
+    fileNumLimit : fileNumLimit+1
+});
+
+
+
+uploader.on('beforeFileQueued', function(file){
+    if ($.inArray(file.ext.toLowerCase(), allowedExtensions) == -1) {
+        layer.msg('不允许上传' + file.ext + '格式文件');
+        return false;
+    }
+    if (fileCount >= fileNumLimit) {
+        layer.msg('文件总数不能超过' + fileNumLimit);
+        return false;
+    }
+    
+    if (file.size > uploadMaxSize) {
+        layer.msg('单文件最大允许上传{return_size($upload_max_size)}');
+        return false;
+    }
+})
+
+uploader.on('fileQueued', function(file){
+     fileCount++;
+     fileSize += file.size;
+     if (fileCount == 1) {
+        $('#thelist').slideDown(300);
+     }
+     addFile(file);
+})
+
+uploader.on('fileDequeued', function(file){
+     fileCount--;
+     fileSize -= file.size;
+     if (fileCount == 0) {
+        $('#thelist').slideUp(300);
+     }
+     removeFile(file);
+})
+
+uploader.on('uploadProgress', function(file, percentage){
+    $('#' + file.id).find('.progress').find('i').css('width', (percentage * 100)+ '%').end().find('span').text((percentage * 100).toFixed(2)+ '%');
+})
+
+uploader.on('uploadBeforeSend', function(object, data , headers){
+    data.name = $('#' + data.id).find('input').val();
+    data.folder_id = vfolder_select_id;
+    console.log(object,data)
+})
+
+uploader.on('uploadAccept', function(object, reg){
+    $('#' + object.file.id).find('.progress').find('span').text(reg.message);
+    $('#' + object.file.id).insertAfter($('#thelist ul').find('li:last'));
+    if (reg.result == 'success') {
+        successCount++
+    } else {
+        errorCount++
+    }
+})
+
+uploader.on('uploadComplete', function(file){
+    var stats = uploader.getStats();
+    if (stats.progressNum  == 0 && stats.queueNum == 0) {
+        $('#uploader-btns').find('.pause').hide().end().find('.close').addClass('r');
+        var msg = "文件上传完成，<span style='color: green;'>" + successCount + "</span>文件上传成功";
+        if (errorCount) {
+            msg += ",<span style='color: red;'>" + errorCount + "</span>文件上传失败"
+        }
+        layer.alert('<span style="color:#000;">' + msg + '</span>', {
+            icon : 6
+        }, function(index){
+            layer.close(index);
+            layer.msg('数据即将重新加载', {
+                time: 600
+            },function(){
+                $('#uploader-btns').find('.close').trigger('click');
+                loadFile($.extend(baseReplace, {
+                    'PAGE' : 'PAGE'
+                }), true)
+            })
+        });
+    }
+})
+
+
+
+function addFile(file) {
+    var $li  = $('<li id="' + file.id + '">'
+        + '    <div class="show">'
+        + '        <div class="tip">'
+        + '            <p>预览中...</p>'
+        + '        </div>'
+        + '        <div class="thumb"></div>'
+        + '        <div class="size">' + WebUploader.formatSize(file.size) + '</div>'
+        + '        <div class="name"><input type="text" value="' + file.name + '"/></div>'
+        + '        <div class="btns"><span class="cancel"><i class="fa fa-trash-o"></i></span></div>'
+        + '        <div class="progress"><i></i><span>等待上传</span></div>'
+        + '    </div>'
+        + '</li>'),
+        
+       $thumb = $($li).find('.thumb'),
+       $tip = $($li).find('.tip p'),
+       $input = $($li).find('input');
+        
+    uploader.makeThumb(file, function(error, src) {
+        if (error) {
+            $tip.text( '不能预览' );
+            return;
+        }    
+        var img = $('<img src="' + src + '">');
+        $thumb.empty().append(img);
+        
+    }, 120, 120);
+    
+    $li.find('.cancel').click(function(){
+        uploader.removeFile(file);
+    })
+    
+    file.on('statuschange', function( cur, prev ) {
+        $('#' + file.id).removeClass('progress complete error interrupt invalid cancelled').addClass(cur);
+        
+        if (cur === 'progress') {
+            $('#' + file.id).find('.progress').show().find('span').text('开始上传').end().end().find('.btns').remove().end().find('input').attr('disabled', true);
+        } else if (cur === 'complete') {
+            
+        } else if (cur === 'error') {
+            $('#' + file.id).find('.progress').find('span').text('上传错误');
+        } else if (cur  === 'interrupt') {
+            $('#' + file.id).find('.progress').find('span').text('上传中断'); 
+        } else if (cur  === 'invalid') {
+            $('#' + file.id).find('.progress').find('span').text('文件不合格'); 
+        } else if (cur  === 'cancelled') {
+            $('#' + file.id).find('.progress').find('span').text('文件被移除'); 
+        }
+    }) 
+    
+    $li.on('mouseover', function(){
+        $(this).addClass('hover');
+    })
+    
+    $li.on('mouseout', function(){
+        $(this).removeClass('hover');
+    })
+    
+    $input.on('focus', function(){
+        $(this).closest('li').off('mouseover');
+        $(this).closest('li').off('mouseout');
+    })
+    $input.on('blur', function(){
+        $li.on('mouseover', function(){
+            $(this).addClass('hover');
+        })
+       
+        $li.on('mouseout', function(){
+            $(this).removeClass('hover');
+        })
+        $li.trigger('mouseout')
+    })
+    
+    $('#thelist').find('ul').css('min-width', fileCount * 132) ;
+    var completeIndex = $('#thelist').find('ul').find('li.complete:first').index();
+    if (completeIndex >= 0) {
+        $li.insertBefore($('#thelist').find('ul').find('li:eq('+completeIndex+')'));
+    } else {
+        $('#thelist').find('ul').append($li);
+    }
+}
+
+function removeFile(file)
+{
+    var $li = $('#'+file.id);
+    $li.remove();
+    $('#thelist').find('ul').css('min-width', fileCount * 132); 
+}
+
+$('#uploader-btns').find('.upload').click(function(){
+    if (fileCount == 0) {
+        layer.msg('还没有选择任何文件');
+        return false;
+    }
+    $('#uploader').addClass('lock');
+    $('#uploader-btns').find('.upload').hide().end().find('.pause').css('display', 'inline-block').addClass('r');
+    successCount = errorCount = 0;
+    uploader.upload();
+    
+})
+
+$('#uploader-btns').find('.close').click(function(){
+    $('#uploader').removeClass('lock').slideUp(300, function(){
+        if (fileCount) {
+            var files = uploader.getFiles();
+            for (i in files) {
+                uploader.removeFile(files[i]);
+            }
+        }    
+        fileCount = 0;
+        fileSize = 0;
+        $('#thelist').hide().find('ul').empty();
+        $('#uploader-btns').find('.upload').show().end().find('.pause').removeClass('r').hide().end().find('.replay').removeClass('r').hide().end().find('.close').removeClass('r');
+    });
+})
+
+$('#uploader-btns').find('.pause').click(function(){
+    uploader.stop();
+    $('#uploader').removeClass('lock');
+    $('#uploader-btns').find('.pause').removeClass('r').hide().end().find('.replay').css('display', 'inline-block').addClass('r');
+})
+
+$('#uploader-btns').find('.replay').click(function(){
+    $('#uploader').addClass('lock');
+    $('#uploader-btns').find('.replay').removeClass('r').hide().end().find('.pause').css('display', 'inline-block').addClass('r');
+    
+    uploader.upload();
+})
+
+/*-----------------------------------*/
+
+$('body').one('dblclick', '#showFile ul li', function() {
+    send_result(wwwroot + $(this).attr('data-src'), $(this).attr('data-src'))
+})
+
+function bindFile() {
+    $('#showFile ul li').not('.isBind').not('.nolist').contextMenu({
+        width: 110, 
+        itemHeight: 30, 
+        bgColor: "#fff",
+        color: "#000",
+        fontSize: 13,
+        hoverColor: "#fff",
+        hoverBgColor: "rgba(0,0,0,0.05)",
+        menu:[
+            {
+                text: "选择",
+                icon:"fa-heart",
+                callback: function(ele) { 
+                    send_result(wwwroot + $(ele).attr('data-src'), $(ele).attr('data-src'))
+                }
+            },
+            {
+                text: "编辑",
+                icon:"fa-image",
+                callback: function(ele) {
+                    var id = $(ele).attr('data-id');
+                    var loadindex = layer.load();
+                    var url = "{addon_url('woofinder/Index/editFile', ['id' => 'SELECTID'])}".replace('SELECTID', id);                    
+                    var html = '<div id="editImage"><iframe src="' + url +'" width="100%" height="100%" scrolling="yes" frameborder="0"></iframe></div>';
+                    $('body').append(html);
+                }
+            },
+            {
+                text: "下载",
+                icon:"fa-download",
+                callback: function(ele) {
+                    var id = $(ele).attr('data-id');
+                    var url = "{addon_url('woofinder/Index/fileDownload', ['id' => 'SELECTID'])}".replace('SELECTID', id);
+                    location.href = url;
+                }
+            },
+            {
+                text: "移动",
+                icon:"fa-arrows",
+                callback: function(ele) { 
+                    var index = layer.open({
+                      content: '<div class="folder-list container">' + $('#folder .container').html() +'</div>'
+                      ,title : '移动文件到...'
+                      ,btn : false
+                      ,id : 'moveFolder'
+                    });
+                    file_select_id = $(ele).attr('data-id')
+                }
+            },
+            {
+                text: "命名",
+                icon:"fa-pencil-square-o",
+                callback : function(ele) {
+                    var id = $(ele).attr('data-id');
+                    var old_title = $(ele).attr('data-basename');
+                    layer.prompt({
+                        title : '文件重命名',
+                        value : old_title
+                    },function(value, index, elem){
+                        var title = $.trim(value);
+                        if (!title) {
+                            layer.close(index);
+                            return false;
+                        }
+                        if (title == old_title) {
+                            layer.close(index);
+                            return false;
+                        }
+                        var loadindex = layer.load();
+                        HKUC.ajax_request("{addon_url('woofinder/Index/ajaxFileModify')}", {
+                           title : title,
+                           id : id 
+                        },{
+                            'success' : function(msg,data){
+                                layer.close(loadindex);
+                                $(ele).attr('data-basename', title)
+                                $(ele).find('.basename').text(title)
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 1
+                                }) 
+                               
+                            },
+                            'error' : function(msg,data){
+                                layer.close(loadindex);
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 2
+                                })  
+                            }
+                        })
+                        layer.close(index);
+                    })
+                }
+            },
+            {
+    			text: "删除",
+                icon:"fa-remove",
+    			callback: function(ele) {
+                    var id = $(ele).attr('data-id');
+    				layer.confirm('请确认是否删除该文件？', {
+    				    title : '删除文件'
+    				}, function(index){
+				       var loadindex = layer.load();
+    				   HKUC.ajax_request("{addon_url('woofinder/Index/ajaxFileDelete')}", {
+                           id : id 
+                        },{
+                            'success' : function(msg,data){ 
+                                layer.close(loadindex);
+                                $(ele).remove();
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 1
+                                }) 
+                            },
+                            'error' : function(msg,data){
+                                layer.close(loadindex);
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 2
+                                })  
+                            }
+                        })
+                       layer.close(index); 
+    				});
+    			}
+    		}
+        ]
+    })
+    $('#showFile ul li').addClass('isBind');
+}
+
+function bindMenu() {
+    
+    $("#folder li a").not('.isBind').contextMenu({
+        width: 140, 
+        itemHeight: 36, 
+        bgColor: "#fff",
+        color: "#000",
+        fontSize: 13,
+        hoverColor: "#fff",
+        hoverBgColor: "rgba(0,0,0,0.05)",
+    	menu: [{
+    			text: "创建子目录",
+                icon:" fa-folder-open-o",
+    			callback: function(ele) {     
+    			     var parent_id = $(ele).attr('data-id');
+    				 layer.prompt({
+    				    title : '创建目录'
+    				 }, function(value, index, elem){
+                        var title = $.trim(value);
+                        if (!title) {
+                            layer.close(index);
+                            return false;
+                        }
+                        
+                        var loadindex = layer.load();
+                        HKUC.ajax_request("{addon_url('woofinder/Index/ajaxFolderCreate')}", {
+                           title : title,
+                           parent_id : parent_id 
+                        },{
+                            'success' : function(msg,data){                            
+                                if (!$(ele).closest('li').find('ul').length) {
+                                    $(ele).closest('li').append('<ul class="list"></ul>');
+                                }
+                                $(ele).closest('.self').find('span.more').removeClass('hidden');
+                                var html = '<li><div class="self"><span class="more hidden"><i class="fa  fa-plus-circle"></i></span><a href="' + wwwroot + '" data-id="' + data['id'] + '"><i class="fa fa-folder-o"></i><cite class="en-font">' + data['title'] + '</cite></a></div></li>';
+                                $(ele).closest('li').find('ul:first').append(html); 
+                                if (!$(ele).closest('li').children('.self').find('.more').hasClass('isOpen')) {
+                                    $(ele).closest('li').children('.self').find('.more').trigger('click');
+                                }
+                                bindMenu();
+                                layer.close(loadindex);
+                            },
+                            'error' : function(msg,data){
+                               layer.close(loadindex);
+                               layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 2
+                                })  
+                            }
+                        })
+                        
+                        layer.close(index);
+                        
+                    });
+    			}
+    		},
+            {
+                text: "上传文件",
+                icon: "fa-upload",
+                callback: function(ele){
+                    vfolder_select_id = $(ele).attr('data-id');
+                    $('#showFile').find('li.active').removeClass('active');
+                    $('#filesBottom').empty();
+                    $('#uploader').slideDown(500, function(){
+                        $(window).trigger('resize');
+                    });
+                }
+            },
+    		{
+    			text: "重命名",
+                icon:"fa-pencil-square-o",
+    			callback: function(ele) {
+                    var id = $(ele).attr('data-id');
+                    var old_title = $(ele).find('cite').text();
+                    layer.prompt({
+                        title : '目录重命名',
+                        value : old_title
+                    },function(value, index, elem){
+                        var title = $.trim(value);
+                        if (!title) {
+                            layer.close(index);
+                            return false;
+                        }
+                        if (title == old_title) {
+                            layer.close(index);
+                            return false;
+                        }
+                        var loadindex = layer.load();
+                        HKUC.ajax_request("{addon_url('woofinder/Index/ajaxFolderModify')}", {
+                           title : title,
+                           id : id 
+                        },{
+                            'success' : function(msg,data){
+                                layer.close(loadindex);
+                                $(ele).find('cite').text(title);
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 1
+                                }) 
+                            },
+                            'error' : function(msg,data){
+                                layer.close(loadindex);
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 2
+                                })
+                            }
+                        })
+                        layer.close(index);
+                    })
+    			}
+    		},
+    		{
+    			text: "删除",
+                icon:"fa-remove",
+    			callback: function(ele) {
+                    var id = $(ele).attr('data-id');
+                    var old_title = $(ele).find('cite').text();
+    				layer.confirm('请确认是否目录['+old_title+']及其子目录删除？', {
+    				    title : '删除目录'
+    				}, function(index){
+    				    var loadindex = layer.load();
+    				   HKUC.ajax_request("{addon_url('woofinder/Index/ajaxFolderDelete')}", {
+                           id : id 
+                        },{
+                            'success' : function(msg,data){ 
+                                layer.close(loadindex);
+                                if ($(ele).closest('li').parent().closest('li').children('ul').children('li').length <=1) {
+                                    $(ele).closest('li').parent().closest('li').find('span.more').addClass('hidden');
+                                }
+                                $(ele).closest('li').remove();
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 1
+                                })
+                            },
+                            'error' : function(msg,data){
+                                layer.close(loadindex);
+                                layer.msg(msg, {
+                                    time: 1000,
+                                    icon : 2
+                                })
+                            }
+                        })
+                       layer.close(index); 
+    				});
+    			}
+    		}
+    	]
+    });
+    
+    $('#folder li a').addClass('isBind');
+}
+
+function notImage(msg) {
+    msg = msg || '图片加载失败';
+    $('#editImage').remove();
+    layer.closeAll()
+    layer.msg(msg,{
+        icon : 2
+    })
+}
+
+function loadFinish() {
+    layer.closeAll();
+    $('#editImage').animate({
+        opacity : 1
+    }, 300)
+}
+
+function closeImageEdit(edit)
+{
+    $('#editImage').fadeIn(500, function () {
+        $(this).remove();
+        if (edit) {
+            loadFile($.extend(baseReplace, {
+                'PAGE' : 'PAGE'
+            }), true)
+        }
+    });
+}
+
+function send_result(url, org_path){
+	var CKEditorFuncNum = getUrlParam('CKEditorFuncNum');
+	if (CKEditorFuncNum) {
+		window.opener.CKEDITOR.tools.callFunction(CKEditorFuncNum, url);
+	} else if (window.opener && window.opener.ckeditor_select_callback) {
+		window.opener.ckeditor_select_callback(url, org_path);
+	} else if (parent.ckeditor_select_callback){
+		parent.ckeditor_select_callback(url, org_path);
+	} else {
+	   layer.alert('文件地址：' + org_path);
+	}
+	window.close();
+}
+
+function getUrlParam(paramName){
+	var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i');
+	var match = window.location.search.match(reParam);
+	return (match && match.length > 1) ? match[1] : '';
+}
+bindMenu()
+bindFile()
+
+</script>
+{/block}

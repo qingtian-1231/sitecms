@@ -1,0 +1,5 @@
+{extends file="../manage_base.html"} 
+
+{block name="insider"}
+昵称：{$login[$login.UserGroup.alias].nickname|default:$login.username}
+{/block}

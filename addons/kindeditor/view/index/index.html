@@ -1,0 +1,52 @@
+{extends file="../global.html"}
+
+{block name="global"}
+
+<style>
+#ued{ width: 800px;margin: 0 auto;}
+#init{ width: 780px;margin: 20px  0 0;padding: 10px; border: 1px solid #ddd;height: 240px;}
+</style>
+
+<div id="ued">
+    <textarea class="keditor" data-theme="primary"></textarea>
+    <textarea class="keditor" data-theme="black"></textarea>
+    <textarea class="keditor" data-theme="grey"></textarea>
+    <textarea class="keditor" data-theme="default"></textarea>
+    
+</div>
+
+<script>
+var $keditors=$('.keditor');
+if ($keditors.length) {
+    KindEditor.ready(function(K) {
+        $keditors.each(function(){
+            var theme = $(this).data('theme');
+            K.create(this, {
+        		uploadJson : "{addon_url('kindeditor/index/server', ['model' => $mdl])}",
+        		fileManagerJson : "{addon_url('kindeditor/index/getlist', ['model' => $mdl])}",
+        		dialogOffset : 0, 
+        		allowFileManager : true,
+        		allowImageUpload : true,
+        		allowMediaUpload : true,
+        		afterCreate : function() {
+        		},
+                width :  800,
+        		showHelpGrid: false,
+        		themeType : theme, 
+        		errorMsgHandler : function(message, type) {
+        			try {
+        				JDialog.msg({
+        				    type:type, content:message, timer:2000});
+        			} catch (Error) {
+        				alert(message);
+        			}
+        		}
+        	});
+        })
+    })
+}
+</script>
+
+
+
+{/block}

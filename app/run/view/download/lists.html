@@ -1,0 +1,13 @@
+{extends file="../lists.html"}
+{block name=function}
+    
+    {function name=item_action_download_permission item=[]}{strip}
+        {if $item.download_permission == 'specify'}
+		<a class="layui-btn layui-btn-warm layui-btn-sm" data-type="{$item.type}" rel="ajax_set" href="{url('DownloadPermission/lists',['parent_id'=>$item.id])}"><i class="layui-icon">&#xe601;</i>下载</a>
+        {/if}
+    {/strip}{/function}
+{/block}
+
+
+{block name=script}
+{/block}

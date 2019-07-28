@@ -1,0 +1,96 @@
+{extends file="../base.html"}
+
+{block name=base}
+<div id="addonList">
+    <blockquote class="layui-elem-quote">获取更多插件<a href="https://www.eduaskcms.xin/addons.html" target="_blank">https://www.eduaskcms.xin/addons.html</a></blockquote>
+    <ul class="grid">
+        {foreach $list as $item}
+        <li>
+            <div class="info">
+                <div class="item_name en-font">
+                    <span>V1.0.0</span>
+                    {$item.name}
+                </div>
+                <div class="item_tit">
+                    {$item.title}
+                </div>
+                <div class="item_summary">{$item.intro} 作者:{$item.author}</div>
+                <div class="item_action">
+                    <div {if addon_exists($item.name)}class="layui-btn-group"{/if}>
+                        {if !addon_exists($item.name)}
+                        <a href="{url('Addon/install', ['name' => $item.name])}" rel="addon_install" class="layui-btn layui-btn-sm javascript">安装</a>
+                        {else}
+                        <a href="{$item.url}" data-title="{$item.name}查看" data-icon="fa fa-eye" class="layui-btn layui-btn-sm new_tab">查看</a>
+                        {$config=get_addon_config($item.name)}
+                        {if isset($config.addon_config)}
+                        <a href="{url('AddonConfig/lists', ['name' => $item.name])}" data-title="{$item.name}配置" data-icon="fa fa-gear" class="layui-btn layui-btn-warm layui-btn-sm new_tab">配置</a>
+                        {/if}
+                        <a href="{url('Addon/uninstall', ['name' => $item.name])}" rel="addon_uninstall" class="layui-btn layui-btn-sm layui-btn-danger javascript">卸载</a>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+</div>
+{/block}
+
+{block name=script}
+<script>
+function addon_uninstall() {
+    var url  = $(this).attr('href');
+    layer.confirm('请确认是否卸载插件？',{
+        title : '卸载提示',
+        icon : 5
+    }, function(){
+        var index =  layer.load();
+        HKUC.ajax_request(url,null,
+        	{
+        		'success':function(msg,data){
+      		        layer.close(index);
+                    layer.msg(msg,{
+                        time:1000,
+                        end:function(){
+                            window.location.reload();
+                        }
+                    });
+        		},
+        		'error':function(msg,data){
+                      layer.close(index);
+                      layer.msg(msg)
+        		}
+        	}
+        );
+    }) 
+}
+
+
+function addon_install() {
+    var url  = $(this).attr('href');
+    var index =  layer.load();
+    
+    HKUC.ajax_request(url,null,
+    	{
+    		'success':function(msg,data){
+  		        layer.close(index);
+                layer.msg(msg,{
+                    time:1000,
+                    end:function(){
+                        window.location.reload();
+                    }
+                });
+    		},
+    		'error':function(msg,data){
+                  layer.close(index);
+                  layer.msg(msg)
+    		}
+    	}
+    );
+}
+
+
+
+
+</script>
+{/block}

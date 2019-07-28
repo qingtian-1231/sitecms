@@ -1,0 +1,17 @@
+{include file="../../home/view/functions.html"}
+{function manage_menu_tag id = 0 class=""}{strip}
+{$url = {call manage_menu_link id = $id}}
+<a href="{$url|default:'javascript:void(0);'}" {if $url && managemenu($id, 'target')}target="{managemenu($id, 'target')}"{/if}  {if $class}class="{$class}"{/if}>{if managemenu($id, 'icon')}<i class="{managemenu($id, 'icon')}"></i>{/if}{managemenu($id, 'title')}</a>
+{/strip}{/function}
+
+{function manage_menu_link id = 0}{strip}
+    {$module = trim(managemenu($id, 'module'))}
+    {$controller = trim(managemenu($id, 'controller'))}
+    {$action = trim(managemenu($id, 'action'))}
+    {$args = managemenu($id, 'args')}
+    {if $controller && $action}
+        {if $args}{$args = json_decode($args, true)}{else}{$args = []}{/if}
+        {if !$module}{$module = 'manage'}{/if}
+        {url($module|cat:'/'|cat:$controller|cat:'/'|cat:$action, $args)}
+    {/if}
+{/strip}{/function}
