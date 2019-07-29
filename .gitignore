@@ -1,0 +1,5 @@
+runtime/log/*
+runtime/cache/*
+runtime/temp/*
+data/config/database.php
+data/database.sql
