@@ -7,21 +7,21 @@ class Menu extends Home
 {
     //初始化 需要调父级方法
     public function initialize()
-    {        
-        call_user_func(['parent', __FUNCTION__]); 
+    {
+        call_user_func(['parent', __FUNCTION__]);
     }
-    
+
     public function show()
     {
         $id  = intval($this->args['menu_id']);
         if ($id <= 0) {
             return $this->notFound();
-        }        
+        }
         $menu_data = menu($id);
         if (empty($menu_data)) {
             return $this->notFound();
         }
-        
+
         if ($menu_data['type'] == 'Menu') {
             $this->processMenu($id);
             $list  = [];
@@ -32,7 +32,7 @@ class Menu extends Home
             $this->assign->page = [];
             $this->assign->render = '';
             $this->fetch = 'show';
-            
+
         } else {
             switch ($menu_data['type']) {
                 case 'Exlink':
@@ -46,7 +46,7 @@ class Menu extends Home
                         $this->redirect($this->absroot . $alias . '.' . config('url_html_suffix'));
                     }
                     break ;
-            }            
+            }
         }
     }
 }

@@ -2,4 +2,5 @@ runtime/log/*
 runtime/cache/*
 runtime/temp/*
 data/config/database.php
+data/backup/*
 data/database.sql

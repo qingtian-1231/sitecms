@@ -37,7 +37,7 @@ var winHight = $(window).height();
                 <li class="layui-nav-item circle"><a class="javascript" rel="full_screen"  href="javascript:void(0);"><i class="layui-icon layui-icon-screen-full"></i></a></li>
                 <li class="layui-nav-item circle"><a class="javascript" rel="select_theme"  href=""><i class="layui-icon layui-icon-theme" ></i></a></li>
                 <li class="layui-nav-item circle"><a href="javascript:void(0);" class="javascript" rel="top_refresh"><i class="layui-icon layui-icon-refresh" ></i></a></li>
-                
+
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-user">
                         <span class="admin-user-headpic"><img  src="{$root}{$login.Member.headimg|default:'images/admin/default_headimg.png'}" alt=""/></span><span class="admin-user-name">{$login[$login.UserGroup.alias]['nickname']|default:$login.username}</span>
@@ -55,33 +55,32 @@ var winHight = $(window).height();
     <div class="woo-sider">
         <div class="woo-sider-scroll">
             <div class="woo-logo sizing">
-                {*授权以后允许修改LOGO信息*}
-                <h2 class="name">WOO<span class="cms">CMS</span></h2>                
+                <h2 class="name">九谷<span class="cms">科技</span></h2>
             </div>
-            <div class="woo-siderbar"> 
-                <ul class="layui-nav layui-nav-tree" lay-shrink="all" lay-unselect>               
+            <div class="woo-siderbar">
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" lay-unselect>
                 {foreach $cms_menu as $level0_id => $level0}
                 {if !$is_app_debug && adminmenu($level0_id, 'is_debug')}{continue}{/if}
                 {if (adminmenu($level0_id, 'power_tree_id') and !in_array(adminmenu($level0_id, 'power_tree_id'), $powers)) and !$is_super_power}{continue}{/if}
-                
+
                     {foreach $level0 as $level1_id => $level1}
-                    {if !$is_app_debug && adminmenu($level1_id, 'is_debug')}{continue}{/if}                    
+                    {if !$is_app_debug && adminmenu($level1_id, 'is_debug')}{continue}{/if}
                     {if (adminmenu($level1_id, 'power_tree_id') and !in_array(adminmenu($level1_id, 'power_tree_id'), $powers)) and !$is_super_power}{continue}{/if}
                     {if !check_power(adminmenu($level1_id, 'url'))}{continue}{/if}
                     <li class="layui-nav-item" data-group="{$level0@index}">
                         <a href="{url(adminmenu($level1_id, 'url'))}" data-icon="{adminmenu($level1_id, 'icon')}"><i  class="fa {adminmenu($level1_id,'icon')}"></i><cite>{adminmenu($level1_id,'title')}</cite></a>
-                        {if $level1} 
+                        {if $level1}
                         <dl class="layui-nav-child">
                             {foreach $level1 as $level2_id => $level2}
-                            {if !$is_app_debug && adminmenu($level2_id, 'is_debug')}{continue}{/if}                            
+                            {if !$is_app_debug && adminmenu($level2_id, 'is_debug')}{continue}{/if}
                             {if (adminmenu($level2_id, 'power_tree_id') and !in_array(adminmenu($level2_id, 'power_tree_id'), $powers)) and !$is_super_power}{continue}{/if}
                             {if !check_power(adminmenu($level2_id, 'url'))}{continue}{/if}
                             <dd>
                                 <a href="{url(adminmenu($level2_id,'url'))}" data-icon="{adminmenu($level2_id,'icon')|default:adminmenu($level1_id, 'icon')}"><cite>{adminmenu($level2_id, 'title')}</cite></a>
-                                {if $level2} 
+                                {if $level2}
                                 <dl class="layui-nav-child">
                                     {foreach $level2 as $level3_id => $level3}
-                                    {if !$is_app_debug && adminmenu($level3_id, 'is_debug')}{continue}{/if}                            
+                                    {if !$is_app_debug && adminmenu($level3_id, 'is_debug')}{continue}{/if}
                                     {if (adminmenu($level3_id, 'power_tree_id') and !in_array(adminmenu($level3_id, 'power_tree_id'), $powers)) and !$is_super_power}{continue}{/if}
                                     {if !check_power(adminmenu($level3_id, 'url'))}{continue}{/if}
                                     <dd>
@@ -89,7 +88,7 @@ var winHight = $(window).height();
                                     </dd>
                                     {/foreach}
                                 </dl>
-                                {/if}                                
+                                {/if}
                             </dd>
                             {/foreach}
                         </dl>
@@ -101,10 +100,10 @@ var winHight = $(window).height();
             </div>
         </div>
     </div>
-    
+
     <div id="wooRight" lay-allowClose="true">
         <div class="layui-tab admin-nav-card" lay-filter="admin-tab" >
-            <div class="tab-title-bg"></div>           
+            <div class="tab-title-bg"></div>
             <a href="javascript:void(0);" class="tab-prev"><i class="fa fa-angle-double-left fa-2x"></i></a>
             <a href="javascript:void(0);" class="tab-next"><i class="fa fa-angle-double-right fa-2x"></i></a>
 			<ul class="layui-tab-title">
@@ -115,7 +114,7 @@ var winHight = $(window).height();
 			<div class="layui-tab-content">
 				<div class="layui-tab-item layui-show admin_home">
                     <div class="admin_content">
-                        
+
                         <div class="layui-row layui-col-space15">
                             <div class="layui-col-md8">
                                 <div class="layui-row layui-col-space15">
@@ -123,7 +122,7 @@ var winHight = $(window).height();
                                         <div class="layui-card b1">
                                             <div class="layui-card-header">快捷方式<a href="{url('Shortcut/lists')}" class="action new_tab" data-title="快捷方式" data-icon="layui-icon-star"><i class="layui-icon layui-icon-more-vertical"></i></a></div>
                                             <div class="layui-card-body">
-                                                
+
                                                 <div class="layui-carousel admin-carousel admin-shortcut" data-height="194">
                                                     <div carousel-item>
                                                         <!--自行在快捷方式模型中进行数据管理 可以添加任意多个 自动循环-->
@@ -143,7 +142,7 @@ var winHight = $(window).height();
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +210,7 @@ var winHight = $(window).height();
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!--这里显示你客户的基本信息-->
                                     <div class="layui-col-md6">
                                         <div class="layui-card b3">
@@ -228,13 +227,13 @@ var winHight = $(window).height();
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <!--这里显示自己的相关信息 在应用/data/cache/Developer 自行修改-->
                                     <div class="layui-col-md6">
                                         <div class="layui-card b4">
                                             <div class="layui-card-header">开发企业</div>
                                             <div class="layui-card-body ">
-                                                <ul class="list admin-use-info">                                                        
+                                                <ul class="list admin-use-info">
                                                     <li><i class="layui-icon layui-icon-flag"></i>公司：<span>{$dev.corp_title}</span></li>
                                                     <li><i class="layui-icon layui-icon-website"></i>网址：<span class="en-font"><a href="{$dev.site}" target="_blank">{$dev.site}</a></span></li>
                                                     <li><i class="layui-icon layui-icon-username"></i>客服：<span class="en-font">{$dev.customer}</span></li>
@@ -245,7 +244,7 @@ var winHight = $(window).height();
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="layui-col-md12">
                                         <div class="layui-card b5">
                                             <div class="layui-card-header">数据分析</div>
@@ -260,9 +259,9 @@ var winHight = $(window).height();
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                             <div class="layui-col-md4">
                                 <div class="layui-card b6">
@@ -282,7 +281,7 @@ var winHight = $(window).height();
                                             <div class="admin_user_left">
                                                 <ul class="list">
                                                     <li>真实姓名：<span class="c">{$login[$login.UserGroup.alias]['truename']|default:'未设置'}</span></li>
-                                                    <li>用户分组：<span class="c">{$login.UserGroup.title}</span></li>                                                 
+                                                    <li>用户分组：<span class="c">{$login.UserGroup.title}</span></li>
                                                     <li>登录地址：<span class="c">{$login.logined_ip}</span></li>
                                                     <li>登录时间：<span class="c">{$login.logined}</span></li>
                                                 </ul>
@@ -386,12 +385,12 @@ var winHight = $(window).height();
                                                 <a href="https://www.eduaskcms.xin" target="_blank" class="layui-btn layui-btn-primary">系统官网</a>
                                                 <a href="https://www.eduaskcms.xin/download/show/15.html" target="_blank" class="layui-btn layui-btn-primary">检查更新</a>
                                                 <a href="https://www.eduaskcms.xin/addons.html" target="_blank" class="layui-btn layui-btn-primary">插件下载</a>
-                                            </div>                                            
+                                            </div>
                                             <div class="layui-btn-group">
                                                 <a href="https://www.kancloud.cn/laowu199/e_dev" target="_blank" class="layui-btn layui-btn-primary">开发手册</a>
                                                 <a href="https://www.eduaskcms.xin/page/4.html" target="_blank" class="layui-btn layui-btn-primary">使用协议</a>
                                                 <a href="//shang.qq.com/wpa/qunwpa?idkey=af4adc038e4a9d6cd04a80d2f4391d071274a004a86f4c889b9444a904f451c8" target="_blank" class="layui-btn layui-btn-primary">系统QQ群</a>
-                                            </div>                                            
+                                            </div>
                                             <div class="layui-btn-group">
                                                 <a href="https://www.eduaskcms.xin/dashang.html" target="_blank" class="layui-btn layui-btn-primary">赞助作者</a>
                                                 <a href="https://www.eduaskcms.xin/shouquan.html" target="_blank" class="layui-btn layui-btn-primary">商业授权</a>
@@ -448,14 +447,14 @@ var charts_options = {json_encode($charts|default:[])};
 layui.use(['element', 'tab', 'carousel'], function(){
     var element = layui.element;
     var carousel = layui.carousel;
-    
+
     $('.woo-siderbar').find('a').each(function() {
         if ($(this).parent().find('dl').length) {
             $(this).attr('href', 'javascript:void(0);')
         }
     })
-    
-    Tab = layui.tab({ 
+
+    Tab = layui.tab({
     	elem: '.layui-tab',
     	maxSetting: {
     		max: 20,
@@ -464,7 +463,7 @@ layui.use(['element', 'tab', 'carousel'], function(){
     	contextMenu:true,
         autoRefresh:true
     });
-    
+
     $('.admin-carousel').each(function() {
         carousel.render({
             elem: this
@@ -477,12 +476,12 @@ layui.use(['element', 'tab', 'carousel'], function(){
             ,interval : $(this).data('interval') ? $(this).data('interval') : 3000
         });
     })
-    
+
     carousel.on('change(charts)', function(obj){
         charts_change(null, 1)
-    });     
+    });
     if (winWidth > 998) {
-       charts_change(null, 1) 
+       charts_change(null, 1)
     } else {
         charts_change()
     }
@@ -496,8 +495,8 @@ function charts_change(index, time) {
         if (charts_options.length == 1) {
             index = 0
         }
-    }  
-    
+    }
+
     if (index >= 0) {
         $('.admin-charts:eq(' + index + ')').attr('_echarts_instance_', 0);
         setTimeout(function(){
@@ -512,21 +511,21 @@ $('.woo-siderbar').on('click', 'a', function() {
         layer.close(layer.tips());
         $('#closeSiderbar').trigger('click');
     }
-    
+
     if (!$(this).parent().find('dl').length) {
         var href  = $(this).attr('href');
         var title = $(this).data('title') || $(this).find('cite').text();
-        if(!title)  title = $(this).text();        
+        if(!title)  title = $(this).text();
         var icon  = $(this).data('icon') || $(this).closest('li').find('a:first').data('icon');
-        
+
         if (winWidth < 1000) {
             $('#closeSiderbar').trigger('click');
-            
+
             setTimeout(function() {
                 if(typeof(Tab) != 'undefined') Tab.resize();
             }, 300)
         }
-        
+
         Tab.tabAdd({
             title: title,
             href : href,
@@ -571,7 +570,7 @@ $('#closeSiderbar').click(function() {
     if ($('body').hasClass('close-bar-state')) {
         $('body').removeClass('close-bar-state').find('#closeSiderbar').find('i').removeClass('layui-icon-spread-left').addClass('layui-icon-shrink-right');
     } else {
-        
+
         $('body').addClass('close-bar-state').find('#closeSiderbar').find('i').removeClass('layui-icon-shrink-right').addClass('layui-icon-spread-left');
     }
     charts_change()
@@ -580,9 +579,9 @@ $('#closeSiderbar').click(function() {
 $(window).resize(function(){
     winWidth = $(window).width();
     winHight = $(window).height();
-    
+
     if(typeof(Tab) != 'undefined') Tab.resize();
-    
+
     if (winWidth <= 998) {
         if (!$('body').hasClass('close-bar-state')) {
             $('#closeSiderbar').trigger('click');
@@ -592,11 +591,11 @@ $(window).resize(function(){
             $('#closeSiderbar').trigger('click');
         }
     }
-    
+
     if (winWidth <= 768) {
         $('#topMenu').find('li:last').trigger('click');
     }
-    
+
     charts_change()
 }).trigger('resize')
 
@@ -653,9 +652,9 @@ $('.woo-theme .theme-list li').click(function() {
 
 if (typeof(default_theme) != 'undefined') {
     if (default_theme)
-        $('.woo-theme .theme-list li[data-name="' + default_theme +'"]').addClass('current'); 
+        $('.woo-theme .theme-list li[data-name="' + default_theme +'"]').addClass('current');
     else
-        $('.woo-theme .theme-list li[data-name="default"]').addClass('current'); 
+        $('.woo-theme .theme-list li[data-name="default"]').addClass('current');
 } else {
     $('.woo-theme .theme-list li[data-name="default"]').addClass('current');
 }
@@ -663,27 +662,27 @@ if (typeof(default_theme) != 'undefined') {
 function full_screen() {
     if ($(this).hasClass('full')) {
         $(this).removeClass('full').find('i').removeClass('layui-icon-screen-restore').addClass('layui-icon-screen-full');
-        if (document.exitFullscreen) { 
-            document.exitFullscreen(); 
-        } else if (document.msExitFullscreen) { 
-            document.msExitFullscreen(); 
-        } else if (document.mozCancelFullScreen) { 
-            document.mozCancelFullScreen(); 
-        } else if (document.webkitCancelFullScreen) { 
-            document.webkitCancelFullScreen(); 
-        } 
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
     } else {
         $(this).addClass('full').find('i').removeClass('layui-icon-screen-full').addClass('layui-icon-screen-restore');
-        var docElm = document.documentElement; 
-        if (docElm.requestFullscreen) { 
-            docElm.requestFullscreen(); 
-        } else if (docElm.msRequestFullscreen) { 
-            docElm.msRequestFullscreen(); 
-        } else if (docElm.mozRequestFullScreen) { 
-            docElm.mozRequestFullScreen(); 
-        } else if (docElm.webkitRequestFullScreen) { 
-            docElm.webkitRequestFullScreen(); 
-        } 
+        var docElm = document.documentElement;
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        } else if (docElm.msRequestFullscreen) {
+            docElm.msRequestFullscreen();
+        } else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen();
+        } else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+        }
     }
 }
 
@@ -757,19 +756,19 @@ document.onkeydown = function(event){
 }
 
 function lockScreen(){
-    if($('#lockScreen').is(':visible')) return false ; 
-    $('#screenPwd').val('');   
+    if($('#lockScreen').is(':visible')) return false ;
+    $('#screenPwd').val('');
     $('#lockScreen').fadeIn(300, function(){
         $('#closeLock').addClass('shake');
     })
     var url = "{url('Tool/lockScreen')}";
     HKUC.ajax_request.call(this,url,null,
     	{
-    		'success':function(msg,data){ 
+    		'success':function(msg,data){
   		        layer.closeAll();
     		},
     		'error':function(msg,data){
-    		  
+
                   layer.closeAll();
                   layer.msg(msg)
     		}
@@ -789,7 +788,7 @@ $('#closeLock').click(function(){
     if (!pwd) {
         layer.msg('请先输入密码', {
             icon : 6
-        }); 
+        });
         return false;
     }
     HKUC.ajax_request.call(this,url,{

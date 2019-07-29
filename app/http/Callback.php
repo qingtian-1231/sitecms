@@ -46,25 +46,25 @@ class Callback
     //  每次访问URL方法之前（仅限Home模块方法）都会执行
     public function appBeforeHome()
     {
-        //  前台每个页面都需要家长的css 和js 
+        //  前台每个页面都需要家长的css 和js
         $this->ts->assign->addJs([
             'jquery-1.11.1.min',
             '/files/layui/layui.js',
             'common'
         ]);
-        
+
         $this->ts->assign->addCss([
             '/files/layui/css/layui.css',
             'global.css',
             'animate.css',
             '/files/awesome-4.7.0/css/font-awesome.min.css'
         ]);
-        
+
         $this->ts->assign->is_response = true;
         $this->ts->assign->is_favicon = true;
         $this->ts->assign->top_id = 0;
-        
-        
+
+
         /**
          * //  手动查询栏目数据模板
         $this->ts->getMenuData(栏目ID(integer), 查询条数(integer), [
@@ -78,7 +78,7 @@ class Callback
         //  查询以后，在这里可以使用 $this->ts->assign->query_data[栏目ID] 获取到数据
         //  查询以后，在试图中可以使用$query_data[栏目ID]获取到数据
         */
-        
+
         //  可以类似于这样 单独指定不同控制器不同方法执行的代码
         switch ($this->ca) {
             case 'Article::show':
@@ -91,13 +91,13 @@ class Callback
                 //  产品详情页
                 break;
         }
-        
+
         if ($this->ca == 'Index::index') {
             //  首页页面
             $this->ts->assign->is_index = true;
             $this->ts->assign->addCss('index.css');
             $this->ts->assign->top_id = 0;
-            
+
         } else {
             //  内页页面（非首页）
             $this->ts->assign->is_index = false;
@@ -107,12 +107,12 @@ class Callback
 
     //  每次访问URL方法后、渲染页面之前（仅限Home模块方法，这个时候所有需要assign到页面的数据都已经准备好）都会执行
     public function appAfterHome()
-    {        
+    {
         if ($this->ca == 'Index::index') {
             //  首页广告位
             $this->ts->getAdData('index_banner', 0);
             $this->ts->assign->ad_var = 'index_banner';
-            
+
         } else {
             //  内页广告位
             if (setting('is_menu_position')) {
@@ -126,7 +126,7 @@ class Callback
                         $this->ts->assign->ad_var = 'menu_' . $child_id;
                         break ;
                     }
-                }           
+                }
                 if (empty($this->ts->assign->ad[$c->assign->ad_var]['Ad'])) {
                     $this->ts->getAdData('insider_banner', 0);
                 }
@@ -144,7 +144,7 @@ class Callback
             'jquery-3.2.1.min.js',
             '/files/layui/layui.js',
             'admin/global.js'
-        ]);        
+        ]);
 
         $this->ts->assign->addCss([
             '/files/layui/css/layui.css',
@@ -152,10 +152,10 @@ class Callback
             'admin/animate.css',
             '/files/awesome-4.7.0/css/font-awesome.min.css'
         ]);
-        
+
         $this->ts->assign->is_response = true;
         $this->ts->assign->is_favicon = true;
-        
+
     }
 
     //  每次访问URL方法后、渲染页面之前（仅限Run模块方法，这个时候所有需要assign到页面的数据都已经准备好）都会执行
@@ -163,7 +163,7 @@ class Callback
     {
 
     }
-    
+
     //  每次访问URL方法之前（仅限Run模块方法）都会执行
     public function appBeforeManage()
     {
@@ -172,8 +172,8 @@ class Callback
             '/files/layui/layui.js',
             'common'
         ]);
-        
-        
+
+
         $this->ts->assign->addCss([
             '/files/layui/css/layui.css',
             'global.css',
@@ -182,7 +182,7 @@ class Callback
             'change.css',
             'animate.css',
             '/files/awesome-4.7.0/css/font-awesome.min.css'
-        ]); 
+        ]);
     }
 
     //  每次访问URL方法后、渲染页面之前（仅限Run模块方法，这个时候所有需要assign到页面的数据都已经准备好）都会执行

@@ -30,6 +30,9 @@ return array (
           array (
           ),
         ),
+        53 => 
+        array (
+        ),
       ),
       3 => 
       array (
@@ -158,6 +161,7 @@ return array (
     array (
       0 => 8,
       1 => 15,
+      2 => 53,
     ),
     8 => 
     array (
@@ -176,6 +180,9 @@ return array (
     array (
     ),
     10 => 
+    array (
+    ),
+    53 => 
     array (
     ),
     15 => 
@@ -362,6 +369,9 @@ return array (
         array (
         ),
       ),
+      53 => 
+      array (
+      ),
     ),
     37 => 
     array (
@@ -475,6 +485,7 @@ return array (
     array (
       0 => 8,
       1 => 15,
+      2 => 53,
     ),
     8 => 
     array (
@@ -493,6 +504,9 @@ return array (
     array (
     ),
     10 => 
+    array (
+    ),
+    53 => 
     array (
     ),
     15 => 
@@ -717,6 +731,18 @@ return array (
       'icon' => '',
       'is_nav' => 1,
       'is_debug' => 1,
+      'list_order' => 0,
+    ),
+    8 => 
+    array (
+      'id' => 8,
+      'parent_id' => 2,
+      'power_tree_id' => 0,
+      'title' => '内容管理',
+      'url' => '',
+      'icon' => 'layui-icon layui-icon-app',
+      'is_nav' => 1,
+      'is_debug' => 0,
       'list_order' => 0,
     ),
     12 => 
@@ -971,18 +997,6 @@ return array (
       'is_debug' => 0,
       'list_order' => 0,
     ),
-    8 => 
-    array (
-      'id' => 8,
-      'parent_id' => 2,
-      'power_tree_id' => 0,
-      'title' => '内容管理',
-      'url' => '',
-      'icon' => 'layui-icon layui-icon-app',
-      'is_nav' => 1,
-      'is_debug' => 0,
-      'list_order' => 1,
-    ),
     9 => 
     array (
       'id' => 9,
@@ -1003,6 +1017,18 @@ return array (
       'title' => '用户管理',
       'url' => '',
       'icon' => 'layui-icon layui-icon-user',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 1,
+    ),
+    15 => 
+    array (
+      'id' => 15,
+      'parent_id' => 2,
+      'power_tree_id' => 0,
+      'title' => '图片管理',
+      'url' => '',
+      'icon' => 'layui-icon layui-icon-picture',
       'is_nav' => 1,
       'is_debug' => 0,
       'list_order' => 1,
@@ -1079,6 +1105,18 @@ return array (
       'is_debug' => 0,
       'list_order' => 2,
     ),
+    53 => 
+    array (
+      'id' => 53,
+      'parent_id' => 2,
+      'power_tree_id' => 0,
+      'title' => '文件库',
+      'url' => '/addons/execute/woofinder-index-index.html',
+      'icon' => 'fa fa-briefcase',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 2,
+    ),
     10 => 
     array (
       'id' => 10,
@@ -1114,18 +1152,6 @@ return array (
       'is_nav' => 1,
       'is_debug' => 0,
       'list_order' => 3,
-    ),
-    15 => 
-    array (
-      'id' => 15,
-      'parent_id' => 2,
-      'power_tree_id' => 0,
-      'title' => '图片管理',
-      'url' => '',
-      'icon' => 'layui-icon layui-icon-picture',
-      'is_nav' => 1,
-      'is_debug' => 0,
-      'list_order' => 4,
     ),
     21 => 
     array (

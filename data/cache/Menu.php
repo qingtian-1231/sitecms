@@ -54,9 +54,24 @@ return array (
       ),
       7 => 
       array (
+        30 => 
+        array (
+        ),
+        31 => 
+        array (
+        ),
+        32 => 
+        array (
+        ),
       ),
       8 => 
       array (
+        33 => 
+        array (
+        ),
+        34 => 
+        array (
+        ),
       ),
       9 => 
       array (
@@ -64,6 +79,24 @@ return array (
         array (
         ),
         23 => 
+        array (
+        ),
+        24 => 
+        array (
+        ),
+        25 => 
+        array (
+        ),
+        26 => 
+        array (
+        ),
+        27 => 
+        array (
+        ),
+        28 => 
+        array (
+        ),
+        29 => 
         array (
         ),
       ),
@@ -143,14 +176,40 @@ return array (
     ),
     7 => 
     array (
+      0 => 30,
+      1 => 31,
+      2 => 32,
+    ),
+    30 => 
+    array (
+    ),
+    31 => 
+    array (
+    ),
+    32 => 
+    array (
     ),
     8 => 
+    array (
+      0 => 33,
+      1 => 34,
+    ),
+    33 => 
+    array (
+    ),
+    34 => 
     array (
     ),
     9 => 
     array (
       0 => 22,
       1 => 23,
+      2 => 24,
+      3 => 25,
+      4 => 26,
+      5 => 27,
+      6 => 28,
+      7 => 29,
     ),
     22 => 
     array (
@@ -158,14 +217,29 @@ return array (
     23 => 
     array (
     ),
+    24 => 
+    array (
+    ),
+    25 => 
+    array (
+    ),
+    26 => 
+    array (
+    ),
+    27 => 
+    array (
+    ),
+    28 => 
+    array (
+    ),
+    29 => 
+    array (
+    ),
   ),
   'nav' => 
   array (
     2 => 
     array (
-      10 => 
-      array (
-      ),
       11 => 
       array (
       ),
@@ -211,9 +285,24 @@ return array (
     ),
     7 => 
     array (
+      30 => 
+      array (
+      ),
+      31 => 
+      array (
+      ),
+      32 => 
+      array (
+      ),
     ),
     8 => 
     array (
+      33 => 
+      array (
+      ),
+      34 => 
+      array (
+      ),
     ),
     9 => 
     array (
@@ -223,21 +312,35 @@ return array (
       23 => 
       array (
       ),
+      24 => 
+      array (
+      ),
+      25 => 
+      array (
+      ),
+      26 => 
+      array (
+      ),
+      27 => 
+      array (
+      ),
+      28 => 
+      array (
+      ),
+      29 => 
+      array (
+      ),
     ),
   ),
   'nav_children' => 
   array (
     2 => 
     array (
-      0 => 10,
-      1 => 11,
-      2 => 12,
-      3 => 13,
-      4 => 14,
-      5 => 15,
-    ),
-    10 => 
-    array (
+      0 => 11,
+      1 => 12,
+      2 => 13,
+      3 => 14,
+      4 => 15,
     ),
     11 => 
     array (
@@ -290,19 +393,63 @@ return array (
     ),
     7 => 
     array (
+      0 => 30,
+      1 => 31,
+      2 => 32,
+    ),
+    30 => 
+    array (
+    ),
+    31 => 
+    array (
+    ),
+    32 => 
+    array (
     ),
     8 => 
+    array (
+      0 => 33,
+      1 => 34,
+    ),
+    33 => 
+    array (
+    ),
+    34 => 
     array (
     ),
     9 => 
     array (
       0 => 22,
       1 => 23,
+      2 => 24,
+      3 => 25,
+      4 => 26,
+      5 => 27,
+      6 => 28,
+      7 => 29,
     ),
     22 => 
     array (
     ),
     23 => 
+    array (
+    ),
+    24 => 
+    array (
+    ),
+    25 => 
+    array (
+    ),
+    26 => 
+    array (
+    ),
+    27 => 
+    array (
+    ),
+    28 => 
+    array (
+    ),
+    29 => 
     array (
     ),
   ),
@@ -345,12 +492,12 @@ return array (
       'child_count' => 6,
       'title' => '关于我们',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'about-us',
       'type' => 'Menu',
       'ex_link' => '',
       'is_nav' => 1,
       'list_count' => 0,
-      'is_redirect' => 0,
+      'is_redirect' => 1,
       'is_map' => 1,
       'list_order' => 0,
       'image' => 'upload/Menu/201907/17280873025d3d4a64bc1f5.png',
@@ -378,7 +525,7 @@ return array (
       'ex_link' => '',
       'is_nav' => 1,
       'list_count' => 0,
-      'is_redirect' => 0,
+      'is_redirect' => 1,
       'is_map' => 1,
       'list_order' => 1,
       'image' => '',
@@ -401,12 +548,12 @@ return array (
       'child_count' => 1,
       'title' => '解决方案',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'solution',
       'type' => 'Menu',
       'ex_link' => '',
       'is_nav' => 1,
       'list_count' => 0,
-      'is_redirect' => 0,
+      'is_redirect' => 1,
       'is_map' => 1,
       'list_order' => 2,
       'image' => '',
@@ -426,15 +573,15 @@ return array (
       'parent_id' => 1,
       'family' => ',1,7,',
       'level' => 2,
-      'child_count' => 0,
+      'child_count' => 3,
       'title' => '业绩展示',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'showcase',
       'type' => 'Menu',
       'ex_link' => '',
       'is_nav' => 1,
       'list_count' => 0,
-      'is_redirect' => 0,
+      'is_redirect' => 1,
       'is_map' => 1,
       'list_order' => 3,
       'image' => '',
@@ -454,10 +601,10 @@ return array (
       'parent_id' => 1,
       'family' => ',1,8,',
       'level' => 2,
-      'child_count' => 0,
+      'child_count' => 2,
       'title' => '新闻资讯',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'news',
       'type' => 'Menu',
       'ex_link' => '',
       'is_nav' => 1,
@@ -482,15 +629,15 @@ return array (
       'parent_id' => 1,
       'family' => ',1,9,',
       'level' => 2,
-      'child_count' => 2,
+      'child_count' => 8,
       'title' => '联系我们',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'contact-us',
       'type' => 'Menu',
       'ex_link' => '',
       'is_nav' => 1,
       'list_count' => 0,
-      'is_redirect' => 0,
+      'is_redirect' => 1,
       'is_map' => 1,
       'list_order' => 5,
       'image' => '',
@@ -541,10 +688,10 @@ return array (
       'child_count' => 0,
       'title' => '公司简介',
       'ex_title' => '',
-      'alias' => '',
+      'alias' => 'company-profile',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -569,7 +716,7 @@ return array (
       'child_count' => 0,
       'title' => '公司文化',
       'ex_title' => '',
-      'alias' => 'culture',
+      'alias' => 'company-culture',
       'type' => 'Page',
       'ex_link' => '',
       'is_nav' => 1,
@@ -868,6 +1015,314 @@ return array (
       'keywords' => '',
       'description' => '',
     ),
+    24 => 
+    array (
+      'id' => 24,
+      'parent_id' => 9,
+      'family' => ',1,9,24,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '售后服务',
+      'ex_title' => '',
+      'alias' => 'sales-service',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    25 => 
+    array (
+      'id' => 25,
+      'parent_id' => 9,
+      'family' => ',1,9,25,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '成为渠道伙伴',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    26 => 
+    array (
+      'id' => 26,
+      'parent_id' => 9,
+      'family' => ',1,9,26,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '潜在客户联系',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    27 => 
+    array (
+      'id' => 27,
+      'parent_id' => 9,
+      'family' => ',1,9,27,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '雇员不正当行为投诉',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    28 => 
+    array (
+      'id' => 28,
+      'parent_id' => 9,
+      'family' => ',1,9,28,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '媒体联系',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    29 => 
+    array (
+      'id' => 29,
+      'parent_id' => 9,
+      'family' => ',1,9,29,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '公益合作',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    30 => 
+    array (
+      'id' => 30,
+      'parent_id' => 7,
+      'family' => ',1,7,30,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '合作客户',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Menu',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    31 => 
+    array (
+      'id' => 31,
+      'parent_id' => 7,
+      'family' => ',1,7,31,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '经典案例',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Article',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    32 => 
+    array (
+      'id' => 32,
+      'parent_id' => 7,
+      'family' => ',1,7,32,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '团队经验',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Article',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    33 => 
+    array (
+      'id' => 33,
+      'parent_id' => 8,
+      'family' => ',1,8,33,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '公司动态',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Article',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    34 => 
+    array (
+      'id' => 34,
+      'parent_id' => 8,
+      'family' => ',1,8,34,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '行业动态',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Article',
+      'ex_link' => '',
+      'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
     16 => 
     array (
       'id' => 16,
@@ -927,7 +1382,14 @@ return array (
   ),
   'alias' => 
   array (
-    11 => 'culture',
+    2 => 'about-us',
+    3 => 'solution',
+    7 => 'showcase',
+    8 => 'news',
+    9 => 'contact-us',
+    10 => 'company-profile',
+    11 => 'company-culture',
+    24 => 'sales-service',
   ),
 )
 ?>

@@ -5,8 +5,8 @@ return array (
   'site_description' => '',
   'site_copyright' => '&copy;版权所有 沪ICP备',
   'site_code' => '',
-  'corp_title' => '公司名称',
-  'tel' => '公司电话',
+  'corp_title' => '上海九谷科技发展有限公司',
+  'tel' => '862164329590',
   'email' => '公司邮箱',
   'address' => '上海市漕宝路70号C座29楼',
   'icp' => '',
@@ -57,5 +57,7 @@ return array (
   'yt_appid' => '',
   'yt_secretid' => '',
   'yt_secretkey' => '',
+  'header_logo' => '',
+  'site_fax' => '862164329597',
 )
 ?>
