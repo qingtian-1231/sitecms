@@ -135,6 +135,25 @@ class Callback
                 $this->ts->assign->ad_var = 'insider_banner';
             }
         }
+
+        // 重写获取menu的方法，在每一个页面都要获得这个页面所属和包含的所有菜单结构
+        if (property_exists($this->ts->assign, 'side_menu')) {
+            $all_menu_children = menu('children');
+            $family = explode(',', $this->ts->assign->menu_data['family']);
+            $top_menu = $family[2];
+            $menus = (array) $all_menu_children[$top_menu];
+
+            foreach ($menus as $menu_key => $second_menu_id) {
+                if (isset($all_menu_children[$second_menu_id]) &&
+                    !empty($all_menu_children[$second_menu_id])
+                ) {
+                    unset($menus[$menu_key]);
+                    $menus[$second_menu_id] = $all_menu_children[$second_menu_id];
+                }
+            }
+            $this->ts->assign->side_menu['top_menu'] = $top_menu;
+            $this->ts->assign->side_menu['menus'] = $menus;
+        }
     }
 
     //  每次访问URL方法之前（仅限Run模块方法）都会执行

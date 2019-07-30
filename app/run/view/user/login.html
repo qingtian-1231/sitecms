@@ -1,18 +1,18 @@
 {extends file='../global.html'}
 {block name=global}
-<!--[if lt IE 10]> 
+<!--[if lt IE 10]>
 <p style="text-align: center;padding-top:100px;">请使用高版本浏览器进入后台管理（建议浏览器：Firefox、Chrome）</p>
 <p><a href="http://www.firefox.com.cn/">下载Firefox浏览器</a></p>
 <p><a href="http://www.google.cn/chrome/browser//">下载Chrome浏览器</a></p>
 <div style="display:none">
-<![endif]--> 
+<![endif]-->
 
 <div id="login">
     <h1>
-		 <strong><span class="en-font">WOOCMS</span>管理系统后台</strong>
+		 <strong><span class="en-font">九谷科技</span>管理系统后台</strong>
 		 <em class="en-font">Management System</em>
 	</h1>
-    
+
     <div class="user info">
         <label>U</label>
         {$form->text("User.username",['class'=>'en-font','placeholder'=>'账号','autocomplete'=>'off'])}
@@ -29,7 +29,7 @@
     <div class="sub">
         <input  type="submit" id="loginSubmit" value="立即登录"/>
     </div>
-    <div class="copy"><a href="{$dev.site}" target="_blank">© WOOCMS版权所有　精心铸造应用管理系统</a></div>
+    <div class="copy"><a href="" target="_blank">精心铸造应用管理系统</a></div>
 </div>
 <div class="auth">
     <div class="loading"><div class="loader-inner ball-clip-rotate-multiple"></div></div>
@@ -42,11 +42,11 @@
 layui.use(['layer', 'carousel'],function(){
     'use strict';
     var layer=layui.layer;
-    
+
     {if $error}
     layer.msg('{$error}');
     {/if}
-    
+
 });
 
 $('body').keydown(function(e){
@@ -96,7 +96,7 @@ $('#loginSubmit').click(function(){
         isLogining = false;
         return false;
     }
-    
+
     $('#login').addClass('checking');
     setTimeout(function(){
         $('#login').animate({
@@ -104,7 +104,7 @@ $('#loginSubmit').click(function(){
         }, 200, 'easeOutQuint')
         $('.auth').addClass('checking');
     }, 500)
-    
+
     setTimeout(function(){
         $.post("{url('User/ajax_login')}",{
             username : username,
@@ -125,15 +125,15 @@ $('#loginSubmit').click(function(){
                 setTimeout(function(){
                     location.href = json['data']['url'];
                 }, 800)
-                
-                
+
+
             } else {
                 $('#login').animate({
                     'margin-left' : -180
                 }, 200, 'easeOutQuint')
                 $('.auth').removeClass('checking');
                 setTimeout(function(){
-                    $('#login').removeClass('checking');                    
+                    $('#login').removeClass('checking');
                 }, 250)
                 setTimeout(function(){
                     $('#captchaimg').trigger('click');
@@ -149,12 +149,12 @@ $('#loginSubmit').click(function(){
             }
         })
     }, 1500)
-    
+
 })
 
 
 </script>
 <!--[if lt IE 10]>
 	</div>
-<![endif]--> 
+<![endif]-->
 {/block}

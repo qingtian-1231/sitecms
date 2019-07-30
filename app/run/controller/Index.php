@@ -8,20 +8,20 @@ use think\Db;
 class Index extends Run
 {
     public function index()
-    {  
+    {
         if (!adminmenu('nav')) {
             //$this->loadModel('AdminMenu');
             //$this->AdminMenu->writeToFile();
         }
-        
+
         $this->assign->addCss('admin/index.css');
-        $this->assign->addJs('admin/echarts.common.min');        
-        
-        
+        $this->assign->addJs('admin/echarts.common.min');
+
+
         //统计图形数据准备
         // 官网 ：http://echarts.baidu.com
         // 具体配置： http://echarts.baidu.com/option.html  这里都按PHP数组配置 页面中会自动转换为JSON
-        
+
         //一、 真实实现7天会员注册量统计
         $user_charts = \Cache::get('admin_user_charts');
         if (empty($user_charts)) {
@@ -46,7 +46,7 @@ class Index extends Run
                     'bottom' => '40px',
                     'left' => '8%',
                     'right' => '8%',
-                    
+
                 ],
                 'tooltip' => [
                     'trigger' => 'item',
@@ -110,13 +110,13 @@ class Index extends Run
             ];
             \Cache::set('admin_user_charts', $user_charts, 86400);
         }
-        
-        //二、虚拟统计图 
+
+        //二、虚拟统计图
         $demo1_charts = \Cache::get('admin_demo1_charts');
         if (empty($demo1_charts)) {
             $demo1_charts = [
                 'title' => [
-                    'text' => '虚拟统计图一',
+                    'text' => '内容统计图',
                     'left' => 'center',
                     'top' => '10px',
                     'textStyle' => [
@@ -130,7 +130,7 @@ class Index extends Run
                     'bottom' => '40px',
                     'left' => '8%',
                     'right' => '8%',
-                    
+
                 ],
                 'tooltip' => [
                     'trigger' => 'item',
@@ -194,8 +194,8 @@ class Index extends Run
             ];
             \Cache::set('admin_demo1_charts', $demo1_charts, 86400);
         }
-        
-        // 三、虚拟统计图 
+
+        // 三、虚拟统计图
         $demo2_charts = \Cache::get('admin_demo2_charts');
         if (empty($demo2_charts)) {
             $demo2_charts = [
@@ -214,7 +214,7 @@ class Index extends Run
                     'bottom' => '40px',
                     'left' => '8%',
                     'right' => '8%',
-                    
+
                 ],
                 'tooltip' => [
                     'trigger' => 'item',
@@ -224,7 +224,7 @@ class Index extends Run
                     'icon' => '',
                     'orient' => 'vertical',
                     'left' => '6%',
-                    'top' => '50px',                    
+                    'top' => '50px',
                     'data' => [
                         [
                             'name' => '直接访问',
@@ -251,7 +251,7 @@ class Index extends Run
                 'series' => [
                     [
                         'name' => '访问来源',
-                        'radius' => '55%',                        
+                        'radius' => '55%',
                         'data' => [
                             ['value' => 335, 'name' => '直接访问', 'itemStyle' => ['color' => '#41cac0']],
                             ['value' => 310, 'name' => '邮件营销', 'itemStyle' => ['color' => '#78CD51']],
@@ -272,13 +272,13 @@ class Index extends Run
             ];
             \Cache::set('admin_demo2_charts', $demo2_charts, 86400);
         }
-        
-        //$charts 必须以索引数组方式 装你准备好的各项统计配置数组  你装几个就自动显示几个 
+
+        //$charts 必须以索引数组方式 装你准备好的各项统计配置数组  你装几个就自动显示几个
         $charts[] = $user_charts;
         $charts[] = $demo1_charts;// 不显示虚拟数据自行注释
         $charts[] = $demo2_charts;// 不显示虚拟数据自行注释
         $this->assign->charts = $charts;
-        
+
         //快捷方式数据
         $shortcut_list = \Cache::get('admin_shortcut_list');
         if (empty($shortcut_list)) {
@@ -290,19 +290,19 @@ class Index extends Run
                                 ->order(['list_order' => 'DESC', 'id' => 'ASC'])
                                 ->select()
                                 ->toArray();
-            
+
             \Cache::set('admin_shortcut_list', $shortcut_list, 86400);
         }
         $this->assign->shortcut_list = $shortcut_list;
-        
-        
+
+
         //环境信息获取
-        $this->assign->dev['php_version'] = PHP_VERSION;        
+        $this->assign->dev['php_version'] = PHP_VERSION;
         if (@ini_get('file_uploads')) {
             $this->assign->dev['upload_max_filesize'] = ini_get('upload_max_filesize');
         } else {
             $this->assign->dev['upload_max_filesize'] = '禁止上传';
-        }        
+        }
         $this->assign->dev['php_os'] = PHP_OS;
         $softArr = explode('/',$_SERVER["SERVER_SOFTWARE"]) ;
         $this->assign->dev['server_software'] = array_shift($softArr);
@@ -314,35 +314,35 @@ class Index extends Run
         } else {
             $this->assign->dev['curl_extension'] = 'NO';
         }
-        
+
         if (extension_loaded('MBstring')) {
             $this->assign->dev['mbstring_extension'] = 'YES';
         } else {
             $this->assign->dev['mbstring_extension'] = 'NO';
         }
-        
+
         if (extension_loaded('pdo')) {
             $this->assign->dev['pdo_extension'] = 'YES';
         } else {
             $this->assign->dev['pdo_extension'] = 'NO';
         }
-        
+
         $this->assign->dev['max_execution_time'] = ini_get('max_execution_time') . 'S';
-        
+
         //数据统计
         $count['article'] = Db::name('Article')->count();
         $count['product'] = Db::name('Product')->count();
         $count['user'] = Db::name('User')->count();
         $count['album'] = Db::name('Album')->count();
-        
-        $count['feedback'] = Db::name('Feedback')->where(['is_finish' => 0])->count();        
+
+        $count['feedback'] = Db::name('Feedback')->where(['is_finish' => 0])->count();
         $this->assign->count = $count ;
-        
+
         cookie(['prefix' => 'think_', 'expire' => 3600]);
         $this->assign->is_lock_screen = cookie('?is_lock_screen') ? true : false;
         $this->assign->default_skin = cookie('?skin_name') ? cookie('skin_name') : '';
-        
-        
+
+
         // 左侧栏目权限使用
         $powers = helper('Auth')->getPowerList();
         $GLOBALS['static_power_list'] = $powers;
@@ -351,11 +351,11 @@ class Index extends Run
         } else {
             $this->assign->is_super_power = false;
         }
-        
+
         $this->assign->powers = array_keys((array)$powers);
-        
-        
-        
+
+
+
         // 后台主题
         $theme = [
             [
@@ -444,10 +444,10 @@ class Index extends Run
             ]
         ];
         $this->assign->theme = $theme;
-        
-        
+
+
         $this->fetch = 'index';
     }
-    
-    
+
+
 }
