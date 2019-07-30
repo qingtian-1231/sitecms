@@ -1664,17 +1664,17 @@
 }
 
 #insiderBase {
-    margin-top: 20px;
-    padding-left: 240px;
-    position: relative;
-    min-height: 300px;
+    /*margin-top: 20px;*/
+    /*padding-left: 240px;*/
+    /*position: relative;*/
+    /*min-height: 300px;*/
 }
 
 #insiderBar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 220px;
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*width: 220px;*/
 }
 
 #insiderBar .layui-nav-tree {

@@ -3,11 +3,14 @@ namespace app\home\controller;
 
 use app\common\controller\Home;
 
-class Feedback extends Home
+class Suppliercertification extends Home
 {
-    public function initialize()
+    /**
+    * 初始化
+    */
+    protected function initialize()
     {
-        call_user_func(array('parent', __FUNCTION__));
+        call_user_func(['parent', __FUNCTION__]);
     }
 
     public function show()

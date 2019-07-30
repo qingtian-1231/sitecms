@@ -99,6 +99,9 @@ return array (
         29 => 
         array (
         ),
+        35 => 
+        array (
+        ),
       ),
     ),
   ),
@@ -210,6 +213,7 @@ return array (
       5 => 27,
       6 => 28,
       7 => 29,
+      8 => 35,
     ),
     22 => 
     array (
@@ -233,6 +237,9 @@ return array (
     array (
     ),
     29 => 
+    array (
+    ),
+    35 => 
     array (
     ),
   ),
@@ -307,9 +314,6 @@ return array (
     9 => 
     array (
       22 => 
-      array (
-      ),
-      23 => 
       array (
       ),
       24 => 
@@ -420,18 +424,14 @@ return array (
     9 => 
     array (
       0 => 22,
-      1 => 23,
-      2 => 24,
-      3 => 25,
-      4 => 26,
-      5 => 27,
-      6 => 28,
-      7 => 29,
+      1 => 24,
+      2 => 25,
+      3 => 26,
+      4 => 27,
+      5 => 28,
+      6 => 29,
     ),
     22 => 
-    array (
-    ),
-    23 => 
     array (
     ),
     24 => 
@@ -629,7 +629,7 @@ return array (
       'parent_id' => 1,
       'family' => ',1,9,',
       'level' => 2,
-      'child_count' => 8,
+      'child_count' => 9,
       'title' => '联系我们',
       'ex_title' => '',
       'alias' => 'contact-us',
@@ -997,9 +997,9 @@ return array (
       'title' => '成为九谷供应商',
       'ex_title' => '',
       'alias' => '',
-      'type' => 'Menu',
+      'type' => 'SupplierCertification',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1308,6 +1308,34 @@ return array (
       'type' => 'Article',
       'ex_link' => '',
       'is_nav' => 1,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '',
+      'keywords' => '',
+      'description' => '',
+    ),
+    35 => 
+    array (
+      'id' => 35,
+      'parent_id' => 9,
+      'family' => ',1,9,35,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '留言',
+      'ex_title' => '',
+      'alias' => '',
+      'type' => 'Feedback',
+      'ex_link' => '',
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,

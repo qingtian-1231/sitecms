@@ -23,11 +23,10 @@ layui.use('carousel', function(){
 
 </script>
 
-<div  class="wrap" >
-    <div id="insiderBase">
+<div  class="wrap layui-container" >
+    <div id="insiderBase" class="layui-row">
         {block name="insider_bar"}
-        <div id="insiderBar">
-            <h2 class="reset">{$menu_data.title}</h2>
+        <div id="insiderBar" class="layui-col-md3">
             <ul class="layui-nav layui-nav-tree list" lay-filter="test">
                 {foreach $side_menu.menus as $menu_key => $menu_id}
                     {if is_array($menu_id)}
@@ -52,7 +51,8 @@ layui.use('carousel', function(){
         {/block}
 
         {block name="insider_content"}
-        <div id="insider_content">
+        <div id="insider_content" class="layui-col-md9">
+            <h2 class="reset">{$menu_data.title}</h2>
             <div class="location">{include file="common/path.html" delimiter=' &gt; '}</div>
             <div id="insider">
                 {block name=insider}{/block}

@@ -425,7 +425,7 @@ return array (
     'id' => 43,
     'model' => 'SupplierCertification',
     'cname' => '申请合格供应商认证',
-    'is_menu' => 0,
+    'is_menu' => 1,
     'is_power' => 0,
     'is_dustbin' => 1,
     'is_import' => 0,

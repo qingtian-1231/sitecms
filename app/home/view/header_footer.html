@@ -45,7 +45,7 @@
 {block name="foot"}
 <div id="footer">
     <div class="wrap">
-        <div  class="link">
+        <div class="link">
             {foreach $query_data[11] as $item}{strip}
             <a href="{furl($item.link)}" target="_blank">{$item.title}</a>{if !$item@last}<em>|</em>{/if}
             {/strip}{/foreach}
