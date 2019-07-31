@@ -1663,22 +1663,14 @@
     height: 100%;
 }
 
-#insiderBase {
-    /*margin-top: 20px;*/
-    /*padding-left: 240px;*/
-    /*position: relative;*/
-    /*min-height: 300px;*/
-}
-
 #insiderBar {
-    /*position: absolute;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*width: 220px;*/
+    padding: 0 1rem;
 }
 
 #insiderBar .layui-nav-tree {
     background-color: #fff;
+    width: 100%;
+    text-align: center;
 }
 #insiderBar .layui-nav-tree .layui-nav-bar {
     display: none;
@@ -1697,14 +1689,15 @@
 
 #insiderBar ul li {
     margin-top: 10px;
-    background-color: #393D49;
+    background-color: #436caa;
 }
 
 #insiderBar ul li a {
     display: block;
     height: 36px;
     line-height: 36px;
-    padding: 0 20px;
+    padding: 12px 20px;
+    color: #fff;
     overflow: hidden;
 }
 
@@ -1714,10 +1707,12 @@
 #insiderBar ul li.current a,
 #insiderBar dl dd.current a,
 #insiderBar ul li a:hover {
-    background: #ccc;
-    color: #31833e;
+    background: #f6a800;
 }
 
+#insider_content {
+    padding: 2rem 4rem;
+}
 
 #insider_content .location {
     line-height: 40px;

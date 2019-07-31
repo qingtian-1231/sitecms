@@ -21,6 +21,12 @@ return array (
           array (
           ),
         ),
+        54 => 
+        array (
+          55 => 
+          array (
+          ),
+        ),
         15 => 
         array (
           16 => 
@@ -160,8 +166,9 @@ return array (
     2 => 
     array (
       0 => 8,
-      1 => 15,
-      2 => 53,
+      1 => 54,
+      2 => 15,
+      3 => 53,
     ),
     8 => 
     array (
@@ -182,7 +189,11 @@ return array (
     10 => 
     array (
     ),
-    53 => 
+    54 => 
+    array (
+      0 => 55,
+    ),
+    55 => 
     array (
     ),
     15 => 
@@ -194,6 +205,9 @@ return array (
     array (
     ),
     17 => 
+    array (
+    ),
+    53 => 
     array (
     ),
     3 => 
@@ -360,6 +374,12 @@ return array (
         array (
         ),
       ),
+      54 => 
+      array (
+        55 => 
+        array (
+        ),
+      ),
       15 => 
       array (
         16 => 
@@ -484,8 +504,9 @@ return array (
     2 => 
     array (
       0 => 8,
-      1 => 15,
-      2 => 53,
+      1 => 54,
+      2 => 15,
+      3 => 53,
     ),
     8 => 
     array (
@@ -506,7 +527,11 @@ return array (
     10 => 
     array (
     ),
-    53 => 
+    54 => 
+    array (
+      0 => 55,
+    ),
+    55 => 
     array (
     ),
     15 => 
@@ -518,6 +543,9 @@ return array (
     array (
     ),
     17 => 
+    array (
+    ),
+    53 => 
     array (
     ),
     37 => 
@@ -714,7 +742,7 @@ return array (
       'id' => 6,
       'parent_id' => 8,
       'power_tree_id' => 0,
-      'title' => '前台栏目',
+      'title' => '栏目结构',
       'url' => '/run/menu/lists',
       'icon' => '',
       'is_nav' => 1,
@@ -738,7 +766,7 @@ return array (
       'id' => 8,
       'parent_id' => 2,
       'power_tree_id' => 0,
-      'title' => '内容管理',
+      'title' => '栏目管理',
       'url' => '',
       'icon' => 'layui-icon layui-icon-app',
       'is_nav' => 1,
@@ -997,12 +1025,36 @@ return array (
       'is_debug' => 0,
       'list_order' => 0,
     ),
+    54 => 
+    array (
+      'id' => 54,
+      'parent_id' => 2,
+      'power_tree_id' => 0,
+      'title' => '内容管理',
+      'url' => '',
+      'icon' => 'fa fa-file-text-o',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    55 => 
+    array (
+      'id' => 55,
+      'parent_id' => 54,
+      'power_tree_id' => 0,
+      'title' => '文章列表',
+      'url' => 'article/lists',
+      'icon' => 'fa fa-wpforms',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
     9 => 
     array (
       'id' => 9,
       'parent_id' => 8,
       'power_tree_id' => 0,
-      'title' => '前台内容',
+      'title' => '栏目内容',
       'url' => '/run/menu/content',
       'icon' => '',
       'is_nav' => 1,

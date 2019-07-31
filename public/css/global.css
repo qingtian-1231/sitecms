@@ -422,24 +422,51 @@ a:hover, a:focus {
 
 #footer {
     margin-top: 40px;
-    border-top: 2px solid #31833e;
-    padding-top: 15px;
+    border-top: 2px solid #f6a800;
     text-align: center;
 }
 
-#footer .link, #footer .foot {
+#footer .about-us-links, #footer .foot {
     text-align: center;
     line-height: 24px;
 }
 
-#footer .link em {
+#footer .about-us-links {
+    background-color: #dfdfdf;
+    padding: 20px 0;
+}
+
+#footer h4 {
+    color: #666666;
+    text-decoration: none;
+    padding: 12px 0;
+}
+
+#footer a {
+    color: #666666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+#footer a.current {
+    border-bottom: 2px solid #eeaa50;
+    padding-bottom: 7px;
+}
+
+#footer a:hover {
+    color: #31833e;
+}
+
+#footer .about-us-links em {
     font-style: normal;
-    margin: 0 15px;
+    margin: 0 25px;
     color: #999;
 }
 
 #footer .foot {
     padding: 12px 0;
+    background-color: #636363;
+    color: #fff;
 }
 
 #footer .foot span {

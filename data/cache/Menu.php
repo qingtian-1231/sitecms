@@ -99,9 +99,6 @@ return array (
         29 => 
         array (
         ),
-        35 => 
-        array (
-        ),
       ),
     ),
   ),
@@ -213,7 +210,6 @@ return array (
       5 => 27,
       6 => 28,
       7 => 29,
-      8 => 35,
     ),
     22 => 
     array (
@@ -239,217 +235,46 @@ return array (
     29 => 
     array (
     ),
-    35 => 
-    array (
-    ),
   ),
   'nav' => 
   array (
     2 => 
     array (
-      11 => 
-      array (
-      ),
-      12 => 
-      array (
-      ),
-      13 => 
-      array (
-        16 => 
-        array (
-        ),
-        17 => 
-        array (
-        ),
-      ),
-      14 => 
-      array (
-      ),
-      15 => 
-      array (
-      ),
     ),
     4 => 
     array (
-      18 => 
-      array (
-      ),
-      19 => 
-      array (
-      ),
-      20 => 
-      array (
-      ),
-      21 => 
-      array (
-      ),
     ),
     3 => 
     array (
-      5 => 
-      array (
-      ),
     ),
     7 => 
     array (
-      30 => 
-      array (
-      ),
-      31 => 
-      array (
-      ),
-      32 => 
-      array (
-      ),
     ),
     8 => 
     array (
-      33 => 
-      array (
-      ),
-      34 => 
-      array (
-      ),
     ),
     9 => 
     array (
-      22 => 
-      array (
-      ),
-      24 => 
-      array (
-      ),
-      25 => 
-      array (
-      ),
-      26 => 
-      array (
-      ),
-      27 => 
-      array (
-      ),
-      28 => 
-      array (
-      ),
-      29 => 
-      array (
-      ),
     ),
   ),
   'nav_children' => 
   array (
     2 => 
     array (
-      0 => 11,
-      1 => 12,
-      2 => 13,
-      3 => 14,
-      4 => 15,
-    ),
-    11 => 
-    array (
-    ),
-    12 => 
-    array (
-    ),
-    13 => 
-    array (
-      0 => 16,
-      1 => 17,
-    ),
-    16 => 
-    array (
-    ),
-    17 => 
-    array (
-    ),
-    14 => 
-    array (
-    ),
-    15 => 
-    array (
     ),
     4 => 
-    array (
-      0 => 18,
-      1 => 19,
-      2 => 20,
-      3 => 21,
-    ),
-    18 => 
-    array (
-    ),
-    19 => 
-    array (
-    ),
-    20 => 
-    array (
-    ),
-    21 => 
     array (
     ),
     3 => 
     array (
-      0 => 5,
-    ),
-    5 => 
-    array (
     ),
     7 => 
-    array (
-      0 => 30,
-      1 => 31,
-      2 => 32,
-    ),
-    30 => 
-    array (
-    ),
-    31 => 
-    array (
-    ),
-    32 => 
     array (
     ),
     8 => 
     array (
-      0 => 33,
-      1 => 34,
-    ),
-    33 => 
-    array (
-    ),
-    34 => 
-    array (
     ),
     9 => 
-    array (
-      0 => 22,
-      1 => 24,
-      2 => 25,
-      3 => 26,
-      4 => 27,
-      5 => 28,
-      6 => 29,
-    ),
-    22 => 
-    array (
-    ),
-    24 => 
-    array (
-    ),
-    25 => 
-    array (
-    ),
-    26 => 
-    array (
-    ),
-    27 => 
-    array (
-    ),
-    28 => 
-    array (
-    ),
-    29 => 
     array (
     ),
   ),
@@ -629,7 +454,7 @@ return array (
       'parent_id' => 1,
       'family' => ',1,9,',
       'level' => 2,
-      'child_count' => 9,
+      'child_count' => 8,
       'title' => '联系我们',
       'ex_title' => '',
       'alias' => 'contact-us',
@@ -663,7 +488,7 @@ return array (
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -719,7 +544,7 @@ return array (
       'alias' => 'company-culture',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -747,7 +572,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -775,7 +600,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -803,7 +628,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -831,7 +656,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -859,7 +684,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -887,7 +712,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -915,7 +740,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -943,7 +768,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -971,7 +796,7 @@ return array (
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -995,7 +820,7 @@ return array (
       'level' => 3,
       'child_count' => 0,
       'title' => '成为九谷供应商',
-      'ex_title' => '',
+      'ex_title' => 'become a supplier',
       'alias' => '',
       'type' => 'SupplierCertification',
       'ex_link' => '',
@@ -1010,8 +835,8 @@ return array (
       'thumb_method' => 0,
       'template' => '',
       'list_style' => '',
-      'page_style' => '',
-      'summary' => '',
+      'page_style' => '1',
+      'summary' => '感谢您成为九谷科技 爸爸拉拉吧 阿法士大夫阿发发达地方爱对方的发生海德股份恢复公司的换个地方和豆腐干很多很多发过火的，阿斯顿发阿道夫个？打发的说法发',
       'keywords' => '',
       'description' => '',
     ),
@@ -1027,7 +852,7 @@ return array (
       'alias' => 'sales-service',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1055,7 +880,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1083,7 +908,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1111,7 +936,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1139,7 +964,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1167,7 +992,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1195,7 +1020,7 @@ return array (
       'alias' => '',
       'type' => 'Menu',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1223,7 +1048,7 @@ return array (
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1251,7 +1076,7 @@ return array (
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1279,7 +1104,7 @@ return array (
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1306,34 +1131,6 @@ return array (
       'ex_title' => '',
       'alias' => '',
       'type' => 'Article',
-      'ex_link' => '',
-      'is_nav' => 1,
-      'list_count' => 0,
-      'is_redirect' => 0,
-      'is_map' => 1,
-      'list_order' => 0,
-      'image' => '',
-      'thumb_width' => 0,
-      'thumb_height' => 0,
-      'thumb_method' => 0,
-      'template' => '',
-      'list_style' => '',
-      'page_style' => '',
-      'summary' => '',
-      'keywords' => '',
-      'description' => '',
-    ),
-    35 => 
-    array (
-      'id' => 35,
-      'parent_id' => 9,
-      'family' => ',1,9,35,',
-      'level' => 3,
-      'child_count' => 0,
-      'title' => '留言',
-      'ex_title' => '',
-      'alias' => '',
-      'type' => 'Feedback',
       'ex_link' => '',
       'is_nav' => 0,
       'list_count' => 0,
@@ -1363,7 +1160,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
@@ -1391,7 +1188,7 @@ return array (
       'alias' => '',
       'type' => 'Page',
       'ex_link' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'list_count' => 0,
       'is_redirect' => 0,
       'is_map' => 1,
