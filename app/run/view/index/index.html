@@ -181,15 +181,15 @@ var winHight = $(window).height();
                                                         </ul>
                                                         <ul class="grid quick-link layui-row layui-col-space10">
                                                             <li class="layui-col-xs6">
-                                                                <a href="{url('user/lists')}" class="new_tab" data-title="会员列表" data-icon="layui-icon-user">
-                                                                    <h2>会员</h2>
+                                                                <a href="{url('user/lists')}" class="new_tab" data-title="用户列表" data-icon="layui-icon-user">
+                                                                    <h2>用户</h2>
                                                                     <span>{if $count.user<999}{$count.user}{else}999+{/if}</span>
                                                                 </a>
                                                             </li>
                                                             <li class="layui-col-xs6">
-                                                                <a onclick="layer.msg('敬请期待')">
-                                                                    <h2>订单</h2>
-                                                                    <span>0</span>
+                                                                <a href="{url('supplier_certification/lists')}" class="new_tab" data-title="申请供应商认证列表" data-icon="layui-icon-user">
+                                                                    <h2>待处理供应商认证申请</h2>
+                                                                    <span>{if $count.supplier_certification<999}{$count.supplier_certification}{else}999+{/if}</span>
                                                                 </a>
                                                             </li>
                                                             <li class="layui-col-xs6">

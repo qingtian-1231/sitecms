@@ -25,7 +25,7 @@ class SupplierCertification extends App
             'menu_id' => array(
                 'type' => 'integer',
                 'name' => '所属栏目',
-                'elem' => 'nest_select.Menu',
+                'elem' => 'hidden',
                 'foreign' => 'Menu.title',
                 'list' => 'assoc'
             ),
@@ -43,7 +43,7 @@ class SupplierCertification extends App
             ),
             'position' => array(
                 'type' => 'string',
-                'name' => '工作职位/头衔',
+                'name' => '工作职位',
                 'elem' => 'text',
                 'list' => 'show',
             ),
@@ -59,14 +59,9 @@ class SupplierCertification extends App
                 'elem' => 'text',
                 'list' => 'show',
             ),
-            'question_provide' => array(
-                'type' => 'text',
-                'name' => '您能提供哪些产品和服务？',
-                'elem' => 'textarea',
-            ),
             'question_type' => array(
                 'type' => 'text',
-                'name' => '您公司的类型？',
+                'name' => '公司类型',
                 'elem' => 'radio',
                 'options' => [
                     '民营' => '民营',
@@ -75,24 +70,29 @@ class SupplierCertification extends App
                     '售后' => '售后',
                 ],
             ),
+            'question_provide' => array(
+                'type' => 'text',
+                'name' => '提供哪些产品和服务',
+                'elem' => 'textarea',
+            ),
             'question_product' => array(
                 'type' => 'text',
-                'name' => '您提供的服务或者产品需要强制性检测和认证吗？',
+                'name' => '提供的服务或者产品是否需要强制性检测和认证',
                 'elem' => 'textarea',
             ),
             'question_customer' => array(
                 'type' => 'text',
-                'name' => '您曾经为哪些客户或者项目提供过上述产品或服务？',
+                'name' => '曾经为哪些客户或者项目提供过上述产品或服务',
                 'elem' => 'textarea',
             ),
             'question_judge' => array(
                 'type' => 'text',
-                'name' => '您愿意参加我公司的竞争性谈判吗？',
+                'name' => '是否愿意参加我公司的竞争性谈判',
                 'elem' => 'textarea',
             ),
             'question_pay' => array(
                 'type' => 'text',
-                'name' => '您对付款方式有特殊要求吗？',
+                'name' => '对付款方式是否有特殊要求',
                 'elem' => 'textarea',
             ),
             'ip' => array(
@@ -125,10 +125,6 @@ class SupplierCertification extends App
 
         call_user_func_array(['parent', __FUNCTION__], func_get_args());
     }
-
-    public $formGroup = array(
-        'advanced' => '高级选项'
-    );
 
     /**
      * 数据验证

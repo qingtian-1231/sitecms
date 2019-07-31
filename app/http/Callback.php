@@ -136,6 +136,23 @@ class Callback
             }
         }
 
+        /**
+         * 获得固定的名称为联系我们的栏目下所有菜单id.
+         *
+         */
+        $about_us_id = '1';
+        $all_menu_list = menu('list');
+        foreach ($all_menu_list as $menu_item) {
+            if ($menu_item['title'] === '联系我们') {
+                $about_us_id = $menu_item['id'];
+                break;
+            }
+        }
+        $this->ts->assign->all_about_us_ids = [
+            'about_us_id' => $about_us_id,
+            'about_us_children_id' => menu('children', $about_us_id),
+        ];
+
         // 重写获取menu的方法，在每一个页面都要获得这个页面所属和包含的所有菜单结构
         if (property_exists($this->ts->assign, 'side_menu')) {
             $all_menu_children = menu('children');

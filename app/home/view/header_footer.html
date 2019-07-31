@@ -45,9 +45,10 @@
 {block name="foot"}
 <div id="footer">
     <div class="wrap">
+        <h4>{menu($all_about_us_ids['about_us_id'],'title')}</h4>
         <div class="link">
-            {foreach $query_data[11] as $item}{strip}
-            <a href="{furl($item.link)}" target="_blank">{$item.title}</a>{if !$item@last}<em>|</em>{/if}
+            {foreach $all_about_us_ids['about_us_children_id'] as $menu_id}{strip}
+            <a href="{call menu_link id=$menu_id}" target="_blank">{menu($menu_id,'title')}</a>{if !$menu_id@last}<em>|</em>{/if}
             {/strip}{/foreach}
         </div>
         <div class="foot en-font">

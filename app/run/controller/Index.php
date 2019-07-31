@@ -334,7 +334,7 @@ class Index extends Run
         $count['product'] = Db::name('Product')->count();
         $count['user'] = Db::name('User')->count();
         $count['album'] = Db::name('Album')->count();
-
+        $count['supplier_certification'] = Db::name('SupplierCertification')->where(['is_finish' => 0])->count();
         $count['feedback'] = Db::name('Feedback')->where(['is_finish' => 0])->count();
         $this->assign->count = $count ;
 
