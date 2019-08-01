@@ -1,4 +1,4 @@
-{extends file="./insider_base.html"} 
+{extends file="./insider_base.html"}
 {block name=function}
 {function name="default_src"}{strip}
 {$root}{$item.thumb|default:$item.image|default:setting('default_image')}
@@ -41,7 +41,7 @@
                     <i class="line_b cms_tran"></i>
                 </div>
                 <h4 class="cms_tran {cycle values='odd,even'}">{$item.title}</h4>
-            </a>            
+            </a>
         </div>
     </li>
     {/foreach}
@@ -194,13 +194,13 @@ $(function(){
 <div class="cms_case12">
     <ul class="list fallsList">
     {foreach $list as $item}
-    <li>            
+    <li>
         <div class="thumb"><a href="{call view_link item=$item}" class="cms_tran coverBg" style="background-image: url({call default_src});"><img src="{call default_src}" alt="{$item.title}" class="hidden"/></a></div>
         <div class="item_con">
-            <div class="item_tit"><a href="{call view_link item=$item}">{$item.title}</a></div> 
+            <div class="item_tit"><a href="{call view_link item=$item}">{$item.title}</a></div>
             <p class="reset" >
             {call trim_content html=$item.summary|nl2br|default:$item.content length=100}
-            </p>                 
+            </p>
         </div>
         <div class="item_info">
             <a href="{call view_link item=$item}">查看详情 &gt;</a>
@@ -251,7 +251,7 @@ $(function(){
         </li>
         {/foreach}
     </ul>
-</div> 
+</div>
 {/function}
 
 {function name="show_case_15" list=[] mdl=$mdl}
@@ -273,7 +273,7 @@ $(function(){
         </li>
         {/foreach}
     </ul>
-</div> 
+</div>
 {/function}
 
 {function name="show_case_16" list=[] mdl=$mdl}
@@ -297,7 +297,7 @@ $(function(){
 <script type="text/javascript" src="{$absroot}js/minigrid.js"></script>
 <script type="text/javascript" src="{$absroot}js/dynamics.js"></script>
 
- <div class="cms_case17 clearfix relative fallsList">    
+ <div class="cms_case17 clearfix relative fallsList">
     {foreach $list as $item}
     <div class="grid-item">
         <a class="article" href="{call view_link item=$item}">
@@ -321,9 +321,9 @@ $(function(){
         delay: 100 + index * 30
         });
     }
-    
+
     minigrid('.cms_case17', '.grid-item', 12, animate);
-    
+
     $(window).resize(function(){
          minigrid('.cms_case17', '.grid-item', 12, animate);
     })
@@ -341,7 +341,7 @@ $(function(){
     <div id="insider_show">
         {$list_style=$menu_data.list_style|default:'show_case_1'}
         {call $list_style list=$list}
-    </div>    
+    </div>
     <div id="cms_page" class="clearfix fallsPage">
         <div class="cms_page_relative clearfix">{$render}</div>
     </div>
@@ -363,20 +363,20 @@ function scrollWin(){
         var winHei = winHei|| $(window).height();
         if($('.fallsBox').length){
             if(!is_over) $('#loadMark').show() ;
-            
-            var scrtop =document.documentElement.scrollTop || document.body.scrollTop;                  
-            if (scrtop > sign) { 
+
+            var scrtop =document.documentElement.scrollTop || document.body.scrollTop;
+            if (scrtop > sign) {
                 sign = scrtop;
-                direct = -1;     
+                direct = -1;
             }
-            if (scrtop < sign) {   
-                sign = scrtop;         
+            if (scrtop < sign) {
+                sign = scrtop;
                 direct = 1;
-            } 
-            if(direct == -1){            
+            }
+            if(direct == -1){
                 footTop =  $('#loadMark').offset().top;
                 var midTop = footTop - scrtop ;
-                if(midTop-20<winHei){                 
+                if(midTop-20<winHei){
                     loadFalls()
                 }
             }
@@ -385,7 +385,7 @@ function scrollWin(){
 }
 
 function loadFalls(){
-    if(!is_load) return false ; 
+    if(!is_load) return false ;
     is_load = false ;
     if(!$('#fallsHidden').find('.pagination').length){
         $('#fallsHidden').html($('.fallsPage').html());
@@ -394,7 +394,7 @@ function loadFalls(){
     var pages   =  $('#fallsHidden').find('.pagination').find('li').not(':last,:first').length ;
     var nowPage =  $('#fallsHidden').find('.pagination').find('li.active').index()>= 0 ? $('#fallsHidden').find('.pagination').find('li.active').index(): 0 ;
     console.log(pages, nowPage)
-    
+
     if(nowPage>=pages) {
         is_over = true ;
         $('#loadMark').html('已经没有啦(*^__^*) ').fadeOut(6000) ;
@@ -404,13 +404,13 @@ function loadFalls(){
     console.log(href)
     $('#fallsHidden').load(href + ' .fallsBox',function(){
         console.log($('#fallsHidden').html())
-        
+
         var list    = $('#fallsHidden').find('.fallsList').html();
         console.log(list)
         $(list).appendTo($('.fallsBox').find('.fallsList'));
         loadJs() ;
         is_load = true ;
-        
+
     })
 }
 //因为load不能把js加载过来，所以每次加载数据完成后需要执行的js单独在这里再执行一次

@@ -46,6 +46,11 @@ class Menu extends App
                 'name' => '栏目标题',
                 'elem' => 'text'
             ),
+            'title_alias' => array(
+                'type' => 'string',
+                'name' => '标题别名',
+                'elem' => 'text'
+            ),
             'ex_title' => array(
                 'type' => 'string',
                 'name' => '栏目副标题',

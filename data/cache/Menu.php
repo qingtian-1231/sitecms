@@ -307,6 +307,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     2 => 
     array (
@@ -335,6 +336,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     4 => 
     array (
@@ -363,6 +365,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     3 => 
     array (
@@ -391,6 +394,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     7 => 
     array (
@@ -419,6 +423,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     8 => 
     array (
@@ -447,6 +452,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     9 => 
     array (
@@ -475,6 +481,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     5 => 
     array (
@@ -503,6 +510,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     10 => 
     array (
@@ -531,6 +539,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     11 => 
     array (
@@ -559,6 +568,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     12 => 
     array (
@@ -587,6 +597,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     13 => 
     array (
@@ -615,6 +626,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     14 => 
     array (
@@ -643,6 +655,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     15 => 
     array (
@@ -671,6 +684,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     18 => 
     array (
@@ -699,6 +713,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     19 => 
     array (
@@ -727,6 +742,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     20 => 
     array (
@@ -755,6 +771,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     21 => 
     array (
@@ -783,6 +800,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     22 => 
     array (
@@ -792,7 +810,7 @@ return array (
       'level' => 3,
       'child_count' => 0,
       'title' => '工作机会',
-      'ex_title' => '',
+      'ex_title' => '申请职位',
       'alias' => '',
       'type' => 'Article',
       'ex_link' => '',
@@ -811,6 +829,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => 'job opportunities',
     ),
     23 => 
     array (
@@ -820,7 +839,7 @@ return array (
       'level' => 3,
       'child_count' => 0,
       'title' => '成为九谷供应商',
-      'ex_title' => 'become a supplier',
+      'ex_title' => '申请合格供应商认证',
       'alias' => '',
       'type' => 'SupplierCertification',
       'ex_link' => '',
@@ -839,6 +858,7 @@ return array (
       'summary' => '感谢您成为九谷科技 爸爸拉拉吧 阿法士大夫阿发发达地方爱对方的发生海德股份恢复公司的换个地方和豆腐干很多很多发过火的，阿斯顿发阿道夫个？打发的说法发',
       'keywords' => '',
       'description' => '',
+      'title_alias' => 'become a supplier',
     ),
     24 => 
     array (
@@ -867,6 +887,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     25 => 
     array (
@@ -895,6 +916,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     26 => 
     array (
@@ -923,6 +945,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     27 => 
     array (
@@ -951,6 +974,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     28 => 
     array (
@@ -979,6 +1003,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     29 => 
     array (
@@ -1007,6 +1032,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     30 => 
     array (
@@ -1035,6 +1061,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     31 => 
     array (
@@ -1063,6 +1090,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     32 => 
     array (
@@ -1091,6 +1119,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     33 => 
     array (
@@ -1119,6 +1148,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     34 => 
     array (
@@ -1147,6 +1177,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     16 => 
     array (
@@ -1175,6 +1206,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
     17 => 
     array (
@@ -1203,6 +1235,7 @@ return array (
       'summary' => '',
       'keywords' => '',
       'description' => '',
+      'title_alias' => NULL,
     ),
   ),
   'alias' => 

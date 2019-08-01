@@ -495,6 +495,33 @@ a:hover, a:focus {
     margin-right: 15px;
 }
 
+.title-ext-header {
+    height: 50px;
+    line-height: 50px;
+}
+
+.title-ext-header.header-left {
+    background-color: #dfdfdf;
+}
+
+.title-ext-header.header-right {
+    background-color: #446baa;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+}
+
+#insider .menu-summary {
+    padding: 2rem 1rem 0 0;
+    text-align: justify;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: #222;
+}
+
+#insider .right-form {
+    border-left: 1px inset rgba(223, 223, 223, 0.2);
+}
 
 @media screen and (max-width: 768px) {
     body {
@@ -543,33 +570,3 @@ a:hover, a:focus {
         text-align: left;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -57,7 +57,7 @@ return array (
   'yt_appid' => '',
   'yt_secretid' => '',
   'yt_secretkey' => '',
-  'header_logo' => '',
+  'header_logo' => 'upload/site_logo/201908/21236130775d42f716ed5f4.png',
   'site_fax' => '862164329597',
 )
 ?>
