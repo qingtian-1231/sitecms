@@ -7,11 +7,11 @@ var layer;
 var is_layer_loading = {setting('is_layer_loading')|default:0};
 $(function(){
     layui.use(['layer'], function(){
-        layer = layui.layer;        
+        layer = layui.layer;
         layer.config({
             zIndex:10000
         });
-        
+
         {if $error}
           layer.msg('{$error}',{
             offset :['50px', '35%']
@@ -21,18 +21,18 @@ $(function(){
 })
 
 HKUC.ajax_request.defaultSuccessHandlers= {
-    'success':function(rslt_msg,rslt_data){ 
+    'success':function(rslt_msg,rslt_data){
        layer.alert(rslt_msg,{
             icon:1
-        }); 
+        });
     },
     'error':function(rslt_msg,rslt_data){
         layer.alert(rslt_msg,{
             icon:2
-        });                   
+        });
     },
     'nopower':function(msg,data){
-        
+
         layer.alert(msg,{
             icon:2
         });

@@ -19,7 +19,7 @@
             {if !$is_check_power || ($is_check_power && $auth->checkMenuPower($self_id,'create'))}
             <a href="{url($type|cat:'/create',['parent_id'=>$self_id])}"><i class="fa fa-plus"></i>添加内容</a>
             {/if}
-            {/if}           
+            {/if}
             <a href="{call menu_link id=$self_id}" target="_blank"><i class="fa fa-eye"></i>预览</a>
         </span>
         <span class="menu_info clearfix">
@@ -63,7 +63,7 @@ $('#menu_tree .self').click(function(){
         var href  = $(this).attr('href') ;
         layer.confirm('该操作不可逆，请确认删除该栏目及其子栏目？',function(){
             layer.closeAll();
-            location.href  = href; 
+            location.href  = href;
         })
         return false ;
     }

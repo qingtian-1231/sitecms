@@ -7,7 +7,7 @@
     {else}
     {$form->text("$mdl.$field",['class' => 'layui-input text-input form_item', 'placeholder' => $col.placeholder|default:''])}
     {/if}
-    
+
     {if isset($col.quick)}
         {if dict($mdl,$field)}
         {$options=[]}
@@ -18,7 +18,7 @@
         {else}
             <a href="{url('Dictionary/create',['model'=>$mdl,'field'=>$field,'title'=>$mdls.$mdl->cname|cat:'.'|cat:$col.name])}" class="layui-btn new_tab">添加选项</a>
         {/if}
-    {/if}       
+    {/if}
 {/function}
 
 {function name=form_elem_number mdl=null field=null col=null}
@@ -32,7 +32,7 @@
         {$value=$form->data.$mdl.$field}
         {if $value}
         {$value_array = explode(',', $value)}
-        {foreach $value_array as $tag}        
+        {foreach $value_array as $tag}
         <a class="tag_each" data-value="{$tag}">{$tag}<i class="fa fa-close"></i></a>
         {/foreach}
         {/if}
@@ -62,10 +62,10 @@
             $('.color_{$field}').css('background-color', '#' + hex).parent().find('input').val('#' + hex) ;
         }
     });
-    </script>    
+    </script>
 {/function}
 
-{function name=form_elem_password mdl=null field=null col=null}	
+{function name=form_elem_password mdl=null field=null col=null}
 	{$form->password("$mdl.$field",['class' => 'layui-input text-input form_item', 'empty'=>true, 'value'=>'', 'placeholder' => $col.placeholder|default:''])}
 {/function}
 
@@ -107,7 +107,7 @@
 	{$form->radio("$mdl.$field",$col.options,['class'=>'form_item','label'=>false,'lay-filter'=>$field,'title'=>true,'notext'=>true])}
 {/function}
 
-{function name=form_elem_textarea mdl=null field=null col=null}	
+{function name=form_elem_textarea mdl=null field=null col=null}
 	{$form->textarea("$mdl.$field",['class' => 'layui-textarea  form_item' ,'placeholder' => $col.placeholder|default:''])}
 {/function}
 
@@ -119,37 +119,37 @@
     <div class="form-error-tip">“datetime”已废弃，请将“elem”设置为“date”，字段“options”中“type” => “datetime”</div>
 {/function}
 
-{function name=form_elem_month mdl=null field=null col=null} 
+{function name=form_elem_month mdl=null field=null col=null}
     <div class="form-error-tip">“month”已废弃，请将“elem”设置为“date”，字段“options”中“type” => “month”</div>
 {/function}
 
-{function name=form_elem_year mdl=null field=null col=null} 
+{function name=form_elem_year mdl=null field=null col=null}
     <div class="form-error-tip">“year”已废弃，请将“elem”设置为“date”，字段“options”中“type” => “year”</div>
 {/function}
 
-{function name=form_elem_time mdl=null field=null col=null} 
+{function name=form_elem_time mdl=null field=null col=null}
     <div class="form-error-tip">“time”类型已废弃，请将“elem”设置为“date”，字段“options”中“type” => “time”</div>
 {/function}
 
-{function name=form_elem_editor mdl=null field=null col=null}       
-    {$form->textarea("$mdl.$field",['class' => 'form_item editor editor_'|cat:$field])}          
+{function name=form_elem_editor mdl=null field=null col=null}
+    {$form->textarea("$mdl.$field",['class' => 'form_item editor editor_'|cat:$field])}
 {/function}
 
-{function name=form_elem_ueditor mdl=null field=null col=null}  
-    {if !addon_exists('ueditor', true)}<div style="color: #FF5722;">当前系统尚未安装ueditor插件，所有上传类功能将无法正常工作。<a href="https://www.eduaskcms.xin/addons.html" target="_blank">马上下载安装</a></div>{/if} 
-    {$form->ueditor("$mdl.$field",['class' => 'form_item ueditor ueditor_'|cat:$field])}          
+{function name=form_elem_ueditor mdl=null field=null col=null}
+    {if !addon_exists('ueditor', true)}<div style="color: #FF5722;">当前系统尚未安装ueditor插件，所有上传类功能将无法正常工作。<a href="https://www.eduaskcms.xin/addons.html" target="_blank">马上下载安装</a></div>{/if}
+    {$form->ueditor("$mdl.$field",['class' => 'form_item ueditor ueditor_'|cat:$field])}
 {/function}
 
-{function name=form_elem_keditor mdl=null field=null col=null} 
-    {if !addon_exists('kindeditor', true)}<div style="color: #FF5722;">当前系统尚未安装kindeditor插件，所有上传类功能将无法正常工作。<a href="https://www.eduaskcms.xin/addons.html" target="_blank">马上下载安装</a></div>{/if}       
-    {$form->textarea("$mdl.$field",['class' => 'form_item keditor editor_'|cat:$field, 'data-theme' => $sub_elem])}          
+{function name=form_elem_keditor mdl=null field=null col=null}
+    {if !addon_exists('kindeditor', true)}<div style="color: #FF5722;">当前系统尚未安装kindeditor插件，所有上传类功能将无法正常工作。<a href="https://www.eduaskcms.xin/addons.html" target="_blank">马上下载安装</a></div>{/if}
+    {$form->textarea("$mdl.$field",['class' => 'form_item keditor editor_'|cat:$field, 'data-theme' => $sub_elem])}
 {/function}
 
-{function name=form_elem_slider mdl=null field=null col=null}       
+{function name=form_elem_slider mdl=null field=null col=null}
     <div class="slider-init">
         {$form->hidden("$mdl.$field",['class'=>'form_item'])}
         <div class="slider" data-value="{$form->data[$mdl][$field]|default:$col.slider.value|default: ''}" data-min="{$col.slider.min|default : 0}" data-max="{$col.slider.max|default : 100}" data-step="{$col.slider.step|default : 1}"></div>
-    </div>          
+    </div>
 {/function}
 
 {function name=form_elem_array mdl=null field=null col=null}
@@ -204,7 +204,7 @@
             {/foreach}
             {/if}
         </ul>
-    </div>    
+    </div>
 </div>
 {/function}
 
@@ -222,7 +222,7 @@
             {$form->file("$mdl.upload.$field",['class'=>'form_upload','accept'=>'image/png,image/gif,image/jpeg'])}
             <i class="fa fa-cloud-upload fa-lg"></i>图片上传
         </a><span class="upload_elem_info"></span>
-    </div> 
+    </div>
     {if $form->data[$mdl][$field]}
     {$show_src = $form->data[$mdl][$field]}
     <div class="clearfix form_elem_info">
@@ -237,7 +237,7 @@
             <span  class="btn upload_remove_btn eft tooltip" data-tip-text="删除文件"><i class="fa fa-trash fa-lg"></i></span>
         </a>
     </div>
-    {/if}    	
+    {/if}
 {/function}
 
 {function name=form_elem_file mdl=null field=null col=null}
@@ -253,9 +253,9 @@
             {$form->file("$mdl.upload.$field",['class'=>'form_upload'])}
             <i class="fa fa-cloud-upload fa-lg"></i>文件上传
         </a><span class="upload_elem_info"></span>
-    </div> 
-    {if $form->data[$mdl][$field]} 
-    {$src=$form->data[$mdl][$field]} 
+    </div>
+    {if $form->data[$mdl][$field]}
+    {$src=$form->data[$mdl][$field]}
     <div class="clearfix form_elem_info">
         {$form->hidden("$mdl.$field",['value'=>$src,'class'=>'form_item form_file_hidden'])}
         <a href="{call furl url=$src}" target="_blank" class="file_show">
@@ -263,7 +263,7 @@
             <span  class="btn upload_remove_btn eft tooltip" data-tip-text="删除文件"><i class="fa fa-trash fa-lg"></i></span>
         </a>
     </div>
-    {/if}    	
+    {/if}
 {/function}
 
 {function name=form_elem_format mdl=null field=null col=null}
@@ -276,7 +276,7 @@
 	{if $col.length}{$local.val=$local.val|cn_truncate:$col.length}{/if}
     {$local.temp=$form->data}
     {$local.temp.$field=$local.val}
-    
+
 	{string_insert($col.format|default:$local.val,$local.temp)}
 	</span>
 {/function}
@@ -297,11 +297,11 @@
     {foreach $data as $self_id=>$children}{strip}
     {if $children@first}
     <div class="menu_option menu_option_level_{$level} menu_option_parent_{$fulldata.list[$self_id].parent_id} {if !in_array($self_id,$family)&&!in_array({$fulldata.list[$self_id].parent_id},$family)&&$level>0}hidden{/if}">
-    {/if}   
+    {/if}
         {*$data_family = substr(substr(menu($self_id,'family'),1),0,-1)}
         {if !$data_family}{getClosestFamily('AdminMenu',$self_id,$data_family)}{$data_family=implode($data_family,',')}{/if*}
         <a href="javascript:void(0);" class="each_nav each_nav_{$self_id} {if in_array($self_id,$family)}same{/if}"  data-id="{$self_id}"  {*data-family="{$data_family}"*} data-parent="{$fulldata.list[$self_id].parent_id}">{$fulldata.list[$self_id].title}</a>
-    {if $children@last} 
+    {if $children@last}
     </div>
     {/if}
     {/strip}{/foreach}
@@ -323,11 +323,11 @@
             {$fulldata.list[$famly_id].title|default:'未选择'}{if !$famly_id@last}<i>&gt;</i>{/if}
             {/foreach}
         </div>
-        <a href="javascript:void(0);" class="menu_select_action layui-btn  layui-btn-normal">重新选取</a>   
+        <a href="javascript:void(0);" class="menu_select_action layui-btn  layui-btn-normal">重新选取</a>
         <div class="menu_select_options sizing">
             {call form_elem_nest_select_options data=$fulldata.threaded  level=0}
-        </div> 
-    </div>   
+        </div>
+    </div>
 {/function}
 
 {function name=form_elem_multi_select_parent mdl=null field=null col=null}
@@ -336,14 +336,14 @@
     {if $sub_elem !== 'ajax'}
         {$select_name = 'multiSelect'|cat:parse_name($sub_elem, 1)}
         {$cache = read_file_cache($select_name)}
-        {if !empty($cache)}    
+        {if !empty($cache)}
         {$min=$cache.data.top_id}
         {$cache.data.top_id=$cache.list[$min].parent_id}
         {$cache.options[$cache.data.top_id] = [$min]}
         {$cache.list[$cache.data.top_id]=['id' => $cache.data.top_id, 'title' => '根节点','parent_id' => -1]}
         {$cache = json_encode($cache)}
-        {call name=form_elem_hidden mdl=$mdl field=$field col=$col}        
-        <script> 
+        {call name=form_elem_hidden mdl=$mdl field=$field col=$col}
+        <script>
             new multi_select('{$field}', {$cache}, {$parent_id}, '{$mdl}', [],, '{url("ajaxMultiSelect")}')
         </script>
         {/if}
@@ -352,7 +352,7 @@
         {if $parent_id}{$default_value = $cthis->mdl->getFamily($field, $parent_id)}{/if}
         {$default_value = array_merge([$col.top_id|default:0], $default_value)}
         {call name=form_elem_hidden mdl=$mdl field=$field col=$col}
-        <script>  
+        <script>
         new multi_select('{$field}', {json_encode(['options' => 'ajax', 'data'=>['top_id'=>$col.top_id|default:0]])}, {json_encode($default_value)}, '{$mdl}', {json_encode($col.multi_field|default:[])}, '{url("ajaxMultiSelect")}')
         </script>
     {/if}
@@ -361,15 +361,15 @@
 {function name=form_elem_multi_select mdl=null field=null col=null}
     {$parent_id = $form->data.$mdl.$field|default:0}
     {if !isset($col.multi_field)}{call name=form_elem_hidden mdl=$mdl field=$field col=$col}{/if}
-    <div class="multi_select multi_select_{$field} clearfix"></div>    
+    <div class="multi_select multi_select_{$field} clearfix"></div>
     {if $sub_elem !== 'ajax'}
         {$select_name = 'multiSelect'|cat:parse_name($sub_elem, 1)}
         {$cache = read_file_cache($select_name)}
-        {if !empty($cache)}  
-            
-            {if !isset($col.multi_field)}  
-                {$cache = json_encode($cache)}              
-                <script> 
+        {if !empty($cache)}
+
+            {if !isset($col.multi_field)}
+                {$cache = json_encode($cache)}
+                <script>
                 new multi_select('{$field}', {$cache}, {$parent_id}, '{$mdl}', {json_encode($col.multi_field|default:[])}, '{url("ajaxMultiSelect")}')
                 </script>
             {else}
@@ -381,18 +381,18 @@
                 {/foreach}
                 {$top_id=$cache.data.top_id}
                 {$cache = json_encode($cache)}
-                <script>  
+                <script>
                 new multi_select('{$field}', {$cache}, {json_encode(array_merge([$top_id], $default_value))}, '{$mdl}', {json_encode($col.multi_field|default:[])}, '{url("ajaxMultiSelect")}')
                 </script>
-            {/if} 
+            {/if}
         {else}
              <div class="form-error-tip">缺少缓存数据</div>
-        {/if}           
+        {/if}
     {else}
         {if !isset($col.multi_field)}
             {$default_value=[]}
             {if $parent_id}{$default_value = $cthis->mdl->getFamily($field, $parent_id)}{/if}
-            <script>  
+            <script>
             new multi_select('{$field}', {json_encode(['options' => 'ajax', 'data'=>['top_id'=>$col.top_id|default:1]])}, {json_encode($default_value)}, '{$mdl}', {json_encode($col.multi_field|default:[])}, '{url("ajaxMultiSelect")}')
             </script>
         {else}
@@ -402,10 +402,10 @@
                     {$default_value[]=$form->data.$mdl.$mfield}
                 {/if}
             {/foreach}
-            <script>  
+            <script>
             new multi_select('{$field}', {json_encode(['options' => 'ajax', 'data'=>['top_id'=>$col.top_id|default:1]])},{json_encode(array_merge([$col.top_id|default:1], $default_value))}, '{$mdl}', {json_encode($col.multi_field|default:[])}, '{url("ajaxMultiSelect")}')
             </script>
-        {/if}  
+        {/if}
     {/if}
 {/function}
 
@@ -436,15 +436,15 @@
     </div>
     {/if}
     {/if}
-    
+
     <div class="box_content">
         {if $warning}
         <blockquote class="site-text layui-elem-quote form_warning">
             <a href="javascript:void(0);" class="close" onclick="$(this).parent().slideUp(500);"><i class="fa fa-close"></i></a>
             {$warning}
-        </blockquote>        
+        </blockquote>
         {/if}
-        
+
         {$form->create(['type'=>'file','class'=>'MainForm layui-form layui-form-pane','novalidate'=>true])}
         {block name=form_content}
             {foreach $mdls.$mdl->form as $field=>$col}
@@ -454,7 +454,7 @@
     				{call name=form_elem_hidden mdl=$mdl field=$field col=$col}
     				{continue}
     			{/if}
-                
+
                 {$local.elem = plugin_split($col.elem)}
                 {if $local.elem[0]}
                 	{$elem=$local.elem[0]}
@@ -462,8 +462,8 @@
                 {else}
                 	{$elem=$local.elem[1]}
                     {$sub_elem=NULL}
-                {/if}     
-                {if method_exists($mdls.$mdl,'getError')}    
+                {/if}
+                {if method_exists($mdls.$mdl,'getError')}
                 {$local.error=$mdls.$mdl->getError()|default:$mdl_error|default:[]}
                 {else}
                 {$local.error=$mdl_error|default:[]}
@@ -472,7 +472,7 @@
                 {$elem_group = $col.elem_group|default:'basic'}
                 <div class="layui-form-item form-item-row form-item-field-{$field} form-item-{$elem} form-item-group-{$elem_group} {if $form_group_keys && $elem_group != 'basic' && !in_array($field,$local.error.fields)}hidden{/if} {if isset($col.quick)}quick_row{/if}">
                     <label class="layui-form-label">{$col.name}：</label>
-                    <div class="layui-input-inline">                   
+                    <div class="layui-input-inline">
                     {$local.func='form_elem_'|cat:$elem}
                     {if $elem == 'editor'}{$is_ckeditor=true}{/if}
                     {if $elem == 'ueditor'}{$is_ueditor=true}{$ueditor_list[]=$field}{/if}
@@ -535,7 +535,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
     upload = layui.upload;
     formSelects = layui.formSelects;
     transfer = layui.transfer
-    
+
     if ($('.formSelects4').length) {
         $('.formSelects4').each(function() {
             var field = $(this).attr('xm-select');
@@ -545,7 +545,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             }
         })
     }
-    
+
     if ($('.elem-transfer').length) {
         $('.elem-transfer').each(function () {
             var that = $(this)
@@ -576,10 +576,10 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             });
         })
     }
-    
+
     var uploadInst = upload.render({
         elem: '.multi_image_upload'
-        ,url: '{url("run/Upload/multiImageUpload", ["mdl" => $mdl])}' 
+        ,url: '{url("run/Upload/multiImageUpload", ["mdl" => $mdl])}'
         ,multiple: true
         ,drag : true
         ,before: function(obj){
@@ -591,7 +591,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             }
         }
         ,done: function(res){
-            if (res.result == 'success') {                
+            if (res.result == 'success') {
                 add_multi_image($(this.item).closest('.multi_image'), res.data.url)
             } else {
                 layer.alert(res.message, {
@@ -603,11 +603,11 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             $(this.item).closest('.multi_image').find('.tip').hide();
         }
         ,error: function(){
-            
+
         }
     });
-    
-    
+
+
     if ($('.slider').length) {
         $('.slider').each(function(){
             slider.render({
@@ -622,7 +622,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             });
         })
     }
-    
+
     $('.datepicker').each(function(){
         var range = false;
         if ($(this).data('range')) {
@@ -631,8 +631,8 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             } else {
                 range = $(this).data('range');
             }
-        }        
-        laydate.render({ 
+        }
+        laydate.render({
           elem: this
           ,type: $(this).data('type') ? $(this).data('type') : 'date'
           ,trigger: $(this).data('trigger') ? $(this).data('trigger') : 'focus'
@@ -644,12 +644,12 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
           ,calendar : !$(this).data('calendar') ? false : true
         });
     })
-    
-    
+
+
     form.on('select(quick_select_item)', function(data){
         $(data.elem).closest('.layui-input-inline').find('.form_item').val(data.value);
     })
-    
+
     //字段响应处理
     {if $cthis->mdl->fieldRespond}
     {foreach $cthis->mdl->fieldRespond as $field=>$respond}
@@ -672,8 +672,8 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
                 {/foreach}
             }
             {/foreach}
-        }).trigger('change');   
-        
+        }).trigger('change');
+
         {if $cthis->mdl->form[$field]['elem'] =='select'}
         form.on('select({$field})', function(data){
             {if $respond.RespondField}
@@ -693,7 +693,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
         });
         {continue}
         {/if}
-        
+
         {if in_array($cthis->mdl->form[$field]['elem'],array('radio','checker'))}
         {if $cthis->mdl->form[$field]['elem'] == 'radio'}{$event='radio'}{/if}
         {if $cthis->mdl->form[$field]['elem'] == 'checker'}{$event='switch'}{/if}
@@ -715,8 +715,8 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
         });
         {continue}
         {/if}
-        
-        
+
+
         {if strpos($cthis->mdl->form[$field]['elem'], 'formSelects') !== false}
         {if $respond.RespondField}
             {foreach $respond.RespondField as $hideField}
@@ -742,7 +742,7 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
             for (i in vals) {
                 changeVal.push(vals[i].value)
             }
-            
+
             {foreach $respond as $value=>$showFields}
             {if $value == 'RespondField'}{continue}{/if}
             if($.inArray('{$value}', changeVal) != -1){
@@ -751,12 +751,12 @@ layui.use(['form','element','laydate', 'slider', 'upload', 'formSelects', 'trans
                 {/foreach}
             }
             {/foreach}
-             
+
         }, true);
-        
+
         {continue}
         {/if}
-        
+
     {/foreach}
     {/if}
 });
@@ -769,7 +769,7 @@ if($editors.length){
 	var ckeditor_setting={
 		baseHref:wwwroot,
 		toolbar:'AdminFull',
-        
+
         {if addon_exists('woofinder', true)}
         filebrowserImageUploadUrl:"{addon_url('woofinder/index/ckuploader',['type'=>'image','model'=>$mdl])}?",
         filebrowserImageBrowseUrl:"{addon_url('woofinder/index/index',['filetype'=>'image','model'=>$mdl])}?",
@@ -778,7 +778,7 @@ if($editors.length){
         {else}
         filebrowserImageUploadUrl:"{url('Upload/uploader',['type'=>'image','model'=>$mdl])}?",
         {/if}
-        
+
         allowedContent:true,
 		width:(is_layer_loading ? 700 : 800) + 'px',
 		height:'280px',
@@ -797,7 +797,7 @@ var {'ueditor_'|cat:$field} = UE.getEditor($("{'.ueditor_'|cat:$field}").attr('i
     initialFrameWidth : is_layer_loading ? 700 : 800,
     initialFrameHeight : 280,
     wordCount :false
-}); 
+});
 {/foreach}
 {/if}
 
@@ -818,7 +818,7 @@ if ($keditors.length) {
         		},
                 width : is_layer_loading ? 700 : 800,
         		showHelpGrid: false,
-        		themeType : theme, 
+        		themeType : theme,
         		errorMsgHandler : function(message, type) {
         			try {
         				JDialog.msg({
@@ -868,7 +868,7 @@ if(typeof(TPL) != 'undefined'){
 	{/each}
 </table>
 */}
-	
+
 	TPL.edit_array=function(){/*
 <div class="edit_array">
 	<div class="copy_template" style="display:none;">
@@ -924,9 +924,9 @@ if(typeof(TPL) != 'undefined'){
 }
 
 function show_array(){
-	var is_keyvalue=$(this).is('.keyvalue'); 
+	var is_keyvalue=$(this).is('.keyvalue');
 	var value=get_array_value.call(this);
-	
+
 	$(this).removeClass('editing').html('编辑').siblings('.array').html((is_keyvalue?TPL.show_keyvalue:TPL.show_array).render({
 		$value:value
 	}));
@@ -934,18 +934,18 @@ function show_array(){
 
 function edit_array(){
 	var $this=$(this);
-    
+
 	var is_keyvalue=$this.is('.keyvalue');
-	
+
 	if($this.is('.editing')){
 		var value=HKUC.parse_serial_array($this.siblings('.array').find('.array_items input[type=text]').serializeArray());
-		
+
 		(is_keyvalue?set_keyvalue_value:set_array_value).call(this,value.array_value);
 		show_array.call(this);
 	}
 	else{
 		var value=get_array_value.call(this);
-		
+
 		$this.addClass('editing').html('保存').siblings('.array').html((is_keyvalue?TPL.edit_keyvalue:TPL.edit_array).render({
 			$value:value
 		}));
@@ -954,7 +954,7 @@ function edit_array(){
 
 function get_array_value(){
 	var raw_value=$(this).siblings('.form_item').val();
-	
+
 	if(HKUC.isJsonValidate(raw_value)){
 		return eval('('+raw_value+')');
 	}
@@ -972,7 +972,7 @@ function set_keyvalue_value(value){
 	if(value && value.key)
 	for(key in value.key){
 		ret[value.key[key]]=value.value[key];
-	}	
+	}
 	$(this).siblings('.form_item').val(JSON.stringify(ret));
 }
 
@@ -1011,15 +1011,15 @@ var textWidth = function (text) {
 $('.tag_write').keyup(function(){
     var tw = textWidth($(this).val());
     var width = tw > 60 ? tw : 60;
-    $(this).width(width);    
+    $(this).width(width);
 }).keydown(function(e){
     if (e.keyCode == 13) {
-        insert_tag(this);       
+        insert_tag(this);
         e.stopPropagation();
         return false;
     }
 }).blur(function(){
-    insert_tag(this); 
+    insert_tag(this);
 })
 
 function insert_tag(obj) {
@@ -1035,13 +1035,13 @@ function insert_tag(obj) {
         if (value == tag) {
             isExist = true;
             return false;
-        }        
+        }
         if (i >= length && length) {
             isExist = true;
             return false;
-        }        
+        }
         valArray.push(tag);
-    })    
+    })
     if (!isExist) {
         valArray.push(value);
         var html = $('<a class="tag_each" data-value="'+value+'">'+value+'<i class="fa fa-close"></i></a>')
@@ -1118,13 +1118,13 @@ $('.menu_select').hover(jQuery.noop,function(){
 $('.menu_select_options').find('a.each_nav').click(function(){
     var parent_index = $(this).parent().index();
     var index  = $(this).index();
-    var id           = $(this).attr('data-id');    
+    var id           = $(this).attr('data-id');
     $(this).parent().parent().find('.menu_option:gt('+parent_index+')').hide().find('a.same').removeClass('same').end().end().find('.menu_option_parent_'+id).show();
     $(this).parent().find('a.same').removeClass('same').end().find('a:eq('+index+')').addClass('same');
     var family_str = [];
     $(this).closest('.menu_select_options').find('a.same').each(function(){
         family_str.push($(this).text());
-    })    
+    })
     $(this).parent().parent().parent().find('.menu_select_show').html(family_str.join('<i>&gt;</i>')).end().find('.form_item').val(id)
 })
 
@@ -1178,27 +1178,27 @@ $('.multi_image').on('click', '.file_list .image-sorted-left', function() {
     var index  = $(this).parent().index();
     var fileList = $(this).closest('ul');
     var inputList = $(this).closest('.multi_image').find('.input_list');
-    
+
     fileList.find('li:eq('+index+')').insertBefore(fileList.find('li:eq('+(index-1)+')'));
     inputList.find('input:eq('+index+')').insertBefore(inputList.find('input:eq('+(index-1)+')'));
-    
-    
+
+
 })
 
 $('.multi_image').on('click', '.file_list .image-delete', function() {
     var index  = $(this).parent().index();
     var fileList = $(this).closest('ul');
     var inputList = $(this).closest('.multi_image').find('.input_list');
-    
+
     fileList.find('li:eq('+index+')').remove();
-    inputList.find('input:eq('+index+')').remove();    
+    inputList.find('input:eq('+index+')').remove();
 })
 
 $('.multi_image').on('click', '.file_list .image-sorted-right', function() {
     var index  = $(this).parent().index();
     var fileList = $(this).closest('ul');
     var inputList = $(this).closest('.multi_image').find('.input_list');
-    
+
     fileList.find('li:eq('+index+')').insertAfter(fileList.find('li:eq('+(index+1)+')'));
     inputList.find('input:eq('+index+')').insertAfter(inputList.find('input:eq('+(index+1)+')'));
 })
@@ -1209,13 +1209,13 @@ $(document).ready(function(){
 	$('.edit_array').each(function(){
 		show_array.call(this)
 	})
-    
+
     $('.layui-input-error').click(function(){
         var animate = ['zoomOutRight','fadeOutRight','flipOutX','flipOutY','rotateOutDownRight','rollOut'];
         var rand    = Math.round(Math.random()*5)
         $(this).addClass(animate[rand]).delay(600).fadeOut(200);
     })
-    
+
     $('.box_form .layui-input-error').fadeIn(200)
 });
 </script>

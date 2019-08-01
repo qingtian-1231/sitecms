@@ -345,28 +345,50 @@ a:hover, a:focus {
 
 /*=========前面是reset.css，不建议删除；下面的是你自己的全局css=========*/
 #header {
-    background: #393D49;
-    height: 70px;
+    background: #fff;
+    color: #000;
 }
 
 #header .logo {
     font-size: 20px;
     float: left;
-    padding-top: 6px;
     line-height: 60px;
 }
 
 #header .logo a {
-    color: #fff;
+    color: #000;
 }
 
 #Menu {
     float: right;
-    padding-top: 10px;
+}
+
+#Menu .layui-nav {
+    background: none;
+}
+
+#Menu .layui-nav .layui-nav-item a {
+    color: #000;
+}
+
+#Menu .layui-nav .layui-this {
+    background-color: #436caa;
+    color: #fff;
+}
+
+
+
+#Menu .layui-nav .layui-nav-item:hover a{
+    background-color: #436caa;
+    color: #fff;
+}
+
+#Menu .layui-nav .layui-this a {
+    color: #fff;
 }
 
 #Menu .layui-nav .layui-this::after, #Menu .layui-nav-bar, #Menu .layui-nav-tree .layui-nav-itemed::after {
-    background-color: #31833e;
+    display: none;
 }
 
 #mMenu {

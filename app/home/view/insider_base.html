@@ -52,8 +52,21 @@ layui.use('carousel', function(){
 
         {block name="insider_content"}
         <div id="insider_content" class="layui-col-md9">
-            <h2 class="reset">{$menu_data.title}</h2>
-            <div class="location">{include file="common/path.html" delimiter=' &gt; '}</div>
+            <div class="location">
+                <span class="title">
+                    <div class="exCircle">
+                        <div class="inCircle">
+                        </div>
+                    </div>
+                    <h2 class="h-title">
+                        <span>{$menu_data.title}</span>
+                        {if !empty($menu_data.ex_title)}
+                            / <span class="ex_title">{$menu_data.title_alias}</span>
+                        {/if}
+                    </h2>
+                </span>
+                {include file="common/path.html" delimiter=' &gt; '}
+            </div>
             <div id="insider">
                 {block name=insider}{/block}
             </div>

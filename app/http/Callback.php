@@ -64,7 +64,6 @@ class Callback
         $this->ts->assign->is_favicon = true;
         $this->ts->assign->top_id = 0;
 
-
         /**
          * //  手动查询栏目数据模板
         $this->ts->getMenuData(栏目ID(integer), 查询条数(integer), [
