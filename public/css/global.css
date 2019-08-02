@@ -353,14 +353,37 @@ a:hover, a:focus {
     font-size: 20px;
     float: left;
     line-height: 60px;
+    height: 60px;
 }
 
 #header .logo a {
     color: #000;
 }
 
+#header .logo img {
+    height: 60px;
+}
+
 #Menu {
     float: right;
+    display: flex;
+}
+
+#Menu  .global-search form{
+    position: relative;
+    top: 17.5px;
+}
+
+#Menu  .global-search form input {
+    height: 25px;
+}
+
+#Menu  .global-search form i.layui-icon {
+    position: absolute;
+    right: 11px;
+    top: 1px;
+    color: #777;
+    cursor: pointer;
 }
 
 #Menu .layui-nav {

@@ -2,7 +2,7 @@
 {block name=global}
 <script type="text/javascript">
 if (window.localStorage) {
-    var default_theme = localStorage.getItem('woocms-theme');
+    var default_theme = localStorage.getItem('woocms-theme') || 'red-yellow-header';
     if (default_theme) {
         $('body').addClass(default_theme);
     }
@@ -35,7 +35,7 @@ var winHight = $(window).height();
             <ul class="layui-nav list" >
                 <li class="layui-nav-item circle gohome first"><a   href="{$absroot}" target="_blank"><i class="layui-icon layui-icon-website"></i></a></li>
                 <li class="layui-nav-item circle"><a class="javascript" rel="full_screen"  href="javascript:void(0);"><i class="layui-icon layui-icon-screen-full"></i></a></li>
-                <li class="layui-nav-item circle"><a class="javascript" rel="select_theme"  href=""><i class="layui-icon layui-icon-theme" ></i></a></li>
+<!--                <li class="layui-nav-item circle"><a class="javascript" rel="select_theme"  href=""><i class="layui-icon layui-icon-theme" ></i></a></li>-->
                 <li class="layui-nav-item circle"><a href="javascript:void(0);" class="javascript" rel="top_refresh"><i class="layui-icon layui-icon-refresh" ></i></a></li>
 
                 <li class="layui-nav-item">

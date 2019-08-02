@@ -26,6 +26,15 @@ return array (
           55 => 
           array (
           ),
+          56 => 
+          array (
+          ),
+          57 => 
+          array (
+          ),
+          58 => 
+          array (
+          ),
         ),
         15 => 
         array (
@@ -192,8 +201,20 @@ return array (
     54 => 
     array (
       0 => 55,
+      1 => 56,
+      2 => 57,
+      3 => 58,
     ),
     55 => 
+    array (
+    ),
+    56 => 
+    array (
+    ),
+    57 => 
+    array (
+    ),
+    58 => 
     array (
     ),
     15 => 
@@ -379,6 +400,15 @@ return array (
         55 => 
         array (
         ),
+        56 => 
+        array (
+        ),
+        57 => 
+        array (
+        ),
+        58 => 
+        array (
+        ),
       ),
       15 => 
       array (
@@ -400,9 +430,6 @@ return array (
         7 => 
         array (
         ),
-        46 => 
-        array (
-        ),
         47 => 
         array (
         ),
@@ -413,12 +440,6 @@ return array (
         array (
         ),
         14 => 
-        array (
-        ),
-        44 => 
-        array (
-        ),
-        45 => 
         array (
         ),
       ),
@@ -530,8 +551,20 @@ return array (
     54 => 
     array (
       0 => 55,
+      1 => 56,
+      2 => 57,
+      3 => 58,
     ),
     55 => 
+    array (
+    ),
+    56 => 
+    array (
+    ),
+    57 => 
+    array (
+    ),
+    58 => 
     array (
     ),
     15 => 
@@ -559,13 +592,9 @@ return array (
     39 => 
     array (
       0 => 7,
-      1 => 46,
-      2 => 47,
+      1 => 47,
     ),
     7 => 
-    array (
-    ),
-    46 => 
     array (
     ),
     47 => 
@@ -575,19 +604,11 @@ return array (
     array (
       0 => 12,
       1 => 14,
-      2 => 44,
-      3 => 45,
     ),
     12 => 
     array (
     ),
     14 => 
-    array (
-    ),
-    44 => 
-    array (
-    ),
-    45 => 
     array (
     ),
     48 => 
@@ -973,7 +994,7 @@ return array (
       'title' => '积分管理',
       'url' => '/run/user_score/lists',
       'icon' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'is_debug' => 0,
       'list_order' => 0,
     ),
@@ -985,7 +1006,7 @@ return array (
       'title' => '用户等级',
       'url' => '/run/user_grade/lists',
       'icon' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'is_debug' => 0,
       'list_order' => 0,
     ),
@@ -997,7 +1018,7 @@ return array (
       'title' => '导入管理',
       'url' => '/run/import/lists',
       'icon' => 'fa fa-cloud-upload',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'is_debug' => 0,
       'list_order' => 0,
     ),
@@ -1045,6 +1066,42 @@ return array (
       'title' => '文章列表',
       'url' => 'article/lists',
       'icon' => 'fa fa-wpforms',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    56 => 
+    array (
+      'id' => 56,
+      'parent_id' => 54,
+      'power_tree_id' => 0,
+      'title' => '产品列表',
+      'url' => 'run/product/lists',
+      'icon' => 'fa fa-suitcase',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    57 => 
+    array (
+      'id' => 57,
+      'parent_id' => 54,
+      'power_tree_id' => 0,
+      'title' => '图集列表',
+      'url' => '/run/album/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    58 => 
+    array (
+      'id' => 58,
+      'parent_id' => 54,
+      'power_tree_id' => 0,
+      'title' => '供应商合格认证列表',
+      'url' => 'run/supplier_certification/lists',
+      'icon' => '',
       'is_nav' => 1,
       'is_debug' => 0,
       'list_order' => 0,

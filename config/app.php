@@ -23,7 +23,7 @@ return [
     // 应用Trace
     'app_trace'              => !!setting('is_trace'),
     // 是否允许添加和删除字段  很容易产生安全问题  一定要控制好
-    'field_add_del'          => true,
+    'field_add_del'          => false,
     // 是否支持多模块
     'app_multi_module'       => true,
     // 入口自动绑定模块

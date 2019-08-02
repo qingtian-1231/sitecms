@@ -3,7 +3,15 @@
 {block name="head"}
 <div id="header">
     <div class="wrap clearfix">
-        <div class="logo"><a href="{call index_link}">九谷科技</a></div>
+        <div class="logo">
+            <a href="{call index_link}">
+                {if !empty(setting('header_logo'))}
+                    <img src="/{setting('header_logo')}"/>
+                {else}
+                    九谷科技
+                {/if}
+            </a>
+        </div>
         <div id="Menu">
             <ul class="layui-nav" lay-filter="">
                 <li class="layui-nav-item {if $is_index}layui-this{/if}"><a href="{call index_link}">首页</a></li>
@@ -20,6 +28,12 @@
                 </li>
                 {/foreach}
             </ul>
+            <div class="global-search">
+                <form action="{call search_link mdl='Article'}" method="post">
+                    <input  type="text" placeholder="请输入关键词" name="kw" class="layui-input"/>
+                    <i class="layui-icon layui-icon-search"></i>
+                </form>
+            </div>
         </div>
         <div class="menuBar" >
             <ul class="list">
@@ -71,6 +85,9 @@ $('.menuBar').click(function(){
     $('#header').toggleClass('menu_close');
 })
 
+$('.global-search .layui-icon-search').on('click', function () {
+    $('.global-search form').submit();
+});
 
 </script>
 {/block}

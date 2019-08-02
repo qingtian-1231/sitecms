@@ -1,8 +1,8 @@
 <?php
 return array (
   'site_title' => '九谷科技',
-  'site_keywords' => '',
-  'site_description' => '',
+  'site_keywords' => '九谷科技 test key words',
+  'site_description' => '测试seo描述信息',
   'site_copyright' => '&copy;版权所有 沪ICP备',
   'site_code' => '',
   'corp_title' => '上海九谷科技发展有限公司',
@@ -21,8 +21,8 @@ return array (
   'is_admin_args' => '1',
   'is_feedback_list' => '0',
   'is_menu_position' => '0',
-  'is_trace' => '1',
-  'is_debug' => '1',
+  'is_trace' => '0',
+  'is_debug' => '0',
   'is_show_cache' => '0',
   'manage_list_count' => '15',
   'is_manage_cache' => '0',

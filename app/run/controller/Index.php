@@ -194,7 +194,7 @@ class Index extends Run
             ];
             \Cache::set('admin_demo1_charts', $demo1_charts, 86400);
         }
-
+        $demo1_charts = null;
         // 三、虚拟统计图
         $demo2_charts = \Cache::get('admin_demo2_charts');
         if (empty($demo2_charts)) {
@@ -272,11 +272,11 @@ class Index extends Run
             ];
             \Cache::set('admin_demo2_charts', $demo2_charts, 86400);
         }
-
+        $demo2_charts = null;
         //$charts 必须以索引数组方式 装你准备好的各项统计配置数组  你装几个就自动显示几个
         $charts[] = $user_charts;
-        $charts[] = $demo1_charts;// 不显示虚拟数据自行注释
-        $charts[] = $demo2_charts;// 不显示虚拟数据自行注释
+//        $charts[] = $demo1_charts;// 不显示虚拟数据自行注释
+//        $charts[] = $demo2_charts;// 不显示虚拟数据自行注释
         $this->assign->charts = $charts;
 
         //快捷方式数据

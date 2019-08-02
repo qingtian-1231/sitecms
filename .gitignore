@@ -4,3 +4,4 @@ runtime/temp/*
 data/config/database.php
 data/backup/*
 data/database.sql
+public/upload/*
