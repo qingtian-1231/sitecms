@@ -12,6 +12,16 @@ class Index extends Home
     //首页
     public function index()
     {
+        $product_service_id = '1';
+        $all_menu_list = menu('list');
+        foreach ($all_menu_list as $menu_item) {
+            if ($menu_item['title'] === '产品与服务') {
+                $product_service_id = $menu_item['id'];
+                break;
+            }
+        }
+        $this->assign->product_service_ids = menu('children', $product_service_id);
+
         $this->fetch = true;
     }
 

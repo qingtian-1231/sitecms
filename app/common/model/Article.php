@@ -3,10 +3,10 @@ namespace app\common\model;
 
 class Article extends App
 {
-    public $display = 'title';
+    public $display = ['title', 'content', 'tags'];
     public $parentModel = 'Menu';
     public $cname = '文章';
-    
+
 
     public $assoc = array(
         'Menu' => array(
@@ -17,14 +17,14 @@ class Article extends App
             'foreignKey'=>'foreign_id',
             'where'=> [
                 ['module', '=', 'ArticlePicture']
-            ]                    
+            ]
         ),
         'User1' => array(
             'foreign' => 'User',//真正关联得模型名，不写默认是键
             'type' => 'belongsTo'
         ),
     );
-    
+
     public function initialize()
     {
         $this->form = array(
@@ -75,11 +75,11 @@ class Article extends App
                         'method' => 3,//强制剪裁类型（1-6的类型请参见TP手册）
                         'customable' => true// 是否显示可自定义图片resize尺寸的输入框，未定义不显示
                     ],
-                    'maxLength' => 5 //该字段最多可以上传或选择5张图片，如果未定义表示不限制  
+                    'maxLength' => 5 //该字段最多可以上传或选择5张图片，如果未定义表示不限制
                 ],
                 'upload' => [
                     'maxSize' => 2048,//允许文件上传的最大值（先受PHP配置文件约束），单位：KB
-                    'validExt' => ['jpg', 'png', 'gif'],//允许上传的文件扩展名，不区分大小写                    
+                    'validExt' => ['jpg', 'png', 'gif'],//允许上传的文件扩展名，不区分大小写
                 ],*/
                 'list' => 'multi_image'//列表使用multi_image配合图片类型显示
             ),
@@ -94,9 +94,9 @@ class Article extends App
                 'type' => 'date',
                 'name' => '发布日期',
                 'elem' => 'date',//这里就固定不变了，需要做不同类型的在options的type中设置
-                'list' => 'date',               
+                'list' => 'date',
                 'options' => [
-                    'type' => 'date',//类型，默认date(Y-m-d)、datetime（Y-m-d H:i:s）、year（年份选择器）、month（年-月选择器）、time （H:i:s）                   
+                    'type' => 'date',//类型，默认date(Y-m-d)、datetime（Y-m-d H:i:s）、year（年份选择器）、month（年-月选择器）、time （H:i:s）
                     //'range' => true,//时间范围选择，默认false，开启true，也可以写 '-'用来自定义2个时间点的分隔符（如果true，默认用~分割符）
                     //'min' => '2018-01-01',//日历可选择的最小时间，默认不限制
                     //'max' => date('Y-m-d'),//日历可选择的最大时间，默认不限制
@@ -154,13 +154,13 @@ class Article extends App
                     'type' => 'checkbox',//支持checkbox多选、radio单选  默认radio单选
                     'skin' => 'default',//皮肤default | primary | normal | warm | danger 默认default
                     'height' => '36px', //标记select高度是否固定 建议是36的倍数 ；默认36px 自动换行写 null 或去掉该配置
-                    'direction' => 'auto', //下拉方向  "auto|up|down", 自动, 上, 下,；默认自动模式 
+                    'direction' => 'auto', //下拉方向  "auto|up|down", 自动, 上, 下,；默认自动模式
                     'search_type' => 'dl',// 支持 title 和 dl  "title" 在下拉选title部分显示,"dl" 在选项的第二条显示 ；默认dl
                     'select_max' => 0, //多选最多选择数量 不显示请填写0；默认0不显示
                 ]
             ),
             */
-            
+
             'from' => array(
                 'type' => 'string',
                 'name' => '来源',
@@ -302,12 +302,12 @@ class Article extends App
         'title' => array(
             'rule' => 'require',
             'message' => '请填写标题'
-        ),        
+        ),
         'menu_id' => array(
             array(
                 'rule' => array('egt', 1),
                 'message' => '请选择父级导航'
-            ),            
+            ),
             array(
                 'rule' => array('call', 'checkTypeOfMenu')
             )

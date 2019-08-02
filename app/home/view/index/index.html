@@ -2,11 +2,26 @@
 
 {block name=content}
 <div class="layui-carousel" id="banner">
-  <div carousel-item>
+    <div carousel-item>
     {foreach $ad.index_banner.Ad as $each}
     <div><a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});"><img  src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/></a></div>
     {/foreach}
   </div>
+    <div class="layui-row carousel-bottom">
+        <div class="carousel-bottom-content">
+            {foreach $product_service_ids as $key => $menu_id}
+                <div class="layui-col-md3 content-{$key}">
+                    <div class="layui-card">
+                        <div class="layui-card-body">
+                            <div class="menu-title">{menu($menu_id,'title')}</div>
+                            <div class="menu-title-ex">{menu($menu_id,'title_alias')}</div>
+                            <a target="_blank" href="{call menu_link id=$menu_id}" class="layui-btn layui-btn-radius layui-btn-primary">了解更多></a>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+    </div>
 </div>
 <script>
 layui.use('carousel', function(){
