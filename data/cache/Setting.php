@@ -1,8 +1,8 @@
 <?php
 return array (
   'site_title' => '九谷科技',
-  'site_keywords' => '九谷科技 test key words',
-  'site_description' => '测试seo描述信息',
+  'site_keywords' => '',
+  'site_description' => '',
   'site_copyright' => '&copy;版权所有 沪ICP备',
   'site_code' => '',
   'corp_title' => '上海九谷科技发展有限公司',
@@ -51,13 +51,13 @@ return array (
   'email_host' => 'smtp.qq.com',
   'email_from' => '',
   'email_password' => '',
-  'email_fromname' => 'WooCMS',
+  'email_fromname' => '九谷科技',
   'sms_keyid' => '',
   'sms_keysecret' => '',
   'yt_appid' => '',
   'yt_secretid' => '',
   'yt_secretkey' => '',
-  'header_logo' => 'upload/site_logo/201908/21236130775d42f716ed5f4.png',
+  'header_logo' => 'upload/home/201908/12450490285d458d5737517.png',
   'site_fax' => '862164329597',
 )
 ?>
