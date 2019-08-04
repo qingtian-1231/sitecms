@@ -56,7 +56,7 @@ class AdPosition extends App
             ),
             'limit' => array(
                 'type' => 'integer',
-                'name' => '广告限制',
+                'name' => '图片限制',
                 'elem' => 'text'
             ),
             'is_thumb' => array(
@@ -87,7 +87,7 @@ class AdPosition extends App
             ),
             'ad_count' => array(
                 'type' => 'integer',
-                'name' => '广告数量',
+                'name' => '图片数量',
                 'elem' => 0,
                 'list' => 'counter',
                 'counter' => 'Ad'

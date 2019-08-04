@@ -402,9 +402,6 @@ return array (
         9 => 
         array (
         ),
-        43 => 
-        array (
-        ),
         10 => 
         array (
         ),
@@ -556,16 +553,12 @@ return array (
     array (
       0 => 6,
       1 => 9,
-      2 => 43,
-      3 => 10,
+      2 => 10,
     ),
     6 => 
     array (
     ),
     9 => 
-    array (
-    ),
-    43 => 
     array (
     ),
     10 => 
@@ -1269,7 +1262,7 @@ return array (
       'title' => '用户栏目',
       'url' => '/run/manage_menu/lists',
       'icon' => '',
-      'is_nav' => 1,
+      'is_nav' => 0,
       'is_debug' => 0,
       'list_order' => 2,
     ),

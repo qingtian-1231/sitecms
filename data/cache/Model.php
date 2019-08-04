@@ -214,20 +214,20 @@ return array (
   array (
     'id' => 22,
     'model' => 'AdPosition',
-    'cname' => '广告位',
+    'cname' => '图片位置',
     'is_menu' => 0,
     'is_power' => 0,
-    'is_dustbin' => 0,
+    'is_dustbin' => 1,
     'is_import' => 0,
   ),
   23 => 
   array (
     'id' => 23,
     'model' => 'Ad',
-    'cname' => '广告',
+    'cname' => '图片',
     'is_menu' => 0,
     'is_power' => 0,
-    'is_dustbin' => 0,
+    'is_dustbin' => 1,
     'is_import' => 0,
   ),
   24 => 

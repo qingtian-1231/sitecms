@@ -22,7 +22,7 @@ class Ad extends App
             ),
             'ad_position_id' => array(
                 'type' => 'integer',
-                'name' => '所属广告位',
+                'name' => '所属图片位',
                 'elem' => 'assoc_select',
                 'foreign' => 'AdPosition.title',
                 'list' => 'assoc'
@@ -102,11 +102,11 @@ class Ad extends App
 
         call_user_func_array(array('parent', __FUNCTION__), func_get_args());
     }
-    
+
     protected $validate = [
         'ad_position_id' => [
             'rule' => ['egt', 1],
             'message' => '缺少广告位参数'
         ]
-    ]; 
+    ];
 }

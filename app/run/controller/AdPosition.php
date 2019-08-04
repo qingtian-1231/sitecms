@@ -7,10 +7,10 @@ class AdPosition extends Run
 {
     protected function initialize()
     {
-        
-        call_user_func(array('parent',__FUNCTION__)); 
+
+        call_user_func(array('parent',__FUNCTION__));
     }
-    
+
     public function lists()
     {
         if(!$this->local['list_fields'])
@@ -35,11 +35,11 @@ class AdPosition extends Run
             'is_thumb',
             'ad_count'
         );
-        $this->addItemAction('添加广告', array('Ad/create',['parent_id'=>'id'],'parse'=>['parent_id']), '&#xe654;', 'layer-ajax-form layui-btn');
+        $this->addItemAction('添加图片', array('Ad/create',['parent_id'=>'id'],'parse'=>['parent_id']), '&#xe654;', 'layer-ajax-form layui-btn');
         call_user_func(array('parent', __FUNCTION__));
-        
+
     }
-    
+
     public function create()
     {
         $this->assignDefault('width',-1);
@@ -48,5 +48,5 @@ class AdPosition extends Run
         $this->assignDefault('mobile_height',450);
         $this->assignDefault('limit',0);
         return call_user_func(array('parent', __FUNCTION__));
-    }  
+    }
 }

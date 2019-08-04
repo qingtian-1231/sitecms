@@ -48,6 +48,26 @@
 </ul>
 {/function}
 
+{function name="show_case_jiugu" list=[] mdl=$mdl}
+<ul class="grid cms_case_jiugu clearfix fallsList">
+    {foreach $list as $item}
+    <li>
+        <div class="thumb">
+            <div style="background-image: url('{call default_src}');" class="coverBg cms_tran">
+                <img src="{call default_src}" alt="{$item.title}" class="hidden"/>
+                <div class="bgcolor cms_tran_in"></div>
+                <div class="cms_tran_content cms_tran {cycle values='odd,even'}">
+                    <h4>{$item.title}</h4>
+                    <span>{$item.summary}</span>
+                    <a href="{call view_link item=$item}">查看</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    {/foreach}
+</ul>
+{/function}
+
 {function name="show_case_4" list=[] mdl=$mdl}
 <ul class="grid cms_case4 clearfix fallsList">
     {foreach $list as $item}

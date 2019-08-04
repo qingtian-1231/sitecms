@@ -103,13 +103,13 @@ class Article extends App
                     //'calendar' => true//假日备注，也可以自定义
                 ]
             ),
-            'author' => array(
-                'type' => 'string',
-                'name' => '作者',
-                'elem' => 'text',
-                'list' => 'show',
-                'quick' => true
-            ),
+//            'author' => array(
+//                'type' => 'string',
+//                'name' => '作者',
+//                'elem' => 'text',
+//                'list' => 'show',
+//                'quick' => true
+//            ),
             /*
              // transfer 测试代码 可以借鉴
             'author' => [
@@ -161,13 +161,13 @@ class Article extends App
             ),
             */
 
-            'from' => array(
-                'type' => 'string',
-                'name' => '来源',
-                'elem' => 'text',
-                'list' => 'show',
-                'quick' => true
-            ),
+//            'from' => array(
+//                'type' => 'string',
+//                'name' => '来源',
+//                'elem' => 'text',
+//                'list' => 'show',
+//                'quick' => true
+//            ),
             'is_verify' => array(
                 'type' => 'boolean',
                 'name' => '审核',

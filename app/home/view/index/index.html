@@ -4,7 +4,11 @@
 <div class="layui-carousel" id="banner">
     <div carousel-item>
     {foreach $ad.index_banner.Ad as $each}
-    <div><a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});"><img  src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/></a></div>
+        <div>
+            <a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});">
+                <img  src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/>
+            </a>
+        </div>
     {/foreach}
   </div>
     <div class="layui-row carousel-bottom">

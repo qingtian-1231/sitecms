@@ -7,7 +7,7 @@ class User extends App
 {
     public $display = 'username';
     //public $parentModel = 'UserGroup';
-    
+
     public $assoc = array(
         'UserGroup' => array(
             'type' => 'belongsTo'
@@ -23,11 +23,9 @@ class User extends App
             'type' => 'hasOne',
             'deleteWith' => true,
         ),
-        'UserLogin' => 'hasMany'        
+        'UserLogin' => 'hasMany'
     );
-    
-    
-    
+
     public function initialize()
     {
         $this->form = array(
@@ -50,7 +48,7 @@ class User extends App
             'user_group_id' => array(
                 'type' => 'integer',
                 'name' => '用户组',
-                'elem' => 'assoc_select',                
+                'elem' => 'assoc_select',
                 'list' => 'assoc',
                 'foreign' => 'UserGroup.title',
                 'prepare' => 'select'
@@ -58,7 +56,7 @@ class User extends App
             'user_grade_id' => array(
                 'type' => 'integer',
                 'name' => '用户等级',
-                'elem' => 'format',                
+                'elem' => 'format',
                 'list' => 'assoc',
                 'foreign' => 'UserGrade.title'
             ),
@@ -68,8 +66,8 @@ class User extends App
                 'elem' => 'formSelects',
                 'select4' => [
                     'type' => 'radio',
-                    'skin' => 'default', 
-                    'height' => '36px'                     
+                    'skin' => 'default',
+                    'height' => '36px'
                 ],
                 'options' => array(
                     'verified' => '正常',
@@ -131,13 +129,13 @@ class User extends App
                 'rule' => array('length', 5, 16)
             )
         ),
-        
+
         'email'=>array(
             'allowEmpty' => true,
             'rule' => 'email'
-            
+
         ),
-        
+
         'user_group_id' => array(
             'rule' => array('egt', 1),
             'message' => '请选择用户组'
@@ -194,20 +192,20 @@ class User extends App
 //        $memberModel->isValidate(false)->isUpdate(false)->save($data);
         return $rslt;
     }
-    
+
     public function afterUpdateCall()
     {
         $rslt = call_user_func(array('parent', __FUNCTION__));
-        $this->checkUserGrade();  
+        $this->checkUserGrade();
         return $rslt;
     }
-    
+
     protected function checkUserGrade()
     {
         if (!isset($this->oldData['user_score_sum']) || !isset($this['user_score_sum']) || !isset($this['id'])) {
             return;
         }
-        
+
         // 积分有改变
         if ($this->oldData['user_score_sum'] != $this['user_score_sum']) {
             $gradeModel = model('UserGrade');
