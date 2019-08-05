@@ -1781,6 +1781,24 @@
     transform: rotate(0);
 }
 
+
+.cms_case_jiugu_list li {
+    width: 33.3%;
+    float: left;
+    font-size: 14px;
+    text-align: right
+}
+
+.cms_case_jiugu_list li span {
+    margin-right: 80px;
+}
+
+.cms_case_jiugu_list li a {
+    color: #f6a800;
+    font-size: 15px;
+    float: right;
+}
+
 /**============↑上面是内页的一些公共样式，建议不删除=============**/
 /**============↓下面是内页自己的布局样式，这个做为演示站，可以全部删除=============**/
 #banner div {
@@ -1897,6 +1915,10 @@
 
 #insider_content .location .path  a.path_item{
     color: #436caa;
+}
+
+#insider_content #insider {
+    padding-top: 1rem;
 }
 
 @media screen and (max-width: 768px) {

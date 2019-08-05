@@ -546,6 +546,24 @@ a:hover, a:focus {
     border-left: 1px inset rgba(223, 223, 223, 0.2);
 }
 
+#cms_supplier_certification form {
+    padding: 2rem 0;
+}
+
+#cms_supplier_certification form .layui-form-textarea .layui-form-textarea-label {
+    width: 100%;
+    text-align: left;
+}
+
+#cms_supplier_certification form .layui-form-textarea .layui-input-block{
+    width: 97%;
+    margin: 0 15px;
+}
+
+#cms_supplier_certification form .layui-form-item .layui-input-inline {
+    margin-left: 20px;
+}
+
 @media screen and (max-width: 768px) {
     body {
         font-size: 14px;

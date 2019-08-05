@@ -56,12 +56,6 @@ class SupplierCertification extends App
             'company_type' => array(
                 'type' => 'string',
                 'name' => '公司性质',
-                'elem' => 'text',
-                'list' => 'show',
-            ),
-            'question_type' => array(
-                'type' => 'text',
-                'name' => '公司类型',
                 'elem' => 'radio',
                 'options' => [
                     '民营' => '民营',
@@ -69,6 +63,12 @@ class SupplierCertification extends App
                     '外资' => '外资',
                     '售后' => '售后',
                 ],
+                'list' => 'show',
+            ),
+            'question_type' => array(
+                'type' => 'text',
+                'name' => '您公司的类型?工厂直销?总代理?一级分销?二级分销?',
+                'elem' => 'textarea',
             ),
             'question_provide' => array(
                 'type' => 'text',

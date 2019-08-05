@@ -175,6 +175,7 @@ class Menu extends App
                         'show_case_16' => '标题+简介【show_case_16】',
                     ],
                     '九谷风格' => [
+                        'show_case_jiugu_list' => '九谷三组列表风格',
                         'show_case_jiugu' => '九谷封面简介风格',
                     ],
                     '封面+标题风格' => [

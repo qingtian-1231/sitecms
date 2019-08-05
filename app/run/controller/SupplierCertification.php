@@ -28,12 +28,12 @@ class SupplierCertification extends Run
             'menu_id',
             'name',
             'company_name',
-            'question_type',
             'position',
             'contact_number',
             'company_type',
             'is_finish',
             'created',
+            'modified',
         );
         //$this->local['actions']['create'] = false ;
         $this->local['order'] = ['is_finish' => 'ASC', 'created' => 'DESC', 'id' => 'DESC'];
