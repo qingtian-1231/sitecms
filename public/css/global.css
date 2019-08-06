@@ -546,7 +546,7 @@ a:hover, a:focus {
     border-left: 1px inset rgba(223, 223, 223, 0.2);
 }
 
-#cms_supplier_certification form {
+.cms_custom_form form {
     padding: 2rem 0;
 }
 

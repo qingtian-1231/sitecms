@@ -13,7 +13,7 @@
     // });
   });
 </script>
-<div id="cms_supplier_certification">
+<div id="cms_supplier_certification" class="cms_custom_form">
   <div class="layui-row">
     {if !empty({$menu_data.ex_title})}
       <div class="layui-col-md4">
@@ -88,7 +88,8 @@
           {$field="contact_number"}
           {$form->text("$mdl.$field",
           [
-          'class' => 'layui-input',
+          'class' => 'layui-input layui-tooltip',
+          'tooltip' => '固定电话加区号',
           'placeholder' =>
           '请输入联系电话',
           'required' => 'required',

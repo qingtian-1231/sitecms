@@ -50,7 +50,8 @@ class Callback
         $this->ts->assign->addJs([
             'jquery-1.11.1.min',
             '/files/layui/layui.js',
-            'common'
+            'common',
+            'custom',
         ]);
 
         $this->ts->assign->addCss([

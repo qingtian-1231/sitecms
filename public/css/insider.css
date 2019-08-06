@@ -1799,6 +1799,24 @@
     float: right;
 }
 
+/*列表样式-1*/
+.cms_case_jiugu_list1 {
+}
+
+.cms_case_jiugu_list1 li {
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px dotted #dddddd;
+    padding-left: 12px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.cms_case_jiugu_list1 li span {
+    float: right;
+    color: #666666;
+}
+
 /**============↑上面是内页的一些公共样式，建议不删除=============**/
 /**============↓下面是内页自己的布局样式，这个做为演示站，可以全部删除=============**/
 #banner div {

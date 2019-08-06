@@ -24,7 +24,7 @@ class SupplierCertification extends Run
             'contact_number',
             'company_type'
         ];
-        $this->local['list_fields'] = array(
+        $this->local['list_fields'] = [
             'menu_id',
             'name',
             'company_name',
@@ -34,7 +34,7 @@ class SupplierCertification extends Run
             'is_finish',
             'created',
             'modified',
-        );
+        ];
         //$this->local['actions']['create'] = false ;
         $this->local['order'] = ['is_finish' => 'ASC', 'created' => 'DESC', 'id' => 'DESC'];
 

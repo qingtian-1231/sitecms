@@ -79,6 +79,14 @@
     {/foreach}
 </ul>
 {/function}
+
+{function name="show_case_jiugu_list1" list=[] mdl=$mdl}
+<ul class="list cms_case_jiugu_list1 fallsList">
+    {foreach $list as $item}
+    <li><span>{$item.date|date_format:'Y-m-d'}</span><a href="{call view_link item=$item}">{$item.title}</a></li>
+    {/foreach}
+</ul>
+{/function}
 <!--自定义风格-->
 
 {function name="show_case_4" list=[] mdl=$mdl}
