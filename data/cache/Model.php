@@ -424,7 +424,27 @@ return array (
   array (
     'id' => 43,
     'model' => 'SupplierCertification',
-    'cname' => '申请合格供应商认证',
+    'cname' => '申请合格供应商认证表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
+  44 => 
+  array (
+    'id' => 44,
+    'model' => 'WelfareCooperation',
+    'cname' => '公益合作表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
+  45 => 
+  array (
+    'id' => 45,
+    'model' => 'SaleService',
+    'cname' => '售后服务表单',
     'is_menu' => 1,
     'is_power' => 0,
     'is_dustbin' => 1,
