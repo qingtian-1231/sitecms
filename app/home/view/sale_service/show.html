@@ -1,0 +1,110 @@
+{extends file="../insider_base.html"}
+{block name=insider}
+
+<script>
+  //Demo
+  layui.use('form', function(){
+    var form = layui.form;
+
+    //监听提交
+    // form.on('submit(supplierCertification)', function(data){
+    //   layer.msg(JSON.stringify(data.field));
+    //   return false;
+    // });
+  });
+</script>
+<div id="cms_supplier_certification" class="cms_custom_form">
+  <div class="layui-row">
+    {if !empty({$menu_data.ex_title})}
+      <div class="layui-col-md4">
+        <div class="title-ext-header header-left"></div>
+        <div class="menu-summary">{$menu_data.summary}</div>
+      </div>
+    {/if}
+    <div class="layui-col-md{if !empty({$menu_data.ex_title})}8{else}12{/if} right-form">
+      {if !empty({$menu_data.ex_title})}
+        <div class="title-ext-header header-right">{$menu_data.ex_title}</div>
+      {/if}
+
+      {if $error}
+      <div class="cms_error">
+        {foreach $error as $e}
+        <p>{$e}</p>
+        {/foreach}
+      </div>
+      {/if}
+      {$form->create(['type'=>'file','class'=>'MainForm layui-form','novalidate'=>true])}
+      <div class="layui-form-item">
+        <label class="layui-form-label">公司名称</label>
+        <div class="layui-input-block">
+          {$field="company_name"}
+          {$form->text("$mdl.$field",
+            [
+              'class' => 'layui-input',
+              'placeholder' =>
+              '请输入公司名称',
+              'required' => 'required',
+              'lay-verify' => 'required',
+              'autocomplete' => 'off'
+            ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">联系人姓名</label>
+        <div class="layui-input-block">
+          {$field="name"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入联系人姓名',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-input-block">
+          {$field="contact_number"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input layui-tooltip',
+          'tooltip' => '固定电话加区号',
+          'placeholder' =>
+          '请输入联系电话',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">回馈与咨询</label>
+        <div class="layui-input-block">
+          {$field="feedback"}
+          {$form->textarea("$mdl.$field",
+          [
+          'class' => 'layui-textarea',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="supplierCertification">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      {$form->end()}
+    </div>
+  </div>
+</div>
+{/block}

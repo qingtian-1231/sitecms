@@ -1817,6 +1817,20 @@
     color: #666666;
 }
 
+.cms_case_jiugu_list2 {
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.cms_case_jiugu_list2 thead tr {
+    color: #000;
+    font-weight: bold;
+}
+
+.cms_case_jiugu_list2 thead tr th {
+    border: 0;
+}
+
 /**============↑上面是内页的一些公共样式，建议不删除=============**/
 /**============↓下面是内页自己的布局样式，这个做为演示站，可以全部删除=============**/
 #banner div {

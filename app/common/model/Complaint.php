@@ -2,22 +2,22 @@
 
 namespace app\common\model;
 
-class SaleService extends App
+class Complaint extends App
 {
     /**
      * 关联模型
      */
-    public $assoc = array(
+    public $assoc = [
         'Menu' =>
-            array(
+            [
                 'type' => 'belongsTo',
-            ),
-    );
+            ],
+    ];
 
     public function initialize()
     {
         // 字段和表单信息  设置完成以后，在添加页面会自动读取数据并生成对应表单结构
-        $this->form = array(
+        $this->form = [
             'id' => [
                 'type' => 'integer',
                 'name' => 'ID',
@@ -37,27 +37,19 @@ class SaleService extends App
                 'list' => 'checker',
                 'sortable' => true,
             ],
-            'company_name' => [
-                'type' => 'string',
-                'name' => '公司名称',
-                'elem' => 'text',
-                'list' => 'show',
+            'complaint_who' => [
+                'type' => 'text',
+                'name' => '您要投诉的雇员员工，工号是？',
+                'elem' => 'textarea',
             ],
-            'name' => [
-                'type' => 'string',
-                'name' => '联系人姓名',
-                'elem' => 'text',
-                'list' => 'show',
+            'complaint_what' => [
+                'type' => 'text',
+                'name' => '您要投诉的具体事项是？',
+                'elem' => 'textarea',
             ],
             'contact_number' => [
-                'type' => 'string',
-                'name' => '联系电话',
-                'elem' => 'text',
-                'list' => 'show',
-            ],
-            'feedback' => [
                 'type' => 'text',
-                'name' => '回馈与咨询',
+                'name' => '您方便留下您的联系方式吗？',
                 'elem' => 'textarea',
             ],
             'created' => [
@@ -72,7 +64,7 @@ class SaleService extends App
                 'elem' => 0,
                 'list' => 'datetime',
             ],
-        );
+        ];
 
         call_user_func_array(['parent', __FUNCTION__], func_get_args());
     }
@@ -87,26 +79,26 @@ class SaleService extends App
     /**
      * 数据验证
      */
-    protected $validate = array(
+    protected $validate = [
         'menu_id' =>
-            array(
+            [
                 0 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'egt',
                                 1 => 1,
-                            ),
+                            ],
                         'message' => '请选择父级导航',
-                    ),
+                    ],
                 1 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'call',
                                 1 => 'checkTypeOfMenu',
-                            ),
-                    ),
-            ),
-    );
+                            ],
+                    ],
+            ],
+    ];
 }

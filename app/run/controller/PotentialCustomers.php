@@ -3,7 +3,7 @@ namespace app\run\controller;
 
 use app\common\controller\Run;
 
-class SaleService extends Run
+class PotentialCustomers extends Run
 {
     /**
     * 初始化
@@ -22,7 +22,7 @@ class SaleService extends Run
         $this->local['filter'] = [
             'name',
             'company_name',
-            'contact_number',
+            'position',
             'is_finish',
             'created',
         ];
@@ -32,10 +32,12 @@ class SaleService extends Run
             'menu_id',
             'name',
             'company_name',
+            'position',
             'contact_number',
             'is_finish',
             'created',
             'modified',
+            // 其他列表字段
         ];
 
         // 添加额外条件

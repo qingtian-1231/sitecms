@@ -3,7 +3,7 @@ namespace app\run\controller;
 
 use app\common\controller\Run;
 
-class SaleService extends Run
+class Complaint extends Run
 {
     /**
     * 初始化
@@ -20,9 +20,6 @@ class SaleService extends Run
     {
         // 搜索字段
         $this->local['filter'] = [
-            'name',
-            'company_name',
-            'contact_number',
             'is_finish',
             'created',
         ];
@@ -30,9 +27,8 @@ class SaleService extends Run
         // 列表字段
         $this->local['list_fields'] = [
             'menu_id',
-            'name',
-            'company_name',
             'contact_number',
+            'complaint_who',
             'is_finish',
             'created',
             'modified',

@@ -87,6 +87,31 @@
     {/foreach}
 </ul>
 {/function}
+
+{function name="show_case_jiugu_list2" list=[] mdl=$mdl}
+<table class="cms_case_jiugu_list2 layui-table" lay-skin="line">
+    <thead>
+        <tr>
+        <th>产品名称</th>
+        <th>型号/规格</th>
+        <th>品牌</th>
+        <th>单位</th>
+        <th>数量</th>
+    </tr>
+    </thead>
+    <tbody>
+        {foreach $list as $item}
+            <tr>
+                <td><a href="{call view_link item=$item}">{$item.title}</a></td>
+                <td>{$item.specification}</td>
+                <td>{$item.brand}</td>
+                <td>{$item.unit}</td>
+                <td>{$item.quantity}</td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+{/function}
 <!--自定义风格-->
 
 {function name="show_case_4" list=[] mdl=$mdl}

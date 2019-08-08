@@ -44,13 +44,13 @@ class Product extends App
             ),
             'title' => array(
                 'type' => 'string',
-                'name' => '标题',
+                'name' => '产品名称',
                 'elem' => 'text',
                 'list' => 'show',
             ),
             'ex_title' => array(
                 'type' => 'string',
-                'name' => '副标题',
+                'name' => '产品别名',
                 'elem' => 'text',
                 'list' => 'show',
             ),
@@ -74,12 +74,34 @@ class Product extends App
                 'list' => 'show',
             ),
 
-            'property' => array(
+            'specification' => array(
                 'type' => 'string',
-                'name' => '附加属性',
-                'elem' => 'keyvalue',
-                'list' => 'keyvalue',
+                'name' => '型号/规格',
+                'elem' => 'text',
+                'list' => 'show',
             ),
+
+            'brand' => array(
+                'type' => 'string',
+                'name' => '品牌',
+                'elem' => 'text',
+                'list' => 'show',
+            ),
+
+            'unit' => array(
+                'type' => 'string',
+                'name' => '单位',
+                'elem' => 'text',
+                'list' => 'show',
+            ),
+
+            'quantity' => array(
+                'type' => 'integer',
+                'name' => '数量',
+                'elem' => 'number',
+                'list' => 'show',
+            ),
+
             'is_verify' => array(
                 'type' => 'boolean',
                 'name' => '审核',

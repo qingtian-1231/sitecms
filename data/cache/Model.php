@@ -450,5 +450,35 @@ return array (
     'is_dustbin' => 1,
     'is_import' => 0,
   ),
+  46 => 
+  array (
+    'id' => 46,
+    'model' => 'MediaContact',
+    'cname' => '媒体联系表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
+  47 => 
+  array (
+    'id' => 47,
+    'model' => 'Complaint',
+    'cname' => '投诉表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
+  48 => 
+  array (
+    'id' => 48,
+    'model' => 'PotentialCustomers',
+    'cname' => '潜在客户联系表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
 )
 ?>

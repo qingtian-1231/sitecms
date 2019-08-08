@@ -2,22 +2,22 @@
 
 namespace app\common\model;
 
-class SaleService extends App
+class PotentialCustomers extends App
 {
     /**
      * 关联模型
      */
-    public $assoc = array(
+    public $assoc = [
         'Menu' =>
-            array(
+            [
                 'type' => 'belongsTo',
-            ),
-    );
+            ],
+    ];
 
     public function initialize()
     {
         // 字段和表单信息  设置完成以后，在添加页面会自动读取数据并生成对应表单结构
-        $this->form = array(
+        $this->form = [
             'id' => [
                 'type' => 'integer',
                 'name' => 'ID',
@@ -49,15 +49,36 @@ class SaleService extends App
                 'elem' => 'text',
                 'list' => 'show',
             ],
+            'position' => [
+                'type' => 'string',
+                'name' => '公司职位/头衔',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
             'contact_number' => [
                 'type' => 'string',
                 'name' => '联系电话',
                 'elem' => 'text',
                 'list' => 'show',
             ],
-            'feedback' => [
+            'question_when' => [
                 'type' => 'text',
-                'name' => '回馈与咨询',
+                'name' => '您希望我们什么时间向您反馈？',
+                'elem' => 'textarea',
+            ],
+            'question_what' => [
+                'type' => 'text',
+                'name' => '您联系我们是希望我们提供那些服务？合格供应商征集和摸底？前期技术方案征集？前期方案咨询？参与规划设计投标？参与施工或者系统集成投标？参与运维投标？',
+                'elem' => 'textarea',
+            ],
+            'question_how' => [
+                'type' => 'text',
+                'name' => '您要了解的产品和服务主要用于什么项目？您能介绍下项目的基本情况吗？比如项目用途？主要业态？投资规模？进度安排？目前现状？',
+                'elem' => 'textarea',
+            ],
+            'question_service' => [
+                'type' => 'text',
+                'name' => '您需要了解我们那些产品和服务？',
                 'elem' => 'textarea',
             ],
             'created' => [
@@ -72,7 +93,7 @@ class SaleService extends App
                 'elem' => 0,
                 'list' => 'datetime',
             ],
-        );
+        ];
 
         call_user_func_array(['parent', __FUNCTION__], func_get_args());
     }
@@ -87,26 +108,26 @@ class SaleService extends App
     /**
      * 数据验证
      */
-    protected $validate = array(
+    protected $validate = [
         'menu_id' =>
-            array(
+            [
                 0 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'egt',
                                 1 => 1,
-                            ),
+                            ],
                         'message' => '请选择父级导航',
-                    ),
+                    ],
                 1 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'call',
                                 1 => 'checkTypeOfMenu',
-                            ),
-                    ),
-            ),
-    );
+                            ],
+                    ],
+            ],
+    ];
 }
