@@ -480,5 +480,15 @@ return array (
     'is_dustbin' => 1,
     'is_import' => 0,
   ),
+  49 => 
+  array (
+    'id' => 49,
+    'model' => 'BecomePartner',
+    'cname' => '成为渠道合作伙伴表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
 )
 ?>

@@ -1095,7 +1095,7 @@ return array (
       'template' => '',
       'list_style' => '',
       'page_style' => '',
-      'summary' => '',
+      'summary' => ' 积分卡士大夫大师傅阿道夫按购房阿萨德',
       'keywords' => '',
       'description' => '',
     ),
