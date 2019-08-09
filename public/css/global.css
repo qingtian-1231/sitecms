@@ -564,6 +564,15 @@ a:hover, a:focus {
     margin-left: 20px;
 }
 
+.form-multi-text .layui-input-inline{
+    margin-left: 0!important;
+    margin-right: 0 !important;
+}
+
+.form-multi-text .layui-form-mid {
+    margin-right: 0!important;
+}
+
 @media screen and (max-width: 768px) {
     body {
         font-size: 14px;

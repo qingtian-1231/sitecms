@@ -198,6 +198,26 @@ class Callback
     public function appAfterRun()
     {
 
+        switch ($this->ca) {
+            case 'TalentPool::detail':
+                $experience = '<table class="layui-table">';
+                $experience .= '<thread>';
+                $experience .= '<tr>';
+                foreach (unserialize($this->ts->assign->data['experience'])) {
+
+                }
+                $experience .= '</tr>';
+                $experience .= '</thread>';
+                $experience .= '</table>';
+                var_dump(unserialize($this->ts->assign->data['experience']));exit;
+                $this->ts->assign->data['experience'] = unserialize($this->ts->assign->data['experience']);
+                $this->ts->assign->data['education'] = unserialize($this->ts->assign->data['education']);
+                //  人才储备详情页
+                break;
+            case 'TalentPool::modify':
+                //  人才储备编辑页
+                break;
+        }
     }
 
     //  每次访问URL方法之前（仅限Run模块方法）都会执行

@@ -1,0 +1,321 @@
+{extends file="../insider_base.html"}
+{block name=insider}
+
+<script>
+  //Demo
+  layui.use('form', function(){
+    var form = layui.form;
+  });
+
+  var ids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+  ids.forEach(function (index) {
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#selectDate' + index //指定元素
+      });
+    });
+  });
+
+</script>
+<div id="cms_supplier_certification" class="cms_custom_form">
+  <div class="layui-row">
+    {if !empty({$menu_data.ex_title})}
+      <div class="layui-col-md4">
+        <div class="title-ext-header header-left"></div>
+        <div class="menu-summary">{$menu_data.summary}</div>
+      </div>
+    {/if}
+    <div class="layui-col-md{if !empty({$menu_data.ex_title})}8{else}12{/if} right-form">
+      {if !empty({$menu_data.ex_title})}
+        <div class="title-ext-header header-right">{$menu_data.ex_title}</div>
+      {/if}
+
+      {if $error}
+      <div class="cms_error">
+        {foreach $error as $e}
+        <p>{$e}</p>
+        {/foreach}
+      </div>
+      {/if}
+      {$form->create(['type'=>'file','class'=>'MainForm layui-form','novalidate'=>true])}
+      <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+          {$field="name"}
+          {$form->text("$mdl.$field",
+            [
+              'class' => 'layui-input',
+              'placeholder' =>
+              '请输入姓名',
+              'required' => 'required',
+              'lay-verify' => 'required',
+              'autocomplete' => 'off'
+            ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+          {$field="gender"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入性别',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">籍贯</label>
+        <div class="layui-input-block">
+          {$field="birthplace"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入籍贯',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">身份证号码</label>
+        <div class="layui-input-block">
+          {$field="identification"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入身份证号码',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">通讯地址</label>
+        <div class="layui-input-block">
+          {$field="address"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入通讯地址',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">毕业院校</label>
+        <div class="layui-input-block">
+          {$field="graduated_school"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入毕业院校',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">个人联系电话</label>
+        <div class="layui-input-block">
+          {$field="phone"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入个人联系电话',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">最高学历</label>
+        <div class="layui-input-block">
+          {$field="highest_education"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入最高学历',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item form-multi-text">
+        <div class="layui-inline">
+          <label class="layui-form-label">工作经历</label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][star_time][0]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate0">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][end_time][0]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate1">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][employer][0]" autocomplete="off" tooltip="工作单位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][position][0]" autocomplete="off" tooltip="岗位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label"></label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][star_time][1]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate2">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][end_time][1]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate3">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][employer][1]" autocomplete="off" tooltip="工作单位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][position][1]" autocomplete="off" tooltip="岗位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label"></label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][star_time][2]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate4">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][experience][end_time][2]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate5">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][employer][2]" autocomplete="off" tooltip="工作单位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][experience][position][2]" autocomplete="off" tooltip="岗位" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-form-item form-multi-text">
+        <div class="layui-inline">
+          <label class="layui-form-label">教育背景</label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][star_time][0]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate7">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][end_time][0]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate8">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][school][0]" autocomplete="off" tooltip="学校" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][profession][0]" autocomplete="off" tooltip="专业" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label"></label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][star_time][1]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate9">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][end_time][1]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate10">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][school][1]" autocomplete="off" tooltip="学校" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][profession][1]" autocomplete="off" tooltip="专业" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label"></label>
+
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][star_time][2]" autocomplete="off" tooltip="开始时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate11">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 80px;">
+            <input type="text" name="data[TalentPool][education][end_time][2]" autocomplete="off" tooltip="结束时间" tootipDirection="1" class="layui-input layui-tooltip" id="selectDate12">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][school][2]" autocomplete="off" tooltip="学校" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="data[TalentPool][education][profession][2]" autocomplete="off" tooltip="专业" tootipDirection="1" class="layui-input layui-tooltip">
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">感兴趣职位</label>
+        <div class="layui-input-block">
+          {$field="interested_position"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入感兴趣职位',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">您对公司有什么特殊要求？比如薪资待遇不低于多少？对工作地点有什么特殊需求？以及其他？是否介意出差？</label>
+        <div class="layui-input-block">
+          {$field="question_what"}
+          {$form->textarea("$mdl.$field",
+          [
+          'class' => 'layui-textarea',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+        <label class="layui-form-label layui-form-textarea-label">如果您还希望进一步补充您的信息，请您把您的完整简历发到这个邮箱：835117807@qq.com</label>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn layui-btn-radius layui-btn-warm" lay-submit lay-filter="supplierCertification">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
+        </div>
+      </div>
+      {$form->end()}
+    </div>
+  </div>
+</div>
+{/block}

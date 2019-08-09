@@ -4,13 +4,14 @@ $(function(){
     mouseenter:function(){
       var that = this;
       var tipMessage = $(that).attr('tooltip') || '请设置提示信息';
+      var tootipDirection = $(that).attr('tootipDirection') || 2;
       var tip = '<span style=\'color:#fff;\'>' + tipMessage + '</span>';
 
       tips = layer.tips(
         tip,
         that,
         {
-          tips : [2,'#009688'],
+          tips : [tootipDirection, '#436caa'],
           time:0,
           area: 'auto',
           maxWidth : 500

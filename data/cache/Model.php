@@ -424,7 +424,7 @@ return array (
   array (
     'id' => 43,
     'model' => 'SupplierCertification',
-    'cname' => '申请合格供应商认证表单',
+    'cname' => '合格供应商认证表单',
     'is_menu' => 1,
     'is_power' => 0,
     'is_dustbin' => 1,
@@ -485,6 +485,16 @@ return array (
     'id' => 49,
     'model' => 'BecomePartner',
     'cname' => '成为渠道合作伙伴表单',
+    'is_menu' => 1,
+    'is_power' => 0,
+    'is_dustbin' => 1,
+    'is_import' => 0,
+  ),
+  50 => 
+  array (
+    'id' => 50,
+    'model' => 'TalentPool',
+    'cname' => '人才储备表单',
     'is_menu' => 1,
     'is_power' => 0,
     'is_dustbin' => 1,

@@ -78,6 +78,9 @@ return array (
         22 => 
         array (
         ),
+        37 => 
+        array (
+        ),
         23 => 
         array (
         ),
@@ -206,16 +209,20 @@ return array (
     9 => 
     array (
       0 => 22,
-      1 => 23,
-      2 => 36,
-      3 => 24,
-      4 => 25,
-      5 => 26,
-      6 => 27,
-      7 => 28,
-      8 => 29,
+      1 => 37,
+      2 => 23,
+      3 => 36,
+      4 => 24,
+      5 => 25,
+      6 => 26,
+      7 => 27,
+      8 => 28,
+      9 => 29,
     ),
     22 => 
+    array (
+    ),
+    37 => 
     array (
     ),
     23 => 
@@ -461,7 +468,7 @@ return array (
       'parent_id' => 1,
       'family' => ',1,9,',
       'level' => 2,
-      'child_count' => 9,
+      'child_count' => 10,
       'title' => '联系我们',
       'ex_title' => '',
       'alias' => 'contact-us',
@@ -819,6 +826,34 @@ return array (
       'keywords' => '',
       'description' => '',
     ),
+    37 => 
+    array (
+      'id' => 37,
+      'parent_id' => 9,
+      'family' => ',1,9,37,',
+      'level' => 3,
+      'child_count' => 0,
+      'title' => '人才储备',
+      'ex_title' => '人才储备',
+      'alias' => '',
+      'type' => 'TalentPool',
+      'ex_link' => '',
+      'is_nav' => 0,
+      'list_count' => 0,
+      'is_redirect' => 0,
+      'is_map' => 1,
+      'list_order' => 0,
+      'image' => '',
+      'thumb_width' => 0,
+      'thumb_height' => 0,
+      'thumb_method' => 0,
+      'template' => '',
+      'list_style' => '',
+      'page_style' => '',
+      'summary' => '大沙发打发打发发打发打发阿斯顿发ad发',
+      'keywords' => '',
+      'description' => '',
+    ),
     11 => 
     array (
       'id' => 11,
@@ -1023,9 +1058,9 @@ return array (
       'level' => 3,
       'child_count' => 0,
       'title' => '成为渠道伙伴',
-      'ex_title' => '',
+      'ex_title' => '成为渠道伙伴',
       'alias' => '',
-      'type' => 'Menu',
+      'type' => 'BecomePartner',
       'ex_link' => '',
       'is_nav' => 0,
       'list_count' => 0,
@@ -1039,7 +1074,7 @@ return array (
       'template' => '',
       'list_style' => '',
       'page_style' => '',
-      'summary' => '',
+      'summary' => 'asdfadsfa阿斯顿发打发打发的说法是打发大水阿发阿斯顿发ad发多少发的说法阿斯顿发',
       'keywords' => '',
       'description' => '',
     ),

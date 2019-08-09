@@ -427,6 +427,10 @@
     color: #666666;
 }
 
+.cms_case1 li span.show_menu_type {
+    width: 40%;
+}
+
 
 /*列表样式-2*/
 .cms_case2 {

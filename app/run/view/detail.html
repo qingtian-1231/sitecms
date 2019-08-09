@@ -1,53 +1,53 @@
 {extends file="lists.html"}
-{block name=function}    
+{block name=function}
     {function name=detail_elem_show mdl=null field=null val=null col=null sub_elem=null}
     	{$local.show=$info.show|default:$mdls[$mdl]->form.$field.show|default:$val}
         {$local.temp=$item}
         {if isset($col.options[$val])}{$local.show=$col.options[$val]}{/if}
         {$local.temp.$field=$local.show}
         {string_insert($local.show, $local.temp)}
-    {/function} 
+    {/function}
     {function name=detail_elem_text mdl=null field=null val=null col=null sub_elem=null}
     	{call name=list_elem_text mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
     {/function}
-    {function name=detail_elem_filesize mdl=null field=null val=null col=null sub_elem=null}        
+    {function name=detail_elem_filesize mdl=null field=null val=null col=null sub_elem=null}
     	{call name=list_elem_filesize mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
-    {/function} 
+    {/function}
     {function name=detail_elem_query_field mdl=null field=null val=null col=null sub_elem=null}
         {call name=list_elem_query_field mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
-    {/function}   
+    {/function}
     {function name=detail_elem_password mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_password mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_tag mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_tag mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_date mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_date  mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_datetime mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_datetime mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_year mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_year mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_month mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_month mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_time mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_time mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_color mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_color mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_options mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_options mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
@@ -68,36 +68,36 @@
 	{/function}
     {function name=detail_elem_call mdl=null field=null val=null col=null sub_elem=null}
 		{call name='detail_call_'|cat:$sub_elem mdl=$mdl field=$field val=$val item=$item}
-	{/function} 
+	{/function}
     {function name=detail_elem_edit mdl=null field=null val=null col=null sub_elem=null}{strip}
         {$val}
 	{/strip}{/function}
     {function name=detail_elem_counter mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_counter mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_multi_image mdl=null field=null val=null col=null sub_elem=null}
 		{call name=list_elem_multi_image mdl=$mdl field=$field val=$val col=$col sub_elem=$sub_elem}
 	{/function}
-    
+
     {function name=detail_elem_json mdl=null field=null val=null col=null sub_elem=null}
 		{if is_json_validate($val)}
 <pre class="layui-code" lay-title="JSON">
 
 {$val}
-</pre>      
+</pre>
         {/if}
 	{/function}
-    
+
         {function name=detail_elem_code mdl=null field=null val=null col=null sub_elem=null}
-        
+
 		{if $val}
 <pre class="layui-code" lay-title="{$sub_elem|default:'Code'}">
 {$val}
-</pre>      
+</pre>
         {/if}
 	{/function}
-    
+
     {function name=detail_elem_assoc mdl=null field=null val=null col=null sub_elem=null}
        {$show_val = $val}
        {if isset($item[$col.foreign.model][$col.foreign.field])}
@@ -106,7 +106,7 @@
        {if $local_mdl==$col.foreign.model and $val==$data.id}
        {$show_val=$data[$col.foreign.field]}
        {/if}
-       {/if}       
+       {/if}
        {$show_val}
 	{/function}
 
@@ -123,24 +123,24 @@
         {if $detail_type}
             {if $detail_type == -1}
                 {if isset($info.foreign)}
-                {$detail_type='assoc'} 
+                {$detail_type='assoc'}
                 {else}
                 {$detail_type='show'}
-                {/if} 
+                {/if}
             {/if}
-            
+
             {$local.list_type=plugin_split($detail_type)}
             {if $local.list_type[0]===null}
             	{$local.list_type[0]=$local.list_type[1]}
                 {$local.list_type[1]=null}
-            {/if}     
+            {/if}
             {if $local.list_type[0] == 'assoc'}
                 {$assoc_info = plugin_split($info.foreign)}
                 {$info.foreign=[]}
                 {$info.foreign.model = $assoc_info[0]}
                 {$info.foreign.field = $assoc_info[1]}
-            {/if}  
-                      
+            {/if}
+
             {$local.func='detail_elem_'|cat:$local.list_type[0]}
             {call name=$local.func mdl=$mdl field=$field val=$item[$field|default:$field] item=$item col=$info sub_elem=$local.list_type[1]}
         {/if}
@@ -156,9 +156,9 @@
 
 {block name=base_content}
 {$local_mdl=$mdl}
-<div class="woo-detail">    
+<div class="woo-detail">
     <table class="layui-table">
-        <tbody>            
+        <tbody>
             {foreach $mdls.$mdl->form as $field => $info}
             {if !isset($data.$field)}{continue}{/if}
             {if isset($info.detail) and $info.detail===0}{continue}{/if}
@@ -169,26 +169,26 @@
             {/foreach}
         </tbody>
     </table>
-    
+
     {if $detail_with}
     {foreach $detail_with as $model => $info}
         {if empty($mdls.$model->form) || empty($data.$model)}{continue}{/if}
-        {$assoc_type = $mdls.$mdl->assoc.$model.type}    
+        {$assoc_type = $mdls.$mdl->assoc.$model.type}
         {if !in_array($assoc_type, ['hasOne', 'belongsTo', 'hasMany'])}
             {continue}
         {/if}
         {$assoc_data = [$data.$model]}
         {if $assoc_type == 'hasMany'}
             {$assoc_data = $data.$model}
-        {/if}    
-        <div class="detail-title">关联{$mdls.$model->cname}：</div>        
-        {foreach $assoc_data as $item}       
+        {/if}
+        <div class="detail-title">关联{$mdls.$model->cname}：</div>
+        {foreach $assoc_data as $item}
         <table class="layui-table assoc-table">
             <tbody>
                 {foreach $item as $field => $value}
                 {if !isset($mdls.$model->form.$field)}{continue}{/if}
                 {$info = $mdls.$model->form.$field}
-                {if isset($info.detail) and $info.detail===0}{continue}{/if}                               
+                {if isset($info.detail) and $info.detail===0}{continue}{/if}
                 <tr>
                   <th class="detail-field-title">{$info.name}</th>
                   <td>{call detail_base field=$field item=$item info=$info mdl=$model}</td>
@@ -198,7 +198,7 @@
         </table>
         {/foreach}
     {/foreach}
-    {/if}    
+    {/if}
 </div>
 {/block}
 

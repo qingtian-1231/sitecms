@@ -3,7 +3,7 @@ namespace app\run\controller;
 
 use app\common\controller\Run;
 
-class SupplierCertification extends Run
+class TalentPool extends Run
 {
     /**
     * 初始化
@@ -18,40 +18,50 @@ class SupplierCertification extends Run
     */
     public function lists()
     {
+        // 搜索字段
         $this->local['filter'] = [
             'name',
-            'company_name',
-            'contact_number',
-            'company_type'
+            'gender',
+            'graduated_school',
+            'highest_education',
+            'is_finish',
+            'created',
         ];
+
+        // 列表字段
         $this->local['list_fields'] = [
             'menu_id',
             'name',
-            'company_name',
-            'position',
-            'contact_number',
-            'company_type',
+            'gender',
+            'birthplace',
+            'identification',
+            'address',
+            'graduated_school',
+            'phone',
+            'highest_education',
+            'interested_position',
             'is_finish',
             'created',
-            'modified',
+            // 其他列表字段
         ];
-        //$this->local['actions']['create'] = false ;
-        $this->local['order'] = ['is_finish' => 'ASC', 'created' => 'DESC', 'id' => 'DESC'];
+
+        // 添加额外条件
+        //$this->local['where'][] = ['字段', '=', '值'];
 
         call_user_func(['parent', __FUNCTION__]);
     }
 
     /**
-    * 添加
-    */
+     * 添加
+     */
     public function create()
     {
         return $this->message('error','该表单不允许后台添加');
     }
 
     /**
-    * 修改
-    */
+     * 修改
+     */
     public function modify()
     {
         return $this->message('error','该表单不允许后台修改');

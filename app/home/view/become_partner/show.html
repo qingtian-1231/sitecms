@@ -67,6 +67,22 @@
       </div>
 
       <div class="layui-form-item">
+        <label class="layui-form-label">工作职位/头衔</label>
+        <div class="layui-input-block">
+          {$field="position"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入工作职位',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
         <label class="layui-form-label">联系电话</label>
         <div class="layui-input-block">
           {$field="contact_number"}
@@ -83,10 +99,38 @@
         </div>
       </div>
 
-      <div class="layui-form-item layui-form-textarea">
-        <label class="layui-form-label layui-form-textarea-label">回馈与咨询</label>
+      <div class="layui-form-item">
+        <label class="layui-form-label">业务领域</label>
         <div class="layui-input-block">
-          {$field="feedback"}
+          {$field="business_area"}
+          <input type="radio"  name="data[BecomePartner][business_area]" title="弱电智能化" value="弱电智能化" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="智能舞台" value="智能舞台" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="综合机电" value="综合机电" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="IT服务" value="IT服务" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="综合管廊" value="综合管廊" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="数据中心" value="数据中心" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="其他" value="其他" lay-skin="primary">
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">您可以简单分析下这个区域或者行业的竞争格局吗？主要竞争对手是哪些？</label>
+        <div class="layui-input-block">
+          {$field="question_competition"}
+          {$form->textarea("$mdl.$field",
+          [
+          'class' => 'layui-textarea',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">您认为进入这个区域或者行业的突破口在哪儿？您的优势在哪儿？希望九谷配合您做哪些工作？</label>
+        <div class="layui-input-block">
+          {$field="question_advantage"}
           {$form->textarea("$mdl.$field",
           [
           'class' => 'layui-textarea',

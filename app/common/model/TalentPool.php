@@ -2,22 +2,22 @@
 
 namespace app\common\model;
 
-class BecomePartner extends App
+class TalentPool extends App
 {
     /**
      * 关联模型
      */
-    public $assoc = array(
+    public $assoc = [
         'Menu' =>
-            array(
+            [
                 'type' => 'belongsTo',
-            ),
-    );
+            ],
+    ];
 
     public function initialize()
     {
         // 字段和表单信息  设置完成以后，在添加页面会自动读取数据并生成对应表单结构
-        $this->form = array(
+        $this->form = [
             'id' => [
                 'type' => 'integer',
                 'name' => 'ID',
@@ -30,53 +30,73 @@ class BecomePartner extends App
                 'foreign' => 'Menu.title',
                 'list' => 'assoc',
             ],
-            'company_name' => [
-                'type' => 'string',
-                'name' => '公司名称',
-                'elem' => 'text',
-                'list' => 'show',
-            ],
             'name' => [
                 'type' => 'string',
                 'name' => '联系人姓名',
                 'elem' => 'text',
                 'list' => 'show',
             ],
-            'position' => [
+            'gender' => [
                 'type' => 'string',
-                'name' => '公司职位/头衔',
+                'name' => '性别',
                 'elem' => 'text',
                 'list' => 'show',
             ],
-            'contact_number' => [
+            'birthplace' => [
                 'type' => 'string',
-                'name' => '联系电话',
+                'name' => '籍贯',
                 'elem' => 'text',
                 'list' => 'show',
             ],
-            'business_area' => [
+            'identification' => [
                 'type' => 'string',
-                'name' => '业务领域',
-                'elem' => 'radio',
-                'options' => [
-                    '弱电智能化' => '弱电智能化',
-                    '智能舞台' => '智能舞台',
-                    '综合机电' => '综合机电',
-                    'IT服务' => 'IT服务',
-                    '综合管廊' => '综合管廊',
-                    '数据中心' => '数据中心',
-                    '其他' => '其他',
-                ],
+                'name' => '身份证号码',
+                'elem' => 'text',
                 'list' => 'show',
             ],
-            'question_competition' => [
+            'address' => [
+                'type' => 'string',
+                'name' => '通讯地址',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
+            'graduated_school' => [
+                'type' => 'string',
+                'name' => '毕业院校',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
+            'phone' => [
+                'type' => 'string',
+                'name' => '个人联系电话',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
+            'highest_education' => [
+                'type' => 'string',
+                'name' => '最高学历',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
+            'experience' => [
                 'type' => 'text',
-                'name' => '您可以简单分析下这个区域或者行业的竞争格局吗？主要竞争对手是哪些？',
+                'name' => '工作经历',
                 'elem' => 'textarea',
             ],
-            'question_advantage' => [
+            'education' => [
                 'type' => 'text',
-                'name' => '您认为进入这个区域或者行业的突破口在哪儿？您的优势在哪儿？希望九谷配合您做哪些工作？',
+                'name' => '教育背景',
+                'elem' => 'textarea',
+            ],
+            'interested_position' => [
+                'type' => 'string',
+                'name' => '感兴趣职位',
+                'elem' => 'text',
+                'list' => 'show',
+            ],
+            'question_what' => [
+                'type' => 'text',
+                'name' => '您对公司有什么特殊要求？比如薪资待遇不低于多少？对工作地点有什么特殊需求？以及其他？是否介意出差？',
                 'elem' => 'textarea',
             ],
             'is_finish' => [
@@ -84,7 +104,6 @@ class BecomePartner extends App
                 'name' => '已处理',
                 'elem' => 'checker',
                 'list' => 'checker',
-                'sortable' => true,
             ],
             'created' => [
                 'type' => 'datetime',
@@ -98,7 +117,7 @@ class BecomePartner extends App
                 'elem' => 0,
                 'list' => 'datetime',
             ],
-        );
+        ];
 
         call_user_func_array(['parent', __FUNCTION__], func_get_args());
     }
@@ -113,26 +132,26 @@ class BecomePartner extends App
     /**
      * 数据验证
      */
-    protected $validate = array(
+    protected $validate = [
         'menu_id' =>
-            array(
+            [
                 0 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'egt',
                                 1 => 1,
-                            ),
+                            ],
                         'message' => '请选择父级导航',
-                    ),
+                    ],
                 1 =>
-                    array(
+                    [
                         'rule' =>
-                            array(
+                            [
                                 0 => 'call',
                                 1 => 'checkTypeOfMenu',
-                            ),
-                    ),
-            ),
-    );
+                            ],
+                    ],
+            ],
+    ];
 }
