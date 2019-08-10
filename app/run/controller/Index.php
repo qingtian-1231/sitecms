@@ -335,6 +335,14 @@ class Index extends Run
         $count['user'] = Db::name('User')->count();
         $count['album'] = Db::name('Album')->count();
         $count['supplier_certification'] = Db::name('SupplierCertification')->where(['is_finish' => 0])->count();
+        $count['welfare_cooperation'] = Db::name('welfare_cooperation')->where(['is_finish' => 0])->count();
+        $count['sale_service'] = Db::name('sale_service')->where(['is_finish' => 0])->count();
+        $count['media_contact'] = Db::name('media_contact')->where(['is_finish' => 0])->count();
+        $count['complaint'] = Db::name('complaint')->where(['is_finish' => 0])->count();
+        $count['potential_customers'] = Db::name('potential_customers')->where(['is_finish' => 0])->count();
+        $count['become_partner'] = Db::name('become_partner')->where(['is_finish' => 0])->count();
+        $count['talent_pool'] = Db::name('talent_pool')->where(['is_finish' => 0])->count();
+
         $count['feedback'] = Db::name('Feedback')->where(['is_finish' => 0])->count();
         $this->assign->count = $count ;
 

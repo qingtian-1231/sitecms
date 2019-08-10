@@ -173,17 +173,29 @@ var winHight = $(window).height();
                                                                 </a>
                                                             </li>
                                                             <li class="layui-col-xs6">
-                                                                <a href="{url('feedback/lists')}" class="new_tab" data-title="留言列表" data-icon="layui-icon-cellphone">
-                                                                    <h2>待阅留言</h2>
-                                                                    <span>{if $count.feedback<999}{$count.feedback}{else}999+{/if}</span>
+                                                                <a href="{url('user/lists')}" class="new_tab" data-title="用户列表" data-icon="layui-icon-user">
+                                                                    <h2>用户</h2>
+                                                                    <span>{if $count.user<999}{$count.user}{else}999+{/if}</span>
                                                                 </a>
                                                             </li>
                                                         </ul>
                                                         <ul class="grid quick-link layui-row layui-col-space10">
                                                             <li class="layui-col-xs6">
-                                                                <a href="{url('user/lists')}" class="new_tab" data-title="用户列表" data-icon="layui-icon-user">
-                                                                    <h2>用户</h2>
-                                                                    <span>{if $count.user<999}{$count.user}{else}999+{/if}</span>
+                                                                <a href="{url('welfare_cooperation/lists')}" class="new_tab" data-title="公益合作列表" data-icon="layui-icon-user">
+                                                                    <h2>公益合作列表</h2>
+                                                                    <span>{if $count.welfare_cooperation<999}{$count.welfare_cooperation}{else}999+{/if}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="layui-col-xs6">
+                                                                <a href="{url('sale_service/lists')}" class="new_tab" data-title="售后服务列表" data-icon="layui-icon-user">
+                                                                    <h2>售后服务列表</h2>
+                                                                    <span>{if $count.sale_service<999}{$count.sale_service}{else}999+{/if}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="layui-col-xs6">
+                                                                <a href="{url('media_contact/lists')}" class="new_tab" data-title="媒体联系列表" data-icon="layui-icon-user">
+                                                                    <h2>媒体联系列表</h2>
+                                                                    <span>{if $count.media_contact<999}{$count.media_contact}{else}999+{/if}</span>
                                                                 </a>
                                                             </li>
                                                             <li class="layui-col-xs6">
@@ -192,19 +204,33 @@ var winHight = $(window).height();
                                                                     <span>{if $count.supplier_certification<999}{$count.supplier_certification}{else}999+{/if}</span>
                                                                 </a>
                                                             </li>
-                                                            <li class="layui-col-xs6">
-                                                                <a onclick="layer.msg('敬请期待')">
-                                                                    <h2>消息</h2>
-                                                                    <span>0</span>
-                                                                </a>
-                                                            </li>
-                                                            <li class="layui-col-xs6">
-                                                                <a onclick="layer.msg('敬请期待')">
-                                                                    <h2>账单</h2>
-                                                                    <span>0</span>
-                                                                </a>
-                                                            </li>
                                                         </ul>
+                                                        <ul class="grid quick-link layui-row layui-col-space10">
+                                                             <li class="layui-col-xs6">
+                                                                 <a href="{url('complaint/lists')}" class="new_tab" data-title="投诉列表" data-icon="layui-icon-user">
+                                                                     <h2>投诉列表</h2>
+                                                                     <span>{if $count.complaint<999}{$count.complaint}{else}999+{/if}</span>
+                                                                 </a>
+                                                             </li>
+                                                             <li class="layui-col-xs6">
+                                                                 <a href="{url('potential_customers/lists')}" class="new_tab" data-title="潜在客户列表" data-icon="layui-icon-user">
+                                                                     <h2>潜在客户列表</h2>
+                                                                     <span>{if $count.potential_customers<999}{$count.potential_customers}{else}999+{/if}</span>
+                                                                 </a>
+                                                             </li>
+                                                             <li class="layui-col-xs6">
+                                                                 <a href="{url('become_partner/lists')}" class="new_tab" data-title="渠道合作伙伴列表" data-icon="layui-icon-user">
+                                                                     <h2>渠道合作伙伴列表</h2>
+                                                                     <span>{if $count.become_partner<999}{$count.become_partner}{else}999+{/if}</span>
+                                                                 </a>
+                                                             </li>
+                                                             <li class="layui-col-xs6">
+                                                                 <a href="{url('talent_pool/lists')}" class="new_tab" data-title="人才储备列表" data-icon="layui-icon-user">
+                                                                     <h2>人才储备列表</h2>
+                                                                     <span>{if $count.talent_pool<999}{$count.talent_pool}{else}999+{/if}</span>
+                                                                 </a>
+                                                             </li>
+                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>

@@ -200,18 +200,10 @@ class Callback
 
         switch ($this->ca) {
             case 'TalentPool::detail':
-                $experience = '<table class="layui-table">';
-                $experience .= '<thread>';
-                $experience .= '<tr>';
-                foreach (unserialize($this->ts->assign->data['experience'])) {
-
-                }
-                $experience .= '</tr>';
-                $experience .= '</thread>';
-                $experience .= '</table>';
-                var_dump(unserialize($this->ts->assign->data['experience']));exit;
-                $this->ts->assign->data['experience'] = unserialize($this->ts->assign->data['experience']);
-                $this->ts->assign->data['education'] = unserialize($this->ts->assign->data['education']);
+                $experienceOutput = $this->processSerializeFields($this->ts->assign->data['experience'], 'experience');
+                $educationOutput = $this->processSerializeFields($this->ts->assign->data['education'], 'education');
+                $this->ts->assign->data['experience'] = $experienceOutput;
+                $this->ts->assign->data['education'] = $educationOutput;
                 //  人才储备详情页
                 break;
             case 'TalentPool::modify':
@@ -245,6 +237,40 @@ class Callback
     public function appAfterManage()
     {
 
+    }
+
+    protected function processSerializeFields($field, $fieldName)
+    {
+        $output = '';
+        $fieldArray = unserialize($field);
+        $output = '<table class="layui-table">';
+        $output .= '<thread>';
+        $output .= '<tr>';
+        $output .= '<th>开始时间</th>';
+        $output .= '<th>结束时间</th>';
+        if ($fieldName === 'experience') {
+            $output .= '<th>雇用单位</th>';
+            $output .= '<th>岗位</th>';
+        }
+        elseif ($fieldName === 'education') {
+            $output .= '<th>学校</th>';
+            $output .= '<th>专业</th>';
+        }
+
+        $output .= '</tr>';
+        $output .= '</thread>';
+        $output .= '<tbody>';
+        foreach ($fieldArray as $item) {
+            $output .= '<tr>';
+            foreach ($item as $value) {
+                $output .= '<td>' . $value . '</td>';
+            }
+            $output .= '</tr>';
+        }
+        $output .= '</tbody>';
+        $output .= '</table>';
+
+        return $output;
     }
     //  以后扩展模块，每个模块都支持添加这样的2个方法用来表示 执行URL指定方法前和后的 动作
 }

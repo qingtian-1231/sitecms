@@ -29,10 +29,7 @@ return array (
           58 => 
           array (
           ),
-          59 => 
-          array (
-          ),
-          62 => 
+          57 => 
           array (
           ),
           61 => 
@@ -41,7 +38,31 @@ return array (
           60 => 
           array (
           ),
-          57 => 
+        ),
+        69 => 
+        array (
+          70 => 
+          array (
+          ),
+          71 => 
+          array (
+          ),
+          72 => 
+          array (
+          ),
+          73 => 
+          array (
+          ),
+          74 => 
+          array (
+          ),
+          75 => 
+          array (
+          ),
+          76 => 
+          array (
+          ),
+          77 => 
           array (
           ),
         ),
@@ -185,8 +206,9 @@ return array (
     array (
       0 => 8,
       1 => 55,
-      2 => 15,
-      3 => 53,
+      2 => 69,
+      3 => 15,
+      4 => 53,
     ),
     8 => 
     array (
@@ -211,31 +233,58 @@ return array (
     array (
       0 => 56,
       1 => 58,
-      2 => 59,
-      3 => 62,
-      4 => 61,
-      5 => 60,
-      6 => 57,
+      2 => 57,
+      3 => 61,
+      4 => 60,
     ),
     56 => 
-    array (
-    ),
-    57 => 
     array (
     ),
     58 => 
     array (
     ),
-    59 => 
-    array (
-    ),
-    60 => 
+    57 => 
     array (
     ),
     61 => 
     array (
     ),
-    62 => 
+    60 => 
+    array (
+    ),
+    69 => 
+    array (
+      0 => 70,
+      1 => 71,
+      2 => 72,
+      3 => 73,
+      4 => 74,
+      5 => 75,
+      6 => 76,
+      7 => 77,
+    ),
+    70 => 
+    array (
+    ),
+    71 => 
+    array (
+    ),
+    72 => 
+    array (
+    ),
+    73 => 
+    array (
+    ),
+    74 => 
+    array (
+    ),
+    75 => 
+    array (
+    ),
+    76 => 
+    array (
+    ),
+    77 => 
     array (
     ),
     15 => 
@@ -421,10 +470,7 @@ return array (
         58 => 
         array (
         ),
-        59 => 
-        array (
-        ),
-        62 => 
+        57 => 
         array (
         ),
         61 => 
@@ -433,7 +479,31 @@ return array (
         60 => 
         array (
         ),
-        57 => 
+      ),
+      69 => 
+      array (
+        70 => 
+        array (
+        ),
+        71 => 
+        array (
+        ),
+        72 => 
+        array (
+        ),
+        73 => 
+        array (
+        ),
+        74 => 
+        array (
+        ),
+        75 => 
+        array (
+        ),
+        76 => 
+        array (
+        ),
+        77 => 
         array (
         ),
       ),
@@ -556,8 +626,9 @@ return array (
     array (
       0 => 8,
       1 => 55,
-      2 => 15,
-      3 => 53,
+      2 => 69,
+      3 => 15,
+      4 => 53,
     ),
     8 => 
     array (
@@ -578,31 +649,58 @@ return array (
     array (
       0 => 56,
       1 => 58,
-      2 => 59,
-      3 => 62,
-      4 => 61,
-      5 => 60,
-      6 => 57,
+      2 => 57,
+      3 => 61,
+      4 => 60,
     ),
     56 => 
-    array (
-    ),
-    57 => 
     array (
     ),
     58 => 
     array (
     ),
-    59 => 
-    array (
-    ),
-    60 => 
+    57 => 
     array (
     ),
     61 => 
     array (
     ),
-    62 => 
+    60 => 
+    array (
+    ),
+    69 => 
+    array (
+      0 => 70,
+      1 => 71,
+      2 => 72,
+      3 => 73,
+      4 => 74,
+      5 => 75,
+      6 => 76,
+      7 => 77,
+    ),
+    70 => 
+    array (
+    ),
+    71 => 
+    array (
+    ),
+    72 => 
+    array (
+    ),
+    73 => 
+    array (
+    ),
+    74 => 
+    array (
+    ),
+    75 => 
+    array (
+    ),
+    76 => 
+    array (
+    ),
+    77 => 
     array (
     ),
     15 => 
@@ -1124,6 +1222,114 @@ return array (
       'is_debug' => 0,
       'list_order' => 0,
     ),
+    69 => 
+    array (
+      'id' => 69,
+      'parent_id' => 2,
+      'power_tree_id' => 0,
+      'title' => '表单信息管理',
+      'url' => '',
+      'icon' => 'fa fa-envelope-open-o',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    70 => 
+    array (
+      'id' => 70,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '供应商认证列表',
+      'url' => 'supplier_certification/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    71 => 
+    array (
+      'id' => 71,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '公益合作列表',
+      'url' => 'welfare_cooperation/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    72 => 
+    array (
+      'id' => 72,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '售后服务列表',
+      'url' => 'sale_service/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    73 => 
+    array (
+      'id' => 73,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '媒体联系列表',
+      'url' => 'media_contact/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    74 => 
+    array (
+      'id' => 74,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '投诉列表',
+      'url' => 'complaint/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    75 => 
+    array (
+      'id' => 75,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '潜在客户列表',
+      'url' => 'potential_customers/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    76 => 
+    array (
+      'id' => 76,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '渠道合作伙伴列表',
+      'url' => 'become_partner/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
+    77 => 
+    array (
+      'id' => 77,
+      'parent_id' => 69,
+      'power_tree_id' => 0,
+      'title' => '人才储备列表',
+      'url' => 'talent_pool/lists',
+      'icon' => '',
+      'is_nav' => 1,
+      'is_debug' => 0,
+      'list_order' => 0,
+    ),
     9 => 
     array (
       'id' => 9,
@@ -1256,13 +1462,13 @@ return array (
       'is_debug' => 0,
       'list_order' => 2,
     ),
-    59 => 
+    57 => 
     array (
-      'id' => 59,
+      'id' => 57,
       'parent_id' => 55,
       'power_tree_id' => 0,
-      'title' => '申请供应商认证',
-      'url' => 'run/supplier_certification/lists',
+      'title' => '产品列表',
+      'url' => 'run/product/lists',
       'icon' => '',
       'is_nav' => 1,
       'is_debug' => 0,
@@ -1304,18 +1510,6 @@ return array (
       'is_debug' => 0,
       'list_order' => 3,
     ),
-    62 => 
-    array (
-      'id' => 62,
-      'parent_id' => 55,
-      'power_tree_id' => 0,
-      'title' => '公益合作列表',
-      'url' => 'welfare_cooperation/lists',
-      'icon' => '',
-      'is_nav' => 1,
-      'is_debug' => 0,
-      'list_order' => 3,
-    ),
     21 => 
     array (
       'id' => 21,
@@ -1336,18 +1530,6 @@ return array (
       'title' => '插件控制器',
       'url' => '/run/tool/addac',
       'icon' => 'fa-paper-plane',
-      'is_nav' => 1,
-      'is_debug' => 0,
-      'list_order' => 4,
-    ),
-    61 => 
-    array (
-      'id' => 61,
-      'parent_id' => 55,
-      'power_tree_id' => 0,
-      'title' => '链接列表',
-      'url' => 'run/link/lists',
-      'icon' => '',
       'is_nav' => 1,
       'is_debug' => 0,
       'list_order' => 4,
@@ -1376,13 +1558,13 @@ return array (
       'is_debug' => 1,
       'list_order' => 5,
     ),
-    60 => 
+    61 => 
     array (
-      'id' => 60,
+      'id' => 61,
       'parent_id' => 55,
       'power_tree_id' => 0,
-      'title' => '图集列表',
-      'url' => 'run/album/lists',
+      'title' => '链接列表',
+      'url' => 'run/link/lists',
       'icon' => '',
       'is_nav' => 1,
       'is_debug' => 0,
@@ -1400,13 +1582,13 @@ return array (
       'is_debug' => 1,
       'list_order' => 6,
     ),
-    57 => 
+    60 => 
     array (
-      'id' => 57,
+      'id' => 60,
       'parent_id' => 55,
       'power_tree_id' => 0,
-      'title' => '产品列表',
-      'url' => 'run/product/lists',
+      'title' => '图集列表',
+      'url' => 'run/album/lists',
       'icon' => '',
       'is_nav' => 1,
       'is_debug' => 0,
