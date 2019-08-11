@@ -44,30 +44,43 @@ class BecomePartner extends Run
         ];
 
         // 添加额外条件
-        //$this->local['where'][] = ['字段', '=', '值'];
+        $this->local['exportable'] = true;
 
         call_user_func(['parent', __FUNCTION__]);
     }
 
+    public function export()
+    {
+        $this->local['filter'] = [
+            'created',
+            'is_finish'
+
+        ];
+        $this->local['list_fields'] = [
+            /*
+            'date' => [
+                'callback' => function($val) {
+                    return strtotime($val);
+                }
+            ]*/
+        ];
+        call_user_func(array('parent', __FUNCTION__));
+    }
+
     /**
-    * 添加
-    */
+     * 添加
+     */
     public function create()
-    {   // 设置默认值
-        //$this->assignDefault('字段名', '默认值');
-        // 字段白名单
-        //$this->local['whiteList'] = ['id', 'title', ...允许添加的字段列表];
-        call_user_func(['parent', __FUNCTION__]);
+    {
+        return $this->message('error','该表单不允许后台添加');
     }
 
     /**
-    * 修改
-    */
+     * 修改
+     */
     public function modify()
     {
-        // 字段白名单
-        //$this->local['whiteList'] = ['id', 'title', ...允许修改的字段列表];
-        call_user_func(['parent', __FUNCTION__]);
+        return $this->message('error','该表单不允许后台修改');
     }
 
     /**

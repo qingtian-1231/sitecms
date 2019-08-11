@@ -72,14 +72,14 @@ class WelfareCooperation extends App
                 [
                     'type' => 'datetime',
                     'name' => '添加时间',
-                    'elem' => 0,
+                    'elem' => 'date',
                     'list' => 'datetime',
                 ],
             'modified' =>
                 [
                     'type' => 'datetime',
                     'name' => '修改时间',
-                    'elem' => 0,
+                    'elem' => 'date',
                     'list' => 'datetime',
                 ],
         ];

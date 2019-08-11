@@ -45,14 +45,47 @@ layui.use('carousel', function(){
 
 <div id="Index">
     <div class="wrap clearfix">
-        <div class="about">
-            <div class="item_tit"><a href="{call menu_link id=12}">{menu(12,'title')}</a></div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+            <div class="item_tit"><a href="{call menu_link id=8}">{if !empty(menu(8, 'ex_title'))}{menu(8, 'ex_title')}{else}{menu(8, 'title')}{/if}</a></div>
+            <div class="item_con">
+                <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                    <ul class="layui-tab-title">
+                        {foreach $indexNews['ids'] as $key => $menu_id}
+                            <li class="{if $key==0}layui-this{/if}">{menu($menu_id, 'title')}</li>
+                        {/foreach}
+                    </ul>
+                    <div class="layui-tab-content">
+                        {foreach $indexNews['articals'] as $key => $articals}
+                            <div class="layui-tab-item {if $key==0}layui-show{/if}">
+                                <ul class="list cms_case1 fallsList">
+                                    {foreach $articals as $artical}
+                                    <li>
+                                        <span>[{$artical.date|date_format:'Y-m-d'}]</span>
+                                        <a target="_blank" href="/article/{$artical.id}.html">{$artical.title}</a>
+                                    </li>
+                                    {/foreach}
+                                    <li>
+                                        <a target="_blank" href="{call menu_link id=$artical.menu_id}">MORE</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+            <div class="item_tit"><a href="{call menu_link id=3}">{menu(3,'title')}</a></div>
             <div class="item_con">
             </div>
         </div>
-        <div class="news">
-            <div class="item_tit"><a href="{call menu_link id=3}">{menu(3,'title')}</a></div>
+        <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
+            <div class="item_tit"><a href="{call menu_link id=3}">公司宣传片</a></div>
             <div class="item_con">
+                <video controls>
+                    <source src="/{setting('index_video')}" type="video/mp4">
+                    您的浏览器不支持 HTML5 video 标签。
+                </video>
             </div>
         </div>
     </div>

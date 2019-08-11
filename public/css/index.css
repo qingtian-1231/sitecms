@@ -13,8 +13,6 @@
 }
 
 #Index .about {
-    width: 48%;
-    float: left;
     border: 1px solid #dddddd;
 }
 
@@ -26,25 +24,23 @@
 }
 
 #Index .item_tit a {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #31833e;
+    font-size: 1.2rem;
+    text-transform: uppercase;
 }
 
 #Index .item_con {
-    height: 150px;
     line-height: 30px;
     overflow: hidden;
     padding: 10px 15px 0;
 }
 
-#Index .item_con ul li {
+#Index .item_con ul.layui-tab-title li {
     overflow: hidden;
-    height: 29px;
-    line-height: 29px;
-    background: url(../images/home/article_icon.gif) left center no-repeat;
+    height: 40px;
+    line-height: 40px;
     padding-left: 15px;
     border-bottom: 1px dotted #f1f1f1;
+    background-color: #ddd;
 }
 
 #Index .item_con ul li span {
@@ -52,8 +48,6 @@
 }
 
 #Index .news {
-    width: 48%;
-    float: right;
     border: 1px solid #dddddd;
 }
 

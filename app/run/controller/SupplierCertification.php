@@ -36,9 +36,29 @@ class SupplierCertification extends Run
             'modified',
         ];
         //$this->local['actions']['create'] = false ;
+        $this->local['exportable'] = true;
         $this->local['order'] = ['is_finish' => 'ASC', 'created' => 'DESC', 'id' => 'DESC'];
 
         call_user_func(['parent', __FUNCTION__]);
+    }
+
+    public function export()
+    {
+        $this->local['filter'] = [
+            'name',
+            'created',
+            'is_finish'
+
+        ];
+        $this->local['list_fields'] = [
+            /*
+            'date' => [
+                'callback' => function($val) {
+                    return strtotime($val);
+                }
+            ]*/
+        ];
+        call_user_func(array('parent', __FUNCTION__));
     }
 
     /**

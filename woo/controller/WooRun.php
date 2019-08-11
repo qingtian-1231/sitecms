@@ -224,7 +224,7 @@ class WooRun extends WooApp
         }
         $this->setTitle($this->local['title'], 'operation');
         $this->addAction("返回列表", $this->returnListsUrl($oldData), 'fa-reply', 'layui-btn-normal');
-        
+
         $this->fetch = 'form';
     }
 
@@ -286,7 +286,7 @@ class WooRun extends WooApp
             }
             $this->addItemAction('添加图片', array($this->m . 'Picture/create', ['parent_id' => $this->mdlPk], 'parse' => ['parent_id']), '&#xe654;', 'layer-ajax-form');
         }
-        
+
         $addMoreClass = [
             'create' => 'create layui-btn layer-ajax-form ',
             'sort' => 'sort layer-ajax-form layui-btn-warm',
@@ -415,26 +415,26 @@ class WooRun extends WooApp
             $this->local['title'] = "{$this->mdl->cname}列表";
         }
         $this->setTitle($this->local['title'], 'operation');
-        
+
         if (setting('is_admin_args')) {
             session("{$this->m}_lists_args", [
                 'args' => $this->args,
                 'time' => time() + 600
             ]);
         }
-        
+
         $this->assign->addJs([
             'tableResize'
         ]);
-        
+
         return $this->fetch = 'lists';
     }
-    
+
     /**
     * 列表地址
     */
     protected function returnListsUrl($data = [], $parent_field = null, $url_merge = []) {
-        
+
         if (session("?{$this->m}_lists_args")) {
             $store = session("{$this->m}_lists_args");
             if ($store['time'] >= time()) {
@@ -446,12 +446,12 @@ class WooRun extends WooApp
             $store = [];
         }
         $parent_field = empty($parent_field) ? $this->local['parent_conj'] : 'parent_id';
-        
+
         if (!empty($store) && setting('is_admin_args')) {
             return ["{$this->m}/lists", $store];
         }
         $store = !empty($data) ?  $data : $this->args;
-        
+
         if (is_array($store)) {
             $parent_id = !empty($store[$parent_field]) ? $store[$parent_field] : null;
         } else {
@@ -462,7 +462,7 @@ class WooRun extends WooApp
         }
         return ["{$this->m}/lists", array_merge(['parent_id' => $parent_id], $url_merge)];
     }
-    
+
     /**
      * 导出
      * @powerset true
@@ -646,11 +646,11 @@ class WooRun extends WooApp
             $this->local['title'] = "{$this->mdl->cname}ID：" . $data[$this->mdlPk];
         }
         $this->setTitle($this->local['title'], 'operation');
-        //$this->addAction("修改{$this->mdl->cname}", array($this->m . '/modify', ['id' => $data[$this->mdlPk]]), 'fa-edit', 'layui-btn');     
+        //$this->addAction("修改{$this->mdl->cname}", array($this->m . '/modify', ['id' => $data[$this->mdlPk]]), 'fa-edit', 'layui-btn');
         $this->addAction("返回列表", $this->returnListsUrl($data), 'fa-reply', 'layui-btn-normal');
         return $this->fetch = 'detail';
     }
-    
+
     /**
      * 排序
      * @powerset true
@@ -723,7 +723,7 @@ class WooRun extends WooApp
             return $this->fetch = 'sort';
         }
     }
-    
+
     /**
      * 删除
      * @powerset true
@@ -850,7 +850,7 @@ class WooRun extends WooApp
         }
         return $success;
     }
-    
+
     /**
      * 列表修改
      * @powerset true
@@ -1050,11 +1050,11 @@ class WooRun extends WooApp
                     $info['type'] = 'range';
                 }
             }
-            
+
             if ($info['elem'] == 'options' && !isset($info['options'])) {
                 if (isset($this->mdl->form[$field]['foreign'])) {
                     list($foreign_mdl, $foreign_field) = plugin_split($this->mdl->form[$field]['foreign']);
-                    if ($this->mdl->assoc[$foreign_mdl]['type'] == 'belongsTo') { 
+                    if ($this->mdl->assoc[$foreign_mdl]['type'] == 'belongsTo') {
                         $this->loadModel($foreign_mdl);
                         $pk = $this->$foreign_mdl->getPk();
                         $assoc_options = [];
@@ -1063,7 +1063,7 @@ class WooRun extends WooApp
                         } else {
                             $assoc_options = $this->mdl->form[$field]['assoc_options'];
                         }
-                                                
+
                         $mdl_list = $this->$foreign_mdl
                             ->field([$pk, $foreign_field])
                             ->where(isset($assoc_options['where']) ? $assoc_options['where'] : [])
@@ -1075,7 +1075,6 @@ class WooRun extends WooApp
                     }
                 }
             }
-            
 
             $info['value'] = Hash::get((array)$this->args, $field);
             if (!isset($info['hide'])) {
@@ -1102,7 +1101,7 @@ class WooRun extends WooApp
                 }
                 $where_result = true;
             }
-            
+
             if ($info['elem'] == 'number') {
                 $sign = trim($this->args[$field . '_sign']);
                 $sign_map = ['eq' => '=', 'gt' => '>', 'egt' => '>=', 'lt' => '<', 'elt' => '<=', 'neq' => '<>'];
@@ -1388,11 +1387,11 @@ class WooRun extends WooApp
             $this->assign->item_actions[] = compact('title', 'url', 'icon', 'class');
         }
     }
-    
+
     /**
      * 关联选择查询数据
      * @powerset false
-     */ 
+     */
     public function assocSelect()
     {
         return parent::assocSelect();
@@ -1410,7 +1409,7 @@ class WooRun extends WooApp
     /**
      * 没有权限以后 跳转方法
      * @powerset false
-     */ 
+     */
     public function nopower($msg = '没有权限的操作')
     {
         if (!$this->request->isAjax()) {

@@ -2,6 +2,7 @@
 namespace app\home\controller;
 
 use app\common\controller\Home;
+use woo\utility\Hash;
 
 class Index extends Home
 {
@@ -22,6 +23,40 @@ class Index extends Home
         }
         $this->assign->product_service_ids = menu('children', $product_service_id);
 
+
+        $indexNews = [];
+        $menu_ids = menu('children', 8);
+        $indexNews['ids'] = $menu_ids;
+        $artical = $this->loadModel('Article');
+        foreach ($menu_ids as $menu_id) {
+            $where = [
+                ['is_verify', '=', 1],
+                ['menu_id', '=', $menu_id]
+            ];
+            $order = [
+                'list_order' => 'DESC',
+                'id' => 'DESC',
+            ];
+            $result = $artical->getPageList([
+                'where' => $where,
+                'order' => $order,
+                'field' => ['id'],
+                'limit' => 4,
+                'paginate' => []
+            ]);
+            $idList = Hash::combine($result['list'], '{n}.id', '{n}.id');
+
+            $list = $artical
+                ->where('id', 'IN', $idList)
+                ->order($order)
+                ->field([])
+                ->select()
+                ->toArray();
+
+            $indexNews['articals'][] = $list;
+        }
+
+        $this->assign->indexNews = $indexNews;
         $this->fetch = true;
     }
 

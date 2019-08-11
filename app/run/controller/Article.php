@@ -11,7 +11,7 @@ use app\common\controller\Run;
 class Article extends Run
 {
     protected function initialize(){
-        
+
         call_user_func(array('parent', __FUNCTION__));
     }
 
@@ -45,7 +45,7 @@ class Article extends Run
             'is_verify',
             'is_index',
             'list_order'
-        ); 
+        );
         $this->local['exportable'] = true;
         // 测试高级查询
 //        $this->local['whereOr'] = [
@@ -61,16 +61,24 @@ class Article extends Run
 //        $this->local['whereTime'] = ['created', 'today'];
         call_user_func(array('parent', __FUNCTION__));
     }
-        
+
     public function export()
     {
         $this->local['filter'] = [
             'title',
-            'menu_id',
+            'menu_id' => [
+                'elem' => 'options',
+                'assoc_options' => [
+                    'where' => [
+                        ['type', '=', $this->m]
+                    ],
+                    'order' => ['id' => 'ASC']
+                ]
+            ],
             'date',
             'is_verify'
-            
-        ];   
+
+        ];
         $this->local['list_fields'] = [
             /*
             'date' => [
@@ -78,29 +86,29 @@ class Article extends Run
                     return strtotime($val);
                 }
             ]*/
-        ];          
+        ];
         call_user_func(array('parent', __FUNCTION__));
     }
-    
-    
+
+
     public function detail()
     {
         //$this->local['detail_with'] = ['Menu' => ['field' => ['id', 'title', 'ex_title']], 'User1'];
         call_user_func(array('parent', __FUNCTION__));
     }
-    
+
     public function create()
     {
         $this->assignDefault('date', date('Y-m-d'));
         $this->assignDefault('list_order', 0);
         call_user_func(array('parent', __FUNCTION__));
     }
-    
+
     public function delete()
     {
         call_user_func(array('parent', __FUNCTION__));
     }
-    
+
     public function modify()
     {
         $this->mdl->form['created']['elem'] = 'format';

@@ -44,11 +44,29 @@ class TalentPool extends Run
             'created',
             // 其他列表字段
         ];
-
+        $this->local['exportable'] = true;
         // 添加额外条件
         //$this->local['where'][] = ['字段', '=', '值'];
 
         call_user_func(['parent', __FUNCTION__]);
+    }
+
+    public function export()
+    {
+        $this->local['filter'] = [
+            'created',
+            'is_finish'
+
+        ];
+        $this->local['list_fields'] = [
+            /*
+            'date' => [
+                'callback' => function($val) {
+                    return strtotime($val);
+                }
+            ]*/
+        ];
+        call_user_func(array('parent', __FUNCTION__));
     }
 
     /**

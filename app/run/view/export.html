@@ -1,6 +1,6 @@
 {extends file="lists.html"}
-{block name=function}    
-      
+{block name=function}
+
 
 {/block}
 
@@ -13,7 +13,7 @@
     <a class="javascript" id="list_search_toggle" rel='list_search_switch'>{if !$filter}展开搜索{else}关闭搜索{/if}</a>
     <div id="list_search" class="clearfix {if !$filter}hidden{/if}" >
     	{$form->create(['type'=>'post','class'=>'layui-form layui-form-pane','novalidate'=>true])}
-        
+
         {foreach $list_search_fields as $field=>$info}
         {if $info.hide}{continue}{/if}
         <div class="layui-form-item">
@@ -28,27 +28,27 @@
                 {elseif $info.elem == 'date'}
                     {$form->text("Search.$field",['class' => 'layui-input datepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'date', 'data-range' => $info.options.range|default:'', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
                 {elseif $info.elem == 'datetime'}
-                    {$form->text("Search.$field",['class' => 'layui-input datetimepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'datetime', 'data-range' => $info.options.range|default:'', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
+                    {$form->text("Search.$field",['class' => 'layui-input datepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'datetime', 'data-range' => $info.options.range|default:'', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
                 {elseif $info.elem == 'date_range'}
                     {$form->text("Search.$field",['class' => 'layui-input datepicker','value' => urldecode($filter.$field),'data-lang' => $info.options.lang|default:'cn', 'data-trigger' => $info.options.trigger|default:'focus', 'data-type' => $info.options.type|default:'date', 'data-range' => '~', 'data-min' => $info.options.min|default:'', 'data-max' => $info.options.max|default:'', 'data-theme' => $info.options.theme|default:'default', 'data-calendar' => $info.options.calendar|default:''])}
                 {elseif $info.elem == 'number_range'}
                     <div class="number_range clearfix">
                         {$form->hidden("Search.$field",['class' => 'layui-input','value' => urldecode($filter.$field)])}
-                        {$rangeVal=explode('~', urldecode($filter.$field))}                        
-                        <input class="layui-input min" value="{trim($rangeVal[0])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}"  type="number"/><span>-</span><input value="{trim($rangeVal[1])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}" class ="layui-input max"  type="number"/> 
-                    </div>               
+                        {$rangeVal=explode('~', urldecode($filter.$field))}
+                        <input class="layui-input min" value="{trim($rangeVal[0])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}"  type="number"/><span>-</span><input value="{trim($rangeVal[1])}" min="{$info.options.min|default:0}" max="{$info.options.max|default:0}" class ="layui-input max"  type="number"/>
+                    </div>
                 {else}
                     {$local.func='list_search_'|cat:$info.elem}
-                    {call name=$local.func  field=$field info=$info value=$filter.$field}                    
+                    {call name=$local.func  field=$field info=$info value=$filter.$field}
                 {/if}
             </div>
         </div>
         {/foreach}
-        
+
         <div class="search_action">
             <button class="layui-btn" lay-submit>搜索</button>
             <a href="{html_entity_decode(U(['parent_id'=>$args.parent_id]),true)}" class="layui-btn layui-btn-primary">清空</a>
-        </div>        
+        </div>
     	{$form->end()}
     </div>
 </div>
@@ -78,21 +78,21 @@
             {$form->checkbox("Export.field", $fields,['value' => array_keys($fields),'div' => false,'lay-skin'=>'primary','lay-filter'=>'field','class'=>'form_item'])}
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <label class="layui-form-label">排序字段</label>
         <div class="layui-input-inline">
             {$form->select("Export.sort",$sort_field,['value' => 'id','class'=>'form_item','multiple'=>$col.multiple,'lay-search'=>'','lay-filter'=>'sort','empty'=>"≡请选择≡"])}
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <label class="layui-form-label">排序方式</label>
         <div class="layui-input-inline">
             {$form->select("Export.direction",['DESC' => '倒序', 'ASC' => '正序'],['value' => 'DESC','class'=>'form_item','multiple'=>$col.multiple,'lay-search'=>'','lay-filter'=>'direction','empty'=>"≡请选择≡"])}
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <label class="layui-form-label">拉取条数</label>
         <div class="layui-input-inline">
@@ -111,7 +111,7 @@
           <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
-    
+
 </fieldset>
 {$form->end()}
 </div>
@@ -132,22 +132,22 @@ layui.config({
 	excel: 'excel',
 });
 
-layui.use(['excel', 'form'], function() {    
-    layForm = layui.form; 
-    excel = layui.excel;  
-    
-      
-    layForm.on('select(limit)', function(data){      
+layui.use(['excel', 'form'], function() {
+    layForm = layui.form;
+    excel = layui.excel;
+
+
+    layForm.on('select(limit)', function(data){
       render_page(data.value)
     });
     render_page($('#ExportLimit').val());
-    
-    
-      
+
+
+
     layForm.on('submit(exportExcel)', function(data){
-        
+
         {if $export_type == 'ajax'}
-        layer.load()        
+        layer.load()
         $.post('{url("export", $args)}', data.field, function(res){
             layer.closeAll()
             if (res.result == 'success') {
@@ -155,8 +155,8 @@ layui.use(['excel', 'form'], function() {
                 for(i in res.data.list[0]) {
                     header[i] = fields[i]
                 }
-                res.data.list.unshift(header);                
-                
+                res.data.list.unshift(header);
+
                 excel.exportExcel({
                     sheet1 : res.data.list
                 }, res.data.filename + '.xlsx', 'xlsx');
@@ -188,7 +188,7 @@ function render_page(limit) {
     if (now_page > total_page) {
         now_page = total_page;
     }
-    
+
     $('#ExportPage').empty().html(html).val(now_page)
     layForm.render('select');
 }
