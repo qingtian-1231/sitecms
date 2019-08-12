@@ -1,10 +1,14 @@
-{extends file="./header_footer.html"} 
+{extends file="./header_footer.html"}
 
 {block name=content}wap
 <div class="layui-carousel" id="banner">
   <div carousel-item>
     {foreach $ad.$ad_var.Ad as $each}
-    <div><a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});"><img  src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/></a></div>
+    <div>
+      <a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});">
+        <img src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/>
+      </a>
+    </div>
     {/foreach}
   </div>
 </div>
@@ -35,7 +39,7 @@ layui.use('carousel', function(){
             </ul>
         </div>
         {/block}
-        
+
         {block name="insider_content"}
         <div id="insider_content">
             <div class="location">{include file="Common/path.html" delimiter=' &gt; '}</div>

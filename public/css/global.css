@@ -462,7 +462,7 @@ a:hover, a:focus {
 }
 
 #header .menuBar:hover .bar_line {
-    background: #fff;
+    background: #000;
 }
 
 #footer {
