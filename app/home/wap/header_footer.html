@@ -59,20 +59,12 @@
 {block name="foot"}
 <div id="footer">
     <div class="layui-row">
-        <div class="about-us-links">
-            <h4>{menu($all_about_us_ids['about_us_id'],'title')}</h4>
-            <div class="link">
-                {foreach $all_about_us_ids['about_us_children_id'] as $menu_id}{strip}
-                <a class="{if $menu_id==$menu_data.id}current{/if}" href="{call menu_link id=$menu_id}" target="_blank">{menu($menu_id,'title')}</a>{if !$menu_id@last}<em></em>{/if}
-                {/strip}{/foreach}
-            </div>
-        </div>
         <div class="foot en-font">
-            <span>传真：{setting('site_fax')}</span>
-            <span>电话：{setting('tel')}</span>
-            <span>公司地址：{setting('address')}</span>
-            <span>{setting('corp_title')}</span>
-            <span>{setting('site_copyright')}</span>
+            <span class="site-fax">传真：{setting('site_fax')}</span>
+            <span class="tel">电话：{setting('tel')}</span>
+            <span class="address">公司地址：{setting('address')}</span>
+            <span class="corp-title">{setting('corp_title')}</span>
+            <span class="site-copyright">{setting('site_copyright')}</span>
         </div>
     </div>
 </div>

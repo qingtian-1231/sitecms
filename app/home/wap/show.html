@@ -1,4 +1,4 @@
-{extends file="./insider_base.html"} 
+{extends file="./insider_base.html"}
 {block name=function}
 {function name="default_src"}{strip}
 {$root}{$item.thumb|default:$item.image|default:setting('default_image')}
@@ -7,7 +7,11 @@
 {function name="show_case_1" list=[] mdl=$mdl}
 <ul class="list cms_case1 fallsList">
     {foreach $list as $item}
-    <li><span>[{$item.date|date_format:'Y-m-d'}]</span><a href="{call view_link item=$item}">{$item.title}</a></li>
+    <li>
+        <span>[{$item.date|date_format:'Y-m-d'}]</span>
+        <span class="show_menu_type">{menu($item.menu_id,'title')}</span>
+        <a href="{call view_link item=$item}">{$item.title}</a>
+    </li>
     {/foreach}
 </ul>
 {/function}
@@ -41,12 +45,78 @@
                     <i class="line_b cms_tran"></i>
                 </div>
                 <h4 class="cms_tran {cycle values='odd,even'}">{$item.title}</h4>
-            </a>            
+            </a>
         </div>
     </li>
     {/foreach}
 </ul>
 {/function}
+
+<!--自定义风格-->
+{function name="show_case_jiugu" list=[] mdl=$mdl}
+<ul class="grid cms_case_jiugu clearfix fallsList">
+    {foreach $list as $item}
+    <li>
+        <div class="thumb">
+            <div style="background-image: url('{call default_src}');" class="coverBg cms_tran">
+                <img src="{call default_src}" alt="{$item.title}" class="hidden"/>
+                <div class="bgcolor cms_tran_in"></div>
+                <div class="cms_tran_content cms_tran {cycle values='odd,even'}">
+                    <h4>{$item.title}</h4>
+                    <span>{$item.summary}</span>
+                    <a href="{call view_link item=$item}">查看</a>
+                </div>
+            </div>
+        </div>
+    </li>
+    {/foreach}
+</ul>
+{/function}
+
+{function name="show_case_jiugu_list" list=[] mdl=$mdl}
+<ul class="list cms_case_jiugu_list fallsList">
+    {foreach $list as $item}
+    <li>
+        <span>{$item.title}</span>
+        <a href="{call view_link item=$item}"><i class="fa fa-external-link"></i></a>
+    </li>
+    {/foreach}
+</ul>
+{/function}
+
+{function name="show_case_jiugu_list1" list=[] mdl=$mdl}
+<ul class="list cms_case_jiugu_list1 fallsList">
+    {foreach $list as $item}
+    <li><span>{$item.date|date_format:'Y-m-d'}</span><a href="{call view_link item=$item}">{$item.title}</a></li>
+    {/foreach}
+</ul>
+{/function}
+
+{function name="show_case_jiugu_list2" list=[] mdl=$mdl}
+<table class="cms_case_jiugu_list2 layui-table" lay-skin="line">
+    <thead>
+    <tr>
+        <th>产品名称</th>
+        <th>型号/规格</th>
+        <th>品牌</th>
+        <th>单位</th>
+        <th>数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $list as $item}
+    <tr>
+        <td><a href="{call view_link item=$item}">{$item.title}</a></td>
+        <td>{$item.specification}</td>
+        <td>{$item.brand}</td>
+        <td>{$item.unit}</td>
+        <td>{$item.quantity}</td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+{/function}
+<!--自定义风格-->
 
 {function name="show_case_4" list=[] mdl=$mdl}
 <ul class="grid cms_case4 clearfix fallsList">
@@ -125,9 +195,9 @@
     {/foreach}
 </div>
 <script>
-$(function(){
-	$('.cms_case8').jaliswall({ item: '.article' });
-});
+    $(function(){
+        $('.cms_case8').jaliswall({ item: '.article' });
+    });
 </script>
 {/function}
 
@@ -193,21 +263,21 @@ $(function(){
 {function name="show_case_12" list=[] mdl=$mdl}
 <div class="cms_case12">
     <ul class="list fallsList">
-    {foreach $list as $item}
-    <li>            
-        <div class="thumb"><a href="{call view_link item=$item}" class="cms_tran coverBg" style="background-image: url({call default_src});"><img src="{call default_src}" alt="{$item.title}" class="hidden"/></a></div>
-        <div class="item_con">
-            <div class="item_tit"><a href="{call view_link item=$item}">{$item.title}</a></div> 
-            <p class="reset" >
-            {call trim_content html=$item.summary|nl2br|default:$item.content length=100}
-            </p>                 
-        </div>
-        <div class="item_info">
-            <a href="{call view_link item=$item}">查看详情 &gt;</a>
-            <span class="en-font">{$item.date}</span>
-        </div>
-    </li>
-    {/foreach}
+        {foreach $list as $item}
+        <li>
+            <div class="thumb"><a href="{call view_link item=$item}" class="cms_tran coverBg" style="background-image: url({call default_src});"><img src="{call default_src}" alt="{$item.title}" class="hidden"/></a></div>
+            <div class="item_con">
+                <div class="item_tit"><a href="{call view_link item=$item}">{$item.title}</a></div>
+                <p class="reset" >
+                    {call trim_content html=$item.summary|nl2br|default:$item.content length=100}
+                </p>
+            </div>
+            <div class="item_info">
+                <a href="{call view_link item=$item}">查看详情 &gt;</a>
+                <span class="en-font">{$item.date}</span>
+            </div>
+        </li>
+        {/foreach}
     </ul>
 </div>
 {/function}
@@ -251,7 +321,7 @@ $(function(){
         </li>
         {/foreach}
     </ul>
-</div> 
+</div>
 {/function}
 
 {function name="show_case_15" list=[] mdl=$mdl}
@@ -273,7 +343,7 @@ $(function(){
         </li>
         {/foreach}
     </ul>
-</div> 
+</div>
 {/function}
 
 {function name="show_case_16" list=[] mdl=$mdl}
@@ -284,7 +354,7 @@ $(function(){
             <div class="item_init">
                 <div class="item_tit"><a href="{call view_link item=$item}" class="more fr">查看详情</a><a href="{call view_link item=$item}">{$item.title}</a></div>
                 <div class="item_con">
-                {call trim_content html=$item.summary|nl2br|default:$item.content length=100}
+                    {call trim_content html=$item.summary|nl2br|default:$item.content length=100}
                 </div>
             </div>
         </li>
@@ -297,7 +367,7 @@ $(function(){
 <script type="text/javascript" src="{$absroot}js/minigrid.js"></script>
 <script type="text/javascript" src="{$absroot}js/dynamics.js"></script>
 
- <div class="cms_case17 clearfix relative fallsList">    
+<div class="cms_case17 clearfix relative fallsList">
     {foreach $list as $item}
     <div class="grid-item">
         <a class="article" href="{call view_link item=$item}">
@@ -308,26 +378,26 @@ $(function(){
     {/foreach}
 </div>
 <script>
-$(function(){
-    function animate(item, x, y, index) {
-        dynamics.animate(item, {
-            translateX: x,
-            translateY: y,
-            opacity: 1
-        }, {
-        type: dynamics.spring,
-        duration: 800,
-        frequency: 120,
-        delay: 100 + index * 30
-        });
-    }
-    
-    minigrid('.cms_case17', '.grid-item', 12, animate);
-    
-    $(window).resize(function(){
-         minigrid('.cms_case17', '.grid-item', 12, animate);
-    })
-});
+    $(function(){
+        function animate(item, x, y, index) {
+            dynamics.animate(item, {
+                translateX: x,
+                translateY: y,
+                opacity: 1
+            }, {
+                type: dynamics.spring,
+                duration: 800,
+                frequency: 120,
+                delay: 100 + index * 30
+            });
+        }
+
+        minigrid('.cms_case17', '.grid-item', 12, animate);
+
+        $(window).resize(function(){
+            minigrid('.cms_case17', '.grid-item', 12, animate);
+        })
+    });
 </script>
 {/function}
 
@@ -341,7 +411,7 @@ $(function(){
     <div id="insider_show">
         {$list_style=$menu_data.list_style|default:'show_case_1'}
         {call $list_style list=$list}
-    </div>    
+    </div>
     <div id="cms_page" class="clearfix fallsPage">
         <div class="cms_page_relative clearfix">{$render}</div>
     </div>
@@ -351,83 +421,88 @@ $(function(){
 <div id="loadMark"><img src="{$absroot}images/home/loader.gif"/></div>
 <div id="fallsHidden" class="hidden"></div>
 <script type="text/javascript">
-var direct = -1;
-var sign = 0;
-var is_load = true;
-var footTop = 0 ;
-var is_over = false ;
+    var direct = -1;
+    var sign = 0;
+    var is_load = true;
+    var footTop = 0 ;
+    var is_over = false ;
 
-function scrollWin(){
-    $(window).scroll(function(){
-        if (!is_load) return false;
-        var winHei = winHei|| $(window).height();
-        if($('.fallsBox').length){
-            if(!is_over) $('#loadMark').show() ;
-            
-            var scrtop =document.documentElement.scrollTop || document.body.scrollTop;                  
-            if (scrtop > sign) { 
-                sign = scrtop;
-                direct = -1;     
-            }
-            if (scrtop < sign) {   
-                sign = scrtop;         
-                direct = 1;
-            } 
-            if(direct == -1){            
-                footTop =  $('#loadMark').offset().top;
-                var midTop = footTop - scrtop ;
-                if(midTop-20<winHei){                 
-                    loadFalls()
+    function scrollWin(){
+        $(window).scroll(function(){
+            if (!is_load) return false;
+            var winHei = winHei|| $(window).height();
+            if($('.fallsBox').length){
+                if(!is_over) $('#loadMark').show() ;
+
+                var scrtop =document.documentElement.scrollTop || document.body.scrollTop;
+                if (scrtop > sign) {
+                    sign = scrtop;
+                    direct = -1;
+                }
+                if (scrtop < sign) {
+                    sign = scrtop;
+                    direct = 1;
+                }
+                if(direct == -1){
+                    footTop =  $('#loadMark').offset().top;
+                    var midTop = footTop - scrtop ;
+                    if(midTop-20<winHei){
+                        loadFalls()
+                    }
                 }
             }
+        })
+    }
+
+    function loadFalls(){
+        if(!is_load) return false ;
+        is_load = false ;
+        if(!$('#fallsHidden').find('.pagination').length){
+            $('#fallsHidden').html($('.fallsPage').html());
+            $('.fallsPage').html('');
         }
-    })
-}
+        var pages   =  $('#fallsHidden').find('.pagination').find('li').not(':last,:first').length ;
+        var nowPage =  $('#fallsHidden').find('.pagination').find('li.active').index()>= 0 ? $('#fallsHidden').find('.pagination').find('li.active').index(): 0 ;
+        console.log(pages, nowPage)
 
-function loadFalls(){
-    if(!is_load) return false ; 
-    is_load = false ;
-    if(!$('#fallsHidden').find('.pagination').length){
-        $('#fallsHidden').html($('.fallsPage').html());
-        $('.fallsPage').html('');
-    }
-    var pages   =  $('#fallsHidden').find('.pagination').find('li').not(':last,:first').length ;
-    var nowPage =  $('#fallsHidden').find('.pagination').find('li.active').index()>= 0 ? $('#fallsHidden').find('.pagination').find('li.active').index(): 0 ;
-    
-    
-    if(nowPage>=pages) {
-        is_over = true ;
-        $('#loadMark').html('已经没有啦(*^__^*) ').fadeOut(6000) ;
-        return false ;
-    }
-    var href    =  $('#fallsHidden').find('.pagination').find('li:eq('+(nowPage+1)+')').find('a').attr('href') ;
-    $('#fallsHidden').load(href + ' .fallsBox',function(){
-        var list    = $('#fallsHidden').find('.fallsList').html();
-        $(list).appendTo($('.fallsBox').find('.fallsList'));
-        loadJs() ;
-        is_load = true ;
-    })
-}
-//因为load不能把js加载过来，所以每次加载数据完成后需要执行的js单独在这里再执行一次
-function loadJs(){
-    if ($('.cms_case8').length) {
-        $('.cms_case8').jaliswall({ item: '.article' });
-    }
-    if ($('.cms_case17').length) {
-       $(window).trigger('resize');
-    }
-}
+        if(nowPage>=pages) {
+            is_over = true ;
+            $('#loadMark').html('已经没有啦(*^__^*) ').fadeOut(6000) ;
+            return false ;
+        }
+        var href    =  $('#fallsHidden').find('.pagination').find('li:eq('+(nowPage+1)+')').find('a').attr('href') ;
+        console.log(href)
+        $('#fallsHidden').load(href + ' .fallsBox',function(){
+            console.log($('#fallsHidden').html())
 
-$(document).ready(function(){
-    $('.fallsPage').hide();
-    $('#loadMark').show();
-    $('body').on('click', '#loadMark', function(){
-        loadFalls()
-    })
-    {if $page_style == 3}
-    scrollWin()
-    {/if}
-})
+            var list    = $('#fallsHidden').find('.fallsList').html();
+            console.log(list)
+            $(list).appendTo($('.fallsBox').find('.fallsList'));
+            loadJs() ;
+            is_load = true ;
+
+        })
+    }
+    //因为load不能把js加载过来，所以每次加载数据完成后需要执行的js单独在这里再执行一次
+    function loadJs(){
+        if ($('.cms_case8').length) {
+            $('.cms_case8').jaliswall({ item: '.article' });
+        }
+        if ($('.cms_case17').length) {
+            $(window).trigger('resize');
+        }
+    }
+
+    $(document).ready(function(){
+        $('.fallsPage').hide();
+        $('#loadMark').show();
+        $('body').on('click', '#loadMark', function(){
+            loadFalls()
+        })
+        {if $page_style == 3}
+        scrollWin()
+        {/if}
+        })
 </script>
 {/if}
 {/block}

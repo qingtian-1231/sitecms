@@ -1,0 +1,154 @@
+{extends file="../insider_base.html"}
+{block name=insider}
+
+<script>
+  //Demo
+  layui.use('form', function(){
+    var form = layui.form;
+
+    //监听提交
+    // form.on('submit(supplierCertification)', function(data){
+    //   layer.msg(JSON.stringify(data.field));
+    //   return false;
+    // });
+  });
+</script>
+<div id="cms_supplier_certification" class="cms_custom_form">
+  <div class="layui-row">
+    {if !empty({$menu_data.ex_title})}
+      <div class="layui-col-md4">
+        <div class="title-ext-header header-left"></div>
+        <div class="menu-summary">{$menu_data.summary}</div>
+      </div>
+    {/if}
+    <div class="layui-col-md{if !empty({$menu_data.ex_title})}8{else}12{/if} right-form">
+      {if !empty({$menu_data.ex_title})}
+        <div class="title-ext-header header-right">{$menu_data.ex_title}</div>
+      {/if}
+
+      {if $error}
+      <div class="cms_error">
+        {foreach $error as $e}
+        <p>{$e}</p>
+        {/foreach}
+      </div>
+      {/if}
+      {$form->create(['type'=>'file','class'=>'MainForm layui-form','novalidate'=>true])}
+      <div class="layui-form-item">
+        <label class="layui-form-label">公司名称</label>
+        <div class="layui-input-block">
+          {$field="company_name"}
+          {$form->text("$mdl.$field",
+            [
+              'class' => 'layui-input',
+              'placeholder' =>
+              '请输入公司名称',
+              'required' => 'required',
+              'lay-verify' => 'required',
+              'autocomplete' => 'off'
+            ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">联系人姓名</label>
+        <div class="layui-input-block">
+          {$field="name"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入联系人姓名',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">工作职位/头衔</label>
+        <div class="layui-input-block">
+          {$field="position"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input',
+          'placeholder' =>
+          '请输入工作职位',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-input-block">
+          {$field="contact_number"}
+          {$form->text("$mdl.$field",
+          [
+          'class' => 'layui-input layui-tooltip',
+          'tooltip' => '固定电话加区号',
+          'placeholder' =>
+          '请输入联系电话',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">业务领域</label>
+        <div class="layui-input-block">
+          {$field="business_area"}
+          <input type="radio"  name="data[BecomePartner][business_area]" title="弱电智能化" value="弱电智能化" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="智能舞台" value="智能舞台" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="综合机电" value="综合机电" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="IT服务" value="IT服务" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="综合管廊" value="综合管廊" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="数据中心" value="数据中心" lay-skin="primary">
+          <input type="radio" name="data[BecomePartner][business_area]" title="其他" value="其他" lay-skin="primary">
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">您可以简单分析下这个区域或者行业的竞争格局吗？主要竞争对手是哪些？</label>
+        <div class="layui-input-block">
+          {$field="question_competition"}
+          {$form->textarea("$mdl.$field",
+          [
+          'class' => 'layui-textarea',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item layui-form-textarea">
+        <label class="layui-form-label layui-form-textarea-label">您认为进入这个区域或者行业的突破口在哪儿？您的优势在哪儿？希望九谷配合您做哪些工作？</label>
+        <div class="layui-input-block">
+          {$field="question_advantage"}
+          {$form->textarea("$mdl.$field",
+          [
+          'class' => 'layui-textarea',
+          'required' => 'required',
+          'lay-verify' => 'required',
+          'autocomplete' => 'off'
+          ])}
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn layui-btn-radius layui-btn-warm" lay-submit lay-filter="supplierCertification">立即提交</button>
+          <button type="reset" class="layui-btn layui-btn-primary layui-btn-radius">重置</button>
+        </div>
+      </div>
+      {$form->end()}
+    </div>
+  </div>
+</div>
+{/block}

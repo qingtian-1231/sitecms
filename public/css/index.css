@@ -139,7 +139,53 @@
     .carousel-bottom {
         position: relative;
     }
+
+    .carousel-bottom .carousel-top-content {
+        padding: 1rem 1.5rem;
+        letter-spacing: 1px;
+        line-height: 22px;
+        background-color: #efefef;
+    }
+
     .carousel-bottom .carousel-bottom-content {
         width: 100%;
+        display: inline-block;
+        background-color: #c5c5c5;
+        padding: 2rem 0 3.5rem 0;
+    }
+
+    .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title {
+        text-align: center;
+        padding: 0 0 2rem 0;
+    }
+
+    .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title span {
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+
+    .content-0 {
+        padding: 0 0.5rem 0.5rem 1rem;
+    }
+
+    .content-1 {
+        padding: 0 1rem 0.5rem 0.5rem;
+    }
+
+    .content-2 {
+        padding: 0.5rem 0.5rem 0 1rem;
+    }
+
+    .content-3 {
+        padding: 0.5rem 1rem 0 0.5rem;
+    }
+
+    .content-0 .layui-card, .content-1 .layui-card, .content-2 .layui-card, .content-3 .layui-card {
+        border-radius: 25px;
+    }
+
+    .layui-card-body a {
+        font-size: 10px;
+        margin: 1.5rem 0 2.5rem 0;
     }
 }

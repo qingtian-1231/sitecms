@@ -1,53 +1,122 @@
 {extends file="./header_footer.html"}
 
-{block name=content}wap
+{block name=content}
 <div class="layui-carousel" id="banner">
   <div carousel-item>
     {foreach $ad.$ad_var.Ad as $each}
     <div>
-      <a href="{url($each.link)}" class="coverBg" style="background-image: url({$absroot}{$each.image});">
+      <div class="coverBg" style="background-image: url({$absroot}{$each.image});">
         <img src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/>
-      </a>
+      </div>
     </div>
     {/foreach}
   </div>
 </div>
 <script>
-layui.use('carousel', function(){
-  var carousel = layui.carousel;
-  //建造实例
-  carousel.render({
-    elem: '#banner'
-    ,width: '100%' //设置容器宽度
-    ,height:'300px'
-    //,arrow: 'always' //始终显示箭头
-    ,anim: 'fade' //切换动画方式
+  layui.use('carousel', function(){
+    var carousel = layui.carousel;
+    //建造实例
+    carousel.render({
+      elem: '#banner'
+      ,width: '100%' //设置容器宽度
+      ,height:'150px'
+      //,arrow: 'always' //始终显示箭头
+      ,anim: 'fade' //切换动画方式
+    });
   });
-});
 
+  layui.use(['element', 'layer'], function(){
+    var element = layui.element;
+    var layer = layui.layer;
+
+    //监听折叠
+    element.on('collapse(test)', function(data){
+      layer.msg('展开状态：'+ data.show);
+    });
+  });
 </script>
 
-<div class="wrap mobile">
-    <div id="insiderBase">
-        {block name="insider_bar"}
-        <div id="insiderBar">
-            <h2 class="reset">{$menu_data.title}</h2>
-            <ul class="list">
-                {foreach $side_menu.menus as $menu_id}
-                <li class="{if $menu_id==$menu_data.id}current{/if}"><a href="{call menu_link id=$menu_id}">{menu($menu_id,'title')}</a></li>
-                {/foreach}
-            </ul>
-        </div>
-        {/block}
-
-        {block name="insider_content"}
-        <div id="insider_content">
-            <div class="location">{include file="Common/path.html" delimiter=' &gt; '}</div>
-            <div id="insider">
-                {block name=insider}{/block}
-            </div>
-        </div>
-        {/block}
+<div class="row">
+  <!--首页-->
+  <div class="layui-collapse" lay-filter="test">
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">为什么JS社区大量采用未发布或者未广泛支持的语言特性？</h2>
+      <div class="layui-colla-content">
+        <p>有不少其他答案说是因为JS太差。我下面的答案已经说了，这不是根本性的原因。但除此之外，我还要纠正一些对JS具体问题的误解。JS当初是被作为脚本语言设计的，所以某些问题并不是JS设计得差或者是JS设计者的失误。比如var的作用域问题，并不是“错误”，而是当时绝大部分脚本语言都是这样的，如perl/php/sh等。模块的问题也是，脚本语言几乎都没有模块/命名空间功能。弱类型、for-in之类的问题也是，只不过现在用那些老的脚本语言的人比较少，所以很多人都误以为是JS才有的坑。另外有人说JS是半残语言，满足不了开发需求，1999年就该死。半残这个嘛，就夸张了。JS虽然有很多问题，但是设计总体还是优秀的。——来自知乎@贺师俊</p>
+      </div>
     </div>
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">为什么前端工程师多不愿意用 Bootstrap 框架？</h2>
+      <div class="layui-colla-content">
+        <p>因为不适合。如果希望开发长期的项目或者制作产品类网站，那么就需要实现特定的设计，为了在维护项目中可以方便地按设计师要求快速修改样式，肯定会逐步编写出各种业务组件、工具类，相当于为项目自行开发一套框架。——来自知乎@Kayo</p>
+      </div>
+    </div>
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">layui 更适合哪些开发者？</h2>
+      <div class="layui-colla-content">
+        <p>在前端技术快速变革的今天，layui 仍然坚持语义化的组织模式，甚至于模块理念都是采用类AMD组织形式，并非是有意与时代背道而驰。layui 认为以jQuery为核心的开发方式还没有到完全消亡的时候，而早期市面上基于jQuery的UI都普通做得差强人意，所以需要有一个新的UI去重新为这一领域注入活力，并采用一些更科学的架构方式。
+          <br><br>
+          因此准确地说，layui 更多是面向那些追求开发简单的前端工程师们，以及所有层次的服务端程序员。</p>
+      </div>
+    </div>
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">贤心是男是女？</h2>
+      <div class="layui-colla-content">
+        <p>man！ 所以这个问题不要再出现了。。。</p>
+      </div>
+    </div>
+  </div>
+  <!--首页-->
+  <div id="insiderBase" class="layui-row">
+    {block name="insider_bar"}
+    {if !empty($side_menu.menus)}
+    <div id="insiderBar" class="layui-col-md3">
+      <ul class="layui-nav layui-nav-tree list" lay-filter="test">
+        {foreach $side_menu.menus as $menu_key => $menu_id}
+        {if is_array($menu_id)}
+        <li class="layui-nav-item {if in_array($menu_data.id, $menu_id)}layui-nav-itemed{/if}">
+          <a href="javascript:;">{menu($menu_key,'title')}</a>
+          <dl class="layui-nav-child">
+            {foreach $menu_id as $second_menu_id}
+            <dd class="{if $second_menu_id==$menu_data.id}current{/if}">
+              <a href="{call menu_link id=$second_menu_id}">{menu($second_menu_id,'title')}</a>
+            </dd>
+            {/foreach}
+          </dl>
+        </li>
+        {else}
+        <li class="layui-nav-item {if $menu_id==$menu_data.id}current{/if}">
+          <a href="{call menu_link id=$menu_id}">{menu($menu_id,'title')}</a>
+        </li>
+        {/if}
+        {/foreach}
+      </ul>
+    </div>
+    {/if}
+    {/block}
+
+    {block name="insider_content"}
+    <div id="insider_content" class="layui-col-md{if !empty($side_menu.menus)}9{else}12{/if}">
+      <div class="location">
+                <span class="title">
+                    <div class="exCircle">
+                        <div class="inCircle">
+                        </div>
+                    </div>
+                    <h2 class="h-title">
+                        <span>{$menu_data.title}</span>
+                        {if !empty($menu_data.ex_title)}
+                            / <span class="ex_title">{$menu_data.title_alias}</span>
+                        {/if}
+                    </h2>
+                </span>
+        {include file="common/path.html" delimiter=' &gt; '}
+      </div>
+      <div id="insider">
+        {block name=insider}{/block}
+      </div>
+    </div>
+    {/block}
+  </div>
 </div>
 {/block}

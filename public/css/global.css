@@ -629,4 +629,20 @@ a:hover, a:focus {
     .layui-carousel-arrow {
         opacity: 1;
     }
+
+    #footer .foot {
+        padding: 1rem 2rem;
+        text-align: center;
+        color: #686868;
+        background-color: #dfdfdf;
+        border-top: 1px solid #f6a800;
+    }
+
+    #footer .foot span {
+        margin-right: 0;
+    }
+
+    #footer .foot span.address {
+        display: block;
+    }
 }
