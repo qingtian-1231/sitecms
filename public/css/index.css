@@ -51,14 +51,14 @@
     border: 1px solid #dddddd;
 }
 
-.layui-carousel .carousel-bottom {
+.carousel-bottom {
     position: absolute;
     bottom: 0;
     width: 100%;
     background-color: rgba(221, 221, 221, 0.19);
 }
 
-.layui-carousel .carousel-bottom .carousel-bottom-content {
+.carousel-bottom .carousel-bottom-content {
     width: 50%;
     margin: 0 auto;
 }
@@ -86,17 +86,17 @@
     background-color: #194e90;
 }
 
-.layui-carousel .carousel-bottom .carousel-bottom-content .layui-card-body {
+.carousel-bottom .carousel-bottom-content .layui-card-body {
     text-align: center;
     color: #fff;
 }
 
-.layui-carousel .carousel-bottom .carousel-bottom-content .layui-card-body .menu-title {
+.carousel-bottom .carousel-bottom-content .layui-card-body .menu-title {
     font-size: 15px;
     margin-top: 1.25rem;
 }
 
-.layui-carousel .carousel-bottom .carousel-bottom-content .layui-card-body .menu-title-ex {
+.carousel-bottom .carousel-bottom-content .layui-card-body .menu-title-ex {
     font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
@@ -132,5 +132,14 @@
     #Index .item_con ul li {
         height: 34px;
         line-height: 34px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .carousel-bottom {
+        position: relative;
+    }
+    .carousel-bottom .carousel-bottom-content {
+        width: 100%;
     }
 }

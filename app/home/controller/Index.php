@@ -21,6 +21,8 @@ class Index extends Home
                 break;
             }
         }
+
+        $this->assign->product_service_info = menu($product_service_id);
         $this->assign->product_service_ids = menu('children', $product_service_id);
 
 

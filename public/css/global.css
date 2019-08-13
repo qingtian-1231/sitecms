@@ -432,7 +432,7 @@ a:hover, a:focus {
 #header .menuBar .bar_line {
     width: 17px;
     height: 2px;
-    background: #ecebeb;
+    background: #000;
     margin-bottom: 3px;
     -webkit-transition: -webkit-transform .6s, opacity .3s;
     transition: transform .6s, opacity .3s;
@@ -516,6 +516,10 @@ a:hover, a:focus {
 
 #footer .foot span {
     margin-right: 15px;
+}
+
+#footer .foot a {
+    color: #fff;
 }
 
 .title-ext-header {
@@ -618,5 +622,11 @@ a:hover, a:focus {
 
     #footer .link, #footer .foot {
         text-align: left;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .layui-carousel-arrow {
+        opacity: 1;
     }
 }

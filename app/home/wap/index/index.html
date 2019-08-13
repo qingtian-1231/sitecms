@@ -23,8 +23,30 @@ layui.use('carousel', function(){
 
 </script>
 
-<div id="Index">
-    <div class="wrap clearfix">
+<div id="Index" class="mobile">
+  <div class="layui-row carousel-bottom">
+    <div class="carousel-top-content">
+      {$product_service_info.summary}
+    </div>
+    <div class="carousel-bottom-content">
+      <div class="">
+        <h4>{$product_service_info.title}</h4>
+        <span>{$product_service_info.title_alias}</span>
+      </div>
+      {foreach $product_service_ids as $key => $menu_id}
+      <div class="layui-col-xs6 layui-col-sm6 content-{$key}">
+        <div class="layui-card">
+          <div class="layui-card-body">
+            <div class="menu-title">{menu($menu_id,'title')}</div>
+            <div class="menu-title-ex">{menu($menu_id,'title_alias')}</div>
+            <a target="_blank" href="{call menu_link id=$menu_id}" class="layui-btn layui-btn-radius layui-btn-primary">了解更多></a>
+          </div>
+        </div>
+      </div>
+      {/foreach}
+    </div>
+  </div>
+  <div class="wrap clearfix">
         <div class="about">
             <div class="item_tit"><a href="{call menu_link id=12}">{menu(12,'title')}</a></div>
             <div class="item_con">
