@@ -63,14 +63,17 @@
             <dl class="layui-nav-child">
               {foreach $menu_id as $second_menu_id}
               <dd class="{if $second_menu_id==$menu_data.id}hidden{/if}">
+                <i class="layui-icon layui-icon-right"></i>
                 <a href="{call menu_link id=$second_menu_id}">{menu($second_menu_id,'title')}</a>
               </dd>
               {/foreach}
             </dl>
+            <i class="layui-icon layui-icon-add-1"></i>
           </li>
           {else}
           <li class="layui-nav-item {if $menu_id==$menu_data.id}hidden{/if}">
             <a href="{call menu_link id=$menu_id}">{menu($menu_id,'title')}</a>
+            <i class="layui-icon layui-icon-right"></i>
           </li>
           {/if}
           {/foreach}

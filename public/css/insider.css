@@ -1999,12 +1999,32 @@
         background-color: #fff;
     }
 
-    #insiderBar ul li:last-child {
+    #insiderBar ul li .layui-icon {
+        color: #000;
+        position: absolute;
+        right: 15px;
+        top: 7px;
+        font-size: 16px;
+    }
+
+    #insiderBar ul li dl .layui-icon {
+        color: #000;
+        position: absolute;
+        left: 15px;
+        top: 12px;
+        font-size: 16px;
+    }
+
+    #insiderBar > ul:last-child {
         border-bottom: 1px solid #ddd;
     }
 
     #insiderBar ul li a {
-        color: #000;
+        color: #000 !important;
+    }
+
+    #insiderBar .layui-nav-more {
+        display: none;
     }
 
     #cms_page .pagination li.active {
@@ -2013,5 +2033,19 @@
 
     #cms_page .pagination li.active span {
         background: #f6a800;
+    }
+
+    .layui-nav-child dd {
+        padding: 0 15px 0 20px;
+    }
+
+    #insiderBar ul li.current a,
+    #insiderBar dl dd.current a,
+    #insiderBar ul li a:hover {
+        background: #ffffff;
+        color: #000 !important;
+    }
+    .layui-nav-itemed > .layui-nav-child {
+        background-color: #fff !important;
     }
 }

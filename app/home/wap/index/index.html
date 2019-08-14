@@ -15,7 +15,7 @@ layui.use('carousel', function(){
   carousel.render({
     elem: '#banner'
     ,width: '100%' //设置容器宽度
-    ,height:'{$ad.index_banner.mobile_height}'
+    ,height:'{$ad.index_banner.mobile_height}' || 300
     //,arrow: 'always' //始终显示箭头
     ,anim: 'fade' //切换动画方式
   });
