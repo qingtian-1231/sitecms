@@ -1981,22 +1981,37 @@
 
 }
 
+@media screen and (max-width: 480px) {
+    .cms_case_jiugu li {
+        width: 50%;
+    }
 
+    #insiderBase {
+        margin: 0;
+        background-color: #fff;
+        padding: 1rem 0 2rem 0;
+    }
 
+    #insiderBar ul li {
+        margin: 0;
+        border-top: 1px solid #ddd;
+        text-align: left;
+        background-color: #fff;
+    }
 
+    #insiderBar ul li:last-child {
+        border-bottom: 1px solid #ddd;
+    }
 
+    #insiderBar ul li a {
+        color: #000;
+    }
 
+    #cms_page .pagination li.active {
+        border-color: #f6a800;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #cms_page .pagination li.active span {
+        background: #f6a800;
+    }
+}

@@ -645,4 +645,57 @@ a:hover, a:focus {
     #footer .foot span.address {
         display: block;
     }
+
+    .mobile-base .layui-colla-icon {
+        left: auto;
+        right: 15px;
+    }
+
+    .mobile-base {
+        background-color: #dfdfdf;
+        padding: 0 0.5rem;
+    }
+
+    .mobile-base .layui-card {
+        background: none;
+    }
+
+    .mobile-base .layui-card-header {
+        text-align: center;
+        height: auto;
+        line-height: normal;
+        border-bottom: none;
+        padding: 0.5rem 0 1rem 0;
+    }
+
+    .mobile-base .layui-card-header .h-title {
+        font-size: 1.2rem;
+    }
+
+    .mobile-base .layui-card-header h3 {
+        line-height: 10px;
+    }
+
+    .mobile-base .layui-card-header .ex_title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .mobile-base .layui-card-body {
+        background-color: #fff;
+        padding: 2rem 1rem;
+    }
+
+    .mobile-base .layui-card-body .comm_content {
+        border-bottom: none;
+    }
+
+    .mobile-base .hidden {
+        display: none;
+    }
+
+    #footer {
+        margin-top: 0;
+    }
 }
