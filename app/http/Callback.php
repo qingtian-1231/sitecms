@@ -135,7 +135,18 @@ class Callback
                 $this->ts->assign->ad_var = 'insider_banner';
             }
         }
+        $menu_data = $this->ts->assign->menu_data;
+        if (!empty($menu_data['parent_id']) && ($menu_data['parent_id'] !== 1 && $menu_data['parent_id'])) {
+            $family = explode(',', $menu_data['family']);
+            $menu_parent_id = $family[2];
+            $parent_data = menu($menu_parent_id);
+            $ad = &$this->ts->assign->ad;
 
+            if (!empty($parent_data['image'])) {
+                $ad['insider_banner']['Ad'][0]['image'] = $parent_data['image'];
+            }
+            $ad['insider_banner']['Ad'][0] = array_shift($ad['insider_banner']['Ad']);
+        }
         /**
          * 获得固定的名称为联系我们的栏目下所有菜单id.
          *
@@ -164,8 +175,10 @@ class Callback
                 if (isset($all_menu_children[$second_menu_id]) &&
                     !empty($all_menu_children[$second_menu_id])
                 ) {
-                    unset($menus[$menu_key]);
-                    $menus[$second_menu_id] = $all_menu_children[$second_menu_id];
+                    $menus[$menu_key] = [
+                        'parent_menu' => $second_menu_id,
+                        'second_menu' => $all_menu_children[$second_menu_id],
+                    ];
                 }
             }
             $this->ts->assign->side_menu['top_menu'] = $top_menu;

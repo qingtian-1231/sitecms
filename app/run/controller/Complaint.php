@@ -55,26 +55,6 @@ class Complaint extends Run
                 }
             ]*/
         ];
-        $this->local['exportable'] = true;
-
-        call_user_func(array('parent', __FUNCTION__));
-    }
-
-    public function export()
-    {
-        $this->local['filter'] = [
-            'created',
-            'is_finish'
-
-        ];
-        $this->local['list_fields'] = [
-            /*
-            'date' => [
-                'callback' => function($val) {
-                    return strtotime($val);
-                }
-            ]*/
-        ];
         call_user_func(array('parent', __FUNCTION__));
     }
 

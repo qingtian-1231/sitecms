@@ -39,6 +39,12 @@
     min-height: 200px;
 }
 
+.comm_view .comm_content .editor_content {
+    font-size: 14px !important;
+    color: #484848 !important;
+    text-align: justify;
+}
+
 .comm_view .comm_neighbor {
     padding: 15px 0;
 }
@@ -1870,8 +1876,46 @@
 }
 
 #insiderBar ul li {
-    margin-top: 10px;
+    margin-top: 3px;
     background-color: #436caa;
+}
+
+#insiderBar ul li.layui-nav-itemed {
+    z-index: 10;
+    border: 2px solid #f6a800;
+    box-sizing: border-box;
+}
+
+#insiderBar ul li.layui-nav-itemed > a {
+    z-index: 10;
+    background-color: #f6a800;
+}
+
+#insiderBar ul li .layui-icon {
+    display: none;
+}
+
+#insiderBar ul li.layui-nav-itemed > .layui-icon {
+    position: absolute;
+    top: 43px;
+    z-index: 123123;
+    font-size: 35px;
+    left: 44%;
+    color: #f6a800;
+    display: block;
+}
+
+#insiderBar ul li.layui-nav-itemed .layui-nav-child a {
+    color: #f6a800;
+    background: #fff;
+}
+
+#insiderBar ul li.layui-nav-itemed .layui-nav-child .current a{
+    background-color: #f5e2b7;
+}
+
+#insiderBar .layui-nav-more {
+    display: none;
 }
 
 #insiderBar ul li a {

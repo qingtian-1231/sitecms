@@ -35,7 +35,7 @@ $(function(){
     $formValue2 = $workForm.find('.filter_menu_id').attr('value');
 
     if ($formValue1) {
-      $.post("/sitecms/public/article/ajax_select_work.html",{
+      $.post("/article/ajax_select_work.html",{
         title : $formValue1,
         menu_id: $formValue2
       }, function(res){

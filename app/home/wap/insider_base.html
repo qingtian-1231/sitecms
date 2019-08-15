@@ -58,10 +58,10 @@
         <ul class="layui-nav layui-nav-tree list" lay-filter="test">
           {foreach $side_menu.menus as $menu_key => $menu_id}
           {if is_array($menu_id)}
-          <li class="layui-nav-item {if in_array($menu_data.id, $menu_id)}layui-nav-itemed{/if}">
-            <a href="javascript:;">{menu($menu_key,'title')}</a>
+          <li class="layui-nav-item {if in_array($menu_data.id, $menu_id.second_menu)}layui-nav-itemed{/if}">
+            <a href="javascript:;">{menu($menu_id.parent_menu,'title')}</a>
             <dl class="layui-nav-child">
-              {foreach $menu_id as $second_menu_id}
+              {foreach $menu_id.second_menu as $second_menu_id}
               <dd class="{if $second_menu_id==$menu_data.id}hidden{/if}">
                 <i class="layui-icon layui-icon-right"></i>
                 <a href="{call menu_link id=$second_menu_id}">{menu($second_menu_id,'title')}</a>
