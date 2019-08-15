@@ -74,11 +74,44 @@
 {/function}
 
 {function name="show_case_jiugu_list" list=[] mdl=$mdl}
+{if $menu_data.id=22}
+<div class="search-work">
+    {$form->create(['type'=>'file','class'=>'MainForm layui-form','novalidate'=>true])}
+        <div class="layui-form-item">
+            <div class="layui">
+                {$field="title"}
+                {$form->text("$mdl.$field",
+                [
+                'class' => 'layui-input',
+                'placeholder' =>
+                '搜索职位',
+                'required' => 'required',
+                'lay-verify' => 'required',
+                'autocomplete' => 'off'
+                ])}
+            </div>
+         </div>
+        <input class="filter_menu_id" type="hidden" name="menu_id" value="{$menu_data.id}">
+        <div class="layui-form-item">
+            <div class="layui">
+                <button class="layui-btn layui-btn-fluid layui-btn-radius layui-btn-warm" lay-submit lay-filter="supplierCertification">查找您的职位</button>
+            </div>
+        </div>
+    {$form->end()}
+</div>
+{/if}
 <ul class="list cms_case_jiugu_list fallsList">
     {foreach $list as $item}
     <li>
-        <span>{$item.title}</span>
-        <a href="{call view_link item=$item}"><i class="fa fa-external-link"></i></a>
+        <div class="layui-card">
+            <div class="layui-card-header">{$item.title}</div>
+            <div class="layui-card-body">
+                {$item.content}
+                <div class="row-button">
+                    <a class="layui-btn layui-btn-radius" href="{call menu_link id=37}" type="button">马上申请</a>
+                </div>
+            </div>
+        </div>
     </li>
     {/foreach}
 </ul>

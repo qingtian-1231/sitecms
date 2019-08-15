@@ -698,4 +698,16 @@ a:hover, a:focus {
     #footer {
         margin-top: 0;
     }
+
+    #cms_supplier_certification .layui-col-md4 .title-ext-header {
+        display: none;
+    }
+
+    #cms_supplier_certification .layui-col-md4 .menu-summary {
+        padding-bottom: 1rem;
+    }
+
+    #TalentPoolForm .layui-inline-custom {
+        display: flex;
+    }
 }

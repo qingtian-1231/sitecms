@@ -2,6 +2,7 @@
 namespace app\home\controller;
 
 use app\common\controller\Home;
+use woo\utility\Hash;
 
 class Article extends Home
 {
@@ -53,6 +54,62 @@ class Article extends Home
         if ($this->assign->data['video']) {
             $this->assign->addCss('/files/ckin/css/ckin.min.css');
             $this->assign->addJs('/files/ckin/js/ckin.min', true);
+        }
+    }
+
+    public function ajax_select_work() {
+        if ($this->request->isAjax()) {
+            $data = null;
+            $artical = $this->loadModel('Article');
+            $params = $this->request->param();
+
+            if (!empty($params['title'])) {
+                $where = [
+                    ['is_verify', '=', 1],
+                    ['menu_id', '=', (int) $params['menu_id']],
+                    ['title', 'LIKE', '%' . $params['title'] . '%']
+                ];
+                $order = [
+                    'list_order' => 'DESC',
+                    'id' => 'DESC',
+                ];
+                $result = $artical->getPageList([
+                    'where' => $where,
+                    'order' => $order,
+                    'field' => ['id'],
+                    'limit' => 5,
+                    'paginate' => []
+                ]);
+                $idList = Hash::combine($result['list'], '{n}.id', '{n}.id');
+
+                $data = $artical
+                    ->where('id', 'IN', $idList)
+                    ->order($order)
+                    ->field([])
+                    ->select()
+                    ->toArray();
+
+                $output = '';
+
+                foreach ($data as $item) {
+                    $output .= '<li>
+        <div class="layui-card">
+            <div class="layui-card-header">' . $item['title'] . '</div>
+            <div class="layui-card-body">
+                ' . $item['content'] . '
+                <div class="row-button">
+                    <a class="layui-btn layui-btn-radius" href="' . menu_link(37) . '" type="button">马上申请</a>
+                </div>
+            </div>
+        </div>
+    </li>';
+                }
+
+                return $this->ajax('success','查询到数据', $output);
+            }
+            else {
+                return $this->ajax('error', '你搜索时没有输入字段', $data);
+            }
         }
     }
 }

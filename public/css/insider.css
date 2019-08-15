@@ -2048,4 +2048,60 @@
     .layui-nav-itemed > .layui-nav-child {
         background-color: #fff !important;
     }
+
+    .cms_case_jiugu_list li {
+        width: 100%;
+    }
+
+    #insider_show .layui-card {
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #insider_show .layui-card .layui-card-header {
+        text-align: left;
+        font-size: 18px;
+        color: #236fab;
+    }
+
+    #insider_show .layui-card .layui-card-body {
+        padding: 2rem 1rem;
+        display: block;
+        text-align: left;
+    }
+
+    #insider_show .layui-card .layui-card-body ol > li {
+        text-align: left;
+        list-style: decimal;
+    }
+
+    #insider_show .layui-card .layui-card-body .row-button {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    #insider_show .layui-card .layui-card-body .row-button a {
+        background-color: #f6a800;
+        color: #fff;
+        float: none;
+    }
+
+    .search-work {
+        border-bottom: 2px solid #ddd;
+        padding: 1rem 0;
+    }
+
+    .search-work input.layui-input {
+        border-radius: 22px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-work button.layui-btn {
+        background-color: #436caa;
+    }
 }
