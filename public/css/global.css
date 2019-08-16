@@ -399,8 +399,6 @@ a:hover, a:focus {
     color: #fff;
 }
 
-
-
 #Menu .layui-nav .layui-nav-item:hover a{
     background-color: #436caa;
     color: #fff;
@@ -416,6 +414,25 @@ a:hover, a:focus {
 
 #mMenu {
     display: none;
+}
+
+#Menu div.layui-nav-child {
+    top: 60px;
+    background-color: #02020287;
+    box-shadow: none;
+    border: none;
+}
+
+#Menu div.layui-nav-child dd a {
+    background: none !important;
+}
+
+#Menu div.layui-nav-child dd.level3 a {
+    font-size: 12px;
+}
+
+#Menu .layui-show {
+    display: flex !important;
 }
 
 #header .menuBar {

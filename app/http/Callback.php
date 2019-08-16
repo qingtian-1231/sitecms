@@ -135,6 +135,7 @@ class Callback
                 $this->ts->assign->ad_var = 'insider_banner';
             }
         }
+
         $menu_data = $this->ts->assign->menu_data;
         if (!empty($menu_data['parent_id']) && ($menu_data['parent_id'] !== 1 && $menu_data['parent_id'])) {
             $family = explode(',', $menu_data['family']);
@@ -147,6 +148,7 @@ class Callback
             }
             $ad['insider_banner']['Ad'][0] = array_shift($ad['insider_banner']['Ad']);
         }
+
         /**
          * 获得固定的名称为联系我们的栏目下所有菜单id.
          *
@@ -164,7 +166,7 @@ class Callback
             'about_us_children_id' => menu('children', $about_us_id),
         ];
 
-        // 重写获取menu的方法，在每一个页面都要获得这个页面所属和包含的所有菜单结构
+        // 重写获取side_menu的方法，在每一个页面都要获得这个页面所属和包含的所有菜单结构
         if (property_exists($this->ts->assign, 'side_menu')) {
             $all_menu_children = menu('children');
             $family = explode(',', $this->ts->assign->menu_data['family']);
