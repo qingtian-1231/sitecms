@@ -95,7 +95,12 @@ class Callback
         if ($this->ca == 'Index::index') {
             //  首页页面
             $this->ts->assign->is_index = true;
-            $this->ts->assign->addCss(['index.css', 'insider.css']);
+            if ($this->ts->isMobile && setting('is_use_wap')) {
+                $this->ts->assign->addCss(['index.css', 'insider.css']);
+            }
+            else {
+                $this->ts->assign->addCss(['index.css']);
+            }
             $this->ts->assign->top_id = 0;
 
         } else {
