@@ -220,4 +220,80 @@
     .index-typical-case .layui-card-body .more .layui-icon {
         font-size: 16px;
     }
+
+    #insiderBar ul li {
+        margin: 0;
+        border-top: 1px solid #ddd;
+        text-align: left;
+        background-color: #fff;
+    }
+
+    #insiderBar ul li .layui-icon {
+        color: #000;
+        position: absolute;
+        right: 15px;
+        top: 0;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+    #insiderBar ul li dl .layui-icon {
+        color: #000;
+        position: absolute;
+        left: 15px;
+        top: 2px;
+        font-size: 16px;
+        z-index: 10;
+    }
+
+    #insiderBar > ul:last-child {
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+    }
+
+    #insiderBar ul li a {
+        color: #000 !important;
+    }
+
+    #insiderBar .layui-nav-more {
+        display: none;
+    }
+
+    #insiderBar ul li.current a,
+    #insiderBar dl dd.current a,
+    #insiderBar ul li a:hover {
+        background: #ffffff;
+        color: #000 !important;
+    }
+
+    #insiderBar ul li.layui-nav-itemed {
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+
+    #insiderBar ul li.layui-nav-itemed .layui-nav-child {
+        background-color: #fff!important
+    }
+
+    #insiderBar ul li.layui-nav-itemed .layui-nav-child dd {
+        padding: 0 15px 0 20px;
+    }
+
+    #insiderBar ul li.layui-nav-itemed > .layui-icon {
+        color: #000;
+        position: absolute;
+        left: auto;
+        right: 15px;
+        top: 0;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+    #insiderBar ul li.layui-nav-itemed > a {
+        background: #fff;
+    }
+
+    .layui-nav-tree .layui-nav-bar {
+        display: none;
+    }
 }
