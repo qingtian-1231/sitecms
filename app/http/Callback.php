@@ -95,7 +95,7 @@ class Callback
         if ($this->ca == 'Index::index') {
             //  首页页面
             $this->ts->assign->is_index = true;
-            $this->ts->assign->addCss('index.css');
+            $this->ts->assign->addCss(['index.css', 'insider.css']);
             $this->ts->assign->top_id = 0;
 
         } else {
@@ -165,6 +165,26 @@ class Callback
             'about_us_id' => $about_us_id,
             'about_us_children_id' => menu('children', $about_us_id),
         ];
+
+        //手机端首页内容
+        if ($this->ts->isMobile && setting('is_use_wap')) {
+            $index_menus = [];
+            foreach ($all_menu_list as $menu_item) {
+                if ($menu_item['title'] === '解决方案') {
+                    $index_menus[] = $this->processMobileContentForIndex($menu_item);
+                }
+                if ($menu_item['title'] === '工作机会') {
+                    $index_menus[] = $this->processMobileContentForIndex($menu_item);
+                }
+                if ($menu_item['title'] === '关于我们') {
+                    $index_menus[] = $this->processMobileContentForIndex($menu_item);
+                }
+                if ($menu_item['title'] === '经典案例') {
+                    $this->ts->assign->mobile_typical_case = menu($menu_item['id']);
+                }
+            }
+            $this->ts->assign->mobile_index_menus = $index_menus;
+        }
 
         // 重写获取side_menu的方法，在每一个页面都要获得这个页面所属和包含的所有菜单结构
         if (property_exists($this->ts->assign, 'side_menu')) {
@@ -286,6 +306,23 @@ class Callback
         $output .= '</table>';
 
         return $output;
+    }
+
+    protected function processMobileContentForIndex($menu_item) {
+        $all_menu_children = menu('children');
+        $index_menu = NULL;
+        if (isset($all_menu_children[$menu_item['id']]) &&
+            !empty($all_menu_children[$menu_item['id']])) {
+            $index_menu = [
+                'parent_menu' => $menu_item['id'],
+                'second_menu' => $all_menu_children[$menu_item['id']],
+            ];
+        }
+        else {
+            $index_menu = $menu_item['id'];
+        }
+
+        return $index_menu;
     }
     //  以后扩展模块，每个模块都支持添加这样的2个方法用来表示 执行URL指定方法前和后的 动作
 }

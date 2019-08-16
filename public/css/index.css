@@ -188,4 +188,36 @@
         font-size: 10px;
         margin: 1.5rem 0 3.5rem 0;
     }
+
+    .index-typical-case {
+        display: inline-block;
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .index-typical-case .layui-card-header {
+        display: inline-block;
+    }
+
+    .index-typical-case .layui-card-header .h-title {
+        font-size: 1rem;
+        line-height: 1.1rem;
+    }
+
+    .index-typical-case .layui-card-header h3 {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+
+    .index-typical-case .layui-card-body {
+        text-align: justify;
+    }
+
+    .index-typical-case .layui-card-body .more {
+        text-align: right;
+    }
+
+    .index-typical-case .layui-card-body .more .layui-icon {
+        font-size: 16px;
+    }
 }

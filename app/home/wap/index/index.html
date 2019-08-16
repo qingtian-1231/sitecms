@@ -47,20 +47,54 @@ layui.use('carousel', function(){
     </div>
   </div>
   <div class="wrap clearfix">
-        <div class="about">
-            <div class="item_tit"><a href="{call menu_link id=12}">{menu(12,'title')}</a></div>
-            <div class="item_con">
-            {call trim_content html=$query_data[12].content length=200}
-            </div>
+    {if !empty($mobile_index_menus)}
+    <div id="insiderBar" class="layui-col-xs12">
+      <ul class="layui-nav layui-nav-tree list" lay-filter="test">
+        {foreach $mobile_index_menus as $menu_key => $menu_id}
+        {if is_array($menu_id)}
+        <li class="layui-nav-item {if in_array($menu_data.id, $menu_id.second_menu)}layui-nav-itemed{/if}">
+          <a href="javascript:;">{menu($menu_id.parent_menu,'title')}</a>
+          <dl class="layui-nav-child">
+            {foreach $menu_id.second_menu as $second_menu_id}
+            <dd class="{if $second_menu_id==$menu_data.id}hidden{/if}">
+              <i class="layui-icon layui-icon-right"></i>
+              <a href="{call menu_link id=$second_menu_id}">{menu($second_menu_id,'title')}</a>
+            </dd>
+            {/foreach}
+          </dl>
+          <i class="layui-icon layui-icon-add-1"></i>
+        </li>
+        {else}
+        <li class="layui-nav-item {if $menu_id==$menu_data.id}hidden{/if}">
+          <a href="{call menu_link id=$menu_id}">{menu($menu_id,'title')}</a>
+          <i class="layui-icon layui-icon-right"></i>
+        </li>
+        {/if}
+        {/foreach}
+      </ul>
+    </div>
+    {/if}
+<!--经典例子-->
+    <div class="layui-card index-typical-case">
+      <div class="layui-card-header">
+        <h2 class="h-title">
+          <span>{$mobile_typical_case.title}</span>
+        </h2>
+        {if !empty($mobile_typical_case.ex_title)}
+        <h3><span class="ex_title">{$mobile_typical_case.title_alias}</span></h3>
+        {/if}
+      </div>
+      <div class="layui-card-body">
+        {if !empty($mobile_typical_case.image)}
+          <img src="/{$mobile_typical_case.image}">
+        {/if}
+        {$mobile_typical_case.summary}
+        <div class="more">
+          <a href="{call menu_link id=$mobile_typical_case.id}">
+            <i class="layui-icon layui-icon-right"></i>
+          </a>
         </div>
-        <div class="news">
-            <div class="item_tit"><a href="{call menu_link id=3}">{menu(3,'title')}</a></div>
-            <div class="item_con">
-                <ul class="list">
-
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
 </div>
 

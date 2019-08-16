@@ -22,6 +22,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 audio, canvas, progress, video {
     display: inline-block;
     vertical-align: baseline;
+    width: 100%;
 }
 
 audio:not([controls]) {

@@ -2049,6 +2049,7 @@
         right: 15px;
         top: 7px;
         font-size: 16px;
+        display: inline-block;
     }
 
     #insiderBar ul li dl .layui-icon {
@@ -2057,6 +2058,7 @@
         left: 15px;
         top: 12px;
         font-size: 16px;
+        z-index: 10;
     }
 
     #insiderBar > ul:last-child {
@@ -2147,5 +2149,24 @@
 
     .search-work button.layui-btn {
         background-color: #436caa;
+    }
+
+    #insiderBar ul li.layui-nav-itemed {
+        border: none;
+        border-top: 1px solid #ddd;
+    }
+
+    #insiderBar ul li.layui-nav-itemed > .layui-icon {
+        color: #000;
+        position: absolute;
+        left: auto;
+        right: 15px;
+        top: 7px;
+        font-size: 16px;
+        display: inline-block;
+    }
+
+    #insiderBar ul li.layui-nav-itemed > a {
+        background: #fff;
     }
 }
