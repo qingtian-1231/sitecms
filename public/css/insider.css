@@ -34,7 +34,7 @@
 }
 
 .comm_view .comm_content {
-    padding: 15px 0;
+    padding: 0;
     border-bottom: 1px solid #dddddd;
     min-height: 200px;
 }
@@ -1998,7 +1998,7 @@
 }
 
 #insider_content #insider {
-    padding-top: 1rem;
+    padding-top: 0;
 }
 
 @media screen and (max-width: 768px) {
