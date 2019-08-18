@@ -18,10 +18,16 @@ class Index extends Home
         foreach ($all_menu_list as $menu_item) {
             if ($menu_item['title'] === '产品与服务') {
                 $product_service_id = $menu_item['id'];
-                break;
+                continue;
+            }
+
+            if ($menu_item['title'] === '首页地图导航') {
+                $index_map_id = $menu_item['id'];
+                continue;
             }
         }
 
+        $this->assign->index_map_id = $index_map_id;
         $this->assign->product_service_info = menu($product_service_id);
         $this->assign->product_service_ids = menu('children', $product_service_id);
 

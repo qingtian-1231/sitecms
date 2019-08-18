@@ -77,7 +77,7 @@ layui.use('carousel', function(){
         <div class="layui-col-xs12 layui-col-sm12 layui-col-md4">
             <div class="item_con">
                 {if !empty(setting('index_map_image'))}
-                <a href="">
+                <a href="{call menu_link id=$index_map_id}">
                     <img src="/{setting('index_map_image')}"/>
                 </a>
                 {/if}
