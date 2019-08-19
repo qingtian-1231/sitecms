@@ -179,9 +179,6 @@ class Callback
                 if ($menu_item['title'] === '关于我们') {
                     $index_menus[] = $this->processMobileContentForIndex($menu_item);
                 }
-                if ($menu_item['title'] === '经典案例') {
-                    $this->ts->assign->mobile_typical_case = menu($menu_item['id']);
-                }
             }
             $this->ts->assign->mobile_index_menus = $index_menus;
         }
@@ -205,6 +202,13 @@ class Callback
             }
             $this->ts->assign->side_menu['top_menu'] = $top_menu;
             $this->ts->assign->side_menu['menus'] = $menus;
+        }
+
+        //  可以类似于这样 单独指定不同控制器不同方法执行的代码
+        switch ($this->ca) {
+          case 'Article::search':
+            $this->ts->assign->menu_data['title'] = '搜索结果列表';
+            break;
         }
     }
 

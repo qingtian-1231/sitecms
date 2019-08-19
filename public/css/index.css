@@ -193,6 +193,8 @@
         display: inline-block;
         text-align: center;
         padding: 2rem 0;
+        width: 100%;
+        box-shadow: none;
     }
 
     .index-typical-case .layui-card-header {
@@ -241,6 +243,7 @@
         color: #000;
         position: absolute;
         left: 15px;
+        right: auto;
         top: 2px;
         font-size: 16px;
         z-index: 10;
@@ -279,6 +282,13 @@
         padding: 0 15px 0 20px;
     }
 
+    #insiderBar ul li.layui-nav-itemed .layui-nav-child dd a {
+        border-bottom-width: 1px;
+        box-sizing: border-box;
+        border-bottom-style: dotted;
+        border-bottom-color: #ddd;
+    }
+
     #insiderBar ul li.layui-nav-itemed > .layui-icon {
         color: #000;
         position: absolute;
@@ -290,7 +300,7 @@
     }
 
     #insiderBar ul li.layui-nav-itemed > a {
-        background: #fff;
+        background: #c5c5c5;
     }
 
     .layui-nav-tree .layui-nav-bar {
