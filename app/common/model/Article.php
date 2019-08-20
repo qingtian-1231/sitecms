@@ -3,7 +3,7 @@ namespace app\common\model;
 
 class Article extends App
 {
-    public $display = ['title', 'content', 'tags'];
+    public $display = 'title';
     public $parentModel = 'Menu';
     public $cname = '文章';
 

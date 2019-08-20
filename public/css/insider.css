@@ -1796,7 +1796,8 @@
     width: 33.3%;
     float: left;
     font-size: 14px;
-    text-align: right
+    text-align: right;
+    line-height: 30px;
 }
 
 .cms_case_jiugu_list li span {
@@ -1922,7 +1923,7 @@
     display: block;
     height: 36px;
     line-height: 36px;
-    padding: 12px 20px;
+    padding: 12px 0 12px 20px;
     color: #fff;
     overflow: hidden;
 }
@@ -2059,7 +2060,7 @@
         right: auto;
         top: 12px;
         font-size: 16px;
-        z-index: 10;
+        z-index: 11;
     }
 
     #insiderBar > ul:last-child {
@@ -2068,6 +2069,7 @@
 
     #insiderBar ul li a {
         color: #000 !important;
+        z-index: 10;
     }
 
     #insiderBar .layui-nav-more {
@@ -2089,7 +2091,7 @@
     #insiderBar ul li.current a,
     #insiderBar dl dd.current a,
     #insiderBar ul li a:hover {
-        background: #ffffff;
+        background: rgba(255, 255, 255, 0);
         color: #000 !important;
     }
     .layui-nav-itemed > .layui-nav-child {
@@ -2165,9 +2167,11 @@
         top: 7px;
         font-size: 16px;
         display: inline-block;
+        z-index: 10;
     }
 
     #insiderBar ul li.layui-nav-itemed > a {
-        background: #fff;
+        background: rgba(255, 255, 255, 0);
+        z-index: 11;
     }
 }

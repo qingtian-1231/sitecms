@@ -219,7 +219,7 @@
         text-align: right;
     }
 
-    .index-typical-case .layui-card-body .more .layui-icon {
+    .index-typical-case .layui-card-body .more a {
         font-size: 16px;
     }
 
@@ -237,6 +237,7 @@
         top: 0;
         font-size: 16px;
         display: inline-block;
+        z-index: 10;
     }
 
     #insiderBar ul li dl .layui-icon {
@@ -256,6 +257,8 @@
 
     #insiderBar ul li a {
         color: #000 !important;
+        padding: 0 0 0 20px;
+        z-index: 11;
     }
 
     #insiderBar .layui-nav-more {
@@ -265,7 +268,7 @@
     #insiderBar ul li.current a,
     #insiderBar dl dd.current a,
     #insiderBar ul li a:hover {
-        background: #ffffff;
+        background: rgba(255, 255, 255, 0);
         color: #000 !important;
     }
 
@@ -300,10 +303,35 @@
     }
 
     #insiderBar ul li.layui-nav-itemed > a {
-        background: #c5c5c5;
+        background: rgba(197, 197, 197, 0.5411764705882353);
     }
 
     .layui-nav-tree .layui-nav-bar {
         display: none;
     }
+
+    .mobile .layui-card-body img{
+        height: auto !important;
+    }
+
+    .mobile .index-typical-case-header {
+        text-align: center;
+        height: auto;
+        line-height: normal;
+        border-bottom: none;
+        padding: 1rem 0 1rem 0;
+        background-color: #ddd;
+        display: inline-block;
+        width: 100%;
+    }
+    .mobile .index-typical-case-header .h-title {
+        font-size: 1.2rem;
+    }
+    .mobile .index-typical-case-header .ex_title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .mobile .index-typical-case-header
+    .mobile .index-typical-case-header
 }

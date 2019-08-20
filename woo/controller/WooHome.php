@@ -220,21 +220,27 @@ class WooHome extends WooApp
             $this->local['where'][] = ['menu_id', '=', $data['menu_id']];
         }
 
+        $list_order = 0;
+        if (isset($data['list_order'])) {
+            $list_order = $data['list_order'];
+        }
         // 下一篇
         $next = $this->mdl
             //->with(isset($this->local['with']) ? $this->local['with'] : [])
             //->field($this->local['field'])
             ->where($this->local['where'])
-            ->where($this->mdlPk, '<', $this->local['id'])
-            ->order([$this->mdlPk => 'DESC'])
+            ->where($this->mdlPk, '<>', $this->local['id'])
+            ->where('list_order', '<=', $list_order)
+            ->order(['list_order' => 'DESC', $this->mdlPk => 'DESC'])
             ->find();
         // 上一篇
         $prev = $this->mdl
             //->with(isset($this->local['with']) ? $this->local['with'] : [])
             //->field($this->local['field'])
             ->where($this->local['where'])
-            ->where($this->mdlPk, '>', $this->local['id'])
-            ->order([$this->mdlPk => 'ASC'])
+            ->where($this->mdlPk, '<>', $this->local['id'])
+            ->where('list_order', '>=', $list_order)
+            ->order(['list_order' => 'ASC', $this->mdlPk => 'ASC'])
             ->find();
 
         // 编辑器内容分页
