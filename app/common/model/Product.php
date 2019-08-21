@@ -105,7 +105,7 @@ class Product extends App
             'is_verify' => array(
                 'type' => 'boolean',
                 'name' => '审核',
-                'elem' => 'checker',
+                'elem' => 'hidden',
                 'list' => 'checker',
                 'sortable' => true
             ),

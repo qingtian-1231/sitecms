@@ -51,7 +51,7 @@ class Page extends App
             'is_verify' => array(
                 'type' => 'boolean',
                 'name' => '审核',
-                'elem' => 'checker',
+                'elem' => 'hidden',
                 'list' => 'checker',
             ),
             'image' => array(
