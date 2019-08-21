@@ -40,9 +40,9 @@ return [
     //CMS栏目相关的操作是否再进一步根据栏目授权进行权限判断  如果关闭将无视栏目授权设置
     'menu_power_check' => true,
     // 是否开启权限节点重置功能（相当于完全重置，而下面的控制器权限节点只会重置指定控制器的权限节点）
-    'power_reset' => true,
+    'power_reset' => false,
     //是否开启控制器权限节点重置功能
-    'power_controller_reset' => true,
+    'power_controller_reset' => false,
     //不加入权限控制的方法（即不生成节点），格式： '控制器' => ['方法名','方法名']，相当于@powerset false；所以这是另一种不加入权限的方案
     'power_action_pass' => [
         //'Ad' => ['aa', 'lists'],//Ad控制器的aa、lists方法不加入权限
@@ -50,31 +50,41 @@ return [
         //'Product' => false// 如果false 表示整个控制器都不加入权限控制
 
         // 下面是系统中控制器暂时没有使用到的功能 所有屏蔽权限节点生成
-        'Addon' => ['create', 'modify', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
-        'AddonConfig' => ['create', 'modify', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
-        'AdminMenu' => ['batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
+        'AlbumPicture' => false,
+        'Feedback' => false,
+        'Addon' => false,
+        'AddonConfig' => false,
+        'AdminMenu' => false,
+        'Download' => false,
+        'DownloadPermission' => false,
+        'Link' => false,
         'Database' => ['create', 'modify', 'detail', 'sort', 'export', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'Dustbin' => ['create', 'modify', 'sort', 'export', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch' ],
-        'Email' => ['sort', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch' ],
-        'Import' => ['sort', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
+        'Dictionary' => false,
+        'DictionaryItem' => false,
+        'Email' => false,
+        'Import' => false,
         'Index' => false,
         'Log' => ['sort', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch' ],
-        'ManageMenu' => ['batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
+        'ManageMenu' => false,
         'Member' => ['create', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'Menu' => ['batchVerify', 'batchDisabled', 'content'],
+        'Model' => false,
         'Picture' => false,
         'Power' => ['lists', 'create', 'modify', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'MenuPower' => ['lists', 'create', 'modify', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'PowerTree' => ['detail','batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'QueryData' => false,
+        'Region' => false,
         'Setting' => ['batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
         'SettingGroup' => ['batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
-        'Tool' => ['lists', 'create', 'modify', 'detail', 'sort', 'export', 'delete', 'batchDelete', 'batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch', 'getSiteSize', 'getLog', 'removeLog', 'removeTemp', 'clearCache', 'switchTrace', 'lockScreen', 'relieveScreen', 'setSkin', 'getAwesome', 'resetStaticCache'],
+        'Shortcut' => false,
+        'Tool' => false,
         'Upload' => false,
         'User' => ['batchVerify', 'batchDisabled', 'login', 'ajax_login', 'logout'],
         'UserGroup' => ['batchVerify', 'batchDisabled', 'ajaxSetField'],
-        'UserGrade' => ['batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
-        'UserScore' => ['batchVerify', 'batchDisabled', 'ajaxSetField', 'ajaxSwitch'],
+        'UserGrade' => false,
+        'UserScore' => false,
         'UserLogin' => false,
     ],
     //权限映射的另一种方法，相当于@poweras   这里设置的映射优先于@poweras 设置的映射

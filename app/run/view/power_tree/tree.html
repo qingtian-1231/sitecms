@@ -3,7 +3,6 @@
 
 {/block}
 {block name=base}
-<blockquote class="layui-elem-quote">建议直接通过<strong style="color:#FF5722;">节点生成</strong>操作进行添加或重置权限节点，避免手动添加的繁琐。</blockquote>
 {if powertree()}
 {function tree level=1}
 {foreach $data as $self_id=>$children}
@@ -13,22 +12,22 @@
         {$child_count = count($children)}
         <span class="menu_action">
             <a href="{url('PowerTree/create',['parent_id'=>$self_id])}"><i class="fa fa-plus"></i>添加子节点</a>
-            {if $child_count>1}<a href="{url('PowerTree/sort',['parent_id'=>$self_id])}"><i class="fa fa-sort"></i>排序子节点</a>{/if}            
+            {if $child_count>1}<a href="{url('PowerTree/sort',['parent_id'=>$self_id])}"><i class="fa fa-sort"></i>排序子节点</a>{/if}
             <a href="{url('PowerTree/modify',['id'=>$self_id])}"><i class="fa fa-edit"></i>编辑</a>
             <a href="{url('PowerTree/delete',['id'=>$self_id])}" class="item-action-delete"><i class="fa fa-close"></i>删除</a>
             {if powertree($self_id,'url')}
             <a href="{url(powertree($self_id,'url'))}"><i class="fa fa-eye"></i>访问</a>
             {/if}
         </span>
-        <span class="menu_info clearfix">            
+        <span class="menu_info clearfix">
             <i class="fa  {if $children}{if $level==1}fa-plus-circle{else}fa-minus-circle{/if}{else}fa-minus-circle{/if}  fa-lg left fa-icon"></i>
             <span class="menu_title left">
-                {if powertree($self_id,'icon')}<i class="fa {powertree($self_id,'icon')}"></i>{/if} 
+                {if powertree($self_id,'icon')}<i class="fa {powertree($self_id,'icon')}"></i>{/if}
                 <a href="{url('PowerTree/modify',['id'=>$self_id])}">{powertree($self_id,'title')}</a>
             </span>
-            <span class="menu_id left hover_hidden">〖ID：{$self_id}〗</span>  
+            <span class="menu_id left hover_hidden">〖ID：{$self_id}〗</span>
             {if powertree($self_id,'controller')}<span class="left en-font hover_hidden">〖控制器：{powertree($self_id,'controller')}〗</span>{/if}
-            {if powertree($self_id,'action')}<span class="left en-font hover_hidden">〖方法：{powertree($self_id,'action')}〗</span> {/if}                 
+            {if powertree($self_id,'action')}<span class="left en-font hover_hidden">〖方法：{powertree($self_id,'action')}〗</span> {/if}
             {if $child_count>0}<span class="menu_child_count left hover_hidden">〖子节点数：{$child_count}〗</span>{/if}
         </span>
     </div>
@@ -62,7 +61,7 @@ function start(){
                 layer.alert(msg, function(){
                     location.reload();
                 });
-                
+
     		},
     		'error':function(msg,data){
                   layer.closeAll();
@@ -87,7 +86,7 @@ $('#menu_tree .self').click(function(){
         var href  = $(this).attr('href') ;
         layer.confirm('该操作不可逆，请确认删除该栏目及其子栏目？',function(){
             layer.closeAll();
-            location.href  = href; 
+            location.href  = href;
         })
         return false ;
     }
