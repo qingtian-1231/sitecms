@@ -1909,6 +1909,9 @@
 #insiderBar ul li.layui-nav-itemed .layui-nav-child a {
     color: #f6a800;
     background: #fff;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    border-bottom-color: #ddd;
 }
 
 #insiderBar ul li.layui-nav-itemed .layui-nav-child .current a{
@@ -1921,8 +1924,8 @@
 
 #insiderBar ul li a {
     display: block;
-    height: 36px;
-    line-height: 36px;
+    height: 30px;
+    line-height: 30px;
     padding: 12px 0 12px 20px;
     color: #fff;
     overflow: hidden;
@@ -2171,7 +2174,7 @@
     }
 
     #insiderBar ul li.layui-nav-itemed > a {
-        background: rgba(255, 255, 255, 0);
+        background: rgba(197, 197, 197, 0.5411764705882353);
         z-index: 11;
     }
 }

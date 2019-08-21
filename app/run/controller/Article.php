@@ -62,6 +62,10 @@ class Article extends Run
         call_user_func(array('parent', __FUNCTION__));
     }
 
+    /**
+     * @name 导出
+     * @powerset true
+     */
     public function export()
     {
         $this->local['filter'] = [

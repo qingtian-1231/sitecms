@@ -38,7 +38,7 @@ return [
     //是否开启后台权限验证，如果false；即使分别了权限，系统也不会进行权限判断
     'power_check' => true,
     //CMS栏目相关的操作是否再进一步根据栏目授权进行权限判断  如果关闭将无视栏目授权设置
-    'menu_power_check' => false,
+    'menu_power_check' => true,
     // 是否开启权限节点重置功能（相当于完全重置，而下面的控制器权限节点只会重置指定控制器的权限节点）
     'power_reset' => true,
     //是否开启控制器权限节点重置功能
@@ -91,11 +91,11 @@ return [
             '映射方法' => '映射到的方法名'
         ]*/
     ],
-    'power_special_list' => [
-        [
-            'controller' => 'All',
-            'action' => 'all',
-            'title' => '超级权限'
-        ]
-    ]
+//    'power_special_list' => [
+//        [
+//            'controller' => 'All',
+//            'action' => 'all',
+//            'title' => '超级权限'
+//        ]
+//    ]
 ];

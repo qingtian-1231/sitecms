@@ -7,13 +7,13 @@ use think\Db;
 
 class PowerTree extends Run
 {
-    
+
     protected function initialize()
-    {        
-        call_user_func(['parent', __FUNCTION__]); 
+    {
+        call_user_func(['parent', __FUNCTION__]);
     }
-    
-    
+
+
     public function lists()
     {
         $this->addAction("新增一级{$this->mdl->cname}", array('PowerTree/create', ['parent_id' => 1]), 'fa-plus-circle', 'layer-ajax-form layui-btn');
@@ -24,8 +24,8 @@ class PowerTree extends Run
         $this->setTitle("{$this->mdl->cname}结构", 'operation');
         $this->fetch = 'tree';
     }
-    
-    
+
+
     protected function getFileList($path)
     {
         if (is_dir($path) && is_readable($path)) {
@@ -47,7 +47,7 @@ class PowerTree extends Run
             return [];
         }
     }
-    
+
     /**
      * 节点缓存
      * @powerset false
@@ -59,11 +59,11 @@ class PowerTree extends Run
         }
         ini_set('memory_limit', '512M');
         set_time_limit(60);
-        $this->mdl->writeToFile(); 
+        $this->mdl->writeToFile();
         return $this->ajax('success', '节点数据缓存生成成功');
-        
+
     }
-    
+
     /**
      * 特殊权限节点
      * @poweras start
@@ -72,15 +72,15 @@ class PowerTree extends Run
     {
         if (!$this->request->isAjax()) {
             return $this->message('error', '请求方式错误');
-        }        
-        
+        }
+
         try {
             Db::name($this->m)->delete(true);
-            $rootId = Db::name($this->m)->insertGetId(['id' => 1, 'parent_id' => 0, 'title' =>'根节点', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);  
+            $rootId = Db::name($this->m)->insertGetId(['id' => 1, 'parent_id' => 0, 'title' =>'根节点', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);
         } catch (\Exception $e) {
             return $this->ajax('error', $e->getMessage(), ['break' => true]);
         }
-        
+
         $msg = '特殊权限节点生成成功';
         $power_special_list = config('auth.power_special_list');
         if (!empty($power_special_list)) {
@@ -100,7 +100,7 @@ class PowerTree extends Run
                 ];
             }
             Db::name($this->m)->insertAll($dataList);
-            
+
             $this->loadModel('Power');
             if (!$this->Power->count()) {
                 $this->Power->save([
@@ -115,7 +115,7 @@ class PowerTree extends Run
         }
         return $this->ajax('success', $msg);
     }
-    
+
     /**
      * 控制器权限节点重置
      * @poweras start
@@ -136,7 +136,7 @@ class PowerTree extends Run
             $controller = $addon;
             $addon = '';
         }
-        
+
         $addon = strtolower($addon);
         $controller = parse_name($controller, true);
         if (empty($addon)) {
@@ -148,11 +148,11 @@ class PowerTree extends Run
             return $this->ajax('error', '控制器【' . $controllerFull . '】不存在', ['break' => true]);
         }
         $passMethod = ['initialize', '__debugInfo', 'registerMiddleware', 'finish', '__construct'];
-        
+
         $mainMethod = [
             'create' => '新增',
             'modify' => '修改',
-            'lists' => '列表',            
+            'lists' => '列表',
             'detail' => '详情',
             'sort' => '排序',
             'export' => '导出',
@@ -166,8 +166,8 @@ class PowerTree extends Run
         $power_action_pass = config('auth.power_action_pass');
         $power_action_as =   config('auth.power_action_as');
         $reflection = new \ReflectionClass($controllerFull);
-        $classDoc = (new DocParser())->parse($reflection->getDocComment());  
-        
+        $classDoc = (new DocParser())->parse($reflection->getDocComment());
+
         $exists = Db::name($this->m)
             ->where([
                 ['controller', '=', $controller],
@@ -175,21 +175,21 @@ class PowerTree extends Run
             ])
             ->order(['id' => 'ASC'])
             ->find();
-                      
+
         // 当前控制器不需要加入权限验证
         if (isset($classDoc['powerset']) && stripos($classDoc['powerset'], 'false') !== false) {
             if ($exists) {
                 $this->mdl->deleteData($exists['id']);
-            } 
+            }
             return $this->ajax('success', '控制器【' . $controller . '】不加入权限，已经清空', ['finish' => true]);
         }
         if (isset($power_action_pass[($addon ? $addon . '/' : '') . $controller]) && $power_action_pass[($addon ? $addon . '/' : '') . $controller] === false) {
             if ($exists) {
                 $this->mdl->deleteData($exists['id']);
-            } 
+            }
             return $this->ajax('success', '控制器【' . $controller . '】不加入权限，已经清空', ['finish' => true]);
         }
-        
+
         $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
         $methodsAssoc = [];
         foreach ($methods as $item) {
@@ -199,10 +199,10 @@ class PowerTree extends Run
             }
             $methodsAssoc[$name] = $item;
         }
-        
+
         $methodsData = [];
         if (empty($exists)) {
-            
+
             $parentId = Db::name($this->m)->insertGetId([
                 'id' => null,
                 'parent_id' => 1,
@@ -218,7 +218,7 @@ class PowerTree extends Run
             $parentId = $exists['id'];
             Db::name($this->m)->where('parent_id', '=', $parentId)->delete();
         }
-        
+
         foreach ($mainMethod as $key => $title) {
             if (empty($methodsAssoc[$key])) {
                 continue;
@@ -236,7 +236,7 @@ class PowerTree extends Run
             if (isset($power_action_as[($addon ? $addon . '/' : '') . $controller]) && array_key_exists($key, (array)$power_action_as[($addon ? $addon . '/' : '') . $controller])) {
                 continue;
             }
-            
+
             $methodsData[$key] = [
                 'id' => null,
                 'parent_id' => $parentId,
@@ -265,8 +265,8 @@ class PowerTree extends Run
             }
             if (isset($power_action_as[($addon ? $addon . '/' : '') . $controller]) && array_key_exists($key, (array)$power_action_as[($addon ? $addon . '/' : '') . $controller])) {
                 continue;
-            }                   
-            
+            }
+
             $methodsData[$key] = [
                 'id' => null,
                 'parent_id' => $parentId,
@@ -282,25 +282,25 @@ class PowerTree extends Run
         if ($methodsData) {
             Db::name($this->m)->insertAll($methodsData);
         }
-        
+
         return $this->ajax('success', '控制器【' . $controller . '】节点重置成功');
     }
-    
+
     /**
      * 权限节点重置
      * @poweras start
      */
     public function ajaxReset()
     {
-        
+
         if (!$this->request->isAjax()) {
             return $this->message('error', '请求方式错误');
         }
-        
+
         if (!config('auth.power_reset')) {
             return $this->ajax('error', '配置文件中设定不允许重置权限节点', ['break' => true]);
         }
-        
+
         $controllers = session('controller_list');
         if (empty($controllers)) {
             return $this->ajax('error', '控制器列表数据不存在', ['break' => true]);
@@ -310,19 +310,19 @@ class PowerTree extends Run
         $step = 1;
         $min = ($index - 1) * $step;
         $max = $min + ($step - 1);
-        $finish = false; 
-        
-        
+        $finish = false;
+
+
         //$rootData = Db::name($this->m)->order(['id' => 'ASC'])->find();
         //$rootId = $rootData['id'];
-        $rootId = 1;     
-        
+        $rootId = 1;
+
         $passMethod = ['initialize', '__debugInfo', 'registerMiddleware', 'finish', '__construct'];
-        
+
         $mainMethod = [
             'create' => '新增',
             'modify' => '修改',
-            'lists' => '列表',            
+            'lists' => '列表',
             'detail' => '详情',
             'sort' => '排序',
             'export' => '导出',
@@ -334,9 +334,9 @@ class PowerTree extends Run
             'ajaxSwitch' => '列表开关'
         ];
         $power_action_pass = config('auth.power_action_pass');
-        $power_action_as =   config('auth.power_action_as');  
-        
-        
+        $power_action_as =   config('auth.power_action_as');
+
+
         $install = [];
         for ($i = $min; $i <= $max; $i++) {
             if (empty($controllers[$i])) {
@@ -356,7 +356,7 @@ class PowerTree extends Run
             try {
                 $install[] = strtolower($addon ? $addon . '/' : '') . $controller;
                 $reflection = new \ReflectionClass($controllerFull);
-                $classDoc = (new DocParser())->parse($reflection->getDocComment());                
+                $classDoc = (new DocParser())->parse($reflection->getDocComment());
                 // 当前控制器不需要加入权限验证
                 if (isset($classDoc['powerset']) && stripos($classDoc['powerset'], 'false') !== false) {
                     continue;
@@ -364,7 +364,7 @@ class PowerTree extends Run
                 if (isset($power_action_pass[($addon ? $addon . '/' : '') . $controller]) && $power_action_pass[($addon ? $addon . '/' : '') . $controller] === false) {
                     continue;
                 }
-                
+
                 $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
                 $methodsAssoc = [];
                 foreach ($methods as $item) {
@@ -374,10 +374,10 @@ class PowerTree extends Run
                     }
                     $methodsAssoc[$name] = $item;
                 }
-                
+
                 $methodsData = [];
-                
-                
+
+
                 $parentId = Db::name($this->m)->insertGetId([
                     'id' => null,
                     'parent_id' => $rootId,
@@ -389,7 +389,7 @@ class PowerTree extends Run
                     'created' => date('Y-m-d H:i:s'),
                     'modified' => date('Y-m-d H:i:s')
                 ]);
-                
+
                 foreach ($mainMethod as $key => $title) {
                     if (empty($methodsAssoc[$key])) {
                         continue;
@@ -407,7 +407,7 @@ class PowerTree extends Run
                     if (isset($power_action_as[($addon ? $addon . '/' : '') . $controller]) && array_key_exists($key, (array)$power_action_as[($addon ? $addon . '/' : '') . $controller])) {
                         continue;
                     }
-                    
+
                     $methodsData[$key] = [
                         'id' => null,
                         'parent_id' => $parentId,
@@ -436,8 +436,8 @@ class PowerTree extends Run
                     }
                     if (isset($power_action_as[($addon ? $addon . '/' : '') . $controller]) && array_key_exists($key, (array)$power_action_as[($addon ? $addon . '/' : '') . $controller])) {
                         continue;
-                    }                   
-                    
+                    }
+
                     $methodsData[$key] = [
                         'id' => null,
                         'parent_id' => $parentId,
@@ -449,31 +449,31 @@ class PowerTree extends Run
                         'created' => date('Y-m-d H:i:s'),
                         'modified' => date('Y-m-d H:i:s')
                     ];
-                    
+
                 }
                 if ($methodsData) {
                     Db::name($this->m)->insertAll($methodsData);
                 }
-                
+
             } catch (\Exception $e) {
                 return $this->ajax('error', $e->getMessage(), ['break' => true]);
             }
         }
-        
+
         $finish = $max+1 >= count($controllers) ? true : false;
         return $this->ajax('success', '控制器【' . implode('、', $install) . '】权限节点已经安装完成', ['finish' => $finish]);
     }
-    
+
     /**
     * 节点生成
     */
     public function start(){
-        
+
         $level1List = $this->getFileList(APP_PATH . 'run' . DS . 'controller');
         if (empty($level1List)) {
             return $this->message('error', APP_PATH . 'run' . DS . 'controller' . '没有读的权限，控制器列表获取失败');
         }
-        
+
         $controllers = $level1List['controller'];
         if (!empty($level1List['addons'])) {
             foreach ($level1List['addons'] as $addon) {
@@ -485,36 +485,36 @@ class PowerTree extends Run
                 }
             }
         }
-        
+
         session('controller_list', $controllers);
-        
-        
+
+
         $this->setTitle("权限节点智能生成", 'operation');
         $this->addAction("返回列表", array($this->m . '/lists'), 'fa-reply', 'layui-btn-normal');
         $this->fetch = 'start';
-        
+
         /*
         if (!$this->request->isAjax()) {
             return $this->message('error', '请求方式错误');
         }
-        
+
         if ($this->mdl->count()) {
             return $this->ajax('error', '节点已存在，不能再执行初始化');
         }
-        
+
         $map = [
             'lists' => '查看列表',
             'create' => '新增',
             'modify' => '更新',
             'delete' => '删除',
-            'sort' => '排序',   
-            'export' => '导出', 
-            'detail' => '详情',        
+            'sort' => '排序',
+            'export' => '导出',
+            'detail' => '详情',
             'batch_delete' => '批量删除',
             'ajax_switch' => '列表开关',
             'ajax_set_field' => '列表值设置'
         ];
-        
+
         $map_else = [
             'Dustbin' => [
                 'recover' => '还原数据'
@@ -532,9 +532,9 @@ class PowerTree extends Run
                 'create' => false,
                 'modify' => false,
                 'delete' => false,
-                'sort' => false,  
-                'export' => false, 
-                'detail' => false,           
+                'sort' => false,
+                'export' => false,
+                'detail' => false,
                 'batch_delete' => false,
                 'ajax_switch' => false,
                 'ajax_set_field' => false
@@ -548,10 +548,10 @@ class PowerTree extends Run
                 'delete' => '删除备份文件',
                 'download' => '下载备份文件',
                 'create' => false,
-                'modify' => false,                
-                'sort' => false,   
-                'export' => false, 
-                'detail' => false,         
+                'modify' => false,
+                'sort' => false,
+                'export' => false,
+                'detail' => false,
                 'batch_delete' => false,
                 'ajax_switch' => false,
                 'ajax_set_field' => false
@@ -583,21 +583,21 @@ class PowerTree extends Run
                 'title' => '控制器生成',
                 'controller' => 'Tool',
                 'action' => 'addc'
-            ],            
+            ],
             [
                 'title' => '超级权限',
                 'controller' => 'All',
                 'action' => 'all'
             ],
         ];
-        
-        $db = db($this->m); 
-        $rootId = $db->insertGetId(['id' => 1, 'parent_id' => 0, 'title' =>'根节点', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);  
-        
-        unset($GLOBALS['Model_title']['Exlink']); ##外链没有操作 
+
+        $db = db($this->m);
+        $rootId = $db->insertGetId(['id' => 1, 'parent_id' => 0, 'title' =>'根节点', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);
+
+        unset($GLOBALS['Model_title']['Exlink']); ##外链没有操作
         unset($GLOBALS['Model_title']['Picture']); ##不同的图片类型单独设置
         $GLOBALS['Model_title']['Database'] = '数据管理';
-              
+
         foreach ($GLOBALS['Model_title'] as $model => $model_name) {
             $data = [
                 'id' => null,
@@ -609,13 +609,13 @@ class PowerTree extends Run
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s')
             ];
-            $parentId = $db->insertGetId($data);  
-                 
+            $parentId = $db->insertGetId($data);
+
             $children = $map;
             if (isset($map_else[$model])) {
                 $children = array_merge($map, $map_else[$model]);
             }
-            
+
             foreach ($children as $action => $action_name) {
                 if ($action_name !== false) {
                     $data = [
@@ -629,11 +629,11 @@ class PowerTree extends Run
                         'modified' => date('Y-m-d H:i:s')
                     ];
                     $db->insertGetId($data);
-                }              
+                }
             }
         }
-        
-        $elseId = $db->insertGetId(['id' => null, 'controller' => '', 'action' =>'', 'together' => '', 'parent_id' => $rootId, 'title' =>'其他权限', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);  
+
+        $elseId = $db->insertGetId(['id' => null, 'controller' => '', 'action' =>'', 'together' => '', 'parent_id' => $rootId, 'title' =>'其他权限', 'created' => date('Y-m-d H:i:s'), 'modified' => date('Y-m-d H:i:s')]);
         foreach ($else as $each) {
             $data = [
                 'id' => null,
@@ -647,8 +647,8 @@ class PowerTree extends Run
             ];
             $db->insertGetId($data);
         }
-        $this->mdl->writeToFile();     
-        
+        $this->mdl->writeToFile();
+
         $this->loadModel('Dictionary');
         if (!$this->Dictionary->where([['model', '=', $this->m], ['field', '=', 'action']])->count()) {
             $this->Dictionary->save(['title' => '权限节点.方法名', 'model' => $this->m, 'field' => 'action', 'dictionary_item_count' => count($map)]);
@@ -672,11 +672,11 @@ class PowerTree extends Run
             'user_id' => helper('Auth')->user('id'),
             'content' => ['all::all']
         ]);
-        
+
         return $this->ajax('success', '处理完成(当前用户自动拥有超级权限，请自行修改)');
         */
     }
-    
+
     public function sort()
     {
         $this->local['order'] = array('list_order' => 'ASC', 'id' => 'ASC');
@@ -685,10 +685,10 @@ class PowerTree extends Run
         }
         call_user_func(array('parent', __FUNCTION__));
     }
-    
+
     //添加
     public function create()
-    {       
+    {
         if ($this->args['parent_id']) {
             $controller  = powertree(intval($this->args['parent_id']), 'controller');
             if ($controller) {
@@ -697,16 +697,16 @@ class PowerTree extends Run
         }
         call_user_func(['parent', __FUNCTION__]);
     }
-    
+
     //修改
     public function modify()
-    {   
+    {
         call_user_func(['parent', __FUNCTION__]);
-    } 
-    
+    }
+
     //删除
     public function delete()
-    {        
+    {
         call_user_func(['parent', __FUNCTION__]);
-    }  
+    }
 }
