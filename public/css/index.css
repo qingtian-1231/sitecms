@@ -135,61 +135,61 @@
     }
 }
 
-@media screen and (max-width: 768px) {
-    .carousel-bottom {
+@media screen and (max-width: 1024px) {
+    .mobile .carousel-bottom {
         position: relative;
     }
 
-    .carousel-bottom .carousel-top-content {
+    .mobile .carousel-bottom .carousel-top-content {
         padding: 1rem 1.5rem;
         letter-spacing: 1px;
         line-height: 22px;
         background-color: #efefef;
     }
 
-    .carousel-bottom .carousel-bottom-content {
+    .mobile .carousel-bottom .carousel-bottom-content {
         width: 100%;
         display: inline-block;
         background-color: #c5c5c5;
         padding: 2rem 0 3.5rem 0;
     }
 
-    .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title {
+    .mobile .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title {
         text-align: center;
         padding: 0 0 2rem 0;
     }
 
-    .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title span {
+    .mobile .carousel-bottom .carousel-bottom-content .carousel-bottom-content-title span {
         text-transform: uppercase;
         font-weight: bolder;
     }
 
-    .content-0 {
+    .mobile .content-0 {
         padding: 0 0.5rem 0.5rem 1rem;
     }
 
-    .content-1 {
+    .mobile .content-1 {
         padding: 0 1rem 0.5rem 0.5rem;
     }
 
-    .content-2 {
+    .mobile .content-2 {
         padding: 0.5rem 0.5rem 0 1rem;
     }
 
-    .content-3 {
+    .mobile .content-3 {
         padding: 0.5rem 1rem 0 0.5rem;
     }
 
-    .content-0 .layui-card, .content-1 .layui-card, .content-2 .layui-card, .content-3 .layui-card {
+    .mobile .content-0 .layui-card, .content-1 .layui-card, .content-2 .layui-card, .content-3 .layui-card {
         border-radius: 15px;
     }
 
-    .layui-card-body a {
+    .mobile .layui-card-body a {
         font-size: 10px;
         margin: 1.5rem 0 3.5rem 0;
     }
 
-    .index-typical-case {
+    .mobile .index-typical-case {
         display: inline-block;
         text-align: center;
         padding: 2rem 0;
@@ -197,40 +197,40 @@
         box-shadow: none;
     }
 
-    .index-typical-case .layui-card-header {
+    .mobile .index-typical-case .layui-card-header {
         display: inline-block;
     }
 
-    .index-typical-case .layui-card-header .h-title {
+    .mobile .index-typical-case .layui-card-header .h-title {
         font-size: 1rem;
         line-height: 1.1rem;
     }
 
-    .index-typical-case .layui-card-header h3 {
+    .mobile .index-typical-case .layui-card-header h3 {
         font-size: 1.2rem;
         text-transform: uppercase;
     }
 
-    .index-typical-case .layui-card-body {
+    .mobile .index-typical-case .layui-card-body {
         text-align: justify;
     }
 
-    .index-typical-case .layui-card-body .more {
+    .mobile .index-typical-case .layui-card-body .more {
         text-align: right;
     }
 
-    .index-typical-case .layui-card-body .more a {
+    .mobile .index-typical-case .layui-card-body .more a {
         font-size: 16px;
     }
 
-    #insiderBar ul li {
+    .mobile #insiderBar ul li {
         margin: 0;
         border-top: 1px solid #ddd;
         text-align: left;
         background-color: #fff;
     }
 
-    #insiderBar ul li .layui-icon {
+    .mobile #insiderBar ul li .layui-icon {
         color: #000;
         position: absolute;
         right: 15px;
@@ -240,7 +240,7 @@
         z-index: 10;
     }
 
-    #insiderBar ul li dl .layui-icon {
+    .mobile #insiderBar ul li dl .layui-icon {
         color: #000;
         position: absolute;
         left: 15px;
@@ -250,49 +250,49 @@
         z-index: 10;
     }
 
-    #insiderBar > ul:last-child {
+    .mobile #insiderBar > ul:last-child {
         border-bottom: 1px solid #ddd;
         width: 100%;
     }
 
-    #insiderBar ul li a {
+    .mobile #insiderBar ul li a {
         color: #000 !important;
         padding: 0 0 0 20px;
         z-index: 11;
     }
 
-    #insiderBar .layui-nav-more {
+    .mobile #insiderBar .layui-nav-more {
         display: none;
     }
 
-    #insiderBar ul li.current a,
-    #insiderBar dl dd.current a,
-    #insiderBar ul li a:hover {
+    .mobile #insiderBar ul li.current a,
+    .mobile #insiderBar dl dd.current a,
+    .mobile #insiderBar ul li a:hover {
         background: rgba(255, 255, 255, 0);
         color: #000 !important;
     }
 
-    #insiderBar ul li.layui-nav-itemed {
+    .mobile #insiderBar ul li.layui-nav-itemed {
         border: none;
         border-top: 1px solid #ddd;
     }
 
-    #insiderBar ul li.layui-nav-itemed .layui-nav-child {
+    .mobile #insiderBar ul li.layui-nav-itemed .layui-nav-child {
         background-color: #fff!important
     }
 
-    #insiderBar ul li.layui-nav-itemed .layui-nav-child dd {
+    .mobile #insiderBar ul li.layui-nav-itemed .layui-nav-child dd {
         padding: 0 15px 0 20px;
     }
 
-    #insiderBar ul li.layui-nav-itemed .layui-nav-child dd a {
+    .mobile #insiderBar ul li.layui-nav-itemed .layui-nav-child dd a {
         border-bottom-width: 1px;
         box-sizing: border-box;
         border-bottom-style: dotted;
         border-bottom-color: #ddd;
     }
 
-    #insiderBar ul li.layui-nav-itemed > .layui-icon {
+    .mobile #insiderBar ul li.layui-nav-itemed > .layui-icon {
         color: #000;
         position: absolute;
         left: auto;
@@ -302,11 +302,11 @@
         display: inline-block;
     }
 
-    #insiderBar ul li.layui-nav-itemed > a {
+    .mobile #insiderBar ul li.layui-nav-itemed > a {
         background: rgba(197, 197, 197, 0.5411764705882353);
     }
 
-    .layui-nav-tree .layui-nav-bar {
+    .mobile .layui-nav-tree .layui-nav-bar {
         display: none;
     }
 
