@@ -2177,4 +2177,12 @@
         background: rgba(197, 197, 197, 0.5411764705882353);
         z-index: 11;
     }
+
+    .cms_case_jiugu li .thumb .cms_tran_content h4 {
+        font-size: 10px;
+    }
+
+    .cms_case_jiugu li .thumb .cms_tran_content span {
+        font-size: 10px;
+    }
 }

@@ -339,6 +339,14 @@ class WooHome extends WooApp
 
         if (!$this->local['options']['no_redirect'] && $this->menuData['child_count'] && $this->menuData['is_redirect']) {
             $children_menus = menu('children', $this->menuData['id']);
+            if (!$this->isMobile) {
+                foreach ($children_menus as $key => $children_menu_id) {
+                    $menu_item = menu($children_menu_id);
+                    if (isset($menu_item['is_map']) && !$menu_item['is_map']) {
+                        unset($children_menus[$key]);
+                    }
+                }
+            }
             $first_child_id = reset($children_menus);
             if ($first_child_id) {
                 /*

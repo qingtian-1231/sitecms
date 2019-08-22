@@ -190,6 +190,15 @@ class Callback
             $top_menu = $family[2];
             $menus = (array) $all_menu_children[$top_menu];
 
+            //从侧边二级菜单中删除地图导航关闭的菜单
+            if (!$this->ts->isMobile) {
+                foreach ($menus as $key => $menu_id) {
+                    $menu_item = menu($menu_id);
+                    if (isset($menu_item['is_map']) && !$menu_item['is_map']) {
+                        unset($menus[$key]);
+                    }
+                }
+            }
             foreach ($menus as $menu_key => $second_menu_id) {
                 if (isset($all_menu_children[$second_menu_id]) &&
                     !empty($all_menu_children[$second_menu_id])

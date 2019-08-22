@@ -62,8 +62,8 @@
                 <img src="{call default_src}" alt="{$item.title}" class="hidden"/>
                 <div class="bgcolor cms_tran_in"></div>
                 <div class="cms_tran_content cms_tran {cycle values='odd,even'}">
-                    <h4>{$item.title}</h4>
-                    <span>{$item.summary}</span>
+                    <h4>{mb_substr($item.title, 0, 8, 'utf-8')}...</h4>
+                    <span>{mb_substr($item.summary, 0, 15, 'utf-8')}...</span>
                     <a href="{call view_link item=$item}">查看</a>
                 </div>
             </div>
