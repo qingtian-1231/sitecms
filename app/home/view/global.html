@@ -21,7 +21,10 @@
 {block name=function}{/block}
 </head>
 
-<body>
+<body class="{if isset($full_image_page) && $full_image_page}full-content-with-nothing{else}normal-content{/if}">
+<div style="margin:0 auto;width:0px;height:0px;overflow:hidden">
+  <img src="/{setting('share_link_logo')}">
+</div>
 {block name=global}{/block}
 {if isset($deferJs)}
 {$html->script($deferJs, true)}

@@ -60,11 +60,25 @@
 <div id="footer">
     <div class="layui-row">
         <div class="foot en-font">
-            <span class="site-fax">传真：{setting('site_fax')}</span>
-            <span class="tel">电话：{setting('tel')}</span>
-            <span class="address">公司地址：{setting('address')}</span>
-            <span class="corp-title">{setting('corp_title')}</span>
-            <span class="site-copyright">{setting('site_copyright')}</span>
+            {if setting('site_fax')}
+            <span>传真：{setting('site_fax')}</span>
+            {/if}
+
+            {if setting('tel')}
+            <span>电话：{setting('tel')}</span>
+            {/if}
+
+            {if setting('address')}
+            <span>公司地址：{setting('address')}</span>
+            {/if}
+
+            {if setting('corp_title')}
+            <span>{setting('corp_title')}</span>
+            {/if}
+
+            {if setting('icp')}
+            <span><a target="_blank" href="http://beian.miit.gov.cn">{setting('icp')}</a></span>
+            {/if}
         </div>
     </div>
 </div>

@@ -145,6 +145,7 @@
         letter-spacing: 1px;
         line-height: 22px;
         background-color: #efefef;
+        text-align: justify;
     }
 
     .mobile .carousel-bottom .carousel-bottom-content {

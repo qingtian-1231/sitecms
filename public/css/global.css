@@ -596,6 +596,35 @@ a:hover, a:focus {
     margin-right: 0!important;
 }
 
+.full-content-with-nothing .layui-carousel {
+    display: none;
+}
+
+.full-content-with-nothing div.layui-container {
+    max-width: 100%;
+    padding: 0;
+}
+
+.full-content-with-nothing div.layui-container #insider_content {
+    padding: 0;
+}
+
+.full-content-with-nothing div.layui-container #insider_content .location {
+    display: none;
+}
+
+.full-content-with-nothing div.layui-container #insider_content .editor_content p {
+    margin: 0;
+}
+
+.full-content-with-nothing div.layui-container #insider_content .editor_content img{
+    width: 100% !important;
+}
+
+.full-content-with-nothing #footer {
+    margin: 0;
+}
+
 @media screen and (max-width: 768px) {
     body {
         font-size: 14px;

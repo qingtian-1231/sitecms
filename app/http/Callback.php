@@ -218,6 +218,15 @@ class Callback
           case 'Article::search':
             $this->ts->assign->menu_data['title'] = '搜索结果列表';
             break;
+
+          case 'Page::view':
+              $page_data = $this->ts->assign->data;
+              $page_type = $this->ts->assign->mdl;
+              if ($page_data['title'] === '首页地图导航' && $page_type === 'Page') {
+                  $this->ts->assign->full_image_page = true;
+              }
+            break;
+
         }
     }
 

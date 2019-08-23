@@ -79,11 +79,25 @@
             </div>
         </div>
         <div class="foot en-font">
+            {if setting('site_fax')}
             <span>传真：{setting('site_fax')}</span>
+            {/if}
+
+            {if setting('tel')}
             <span>电话：{setting('tel')}</span>
+            {/if}
+
+            {if setting('address')}
             <span>公司地址：{setting('address')}</span>
+            {/if}
+
+            {if setting('corp_title')}
             <span>{setting('corp_title')}</span>
+            {/if}
+
+            {if setting('icp')}
             <span><a target="_blank" href="http://beian.miit.gov.cn">{setting('icp')}</a></span>
+            {/if}
         </div>
     </div>
 </div>
