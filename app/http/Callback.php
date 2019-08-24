@@ -161,9 +161,19 @@ class Callback
                 break;
             }
         }
+
+        $about_us_children_menus = menu('children', $about_us_id);
+        if (!$this->ts->isMobile) {
+            foreach ($about_us_children_menus as $key => $children_menu_id) {
+                $menu_item = menu($children_menu_id);
+                if (isset($menu_item['is_map']) && !$menu_item['is_map']) {
+                    unset($about_us_children_menus[$key]);
+                }
+            }
+        }
         $this->ts->assign->all_about_us_ids = [
             'about_us_id' => $about_us_id,
-            'about_us_children_id' => menu('children', $about_us_id),
+            'about_us_children_id' => $about_us_children_menus,
         ];
 
         //手机端首页内容
