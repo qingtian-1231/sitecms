@@ -28,7 +28,7 @@
                                 {if $level2}
                                 {foreach $level2 as $level3_id=>$level3}
                                 <dd class="level3">
-                                    <a href="{call menu_link id=$level2_id}">{menu($level3_id,'title')}</a>
+                                    <a href="{call menu_link id=$level3_id}">{menu($level3_id,'title')}</a>
                                 </dd>
                                 {/foreach}
                                 {/if}
