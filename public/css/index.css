@@ -333,6 +333,14 @@
         text-transform: uppercase;
         font-weight: bold;
     }
-    .mobile .index-typical-case-header
-    .mobile .index-typical-case-header
+    .mobile .layui-nav-tree .layui-nav-child .layui-nav-second-level {
+        padding: 0 0 0 20px;
+        width: auto;
+    }
+
+    .mobile #insiderBar ul li dl .layui-nav-second-level .layui-icon {
+        left: auto;
+        right: 15px;
+        top: 0px;
+    }
 }

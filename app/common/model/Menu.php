@@ -118,6 +118,16 @@ class Menu extends App
                 ),
                 'elem_group' => 'advanced',
             ),
+            'mobile_image' => array(
+                'type' => 'string',
+                'name' => '手机图片',
+                'elem' => 'image',
+                'upload' => array(
+                    'maxSize' => 1024,
+                    'validExt' => array('jpg', 'gif', 'png'),
+                ),
+                'elem_group' => 'advanced',
+            ),
             'thumb_width' => array(
                 'type' => 'integer',
                 'name' => '缩略图宽度',

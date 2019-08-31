@@ -6,7 +6,7 @@
     {foreach $ad.$ad_var.Ad as $each}
     <div>
       <div class="coverBg" style="background-image: url({$absroot}{$each.image});">
-        <img src="{$absroot}{$each.image}" class="hidden" alt="{$each.title}"/>
+        <img src="{$absroot}{$each.image}" alt="{$each.title}"/>
       </div>
     </div>
     {/foreach}
@@ -19,7 +19,7 @@
     carousel.render({
       elem: '#banner'
       ,width: '100%' //设置容器宽度
-      ,height:'150px'
+      ,height:'auto'
       //,arrow: 'always' //始终显示箭头
       ,anim: 'fade' //切换动画方式
     });

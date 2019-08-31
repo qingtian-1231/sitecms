@@ -145,6 +145,9 @@ class Callback
 
             if (!empty($parent_data['image'])) {
                 $ad['insider_banner']['Ad'][0]['image'] = $parent_data['image'];
+                if ($this->ts->isMobile && setting('is_use_wap') && !empty($parent_data['mobile_image'])) {
+                    $ad['insider_banner']['Ad'][0]['image'] = $parent_data['mobile_image'];
+                }
             }
             $ad['insider_banner']['Ad'][0] = array_shift($ad['insider_banner']['Ad']);
         }
@@ -347,8 +350,22 @@ class Callback
             !empty($all_menu_children[$menu_item['id']])) {
             $index_menu = [
                 'parent_menu' => $menu_item['id'],
-                'second_menu' => $all_menu_children[$menu_item['id']],
+                'second_menu' => [],
             ];
+            foreach ($all_menu_children[$menu_item['id']] as $third_menu_key => $third_menu_id) {
+                if (isset($all_menu_children[$third_menu_id]) &&
+                !empty($all_menu_children[$third_menu_id])) {
+                    $index_menu['second_menu'][] = [
+                        'third_parent_menu' => $third_menu_id,
+                        'third_menu' => $all_menu_children[$third_menu_id],
+                    ];
+                } else {
+                    $index_menu = [
+                        'parent_menu' => $menu_item['id'],
+                        'second_menu' => $all_menu_children[$menu_item['id']],
+                    ];
+                }
+            }
         }
         else {
             $index_menu = $menu_item['id'];
