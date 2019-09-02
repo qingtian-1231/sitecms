@@ -29,12 +29,18 @@ class Index extends Home
             if ($menu_item['title'] === '经典案例') {
                 $typical_case_id = $menu_item['id'];
             }
+
+            if ($menu_item['title'] === '公司文化') {
+                $company_calture_id = $menu_item['id'];
+            }
         }
 
+        $company_calture_page = $this->getPage($company_calture_id);
         $typical_case = $this->getArticle($typical_case_id, 1);
         $this->assign->mobile_typical_case = array_shift($typical_case);
         $this->assign->index_map_id = $index_map_id;
         $this->assign->product_service_info = menu($product_service_id);
+        $this->assign->company_calture_page = $company_calture_page['content'];
         $this->assign->product_service_ids = menu('children', $product_service_id);
 
 
@@ -93,6 +99,26 @@ class Index extends Home
         ->toArray();
 
       return $list;
+    }
+
+    protected function getPage($menu_id) {
+        $page = $this->loadModel('Page');
+        $where = [
+            ['is_verify', '=', 1],
+            ['menu_id', '=', $menu_id]
+        ];
+        $order = [
+            'list_order' => 'DESC',
+            'id' => 'DESC',
+        ];
+        $result = $page
+            ->where($where)
+            ->order($order)
+            ->field([])
+            ->find()
+            ->toArray();
+
+        return $result;
     }
     /*
     //忘记密码可以访问该方法来获取加密字符串 domain/index/getpwd/pwd/需加密的字符串

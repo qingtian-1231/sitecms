@@ -697,6 +697,10 @@ a:hover, a:focus {
 
     #footer .foot span {
         margin-right: 0;
+        display: inline-block;
+    }
+    #footer .foot span a {
+        color: #686868;
     }
 
     #footer .foot span.address {
