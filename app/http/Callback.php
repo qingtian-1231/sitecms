@@ -140,13 +140,23 @@ class Callback
         if (!empty($menu_data['parent_id']) && ($menu_data['parent_id'] !== 1 && $menu_data['parent_id'])) {
             $family = explode(',', $menu_data['family']);
             $menu_parent_id = $family[2];
+            $second_menu_parent_id = isset($family[3]) ? $family[3] : 0;
             $parent_data = menu($menu_parent_id);
+            $second_parent_data = menu($second_menu_parent_id);
+
             $ad = &$this->ts->assign->ad;
 
             if (!empty($parent_data['image'])) {
                 $ad['insider_banner']['Ad'][0]['image'] = $parent_data['image'];
                 if ($this->ts->isMobile && setting('is_use_wap') && !empty($parent_data['mobile_image'])) {
                     $ad['insider_banner']['Ad'][0]['image'] = $parent_data['mobile_image'];
+                }
+            }
+
+            if ($second_parent_data && strtolower($second_parent_data['type']) === 'menu' && !empty($second_parent_data['image'])) {
+                $ad['insider_banner']['Ad'][0]['image'] = $second_parent_data['image'];
+                if ($this->ts->isMobile && setting('is_use_wap') && !empty($second_parent_data['mobile_image'])) {
+                    $ad['insider_banner']['Ad'][0]['image'] = $second_parent_data['mobile_image'];
                 }
             }
             $ad['insider_banner']['Ad'][0] = array_shift($ad['insider_banner']['Ad']);

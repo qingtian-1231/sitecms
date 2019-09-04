@@ -30,6 +30,13 @@ class Article extends Home
         }
         */
         call_user_func(array('parent', __FUNCTION__));
+        if ($this->isMobile && $this->assign->menu_data['list_style'] === 'show_case_jiugu_list1') {
+            foreach ($this->assign->list as $key =>$item) {
+                if (mb_strlen($item['title']) > 15) {
+                    $this->assign->list[$key]['title'] = mb_substr($item['title'], 0, 15) . '...';
+                }
+            }
+        }
     }
 
     public function view()
