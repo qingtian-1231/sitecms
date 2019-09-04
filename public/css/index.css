@@ -41,6 +41,11 @@
     padding-left: 15px;
     border-bottom: 1px dotted #f1f1f1;
     background-color: #ddd;
+    color: #426ca9;
+}
+
+#Index .item_con ul.layui-tab-title .layui-this:after {
+    border-bottom:2px solid #426ca9;
 }
 
 #Index .item_con ul li span {

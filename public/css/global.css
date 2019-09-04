@@ -428,9 +428,14 @@ a:hover, a:focus {
 
 #Menu div.layui-nav-child {
     top: 60px;
-    background-color: rgba(2, 2, 2, 0.5294117647058824);
+    background-color: rgba(255, 255, 255, 0);
     box-shadow: none;
     border: none;
+    padding: 0;
+}
+
+#Menu div.layui-nav-child > dl {
+    background-color: rgba(2, 2, 2, 0.5294117647058824);
 }
 
 #Menu div.layui-nav-child dd a {
