@@ -39,9 +39,13 @@
     height: 40px;
     line-height: 40px;
     padding-left: 15px;
-    border-bottom: 1px dotted #f1f1f1;
     background-color: #ddd;
     color: #426ca9;
+}
+
+#Index .item_con ul.layui-tab-title .layui-this {
+    color: #fff;
+    background-color: #436caa;
 }
 
 #Index .item_con ul.layui-tab-title .layui-this:after {
