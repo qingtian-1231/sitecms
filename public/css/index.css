@@ -19,7 +19,6 @@
 #Index .item_tit {
     height: 46px;
     line-height: 46px;
-    border-bottom: 1px solid #dddddd;
     padding: 0 20px;
 }
 
@@ -32,6 +31,10 @@
     line-height: 30px;
     overflow: hidden;
     padding: 10px 15px 0;
+}
+
+#Index .item_con .layui-tab-title {
+    border: none;
 }
 
 #Index .item_con ul.layui-tab-title li {

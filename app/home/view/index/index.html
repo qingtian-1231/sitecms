@@ -40,6 +40,24 @@ layui.use('carousel', function(){
   });
 });
 
+$(window).on('load', function () {
+    var setWidth = '{$ad.index_banner.width}';
+    var setHeight = '{$ad.index_banner.height}';
+    var autoSetHeight = function () {
+        var screenWidth = $(window).width();
+        var expectHeight = screenWidth * setHeight / setWidth;
+
+        $('#banner').css('height', expectHeight);
+    }
+
+    autoSetHeight();
+    $(window).resize(function () {
+        autoSetHeight();
+    });
+});
+
+console.log('{$ad.index_banner.height}');
+
 </script>
 
 
