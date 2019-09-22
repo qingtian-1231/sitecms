@@ -19,7 +19,6 @@
 #Index .item_tit {
     height: 46px;
     line-height: 46px;
-    border-bottom: 1px solid #dddddd;
     padding: 0 20px;
 }
 
@@ -34,14 +33,22 @@
     padding: 10px 15px 0;
 }
 
+#Index .item_con .layui-tab-title {
+    border: none;
+}
+
 #Index .item_con ul.layui-tab-title li {
     overflow: hidden;
     height: 40px;
     line-height: 40px;
     padding-left: 15px;
-    border-bottom: 1px dotted #f1f1f1;
     background-color: #ddd;
     color: #426ca9;
+}
+
+#Index .item_con ul.layui-tab-title .layui-this {
+    color: #fff;
+    background-color: #436caa;
 }
 
 #Index .item_con ul.layui-tab-title .layui-this:after {

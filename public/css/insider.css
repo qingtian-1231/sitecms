@@ -1947,7 +1947,6 @@
 #insider_content .location {
     line-height: 40px;
     text-align: right;
-    border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
     display: flex;
     justify-content: flex-start;
@@ -1994,7 +1993,7 @@
 }
 
 #insider_content .location a.path_current {
-    color: #31833e;
+    color: #436caa;
 }
 
 #insider_content .location .path  a.path_item{

@@ -333,7 +333,7 @@ a {
 }
 
 a:hover, a:focus {
-    color: #31833e; /*整站a连接移入默认颜色*/
+    color: #436caa; /*整站a连接移入默认颜色*/
     text-decoration: none;
 }
 

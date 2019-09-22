@@ -40,6 +40,24 @@ layui.use('carousel', function(){
   });
 });
 
+$(window).on('load', function () {
+    var setWidth = '{$ad.index_banner.width}';
+    var setHeight = '{$ad.index_banner.height}';
+    var autoSetHeight = function () {
+        var screenWidth = $(window).width();
+        var expectHeight = screenWidth * setHeight / setWidth;
+
+        $('#banner').css('height', expectHeight);
+    }
+
+    autoSetHeight();
+    $(window).resize(function () {
+        autoSetHeight();
+    });
+});
+
+console.log('{$ad.index_banner.height}');
+
 </script>
 
 
@@ -61,7 +79,11 @@ layui.use('carousel', function(){
                                     {foreach $articals as $artical}
                                     <li>
                                         <span>[{$artical.date|date_format:'Y-m-d'}]</span>
-                                        <a target="_blank" href="/article/{$artical.id}.html">{$artical.title}</a>
+                                        {if mb_strlen($artical.title) > 20}
+                                            <a target="_blank" href="/article/{$artical.id}.html">{mb_substr($artical.title, 0, 20)}...</a>
+                                        {else}
+                                            <a target="_blank" href="/article/{$artical.id}.html">{$artical.title}</a>
+                                        {/if}
                                     </li>
                                     {/foreach}
                                     <li>
