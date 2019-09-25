@@ -153,7 +153,7 @@ class Callback
                 }
             }
 
-            if ($second_parent_data && strtolower($second_parent_data['type']) === 'menu' && !empty($second_parent_data['image'])) {
+            if ($second_parent_data && !empty($second_parent_data['image'])) {
                 $ad['insider_banner']['Ad'][0]['image'] = $second_parent_data['image'];
                 if ($this->ts->isMobile && setting('is_use_wap') && !empty($second_parent_data['mobile_image'])) {
                     $ad['insider_banner']['Ad'][0]['image'] = $second_parent_data['mobile_image'];
