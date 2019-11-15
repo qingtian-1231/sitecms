@@ -451,6 +451,10 @@ a:hover, a:focus {
     display: flex !important;
 }
 
+#Menu .child-too-long.layui-show {
+    display: block !important;
+}
+
 #header .menuBar {
     height: 70px;
     cursor: pointer;

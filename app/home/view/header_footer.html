@@ -19,13 +19,13 @@
                 <li class="layui-nav-item {if $top_id==$level1_id}layui-this{/if}">
                     <a href="{call menu_link id=$level1_id}">{menu($level1_id,'title')}</a>
                     {if $level1}
-                    <div class="layui-nav-child">
+                    <div class="layui-nav-child {if count($level1) > 5}child-too-long{/if}">
                         {foreach $level1 as $level2_id=>$level2}
                             <dl>
                                 <dd>
                                     <a href="{call menu_link id=$level2_id}">{menu($level2_id,'title')}</a>
                                 </dd>
-                                {if $level2}
+                                {if $level2 && count($level1) <= 5}
                                 {foreach $level2 as $level3_id=>$level3}
                                 <dd class="level3">
                                     <a href="{call menu_link id=$level3_id}">{menu($level3_id,'title')}</a>
