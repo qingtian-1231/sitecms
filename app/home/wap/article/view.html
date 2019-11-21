@@ -1,4 +1,4 @@
-{extends file="../insider_base.html"} 
+{extends file="../insider_base.html"}
 
 {block name=insider}
 <div class="comm_view">
@@ -6,7 +6,20 @@
         <h2 class="reset">{$data.title}</h2>
         <h4 class="reset"><span>发布日期：{$data.date|date_format:'Y-m-d'}</span>{if $data.from}<span>信息来源：{$data.from}</span>{/if}<span>浏览次数：<i>{$data.visit_count}</i></span></h4>
     </div>
-    <div class="comm_content"><div class="editor_content">{$data.content}</div></div>
+    <div class="comm_content">
+        {if $data.video}
+        <div class="comm_video" style="margin-bottom: 4%;">
+            <video poster="" src="{$absroot}{$data.video}" data-overlay="1" data-title=""></video>
+        </div>
+        {/if}
+
+        {if $data.ex_title}
+        <div class="comm_ex_title" style="margin-bottom: 4%;text-align: center;font-size: 14px">
+            <span>---{$data.ex_title}</span>
+        </div>
+        {/if}
+        <div class="editor_content">{$data.content}</div>
+    </div>
     <div class="comm_neighbor clearfix">
         <div class="prev">上一篇：{if $prev}<a href="{call view_link item=$prev}">{$prev.title}</a>{else}无{/if}</div>
         <div class="next">下一篇：{if $next}<a href="{call view_link item=$next}">{$next.title}</a>{else}无{/if}</div>
